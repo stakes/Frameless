@@ -4,6 +4,11 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="ClearSans-Regular.ttf">
+            <string>ClearSans</string>
+        </mutableArray>
+    </customFonts>
     <scenes>
         <!--View Controller-->
         <scene sceneID="ufC-wZ-h7g">
@@ -22,21 +27,54 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
                             </webView>
-                            <searchBar contentMode="redraw" ambiguous="YES" searchBarStyle="minimal" placeholder="URL" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="50v-cP-i7q" customClass="SearchBar" customModule="Frameless" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
-                                <color key="tintColor" red="0.56927031278610229" green="0.45753145217895508" blue="0.8976520299911499" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </searchBar>
                             <progressView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" verticalHuggingPriority="750" ambiguous="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="2LR-xw-2qa">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="2"/>
                                 <color key="tintColor" red="0.56927031278610229" green="0.45753145217895508" blue="0.8976520299911499" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="trackTintColor" red="0.88926827907562256" green="0.87280172109603882" blue="0.94037115573883057" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </progressView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dZA-Ao-ZpJ">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sadface" translatesAutoresizingMaskIntoConstraints="NO" id="9ud-59-ket">
+                                        <rect key="frame" x="231" y="100" width="138" height="73"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="138" id="NlR-IX-VhT"/>
+                                            <constraint firstAttribute="height" constant="73" id="XHf-yJ-Ezs"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="There was an error loading the URL." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sve-Sf-iR0">
+                                        <rect key="frame" x="228" y="183" width="144" height="57"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="144" id="9XU-ML-8MI"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="ClearSans" family="Clear Sans" pointSize="13"/>
+                                        <color key="textColor" red="0.79254382848739624" green="0.73844963312149048" blue="0.85877132415771484" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="centerX" secondItem="9ud-59-ket" secondAttribute="centerX" id="4wG-wr-LY1"/>
+                                    <constraint firstItem="9ud-59-ket" firstAttribute="top" secondItem="dZA-Ao-ZpJ" secondAttribute="top" constant="100" id="WHj-vA-2kZ"/>
+                                    <constraint firstAttribute="centerX" secondItem="9ud-59-ket" secondAttribute="centerX" id="WbH-Mm-snh"/>
+                                    <constraint firstAttribute="centerX" secondItem="Sve-Sf-iR0" secondAttribute="centerX" id="XMY-8X-DHE"/>
+                                    <constraint firstItem="Sve-Sf-iR0" firstAttribute="top" secondItem="9ud-59-ket" secondAttribute="bottom" constant="10" id="dzs-FE-HS0"/>
+                                </constraints>
+                            </view>
+                            <searchBar contentMode="redraw" ambiguous="YES" searchBarStyle="minimal" placeholder="URL" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="50v-cP-i7q" customClass="SearchBar" customModule="Frameless" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                <color key="tintColor" red="0.56927031278610229" green="0.45753145217895508" blue="0.8976520299911499" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="dZA-Ao-ZpJ" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-16" id="8hb-PD-BLd"/>
+                            <constraint firstItem="dZA-Ao-ZpJ" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="topMargin" id="RMe-9O-agz"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="dZA-Ao-ZpJ" secondAttribute="trailing" constant="-16" id="TkV-EE-Bq5"/>
                             <constraint firstAttribute="trailingMargin" secondItem="980-eI-5k4" secondAttribute="trailing" constant="-16" id="Uj0-mw-fTC"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="980-eI-5k4" secondAttribute="bottom" id="Zng-Va-coV"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="dZA-Ao-ZpJ" secondAttribute="bottom" id="ay1-H6-F2Z"/>
                             <constraint firstItem="2LR-xw-2qa" firstAttribute="width" secondItem="kh9-bI-dsS" secondAttribute="width" id="cga-z9-0km"/>
                             <constraint firstAttribute="trailingMargin" secondItem="50v-cP-i7q" secondAttribute="trailing" constant="-16" id="dMo-8m-LWm"/>
                             <constraint firstItem="50v-cP-i7q" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-16" id="qkh-2S-Nxx"/>
@@ -45,6 +83,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="_loadingErrorView" destination="dZA-Ao-ZpJ" id="5E4-q5-uaI"/>
                         <outlet property="_progressView" destination="2LR-xw-2qa" id="Ikp-ae-6sc"/>
                         <outlet property="_searchBar" destination="50v-cP-i7q" id="sMg-NE-HOo"/>
                         <outlet property="_webView" destination="980-eI-5k4" id="FPx-HK-VKQ"/>
@@ -54,4 +93,7 @@
             </objects>
         </scene>
     </scenes>
+    <resources>
+        <image name="sadface" width="224" height="258"/>
+    </resources>
 </document>

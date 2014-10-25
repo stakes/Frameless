@@ -14,6 +14,7 @@
 
 + (void)setSearchBarTextInputAppearance {
     [[UITextField appearanceWhenContainedIn:[UISearchBar class], nil] setFont:[UIFont fontWithName:@"ClearSans" size:14]];
+//    [[UILabel appearanceWhenContainedIn:[UISearchBar class], nil] setTextColor:[UIColor whiteColor]];
 }
 
 @end

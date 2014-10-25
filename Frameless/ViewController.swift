@@ -14,11 +14,13 @@ class ViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizer
     @IBOutlet weak var _webView: UIWebView!
     @IBOutlet weak var _searchBar: SearchBar!
     @IBOutlet weak var _progressView: UIProgressView!
+    @IBOutlet weak var _loadingErrorView: UIView!
     
     var _panRecognizer: UIScreenEdgePanGestureRecognizer?
     var _areControlsVisible = true
     var _isFirstRun = true
     var _effectView: UIVisualEffectView?
+    var _errorView: UIView?
     
     // Loading progress? Fake it till you make it.
     var _progressTimer: NSTimer?
@@ -26,6 +28,7 @@ class ViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizer
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        _loadingErrorView.hidden = true
         
         _panRecognizer = UIScreenEdgePanGestureRecognizer(target: self, action: Selector("handleScreenEdgePan:"))
         _panRecognizer!.edges = UIRectEdge.Bottom
@@ -102,7 +105,7 @@ class ViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizer
                 _effectView!.alpha = 0
                 
                 _webView.addSubview(_effectView!)
-                _webView.alpha = 0.5
+                _webView.alpha = 0.25
                 UIView.animateWithDuration(0.25, animations: {
                     self._effectView!.alpha = 1
                 }, nil)
@@ -124,6 +127,8 @@ class ViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizer
     
     // Web view
     func webViewDidStartLoad(webView: UIWebView) {
+        _searchBar.showsCancelButton = true
+        _loadingErrorView.hidden = true
         _isFirstRun = false
         _isWebViewLoading = true
         _progressView.hidden = false
@@ -133,6 +138,12 @@ class ViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizer
     
     func webViewDidFinishLoad(webView: UIWebView) {
         _isWebViewLoading = false
+    }
+    
+    func webView(webView: UIWebView, didFailLoadWithError error: NSError) {
+        _isWebViewLoading = false
+        showSearch()
+        displayLoadingErrorMessage()
     }
     
     func progressTimerCallback() {
@@ -154,8 +165,13 @@ class ViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizer
     func loadURL(urlString: String) {
         let addrStr = httpifyString(urlString)
         let addr = NSURL(string: addrStr)
-        let req = NSURLRequest(URL: addr!)
-        _webView.loadRequest(req)
+        if let webAddr = addr {
+            let req = NSURLRequest(URL: webAddr)
+            _webView.loadRequest(req)
+        } else {
+            displayLoadingErrorMessage()
+        }
+        
     }
     
     func httpifyString(str: String) -> String {
@@ -166,6 +182,11 @@ class ViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizer
             }
         }
         return "http://"+lcStr
+    }
+    
+    func displayLoadingErrorMessage() {
+        _searchBar.showsCancelButton = false
+        _loadingErrorView.hidden = false
     }
     
     
