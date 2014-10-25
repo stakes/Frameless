@@ -17,6 +17,8 @@ class ViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizer
     
     var _panRecognizer: UIScreenEdgePanGestureRecognizer?
     var _areControlsVisible = true
+    var _isFirstRun = true
+    var _effectView: UIVisualEffectView?
     
     // Loading progress? Fake it till you make it.
     var _progressTimer: NSTimer?
@@ -32,6 +34,7 @@ class ViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizer
         
         _searchBar.delegate = self
         _searchBar.returnKeyType = UIReturnKeyType.Go
+        _searchBar.keyboardType = UIKeyboardType.URL
         _searchBar.becomeFirstResponder()
         customizeSearchBarAppearance()
         
@@ -77,6 +80,7 @@ class ViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizer
             self._searchBar.transform = CGAffineTransformMakeTranslation(0, -44)
         }, nil)
         _areControlsVisible = false
+        removeBackgroundBlur()
     }
     
     func showSearch() {
@@ -85,12 +89,42 @@ class ViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizer
         }, nil)
         _areControlsVisible = true
         _searchBar.becomeFirstResponder()
+        blurBackground()
     }
     
+    func blurBackground() {
+        if !_isFirstRun {
+            if _effectView == nil {
+                var blur:UIBlurEffect = UIBlurEffect(style: UIBlurEffectStyle.Light)
+                _effectView = UIVisualEffectView(effect: blur)
+                var size = _webView.frame.size
+                _effectView!.frame = CGRectMake(0,0,size.width,size.height)
+                _effectView!.alpha = 0
+                
+                _webView.addSubview(_effectView!)
+                _webView.alpha = 0.5
+                UIView.animateWithDuration(0.25, animations: {
+                    self._effectView!.alpha = 1
+                }, nil)
+            }
+        }
+    }
+    
+    func removeBackgroundBlur() {
+        if _effectView != nil {
+            UIView.animateWithDuration(0.25, animations: {
+                self._effectView!.alpha = 0
+            }, completion: { finished in
+                self._effectView = nil
+            })
+            _webView.alpha = 1
+        }
+    }
     
     
     // Web view
     func webViewDidStartLoad(webView: UIWebView) {
+        _isFirstRun = false
         _isWebViewLoading = true
         _progressView.hidden = false
         _progressView.progress = 0

@@ -22,6 +22,7 @@
 		0DA5BB6F19FC24D500B2FDD1 /* ClearSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0DA5BB6B19FC24D500B2FDD1 /* ClearSans-Regular.ttf */; };
 		0DA5BB7219FC25F000B2FDD1 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA5BB7119FC25F000B2FDD1 /* Helpers.swift */; };
 		0DA5BB7919FC2EBF00B2FDD1 /* AppearanceBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DA5BB7819FC2EBF00B2FDD1 /* AppearanceBridge.m */; };
+		0DA5BB8019FC42DD00B2FDD1 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DA5BB7F19FC42DD00B2FDD1 /* LaunchScreen.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +55,7 @@
 		0DA5BB7319FC2E5400B2FDD1 /* Frameless-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Frameless-Bridging-Header.h"; sourceTree = "<group>"; };
 		0DA5BB7719FC2EAE00B2FDD1 /* AppearanceBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppearanceBridge.h; sourceTree = "<group>"; };
 		0DA5BB7819FC2EBF00B2FDD1 /* AppearanceBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppearanceBridge.m; sourceTree = "<group>"; };
+		0DA5BB7F19FC42DD00B2FDD1 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LaunchScreen.xib; path = ../LaunchScreen.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +97,7 @@
 		0DA5BB4119FAD12800B2FDD1 /* Frameless */ = {
 			isa = PBXGroup;
 			children = (
+				0DA5BB7F19FC42DD00B2FDD1 /* LaunchScreen.xib */,
 				0DA5BB7119FC25F000B2FDD1 /* Helpers.swift */,
 				0DA5BB7319FC2E5400B2FDD1 /* Frameless-Bridging-Header.h */,
 				0DA5BB7719FC2EAE00B2FDD1 /* AppearanceBridge.h */,
@@ -223,6 +226,7 @@
 				0DA5BB6E19FC24D500B2FDD1 /* ClearSans-Italic.ttf in Resources */,
 				0DA5BB5419FAD12800B2FDD1 /* Info.plist in Resources */,
 				0DA5BB5319FAD12800B2FDD1 /* Images.xcassets in Resources */,
+				0DA5BB8019FC42DD00B2FDD1 /* LaunchScreen.xib in Resources */,
 				0DA5BB6D19FC24D500B2FDD1 /* ClearSans-BoldItalic.ttf in Resources */,
 				0DA5BB5119FAD12800B2FDD1 /* Main.storyboard in Resources */,
 				0DA5BB6F19FC24D500B2FDD1 /* ClearSans-Regular.ttf in Resources */,
