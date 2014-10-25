@@ -36,8 +36,9 @@ class ViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizer
         self.view.addGestureRecognizer(_panRecognizer!)
         
         _searchBar.delegate = self
-        _searchBar.returnKeyType = UIReturnKeyType.Go
-        _searchBar.keyboardType = UIKeyboardType.URL
+        _searchBar.autocapitalizationType = .None
+        _searchBar.returnKeyType = .Go
+        _searchBar.keyboardType = .URL
         _searchBar.becomeFirstResponder()
         customizeSearchBarAppearance()
         
