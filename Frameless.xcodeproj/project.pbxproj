@@ -16,6 +16,11 @@
 		0DA5BB5719FAD12800B2FDD1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA5BB4E19FAD12800B2FDD1 /* ViewController.swift */; };
 		0DA5BB6019FAD23A00B2FDD1 /* FramelessTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA5BB5E19FAD23A00B2FDD1 /* FramelessTests.swift */; };
 		0DA5BB6119FAD23A00B2FDD1 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0DA5BB5F19FAD23A00B2FDD1 /* Info.plist */; };
+		0DA5BB6C19FC24D500B2FDD1 /* ClearSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0DA5BB6819FC24D500B2FDD1 /* ClearSans-Bold.ttf */; };
+		0DA5BB6D19FC24D500B2FDD1 /* ClearSans-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0DA5BB6919FC24D500B2FDD1 /* ClearSans-BoldItalic.ttf */; };
+		0DA5BB6E19FC24D500B2FDD1 /* ClearSans-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0DA5BB6A19FC24D500B2FDD1 /* ClearSans-Italic.ttf */; };
+		0DA5BB6F19FC24D500B2FDD1 /* ClearSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0DA5BB6B19FC24D500B2FDD1 /* ClearSans-Regular.ttf */; };
+		0DA5BB7219FC25F000B2FDD1 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA5BB7119FC25F000B2FDD1 /* Helpers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +45,11 @@
 		0DA5BB4E19FAD12800B2FDD1 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		0DA5BB5E19FAD23A00B2FDD1 /* FramelessTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FramelessTests.swift; sourceTree = "<group>"; };
 		0DA5BB5F19FAD23A00B2FDD1 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0DA5BB6819FC24D500B2FDD1 /* ClearSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ClearSans-Bold.ttf"; sourceTree = "<group>"; };
+		0DA5BB6919FC24D500B2FDD1 /* ClearSans-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ClearSans-BoldItalic.ttf"; sourceTree = "<group>"; };
+		0DA5BB6A19FC24D500B2FDD1 /* ClearSans-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ClearSans-Italic.ttf"; sourceTree = "<group>"; };
+		0DA5BB6B19FC24D500B2FDD1 /* ClearSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ClearSans-Regular.ttf"; sourceTree = "<group>"; };
+		0DA5BB7119FC25F000B2FDD1 /* Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +91,7 @@
 		0DA5BB4119FAD12800B2FDD1 /* Frameless */ = {
 			isa = PBXGroup;
 			children = (
+				0DA5BB7119FC25F000B2FDD1 /* Helpers.swift */,
 				0DA5BB4219FAD12800B2FDD1 /* AppDelegate.swift */,
 				0DA5BB4B19FAD12800B2FDD1 /* SearchBar.swift */,
 				0DA5BB4E19FAD12800B2FDD1 /* ViewController.swift */,
@@ -88,6 +99,7 @@
 				0DA5BB4719FAD12800B2FDD1 /* Frameless.xcdatamodeld */,
 				0DA5BB4919FAD12800B2FDD1 /* Images.xcassets */,
 				0DA5BB6219FAD36700B2FDD1 /* Supporting Files */,
+				0DA5BB7019FC24D900B2FDD1 /* Resources */,
 			);
 			path = Frameless;
 			sourceTree = "<group>";
@@ -107,6 +119,17 @@
 				0DA5BB4A19FAD12800B2FDD1 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		0DA5BB7019FC24D900B2FDD1 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				0DA5BB6819FC24D500B2FDD1 /* ClearSans-Bold.ttf */,
+				0DA5BB6919FC24D500B2FDD1 /* ClearSans-BoldItalic.ttf */,
+				0DA5BB6A19FC24D500B2FDD1 /* ClearSans-Italic.ttf */,
+				0DA5BB6B19FC24D500B2FDD1 /* ClearSans-Regular.ttf */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -189,9 +212,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0DA5BB6C19FC24D500B2FDD1 /* ClearSans-Bold.ttf in Resources */,
+				0DA5BB6E19FC24D500B2FDD1 /* ClearSans-Italic.ttf in Resources */,
 				0DA5BB5419FAD12800B2FDD1 /* Info.plist in Resources */,
 				0DA5BB5319FAD12800B2FDD1 /* Images.xcassets in Resources */,
+				0DA5BB6D19FC24D500B2FDD1 /* ClearSans-BoldItalic.ttf in Resources */,
 				0DA5BB5119FAD12800B2FDD1 /* Main.storyboard in Resources */,
+				0DA5BB6F19FC24D500B2FDD1 /* ClearSans-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -213,6 +240,7 @@
 				0DA5BB5719FAD12800B2FDD1 /* ViewController.swift in Sources */,
 				0DA5BB5219FAD12800B2FDD1 /* Frameless.xcdatamodeld in Sources */,
 				0DA5BB4F19FAD12800B2FDD1 /* AppDelegate.swift in Sources */,
+				0DA5BB7219FC25F000B2FDD1 /* Helpers.swift in Sources */,
 				0DA5BB5519FAD12800B2FDD1 /* SearchBar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -399,6 +427,7 @@
 				0DA5BB3D19FAD10F00B2FDD1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0DA5BB3E19FAD10F00B2FDD1 /* Build configuration list for PBXNativeTarget "FramelessTests" */ = {
 			isa = XCConfigurationList;
@@ -407,6 +436,7 @@
 				0DA5BB4019FAD10F00B2FDD1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

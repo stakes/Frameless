@@ -24,17 +24,21 @@ class ViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizer
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         _panRecognizer = UIScreenEdgePanGestureRecognizer(target: self, action: Selector("handleScreenEdgePan:"))
         _panRecognizer!.edges = UIRectEdge.Bottom
         _panRecognizer?.delegate = self
         self.view.addGestureRecognizer(_panRecognizer!)
+        
         _searchBar.delegate = self
         _searchBar.returnKeyType = UIReturnKeyType.Go
         _searchBar.becomeFirstResponder()
+        customizeSearchBarAppearance()
+        
         _webView.scalesPageToFit = true
         _webView.delegate = self
+        
         _progressView.hidden = true
-        self.becomeFirstResponder()
     }
 
     override func didReceiveMemoryWarning() {
@@ -68,6 +72,7 @@ class ViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizer
     }
     
     func hideSearch() {
+        _searchBar.resignFirstResponder()
         UIView.animateWithDuration(0.5, delay: 0.05, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.5, options: nil, animations: {
             self._searchBar.transform = CGAffineTransformMakeTranslation(0, -44)
         }, nil)
@@ -132,14 +137,22 @@ class ViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizer
     
     
     // Search bar
+    func customizeSearchBarAppearance() {
+        let clearSans = UIFont(name: "ClearSans", size: 16)
+        if let font = clearSans {
+            var normalTextAttributes: Dictionary = [
+                NSFontAttributeName: font
+            ]
+            UIBarButtonItem.appearance().setTitleTextAttributes(normalTextAttributes, forState: .Normal)
+        }
+    }
+    
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
-        searchBar.resignFirstResponder()
         hideSearch()
         loadURL(searchBar.text)
     }
     
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
-        searchBar.resignFirstResponder()
         hideSearch()
     }
 
