@@ -70,6 +70,7 @@ class ViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizer
             self._searchBar.transform = CGAffineTransformMakeTranslation(0, 0)
         }, nil)
         _areControlsVisible = true
+        _searchBar.becomeFirstResponder()
     }
     
     
