@@ -2,16 +2,7 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x"
-    },
-    {
-      "idiom" : "universal",
-      "scale" : "2x"
-    },
-    {
-      "idiom" : "universal",
-      "scale" : "3x",
-      "filename" : "Retina HD 5.5.png"
+      "filename" : "Retina HD 5.5.pdf"
     }
   ],
   "info" : {
