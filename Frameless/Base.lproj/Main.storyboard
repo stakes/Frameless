@@ -24,13 +24,20 @@
                             </webView>
                             <searchBar contentMode="redraw" ambiguous="YES" searchBarStyle="minimal" placeholder="URL" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="50v-cP-i7q" customClass="SearchBar" customModule="Frameless" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                <color key="tintColor" red="0.56927031278610229" green="0.45753145217895508" blue="0.8976520299911499" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
+                            <progressView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" verticalHuggingPriority="750" ambiguous="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="2LR-xw-2qa">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="2"/>
+                                <color key="tintColor" red="0.56927031278610229" green="0.45753145217895508" blue="0.8976520299911499" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="trackTintColor" red="0.88926827907562256" green="0.87280172109603882" blue="0.94037115573883057" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </progressView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="980-eI-5k4" secondAttribute="trailing" constant="-16" id="Uj0-mw-fTC"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="980-eI-5k4" secondAttribute="bottom" id="Zng-Va-coV"/>
+                            <constraint firstItem="2LR-xw-2qa" firstAttribute="width" secondItem="kh9-bI-dsS" secondAttribute="width" id="cga-z9-0km"/>
                             <constraint firstAttribute="trailingMargin" secondItem="50v-cP-i7q" secondAttribute="trailing" constant="-16" id="dMo-8m-LWm"/>
                             <constraint firstItem="50v-cP-i7q" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-16" id="qkh-2S-Nxx"/>
                             <constraint firstItem="980-eI-5k4" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" id="tGB-4F-Vra"/>
@@ -38,6 +45,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="_progressView" destination="2LR-xw-2qa" id="Ikp-ae-6sc"/>
                         <outlet property="_searchBar" destination="50v-cP-i7q" id="sMg-NE-HOo"/>
                         <outlet property="_webView" destination="980-eI-5k4" id="FPx-HK-VKQ"/>
                     </connections>

@@ -8,14 +8,19 @@
 
 import UIKit
 
-class ViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizerDelegate {
+class ViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizerDelegate, UIWebViewDelegate {
 
 
     @IBOutlet weak var _webView: UIWebView!
     @IBOutlet weak var _searchBar: SearchBar!
+    @IBOutlet weak var _progressView: UIProgressView!
     
     var _panRecognizer: UIScreenEdgePanGestureRecognizer?
     var _areControlsVisible = true
+    
+    // Loading progress? Fake it till you make it.
+    var _progressTimer: NSTimer?
+    var _isWebViewLoading = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +29,11 @@ class ViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizer
         _panRecognizer?.delegate = self
         self.view.addGestureRecognizer(_panRecognizer!)
         _searchBar.delegate = self
+        _searchBar.returnKeyType = UIReturnKeyType.Go
+        _searchBar.becomeFirstResponder()
         _webView.scalesPageToFit = true
+        _webView.delegate = self
+        _progressView.hidden = true
         self.becomeFirstResponder()
     }
 
@@ -76,6 +85,33 @@ class ViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizer
     
     
     // Web view
+    func webViewDidStartLoad(webView: UIWebView) {
+        _isWebViewLoading = true
+        _progressView.hidden = false
+        _progressView.progress = 0
+        _progressTimer = NSTimer.scheduledTimerWithTimeInterval(0.01667, target: self, selector: "progressTimerCallback", userInfo: nil, repeats: true)
+    }
+    
+    func webViewDidFinishLoad(webView: UIWebView) {
+        _isWebViewLoading = false
+    }
+    
+    func progressTimerCallback() {
+        if (!_isWebViewLoading) {
+            if (_progressView.progress >= 1) {
+                _progressView.hidden = true
+                _progressTimer?.invalidate()
+            } else {
+                _progressView.progress += 0.05
+            }
+        } else {
+            _progressView.progress += 0.02
+            if (_progressView.progress >= 0.95) {
+                _progressView.progress = 0.95
+            }
+        }
+    }
+    
     func loadURL(urlString: String) {
         let addrStr = httpifyString(urlString)
         let addr = NSURL(string: addrStr)
@@ -85,11 +121,12 @@ class ViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizer
     
     func httpifyString(str: String) -> String {
         let lcStr:String = (str as NSString).lowercaseString
-        if ((lcStr as NSString).substringToIndex(7) == "http://") {
-            return lcStr
-        } else {
-            return "http://"+lcStr
+        if (countElements(lcStr) >= 7) {
+            if ((lcStr as NSString).substringToIndex(7) == "http://") {
+                return lcStr
+            }
         }
+        return "http://"+lcStr
     }
     
     
