@@ -144,6 +144,8 @@ class ViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizer
                 NSFontAttributeName: font
             ]
             UIBarButtonItem.appearance().setTitleTextAttributes(normalTextAttributes, forState: .Normal)
+            // See: http://stackoverflow.com/a/26224862/534343
+            AppearanceBridge.setSearchBarTextInputAppearance()
         }
     }
     

@@ -21,6 +21,7 @@
 		0DA5BB6E19FC24D500B2FDD1 /* ClearSans-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0DA5BB6A19FC24D500B2FDD1 /* ClearSans-Italic.ttf */; };
 		0DA5BB6F19FC24D500B2FDD1 /* ClearSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0DA5BB6B19FC24D500B2FDD1 /* ClearSans-Regular.ttf */; };
 		0DA5BB7219FC25F000B2FDD1 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA5BB7119FC25F000B2FDD1 /* Helpers.swift */; };
+		0DA5BB7919FC2EBF00B2FDD1 /* AppearanceBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DA5BB7819FC2EBF00B2FDD1 /* AppearanceBridge.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +51,9 @@
 		0DA5BB6A19FC24D500B2FDD1 /* ClearSans-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ClearSans-Italic.ttf"; sourceTree = "<group>"; };
 		0DA5BB6B19FC24D500B2FDD1 /* ClearSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ClearSans-Regular.ttf"; sourceTree = "<group>"; };
 		0DA5BB7119FC25F000B2FDD1 /* Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
+		0DA5BB7319FC2E5400B2FDD1 /* Frameless-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Frameless-Bridging-Header.h"; sourceTree = "<group>"; };
+		0DA5BB7719FC2EAE00B2FDD1 /* AppearanceBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppearanceBridge.h; sourceTree = "<group>"; };
+		0DA5BB7819FC2EBF00B2FDD1 /* AppearanceBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppearanceBridge.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +96,9 @@
 			isa = PBXGroup;
 			children = (
 				0DA5BB7119FC25F000B2FDD1 /* Helpers.swift */,
+				0DA5BB7319FC2E5400B2FDD1 /* Frameless-Bridging-Header.h */,
+				0DA5BB7719FC2EAE00B2FDD1 /* AppearanceBridge.h */,
+				0DA5BB7819FC2EBF00B2FDD1 /* AppearanceBridge.m */,
 				0DA5BB4219FAD12800B2FDD1 /* AppDelegate.swift */,
 				0DA5BB4B19FAD12800B2FDD1 /* SearchBar.swift */,
 				0DA5BB4E19FAD12800B2FDD1 /* ViewController.swift */,
@@ -241,6 +248,7 @@
 				0DA5BB5219FAD12800B2FDD1 /* Frameless.xcdatamodeld in Sources */,
 				0DA5BB4F19FAD12800B2FDD1 /* AppDelegate.swift in Sources */,
 				0DA5BB7219FC25F000B2FDD1 /* Helpers.swift in Sources */,
+				0DA5BB7919FC2EBF00B2FDD1 /* AppearanceBridge.m in Sources */,
 				0DA5BB5519FAD12800B2FDD1 /* SearchBar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -356,10 +364,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = Frameless/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Frameless/Frameless-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -367,10 +378,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = Frameless/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Frameless/Frameless-Bridging-Header.h";
 			};
 			name = Release;
 		};
