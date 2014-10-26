@@ -16,6 +16,7 @@ class ViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizer
     @IBOutlet weak var _progressView: UIProgressView!
     @IBOutlet weak var _loadingErrorView: UIView!
     
+    var _tapRecognizer: UITapGestureRecognizer?
     var _panRecognizer: UIScreenEdgePanGestureRecognizer?
     var _areControlsVisible = true
     var _isFirstRun = true
@@ -29,6 +30,8 @@ class ViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizer
     override func viewDidLoad() {
         super.viewDidLoad()
         _loadingErrorView.hidden = true
+        
+        _tapRecognizer = UITapGestureRecognizer(target: self, action: Selector("hideSearch"))
         
         _panRecognizer = UIScreenEdgePanGestureRecognizer(target: self, action: Selector("handleScreenEdgePan:"))
         _panRecognizer!.edges = UIRectEdge.Bottom
@@ -104,6 +107,7 @@ class ViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizer
                 var size = _webView.frame.size
                 _effectView!.frame = CGRectMake(0,0,size.width,size.height)
                 _effectView!.alpha = 0
+                _effectView?.addGestureRecognizer(_tapRecognizer!)
                 
                 _webView.addSubview(_effectView!)
                 _webView.alpha = 0.25
