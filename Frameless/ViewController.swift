@@ -42,6 +42,7 @@ class ViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizer
         _searchBar.autocapitalizationType = .None
         _searchBar.returnKeyType = .Go
         _searchBar.keyboardType = .URL
+        _searchBar.showsCancelButton = false
         _searchBar.becomeFirstResponder()
         customizeSearchBarAppearance()
         
