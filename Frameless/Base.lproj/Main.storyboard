@@ -36,16 +36,16 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sadface" translatesAutoresizingMaskIntoConstraints="NO" id="9ud-59-ket">
-                                        <rect key="frame" x="231" y="100" width="138" height="73"/>
+                                        <rect key="frame" x="231" y="120" width="138" height="73"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="138" id="NlR-IX-VhT"/>
                                             <constraint firstAttribute="height" constant="73" id="XHf-yJ-Ezs"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="There was an error loading the URL." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sve-Sf-iR0">
-                                        <rect key="frame" x="228" y="183" width="144" height="57"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Sorry! There was an error loading that URL." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sve-Sf-iR0">
+                                        <rect key="frame" x="210" y="203" width="180" height="56"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="144" id="9XU-ML-8MI"/>
+                                            <constraint firstAttribute="width" constant="180" id="9XU-ML-8MI"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="ClearSans" family="Clear Sans" pointSize="13"/>
                                         <color key="textColor" red="0.79254382848739624" green="0.73844963312149048" blue="0.85877132415771484" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -55,7 +55,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="centerX" secondItem="9ud-59-ket" secondAttribute="centerX" id="4wG-wr-LY1"/>
-                                    <constraint firstItem="9ud-59-ket" firstAttribute="top" secondItem="dZA-Ao-ZpJ" secondAttribute="top" constant="100" id="WHj-vA-2kZ"/>
+                                    <constraint firstItem="9ud-59-ket" firstAttribute="top" secondItem="dZA-Ao-ZpJ" secondAttribute="top" constant="120" id="WHj-vA-2kZ"/>
                                     <constraint firstAttribute="centerX" secondItem="9ud-59-ket" secondAttribute="centerX" id="WbH-Mm-snh"/>
                                     <constraint firstAttribute="centerX" secondItem="Sve-Sf-iR0" secondAttribute="centerX" id="XMY-8X-DHE"/>
                                     <constraint firstItem="Sve-Sf-iR0" firstAttribute="top" secondItem="9ud-59-ket" secondAttribute="bottom" constant="10" id="dzs-FE-HS0"/>
@@ -91,6 +91,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="139" y="127"/>
         </scene>
     </scenes>
     <resources>
