@@ -14,11 +14,76 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        self.window!.backgroundColor = UIColor.whiteColor()
+        
+        if let lastIntro: AnyObject = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.IntroVersionSeen.rawValue) {
+            self.window!.rootViewController = createIntroViewController()
+        } else {
+            self.window!.rootViewController = createIntroViewController()
+        }
+        
+        self.window!.makeKeyAndVisible()
+        
         return true
     }
+    
+    func createIntroViewController() -> OnboardingViewController {
+        let page01: OnboardingContentViewController = OnboardingContentViewController(title: nil, body: "Frameless is a chromeless,\n full-screen web browser. Load a page and the browser bar will hide", image: UIImage(named: "introimage01"), buttonText: nil) {
+        }
+        page01.iconWidth = 158
+        page01.iconHeight = 258.5
+        
+        let page02: OnboardingContentViewController = OnboardingContentViewController(title: nil, body: "Swipe up from the bottom of\nyour screen to show the browser\nbar and the keyboard", image: UIImage(named: "introimage02"), buttonText: nil) {
+        }
+        page02.iconWidth = 158
+        page02.iconHeight = 258.5
+        
+        let page03: OnboardingContentViewController = OnboardingContentViewController(title: nil, body: "Or give your device a hearty shake,\nwhich will also show and\n hide the browser bar", image: UIImage(named: "introimage03"), buttonText: "GOT IT") {
+            self.introCompletion()
+        }
+        page03.iconWidth = 158
+        page03.iconHeight = 258.5
+        
+        let bgImage = UIImage.withColor(UIColorFromHex(0x9178E2))
+        let onboardingViewController = OnboardingViewController(
+            backgroundImage: bgImage,
+            contents: [page01, page02, page03])
+        onboardingViewController.fontName = "ClearSans"
+        onboardingViewController.bodyFontSize = 16
+        onboardingViewController.titleFontName = "ClearSans-Bold"
+        onboardingViewController.titleFontSize = 22
+        onboardingViewController.buttonFontName = "ClearSans-Bold"
+        onboardingViewController.buttonFontSize = 20
+        onboardingViewController.topPadding = 60+(self.window!.frame.height/12)
+        onboardingViewController.underTitlePadding = 8
+        
+        onboardingViewController.shouldMaskBackground = false
+        
+        return onboardingViewController
+    }
+    
+    
+    func introCompletion() {
+        NSUserDefaults.standardUserDefaults().setValue(1, forKey: AppDefaultKeys.IntroVersionSeen.rawValue)
+        setupAppViewController(true)
+    }
+    
+    func setupAppViewController(animated : Bool) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let appViewController = storyboard.instantiateViewControllerWithIdentifier("mainViewController") as UIViewController
+        if animated {
+            UIView.transitionWithView(self.window!, duration: 0.5, options:UIViewAnimationOptions.TransitionFlipFromBottom, animations: { () -> Void in
+                self.window!.rootViewController = appViewController
+                }, completion:nil)
+        }
+        else {
+            self.window?.rootViewController = appViewController
+        }
+    }
+    
 
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

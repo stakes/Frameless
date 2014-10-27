@@ -13,7 +13,7 @@
         <!--View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController id="vXZ-lx-hvc" customClass="ViewController" customModule="Frameless" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="mainViewController" id="vXZ-lx-hvc" customClass="ViewController" customModule="Frameless" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
@@ -61,7 +61,7 @@
                                     <constraint firstItem="Sve-Sf-iR0" firstAttribute="top" secondItem="9ud-59-ket" secondAttribute="bottom" constant="10" id="dzs-FE-HS0"/>
                                 </constraints>
                             </view>
-                            <searchBar contentMode="redraw" ambiguous="YES" searchBarStyle="minimal" placeholder="URL" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="50v-cP-i7q" customClass="SearchBar" customModule="Frameless" customModuleProvider="target">
+                            <searchBar contentMode="redraw" ambiguous="YES" searchBarStyle="minimal" placeholder="Website url" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="50v-cP-i7q" customClass="SearchBar" customModule="Frameless" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                 <color key="tintColor" red="0.56927031278610229" green="0.45753145217895508" blue="0.8976520299911499" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -97,4 +97,5 @@
     <resources>
         <image name="sadface" width="224" height="258"/>
     </resources>
+    <color key="tintColor" red="0.56927031278610229" green="0.45753145217895508" blue="0.8976520299911499" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

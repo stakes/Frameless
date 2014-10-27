@@ -23,6 +23,7 @@ class ViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizer
     var _effectView: UIVisualEffectView?
     var _errorView: UIView?
     var _defaultsObject: NSUserDefaults?
+    var _onboardingViewController: OnboardingViewController?
     
     // Loading progress? Fake it till you make it.
     var _progressTimer: NSTimer?
@@ -32,8 +33,6 @@ class ViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizer
         super.viewDidLoad()
         
         _defaultsObject = NSUserDefaults.standardUserDefaults()
-        
-        buildIntro()
         
         _loadingErrorView.hidden = true
         
@@ -57,29 +56,16 @@ class ViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizer
         
         _progressView.hidden = true
     }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    func buildIntro() {
-        if let lastIntro: AnyObject = _defaultsObject?.objectForKey(AppDefaultKeys.IntroVersionSeen.rawValue) {
-            // intro has been seen, do nothing
-            println(lastIntro)
-        } else {
-            _defaultsObject?.setValue(1, forKey: AppDefaultKeys.IntroVersionSeen.rawValue)
-            let introPanel = MYIntroductionPanel(
-                frame: CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height),
-                title: "This is a test",
-                description: "This just actually works."
-            )
-            let introView = MYBlurIntroductionView(frame: CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height))
-            introView.buildIntroductionWithPanels([introPanel])
-            introView.setBackgroundColor(UIColor.brownColor())
-            self.view.addSubview(introView)
-        }
-        
+
+
+    func introCompletion() {
+        _onboardingViewController?.dismissViewControllerAnimated(true, completion: nil)
     }
     
     

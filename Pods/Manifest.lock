@@ -1,10 +1,14 @@
 PODS:
-  - MYBlurIntroductionView (1.0.3)
+  - Onboard (1.1)
 
 DEPENDENCIES:
-  - MYBlurIntroductionView
+  - Onboard (from `https://github.com/mamaral/Onboard.git`)
+
+EXTERNAL SOURCES:
+  Onboard:
+    :git: https://github.com/mamaral/Onboard.git
 
 SPEC CHECKSUMS:
-  MYBlurIntroductionView: 6caf60805eaa555538aba9e2615820fd6f07cd23
+  Onboard: 40270e520b6df51e90de7fe0d57eb54057dc22d9
 
 COCOAPODS: 0.34.4

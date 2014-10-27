@@ -6,9 +6,9 @@
 // project.
 
 
-// MYBlurIntroductionView
-#define COCOAPODS_POD_AVAILABLE_MYBlurIntroductionView
-#define COCOAPODS_VERSION_MAJOR_MYBlurIntroductionView 1
-#define COCOAPODS_VERSION_MINOR_MYBlurIntroductionView 0
-#define COCOAPODS_VERSION_PATCH_MYBlurIntroductionView 3
+// Onboard
+#define COCOAPODS_POD_AVAILABLE_Onboard
+#define COCOAPODS_VERSION_MAJOR_Onboard 1
+#define COCOAPODS_VERSION_MINOR_Onboard 1
+#define COCOAPODS_VERSION_PATCH_Onboard 0
 
