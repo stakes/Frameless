@@ -9,24 +9,11 @@
         <view contentMode="scaleToFill" id="iN0-l3-epB">
             <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-            <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launch" translatesAutoresizingMaskIntoConstraints="NO" id="HHa-sg-P57">
-                    <rect key="frame" x="20" y="20" width="440" height="440"/>
-                </imageView>
-            </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-            <constraints>
-                <constraint firstItem="HHa-sg-P57" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="PHs-kz-XaI"/>
-                <constraint firstAttribute="trailing" secondItem="HHa-sg-P57" secondAttribute="trailing" constant="20" id="Zni-bT-Htb"/>
-                <constraint firstAttribute="bottom" secondItem="HHa-sg-P57" secondAttribute="bottom" constant="20" id="fUm-P8-FtQ"/>
-                <constraint firstItem="HHa-sg-P57" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="20" id="hTH-3T-Nea"/>
-            </constraints>
+            <color key="backgroundColor" red="0.66349899768829346" green="0.55855429172515869" blue="0.95491331815719604" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="404" y="445"/>
         </view>
     </objects>
-    <resources>
-        <image name="launch" width="1242" height="2208"/>
-    </resources>
 </document>

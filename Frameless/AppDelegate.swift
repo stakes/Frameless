@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window!.backgroundColor = UIColor.whiteColor()
         
         if let lastIntro: AnyObject = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.IntroVersionSeen.rawValue) {
-            self.window!.rootViewController = createIntroViewController()
+            setupAppViewController(false)
         } else {
             self.window!.rootViewController = createIntroViewController()
         }
