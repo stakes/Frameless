@@ -22,6 +22,7 @@ class ViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizer
     var _isFirstRun = true
     var _effectView: UIVisualEffectView?
     var _errorView: UIView?
+    var _defaultsObject: NSUserDefaults?
     
     // Loading progress? Fake it till you make it.
     var _progressTimer: NSTimer?
@@ -29,6 +30,11 @@ class ViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizer
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        _defaultsObject = NSUserDefaults.standardUserDefaults()
+        
+        buildIntro()
+        
         _loadingErrorView.hidden = true
         
         _tapRecognizer = UITapGestureRecognizer(target: self, action: Selector("hideSearch"))
@@ -57,6 +63,24 @@ class ViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizer
         // Dispose of any resources that can be recreated.
     }
     
+    func buildIntro() {
+        if let lastIntro: AnyObject = _defaultsObject?.objectForKey(AppDefaultKeys.IntroVersionSeen.rawValue) {
+            // intro has been seen, do nothing
+            println(lastIntro)
+        } else {
+            _defaultsObject?.setValue(1, forKey: AppDefaultKeys.IntroVersionSeen.rawValue)
+            let introPanel = MYIntroductionPanel(
+                frame: CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height),
+                title: "This is a test",
+                description: "This just actually works."
+            )
+            let introView = MYBlurIntroductionView(frame: CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height))
+            introView.buildIntroductionWithPanels([introPanel])
+            introView.setBackgroundColor(UIColor.brownColor())
+            self.view.addSubview(introView)
+        }
+        
+    }
     
     
     // UI show/hide
