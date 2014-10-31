@@ -215,10 +215,28 @@ class ViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizer
                 NSFontAttributeName: font
             ]
             UIBarButtonItem.appearance().setTitleTextAttributes(normalTextAttributes, forState: .Normal)
+            
             // See: http://stackoverflow.com/a/26224862/534343
             AppearanceBridge.setSearchBarTextInputAppearance()
+            
+            // Change search bar icon
+            var searchField: UITextField?
+            var searchBarSubviews = _searchBar.subviews.first?.subviews
+            for subview in searchBarSubviews! {
+                if subview.isKindOfClass(UITextField) {
+                    searchField = subview as? UITextField
+                    break
+                }
+            }
+            if let field = searchField {
+                var iconImage = UIImage(named: "compass")
+                var imageView = UIImageView(frame: CGRectMake(0, 0, 14, 14))
+                imageView.image = iconImage
+                field.leftView = imageView
+            }
         }
     }
+    
     
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         hideSearch()
