@@ -22,12 +22,14 @@ class ViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizer
     var _isFirstRun = true
     var _effectView: UIVisualEffectView?
     var _errorView: UIView?
+    var _settingsBarView:UIView?
     var _defaultsObject: NSUserDefaults?
     var _onboardingViewController: OnboardingViewController?
     
     // Loading progress? Fake it till you make it.
     var _progressTimer: NSTimer?
     var _isWebViewLoading = false
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,9 +56,20 @@ class ViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizer
         _webView.scalesPageToFit = true
         _webView.delegate = self
         
+        _settingsBarView = UIView(frame: CGRectMake(0, self.view.frame.height, self.view.frame.width, 44))
+        _settingsBarView!.backgroundColor = UIColor.redColor()
+        self.view.addSubview(_settingsBarView!)
+
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name:UIKeyboardWillShowNotification, object: nil);
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name:UIKeyboardWillHideNotification, object: nil);
+        
         _progressView.hidden = true
     }
     
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self);
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -70,6 +83,20 @@ class ViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizer
     
     
     // UI show/hide
+    
+    func keyboardWillShow(sender: NSNotification) {
+        let dict:NSDictionary = sender.userInfo! as NSDictionary
+        let s:NSValue = dict.valueForKey(UIKeyboardFrameEndUserInfoKey) as NSValue
+        let rect :CGRect = s.CGRectValue()
+        _settingsBarView!.frame.origin.y = self.view.frame.height - rect.height - _settingsBarView!.frame.height
+        _settingsBarView!.alpha = 1
+    }
+    
+    func keyboardWillHide(sender: NSNotification) {
+        _settingsBarView!.frame.origin.y = self.view.frame.height
+        _settingsBarView!.alpha = 0
+    }
+    
     func handleScreenEdgePan(sender: AnyObject) {
         showSearch()
     }
