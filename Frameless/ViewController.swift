@@ -57,7 +57,12 @@ class ViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizer
         _webView.delegate = self
         
         _settingsBarView = UIView(frame: CGRectMake(0, self.view.frame.height, self.view.frame.width, 44))
-        _settingsBarView!.backgroundColor = UIColor.redColor()
+        var settingsButton = UIButton(frame: CGRectMake(7, 0, 110, 36))
+        var buttonImg = UIImage(named: "settings-button")
+        settingsButton.setImage(buttonImg, forState: .Normal)
+        var buttonHighlightImg = UIImage(named: "settings-button-highlighted")
+        settingsButton.setImage(buttonHighlightImg, forState: .Highlighted)
+        _settingsBarView?.addSubview(settingsButton)
         self.view.addSubview(_settingsBarView!)
 
         
