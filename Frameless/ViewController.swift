@@ -62,10 +62,10 @@ class ViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizer
         settingsButton.setImage(buttonImg, forState: .Normal)
         var buttonHighlightImg = UIImage(named: "settings-button-highlighted")
         settingsButton.setImage(buttonHighlightImg, forState: .Highlighted)
+        settingsButton.addTarget(self, action: "presentSettingsView:", forControlEvents: .TouchUpInside)
         _settingsBarView?.addSubview(settingsButton)
         self.view.addSubview(_settingsBarView!)
 
-        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name:UIKeyboardWillShowNotification, object: nil);
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name:UIKeyboardWillHideNotification, object: nil);
         
@@ -170,6 +170,12 @@ class ViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizer
             })
             _webView.alpha = 1
         }
+    }
+    
+    // Settings view
+    func presentSettingsView(sender:UIButton!) {
+        var settingsController: UIViewController = storyboard?.instantiateViewControllerWithIdentifier("settingsController") as UIViewController
+        self.presentViewController(settingsController, animated: true, completion: nil)
     }
     
     
