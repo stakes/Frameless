@@ -22,6 +22,7 @@
 		0DA5BB7919FC2EBF00B2FDD1 /* AppearanceBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DA5BB7819FC2EBF00B2FDD1 /* AppearanceBridge.m */; };
 		0DA5BB9D19FC7C7000B2FDD1 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DA5BB9C19FC7C7000B2FDD1 /* LaunchScreen.xib */; };
 		0DA5BBA019FDE2AC00B2FDD1 /* AppDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA5BB9F19FDE2AC00B2FDD1 /* AppDefaults.swift */; };
+		0DD869F51A08A7A000BF196E /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DD869F41A08A7A000BF196E /* SettingsViewController.swift */; };
 		4CBAC84B197969C60DC1899B /* libPods-Frameless.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5ABAB4BA5DBE39442812DB61 /* libPods-Frameless.a */; };
 /* End PBXBuildFile section */
 
@@ -57,6 +58,7 @@
 		0DA5BB7819FC2EBF00B2FDD1 /* AppearanceBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppearanceBridge.m; sourceTree = "<group>"; };
 		0DA5BB9C19FC7C7000B2FDD1 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		0DA5BB9F19FDE2AC00B2FDD1 /* AppDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDefaults.swift; sourceTree = "<group>"; };
+		0DD869F41A08A7A000BF196E /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		5ABAB4BA5DBE39442812DB61 /* libPods-Frameless.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Frameless.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DC7091992089D05BD351118 /* Pods-Frameless.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Frameless.release.xcconfig"; path = "Pods/Target Support Files/Pods-Frameless/Pods-Frameless.release.xcconfig"; sourceTree = "<group>"; };
 		DAC237240666B2261B5088CD /* Pods-Frameless.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Frameless.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Frameless/Pods-Frameless.debug.xcconfig"; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 				0DA5BB4219FAD12800B2FDD1 /* AppDelegate.swift */,
 				0DA5BB4B19FAD12800B2FDD1 /* SearchBar.swift */,
 				0DA5BB4E19FAD12800B2FDD1 /* ViewController.swift */,
+				0DD869F41A08A7A000BF196E /* SettingsViewController.swift */,
 				0DA5BB4519FAD12800B2FDD1 /* Main.storyboard */,
 				0DA5BB4719FAD12800B2FDD1 /* Frameless.xcdatamodeld */,
 				0DA5BB4919FAD12800B2FDD1 /* Images.xcassets */,
@@ -322,6 +325,7 @@
 				0DA5BB7219FC25F000B2FDD1 /* Helpers.swift in Sources */,
 				0DA5BB7919FC2EBF00B2FDD1 /* AppearanceBridge.m in Sources */,
 				0DA5BB5519FAD12800B2FDD1 /* SearchBar.swift in Sources */,
+				0DD869F51A08A7A000BF196E /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

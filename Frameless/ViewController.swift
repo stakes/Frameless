@@ -172,9 +172,14 @@ class ViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizer
         }
     }
     
+    func focusOnSearchBar() {
+        _searchBar.becomeFirstResponder()
+    }
+    
     // Settings view
     func presentSettingsView(sender:UIButton!) {
-        var settingsController: UIViewController = storyboard?.instantiateViewControllerWithIdentifier("settingsController") as UIViewController
+        var settingsController: SettingsViewController = storyboard?.instantiateViewControllerWithIdentifier("settingsController") as SettingsViewController
+        settingsController.delegate = self
         self.presentViewController(settingsController, animated: true, completion: nil)
     }
     
