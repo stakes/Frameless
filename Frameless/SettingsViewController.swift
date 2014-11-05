@@ -26,9 +26,8 @@ class SettingsViewController: UIViewController {
     }
     
     @IBAction func closeSettingsView(sender: AnyObject) {
-        self.dismissViewControllerAnimated(true, completion: { () -> Void in
-            self.delegate!.focusOnSearchBar()
-        })
+        self.dismissViewControllerAnimated(true, completion: nil)
+        self.delegate!.focusOnSearchBar()
     }
     
 

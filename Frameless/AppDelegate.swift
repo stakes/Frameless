@@ -33,7 +33,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func setUserSettingsDefaults() {
-        println(NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.ShakeGesture.rawValue)!)
         if NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.ShakeGesture.rawValue) == nil {
             NSUserDefaults.standardUserDefaults().setValue(true, forKey: AppDefaultKeys.ShakeGesture.rawValue)
         }

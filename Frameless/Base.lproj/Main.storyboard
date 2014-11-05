@@ -9,6 +9,8 @@
             <string>ClearSans</string>
             <string>ClearSans</string>
             <string>ClearSans</string>
+            <string>ClearSans</string>
+            <string>ClearSans</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -87,9 +89,15 @@
                                                         <action selector="toggleShakeSwitch:" destination="lCY-Sl-eE7" eventType="valueChanged" id="8vp-oe-sBB"/>
                                                     </connections>
                                                 </switch>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Shake to show or hide URL bar" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hx3-LR-Exi">
-                                                    <rect key="frame" x="16" y="15" width="235" height="23"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Shake device" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hx3-LR-Exi">
+                                                    <rect key="frame" x="16" y="7" width="100" height="23"/>
                                                     <fontDescription key="fontDescription" name="ClearSans" family="Clear Sans" pointSize="17"/>
+                                                    <color key="textColor" red="0.55673807859420776" green="0.55652600526809692" blue="0.57718861103057861" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Show and hide the browser bar" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ADz-68-azo">
+                                                    <rect key="frame" x="16" y="26" width="301" height="23"/>
+                                                    <fontDescription key="fontDescription" name="ClearSans" family="Clear Sans" pointSize="12"/>
                                                     <color key="textColor" red="0.55673807859420776" green="0.55652600526809692" blue="0.57718861103057861" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -112,9 +120,15 @@
                                                         <action selector="toggleBrowserNavSwitch:" destination="lCY-Sl-eE7" eventType="valueChanged" id="D84-CV-efV"/>
                                                     </connections>
                                                 </switch>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Swipe to go back or forward in browser" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8gQ-vc-1aK">
-                                                    <rect key="frame" x="16" y="15" width="300" height="23"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Swipe left and right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8gQ-vc-1aK">
+                                                    <rect key="frame" x="16" y="7" width="149" height="23"/>
                                                     <fontDescription key="fontDescription" name="ClearSans" family="Clear Sans" pointSize="17"/>
+                                                    <color key="textColor" red="0.55673807859420776" green="0.55652600526809692" blue="0.57718861103057861" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Move back and forward in browser history" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GSp-dV-WGc">
+                                                    <rect key="frame" x="16" y="26" width="301" height="23"/>
+                                                    <fontDescription key="fontDescription" name="ClearSans" family="Clear Sans" pointSize="12"/>
                                                     <color key="textColor" red="0.55673807859420776" green="0.55652600526809692" blue="0.57718861103057861" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -154,7 +168,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <webView contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="980-eI-5k4">
+                            <webView contentMode="scaleToFill" misplaced="YES" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="980-eI-5k4">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
@@ -189,7 +203,7 @@
                             </searchBar>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TbC-ts-ugu">
                                 <rect key="frame" x="245" y="282" width="110" height="36"/>
-                                <state key="normal" image="A0AD8506-6A27-4927-9514-387003EA36CB">
+                                <state key="normal" image="AAFBC732-556C-417C-9766-98D5936F5E7C">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -226,7 +240,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="A0AD8506-6A27-4927-9514-387003EA36CB" width="220" height="72">
+        <image name="AAFBC732-556C-417C-9766-98D5936F5E7C" width="220" height="72">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGSUpYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK8QEAcI
 ERYbHCUmJysyNzo9Q0ZVJG51bGzUCQoLDA0ODxBWJGNsYXNzXE5TSW1hZ2VGbGFnc1ZOU1JlcHNXTlND
