@@ -25,9 +25,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.window!.rootViewController = createIntroViewController()
         }
         
+        setUserSettingsDefaults()
+        
         self.window!.makeKeyAndVisible()
         
         return true
+    }
+    
+    func setUserSettingsDefaults() {
+        println(NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.ShakeGesture.rawValue)!)
+        if NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.ShakeGesture.rawValue) == nil {
+            NSUserDefaults.standardUserDefaults().setValue(true, forKey: AppDefaultKeys.ShakeGesture.rawValue)
+        }
+        if NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.ForwardBackGesture.rawValue) == nil {
+            NSUserDefaults.standardUserDefaults().setValue(true, forKey: AppDefaultKeys.ForwardBackGesture.rawValue)
+        }
     }
     
     func createIntroViewController() -> OnboardingViewController {

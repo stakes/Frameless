@@ -111,11 +111,13 @@ class ViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizer
     }
     
     override func motionEnded(motion: UIEventSubtype, withEvent event: UIEvent) {
-        if(event.subtype == UIEventSubtype.MotionShake) {
-            if (!_areControlsVisible) {
-                showSearch()
-            } else {
-                hideSearch()
+        if let isShakeActive:Bool = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.ShakeGesture.rawValue) as? Bool {
+            if(event.subtype == UIEventSubtype.MotionShake && isShakeActive == true) {
+                if (!_areControlsVisible) {
+                    showSearch()
+                } else {
+                    hideSearch()
+                }
             }
         }
     }

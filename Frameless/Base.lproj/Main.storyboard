@@ -64,10 +64,10 @@
             </objects>
             <point key="canvasLocation" x="824" y="127"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Settings Table View Controller-->
         <scene sceneID="QAm-ab-EhT">
             <objects>
-                <tableViewController id="lCY-Sl-eE7" sceneMemberID="viewController">
+                <tableViewController id="lCY-Sl-eE7" customClass="SettingsTableViewController" customModule="Frameless" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" allowsSelection="NO" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="2hH-gx-KI6">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="556"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -83,6 +83,9 @@
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4yd-mc-Ohq">
                                                     <rect key="frame" x="538" y="11" width="51" height="31"/>
                                                     <color key="onTintColor" red="0.61937248706817627" green="0.51502001285552979" blue="0.90843188762664795" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <connections>
+                                                        <action selector="toggleShakeSwitch:" destination="lCY-Sl-eE7" eventType="valueChanged" id="8vp-oe-sBB"/>
+                                                    </connections>
                                                 </switch>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Shake to show URL bar" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hx3-LR-Exi">
                                                     <rect key="frame" x="16" y="15" width="177" height="23"/>
@@ -105,6 +108,9 @@
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bpD-iZ-A9f">
                                                     <rect key="frame" x="538" y="11" width="51" height="31"/>
                                                     <color key="onTintColor" red="0.61937248706817627" green="0.51502001285552979" blue="0.90843188762664795" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <connections>
+                                                        <action selector="toggleBrowserNavSwitch:" destination="lCY-Sl-eE7" eventType="valueChanged" id="D84-CV-efV"/>
+                                                    </connections>
                                                 </switch>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Swipe to go back/forward" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8gQ-vc-1aK">
                                                     <rect key="frame" x="16" y="15" width="198" height="23"/>
@@ -127,6 +133,10 @@
                             <outlet property="delegate" destination="lCY-Sl-eE7" id="Sfc-7H-tSi"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <outlet property="_browserSwitch" destination="bpD-iZ-A9f" id="iAY-1G-KiD"/>
+                        <outlet property="_shakeSwitch" destination="4yd-mc-Ohq" id="hVN-0x-IGW"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ppZ-Fq-25f" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -179,7 +189,7 @@
                             </searchBar>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TbC-ts-ugu">
                                 <rect key="frame" x="245" y="282" width="110" height="36"/>
-                                <state key="normal" image="3F754A5B-EA52-4DCC-91C3-530E190B195D">
+                                <state key="normal" image="72E0A0DC-9A37-44D0-AAD5-3BF24EC2A585">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -216,7 +226,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="3F754A5B-EA52-4DCC-91C3-530E190B195D" width="220" height="72">
+        <image name="72E0A0DC-9A37-44D0-AAD5-3BF24EC2A585" width="220" height="72">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGSUpYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK8QEAcI
 ERYbHCUmJysyNzo9Q0ZVJG51bGzUCQoLDA0ODxBWJGNsYXNzXE5TSW1hZ2VGbGFnc1ZOU1JlcHNXTlND
