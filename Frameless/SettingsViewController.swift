@@ -10,23 +10,25 @@ import UIKit
 
 class SettingsViewController: UIViewController {
 
+    @IBOutlet weak var _navigationBar: UINavigationBar!
     var delegate:ViewController?
-    
-    @IBAction func closeSettingsView(sender: AnyObject) {
-        self.dismissViewControllerAnimated(true, completion: { () -> Void in
-            self.delegate!.focusOnSearchBar()
-        })
-    }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        var font = UIFont(name: "ClearSans-Bold", size: 18)
+        var textAttributes = [NSFontAttributeName: font!, NSForegroundColorAttributeName: UIColor.whiteColor()]
+        UINavigationBar.appearance().titleTextAttributes = textAttributes
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    @IBAction func closeSettingsView(sender: AnyObject) {
+        self.dismissViewControllerAnimated(true, completion: { () -> Void in
+            self.delegate!.focusOnSearchBar()
+        })
     }
     
 
