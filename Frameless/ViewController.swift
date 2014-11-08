@@ -7,14 +7,17 @@
 //
 
 import UIKit
+import WebKit
 
-class ViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizerDelegate, UIWebViewDelegate {
+class ViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizerDelegate, WKNavigationDelegate {
 
 
-    @IBOutlet weak var _webView: UIWebView!
+    
     @IBOutlet weak var _searchBar: SearchBar!
     @IBOutlet weak var _progressView: UIProgressView!
     @IBOutlet weak var _loadingErrorView: UIView!
+    
+    var _webView: WKWebView?
     
     var _tapRecognizer: UITapGestureRecognizer?
     var _panFromBottomRecognizer: UIScreenEdgePanGestureRecognizer?
@@ -35,6 +38,13 @@ class ViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizer
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        _webView = WKWebView()
+        self.view.addSubview(_webView!)
+        //        _webView!.scalesPageToFit = true
+        _webView!.navigationDelegate = self
+        _webView!.frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height)
+        self.view.sendSubviewToBack(_webView!)
         
         _defaultsObject = NSUserDefaults.standardUserDefaults()
         
@@ -66,9 +76,6 @@ class ViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizer
         _searchBar.showsCancelButton = false
         _searchBar.becomeFirstResponder()
         customizeSearchBarAppearance()
-        
-        _webView.scalesPageToFit = true
-        _webView.delegate = self
         
         _settingsBarView = UIView(frame: CGRectMake(0, self.view.frame.height, self.view.frame.width, 44))
         var settingsButton = UIButton(frame: CGRectMake(7, 0, 36, 36))
@@ -163,13 +170,13 @@ class ViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizer
             if _effectView == nil {
                 var blur:UIBlurEffect = UIBlurEffect(style: UIBlurEffectStyle.Light)
                 _effectView = UIVisualEffectView(effect: blur)
-                var size = _webView.frame.size
+                var size = _webView!.frame.size
                 _effectView!.frame = CGRectMake(0,0,size.width,size.height)
                 _effectView!.alpha = 0
                 _effectView?.addGestureRecognizer(_tapRecognizer!)
                 
-                _webView.addSubview(_effectView!)
-                _webView.alpha = 0.25
+                _webView!.addSubview(_effectView!)
+                _webView!.alpha = 0.25
                 UIView.animateWithDuration(0.25, animations: {
                     self._effectView!.alpha = 1
                 }, nil)
@@ -184,7 +191,7 @@ class ViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizer
             }, completion: { finished in
                 self._effectView = nil
             })
-            _webView.alpha = 1
+            _webView!.alpha = 1
         }
     }
     
@@ -201,7 +208,8 @@ class ViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizer
     
     
     // Web view
-    func webViewDidStartLoad(webView: UIWebView) {
+    
+    func webView(webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
         _searchBar.showsCancelButton = true
         _loadingErrorView.hidden = true
         _isFirstRun = false
@@ -211,11 +219,11 @@ class ViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizer
         _progressTimer = NSTimer.scheduledTimerWithTimeInterval(0.01667, target: self, selector: "progressTimerCallback", userInfo: nil, repeats: true)
     }
     
-    func webViewDidFinishLoad(webView: UIWebView) {
+    func webView(webView: WKWebView, didFinishNavigation navigation: WKNavigation!) {
         _isWebViewLoading = false
     }
     
-    func webView(webView: UIWebView, didFailLoadWithError error: NSError) {
+    func webView(webView: WKWebView, didFailNavigation navigation: WKNavigation!, withError error: NSError) {
         _isWebViewLoading = false
         showSearch()
         displayLoadingErrorMessage()
@@ -242,7 +250,7 @@ class ViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizer
         let addr = NSURL(string: addrStr)
         if let webAddr = addr {
             let req = NSURLRequest(URL: webAddr)
-            _webView.loadRequest(req)
+            _webView!.loadRequest(req)
         } else {
             displayLoadingErrorMessage()
         }
@@ -266,13 +274,13 @@ class ViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizer
     
     func handleGoBackPan(sender: AnyObject) {
         if NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.ForwardBackGesture.rawValue) as Bool == true {
-            _webView.goBack()
+            _webView!.goBack()
         }
     }
     
     func handleGoForwardPan(sender: AnyObject) {
         if NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.ForwardBackGesture.rawValue) as Bool == true {
-            _webView.goForward()
+            _webView!.goForward()
         }
     }
     
