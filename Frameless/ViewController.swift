@@ -243,10 +243,10 @@ class ViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizer
                 _progressView.hidden = true
                 _progressTimer?.invalidate()
             } else {
-                _progressView.progress += 0.05
+                _progressView.progress += 0.2
             }
         } else {
-            _progressView.progress += 0.02
+            _progressView.progress += 0.003
             if (_progressView.progress >= 0.95) {
                 _progressView.progress = 0.95
             }
