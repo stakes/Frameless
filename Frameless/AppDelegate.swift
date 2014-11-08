@@ -42,7 +42,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func createIntroViewController() -> OnboardingViewController {
-        let page01: OnboardingContentViewController = OnboardingContentViewController(title: nil, body: "Frameless is a chromeless,\n full-screen web browser. Load a page and the browser bar will hide", image: UIImage(named: "introimage01"), buttonText: nil) {
+        let page01: OnboardingContentViewController = OnboardingContentViewController(title: nil, body: "Frameless is a chromeless,\n full-screen web browser. Load a page and everything else hides", image: UIImage(named: "introimage01"), buttonText: nil) {
         }
         page01.iconWidth = 158
         page01.iconHeight = 258.5
