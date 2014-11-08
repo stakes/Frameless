@@ -222,8 +222,16 @@ class ViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizer
     func webView(webView: WKWebView, didFinishNavigation navigation: WKNavigation!) {
         _isWebViewLoading = false
     }
+
+    func webView(webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: NSError) {
+        handleWebViewError()
+    }
     
     func webView(webView: WKWebView, didFailNavigation navigation: WKNavigation!, withError error: NSError) {
+        handleWebViewError()
+    }
+
+    func handleWebViewError() {
         _isWebViewLoading = false
         showSearch()
         displayLoadingErrorMessage()
