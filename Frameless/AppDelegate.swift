@@ -42,26 +42,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func createIntroViewController() -> OnboardingViewController {
-        let page01: OnboardingContentViewController = OnboardingContentViewController(title: nil, body: "Frameless is a chromeless,\n full-screen web browser. Load a page and everything else hides", image: UIImage(named: "introimage01"), buttonText: nil) {
+        let page01: OnboardingContentViewController = OnboardingContentViewController(title: nil, body: "Frameless is a chromeless,\n full-screen web browser. Load a\npage and everything else hides", image: UIImage(named: "introimage01"), buttonText: nil) {
         }
         page01.iconWidth = 158
         page01.iconHeight = 258.5
         
-        let page02: OnboardingContentViewController = OnboardingContentViewController(title: nil, body: "Swipe up from the bottom of\nyour screen to show the browser\nbar and the keyboard", image: UIImage(named: "introimage02"), buttonText: nil) {
+        let page02: OnboardingContentViewController = OnboardingContentViewController(title: nil, body: "Pull up from the bottom of your\nscreen or shake the device to show\nthe browser bar and keyboard", image: UIImage(named: "introimage02"), buttonText: nil) {
         }
         page02.iconWidth = 158
         page02.iconHeight = 258.5
         
-        let page03: OnboardingContentViewController = OnboardingContentViewController(title: nil, body: "Or give your device a hearty shake,\nwhich will also show and\n hide the browser bar", image: UIImage(named: "introimage03"), buttonText: "GOT IT") {
+        let page03: OnboardingContentViewController = OnboardingContentViewController(title: nil, body: "Swipe left and right to go\nforward and back in your\nsession history", image: UIImage(named: "introimage03"), buttonText: nil) {
             self.introCompletion()
         }
         page03.iconWidth = 158
         page03.iconHeight = 258.5
         
+        let page04: OnboardingContentViewController = OnboardingContentViewController(title: nil, body: "And turn off shaking, swiping\nor both if they get in your\nway. Happy internetting!", image: UIImage(named: "introimage04"), buttonText: "LET'S GO") {
+            self.introCompletion()
+        }
+        page04.iconWidth = 158
+        page04.iconHeight = 258.5
+        
         let bgImage = UIImage.withColor(UIColorFromHex(0x9178E2))
         let onboardingViewController = OnboardingViewController(
             backgroundImage: bgImage,
-            contents: [page01, page02, page03])
+            contents: [page01, page02, page03, page04])
         onboardingViewController.fontName = "ClearSans"
         onboardingViewController.bodyFontSize = 16
         onboardingViewController.titleFontName = "ClearSans-Bold"
