@@ -18,6 +18,7 @@ class ViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizer
     @IBOutlet weak var _loadingErrorView: UIView!
     
     var _webView: WKWebView?
+    var _loadingTimer: NSTimer?
     
     var _tapRecognizer: UITapGestureRecognizer?
     var _panFromBottomRecognizer: UIScreenEdgePanGestureRecognizer?
@@ -27,7 +28,7 @@ class ViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizer
     var _isFirstRun = true
     var _effectView: UIVisualEffectView?
     var _errorView: UIView?
-    var _settingsBarView:UIView?
+    var _settingsBarView: UIView?
     var _defaultsObject: NSUserDefaults?
     var _onboardingViewController: OnboardingViewController?
     
@@ -217,9 +218,16 @@ class ViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizer
         _progressView.hidden = false
         _progressView.progress = 0
         _progressTimer = NSTimer.scheduledTimerWithTimeInterval(0.01667, target: self, selector: "progressTimerCallback", userInfo: nil, repeats: true)
+        _loadingTimer = NSTimer.scheduledTimerWithTimeInterval(20, target: self, selector: "loadingTimeoutCallback", userInfo: nil, repeats: false)
+    }
+    
+    func loadingTimeoutCallback() {
+        _webView?.stopLoading()
+        handleWebViewError()
     }
     
     func webView(webView: WKWebView, didFinishNavigation navigation: WKNavigation!) {
+        _loadingTimer!.invalidate()
         _isWebViewLoading = false
     }
 
@@ -232,6 +240,7 @@ class ViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizer
     }
 
     func handleWebViewError() {
+        _loadingTimer!.invalidate()
         _isWebViewLoading = false
         showSearch()
         displayLoadingErrorMessage()
