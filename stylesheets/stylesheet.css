@@ -441,17 +441,18 @@ p {
 }
 
 a {
-  color: #2879d0;
+  color: #6D5AAB;
 }
 a:hover {
-  color: #2268b2;
+  color: #6D5AAB;
+  text-decoration: underline;
 }
 
 header {
   padding-top: 40px;
   padding-bottom: 40px;
-  font-family: 'Architects Daughter', 'Helvetica Neue', Helvetica, Arial, serif;
-  background: #2e7bcf url(../images/header-bg.jpg) 0 0 repeat-x;
+  font-family: 'Helvetica Neue', Helvetica, Arial, serif;
+  background: #9178E2;
   border-bottom: solid 1px #275da1;
 }
 
@@ -468,7 +469,7 @@ header h1 {
 
 header h2 {
   font-size: 26px;
-  color: #9ddcff;
+  color: rgba(255,255,255,.5);
   font-weight: normal;
   line-height: 1.3;
   width: 540px;
@@ -524,7 +525,7 @@ a.button {
   color: #fff;
   padding-left: 68px;
   padding-top: 22px;
-  font-family: 'Architects Daughter', 'Helvetica Neue', Helvetica, Arial, serif;
+  font-family: 'Helvetica Neue', Helvetica, Arial, serif;
 }
 a.button small {
   display: block;
@@ -612,7 +613,7 @@ form {
 /* GENERAL ELEMENT TYPE STYLES */
 
 #main-content h1 {
-  font-family: 'Architects Daughter', 'Helvetica Neue', Helvetica, Arial, serif;
+  font-family: 'Helvetica Neue', Helvetica, Arial, serif;
   font-size: 2.8em;
   font-weight: normal;
   letter-spacing: -1px;
@@ -624,13 +625,13 @@ form {
 
 #main-content h1:before {
   content: "/";
-  color: #9ddcff;
+  color: #9178E2;
   padding-right: 0.3em;
   margin-left: -0.9em;
 }
 
 #main-content h2 {
-  font-family: 'Architects Daughter', 'Helvetica Neue', Helvetica, Arial, serif;
+  font-family: 'Helvetica Neue', Helvetica, Arial, serif;
   font-size: 22px;
   font-weight: bold;
   margin-bottom: 8px;
@@ -639,13 +640,13 @@ form {
 }
 #main-content h2:before {
   content: "//";
-  color: #9ddcff;
+  color: #9178E2;
   padding-right: 0.3em;
   margin-left: -1.5em;
 }
 
 #main-content h3 {
-  font-family: 'Architects Daughter', 'Helvetica Neue', Helvetica, Arial, serif;
+  font-family: 'Helvetica Neue', Helvetica, Arial, serif;
   font-size: 18px;
   font-weight: bold;
   margin-top: 24px;
@@ -656,13 +657,13 @@ form {
 
 #main-content h3:before {
   content: "///";
-  color: #9ddcff;
+  color: #9178E2;
   padding-right: 0.3em;
   margin-left: -2em;
 }
 
 #main-content h4 {
-  font-family: 'Architects Daughter', 'Helvetica Neue', Helvetica, Arial, serif;
+  font-family: 'Helvetica Neue', Helvetica, Arial, serif;
   font-size: 15px;
   font-weight: bold;
   margin-bottom: 8px;
@@ -672,7 +673,7 @@ form {
 
 h4:before {
   content: "////";
-  color: #9ddcff;
+  color: #9178E2;
   padding-right: 0.3em;
   margin-left: -2.8em;
 }
@@ -686,7 +687,7 @@ h4:before {
 }
 h5:before {
   content: "/////";
-  color: #9ddcff;
+  color: #9178E2;
   padding-right: 0.3em;
   margin-left: -3.2em;
 }
@@ -700,7 +701,7 @@ h5:before {
 }
 h6:before {
   content: "//////";
-  color: #9ddcff;
+  color: #9178E2;
   padding-right: 0.3em;
   margin-left: -3.7em;
 }
@@ -834,7 +835,7 @@ footer a:hover {
     text-align: center;
     font-size: 13px;
     line-height: 1;
-    background-color: #9ddcff;
+    background-color: #9178E2;
     color: #2879d0;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
