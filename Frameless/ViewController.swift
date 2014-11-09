@@ -218,7 +218,7 @@ class ViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizer
         _progressView.hidden = false
         _progressView.progress = 0
         _progressTimer = NSTimer.scheduledTimerWithTimeInterval(0.01667, target: self, selector: "progressTimerCallback", userInfo: nil, repeats: true)
-        _loadingTimer = NSTimer.scheduledTimerWithTimeInterval(20, target: self, selector: "loadingTimeoutCallback", userInfo: nil, repeats: false)
+        _loadingTimer = NSTimer.scheduledTimerWithTimeInterval(30, target: self, selector: "loadingTimeoutCallback", userInfo: nil, repeats: false)
     }
     
     func loadingTimeoutCallback() {
