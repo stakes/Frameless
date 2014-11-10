@@ -277,12 +277,15 @@ class ViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizer
     func httpifyString(str: String) -> String {
         let lcStr:String = (str as NSString).lowercaseString
         if (countElements(lcStr) >= 7) {
-            if ((lcStr as NSString).substringToIndex(7) == "http://") {
+            if (lcStr.rangeOfString("http://") != nil) {
+                return lcStr
+            } else if (lcStr.rangeOfString("https://") != nil) {
                 return lcStr
             }
         }
         return "http://"+lcStr
     }
+
     
     func displayLoadingErrorMessage() {
         _searchBar.showsCancelButton = false
