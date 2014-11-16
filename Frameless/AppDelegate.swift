@@ -36,6 +36,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.ShakeGesture.rawValue) == nil {
             NSUserDefaults.standardUserDefaults().setValue(true, forKey: AppDefaultKeys.ShakeGesture.rawValue)
         }
+        if NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.PanFromBottomGesture.rawValue) == nil {
+            NSUserDefaults.standardUserDefaults().setValue(true, forKey: AppDefaultKeys.PanFromBottomGesture.rawValue)
+        }
+        if NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.TripleTapGesture.rawValue) == nil {
+            NSUserDefaults.standardUserDefaults().setValue(true, forKey: AppDefaultKeys.TripleTapGesture.rawValue)
+        }
         if NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.ForwardBackGesture.rawValue) == nil {
             NSUserDefaults.standardUserDefaults().setValue(true, forKey: AppDefaultKeys.ForwardBackGesture.rawValue)
         }

@@ -21,6 +21,7 @@ class ViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizer
     var _loadingTimer: NSTimer?
     
     var _tapRecognizer: UITapGestureRecognizer?
+    var _threeFingerTapRecognizer: UITapGestureRecognizer?
     var _panFromBottomRecognizer: UIScreenEdgePanGestureRecognizer?
     var _panFromRightRecognizer: UIScreenEdgePanGestureRecognizer?
     var _panFromLeftRecognizer: UIScreenEdgePanGestureRecognizer?
@@ -52,6 +53,10 @@ class ViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizer
         _loadingErrorView.hidden = true
         
         _tapRecognizer = UITapGestureRecognizer(target: self, action: Selector("hideSearch"))
+        
+        _threeFingerTapRecognizer = UITapGestureRecognizer(target: self, action: Selector("handleThreeFingerTap:"))
+        _threeFingerTapRecognizer?.numberOfTouchesRequired = 3
+        self.view.addGestureRecognizer(_threeFingerTapRecognizer!)
         
         _panFromBottomRecognizer = UIScreenEdgePanGestureRecognizer(target: self, action: Selector("handleBottomEdgePan:"))
         _panFromBottomRecognizer!.edges = UIRectEdge.Bottom
@@ -124,6 +129,12 @@ class ViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizer
     
     func handleBottomEdgePan(sender: AnyObject) {
         showSearch()
+    }
+    
+    func handleThreeFingerTap(sender: AnyObject) {
+        if NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.TripleTapGesture.rawValue) as Bool == true {
+            showSearch()
+        }
     }
     
     override func canBecomeFirstResponder() -> Bool {

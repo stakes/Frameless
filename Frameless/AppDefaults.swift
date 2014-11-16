@@ -11,6 +11,7 @@ enum AppDefaultKeys: String {
     case ShakeGesture = "shake"
     case PanFromBottomGesture = "panFromBottom"
     case ForwardBackGesture = "panLeftRight"
+    case TripleTapGesture = "tripleTap"
 }
 
 

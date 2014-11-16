@@ -10,7 +10,9 @@ import UIKit
 
 class SettingsViewController: UIViewController {
 
+    @IBOutlet weak var _closeButton: UIBarButtonItem!
     @IBOutlet weak var _navigationBar: UINavigationBar!
+    
     var delegate:ViewController?
 
     override func viewDidLoad() {
@@ -28,6 +30,10 @@ class SettingsViewController: UIViewController {
     @IBAction func closeSettingsView(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
         self.delegate!.focusOnSearchBar()
+    }
+    
+    func closeButtonEnabled(bool:Bool) {
+        _closeButton.enabled = bool
     }
     
 
