@@ -22,8 +22,8 @@ class ViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizer
     
     var _tapRecognizer: UITapGestureRecognizer?
     var _panFromBottomRecognizer: UIScreenEdgePanGestureRecognizer?
-    var _panFromRightRecognizer: UISwipeGestureRecognizer?
-    var _panFromLeftRecognizer: UISwipeGestureRecognizer?
+    var _panFromRightRecognizer: UIScreenEdgePanGestureRecognizer?
+    var _panFromLeftRecognizer: UIScreenEdgePanGestureRecognizer?
     var _areControlsVisible = true
     var _isFirstRun = true
     var _effectView: UIVisualEffectView?
@@ -58,18 +58,16 @@ class ViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizer
         _panFromBottomRecognizer!.delegate = self
         self.view.addGestureRecognizer(_panFromBottomRecognizer!)
         
-        _panFromLeftRecognizer = UISwipeGestureRecognizer(target: self, action: Selector("handleGoBackPan:"))
-        _panFromLeftRecognizer!.direction = .Right
-        _panFromLeftRecognizer?.numberOfTouchesRequired = 1
+        _panFromLeftRecognizer = UIScreenEdgePanGestureRecognizer(target: self, action: Selector("handleGoBackPan:"))
+        _panFromLeftRecognizer!.edges = UIRectEdge.Left
         _panFromLeftRecognizer!.delegate = self
         self.view.addGestureRecognizer(_panFromLeftRecognizer!)
         
-        _panFromRightRecognizer = UISwipeGestureRecognizer(target: self, action: Selector("handleGoForwardPan:"))
-        _panFromRightRecognizer!.direction = .Left
-        _panFromRightRecognizer?.numberOfTouchesRequired = 1
+        _panFromRightRecognizer = UIScreenEdgePanGestureRecognizer(target: self, action: Selector("handleGoForwardPan:"))
+        _panFromRightRecognizer!.edges = UIRectEdge.Right
         _panFromRightRecognizer!.delegate = self
         self.view.addGestureRecognizer(_panFromRightRecognizer!)
-        
+
         _searchBar.delegate = self
         _searchBar.autocapitalizationType = .None
         _searchBar.returnKeyType = .Go
@@ -292,15 +290,19 @@ class ViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizer
         _loadingErrorView.hidden = false
     }
     
-    func handleGoBackPan(sender: AnyObject) {
+    func handleGoBackPan(sender: UIScreenEdgePanGestureRecognizer) {
         if NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.ForwardBackGesture.rawValue) as Bool == true {
-            _webView!.goBack()
+            if (sender.state == .Began) {
+                _webView!.goBack()
+            }
         }
     }
     
     func handleGoForwardPan(sender: AnyObject) {
         if NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.ForwardBackGesture.rawValue) as Bool == true {
-            _webView!.goForward()
+            if (sender.state == .Began) {
+                _webView!.goForward()
+            }
         }
     }
     
