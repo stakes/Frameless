@@ -349,9 +349,9 @@ blockquote {
     Buttons
     ------------------------------------------------------------  */
 .button {
-  background-color: #8b99a5;
-  border-color: #8b99a5;
-  border: 2px solid #8b99a5;
+  background-color: white;
+  border-color: white;
+  border: 2px solid rgba(255, 255, 255, 0.7);
   border-radius: 2px;
   color: #fff;
   cursor: pointer;
@@ -365,15 +365,15 @@ blockquote {
   vertical-align: middle;
   white-space: nowrap; }
   .button:focus, .button:hover {
-    background-color: #99a6b0;
-    border-color: #99a6b0; }
+    background-color: white;
+    border-color: white; }
   .button.hollow {
-    color: #8b99a5; }
+    color: rgba(255, 255, 255, 0.7); }
     .button.hollow:focus, .button.hollow:hover {
-      border-color: #b6bfc6;
-      color: #b6bfc6; }
+      border-color: white;
+      color: white; }
   .button:focus, .button:hover {
-    color: #fff; }
+    color: white; }
   .button[disabled] {
     cursor: not-allowed;
     opacity: 0.6;
@@ -389,7 +389,7 @@ blockquote {
     background-color: #52be35;
     border-color: #52be35; }
   .primary.button.hollow {
-    color: #49aa2f; }
+    color: rgba(255, 255, 255, 0.7); }
     .primary.button.hollow:focus, .primary.button.hollow:hover {
       border-color: #6fd055;
       color: #6fd055; }
@@ -978,9 +978,9 @@ html, body {
     position: relative;
     z-index: 2; }
   .background-image h1, .background-image h2, .background-image h3, .background-image h4, .background-image h5, .background-image h6 {
-    color: #fbfbfb; }
+    color: #fff; }
     .background-image h1 small, .background-image h2 small, .background-image h3 small, .background-image h4 small, .background-image h5 small, .background-image h6 small {
-      color: #a2adb7; }
+      color: #fff; }
 
 /*  ------------------------------------------------------------
     Testimonials

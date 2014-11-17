@@ -9,7 +9,7 @@
     }
 
     &.hollow {
-        color: $background-color;
+        color: rgba(255,255,255,.7);
 
         &:focus,
         &:hover {
@@ -24,9 +24,9 @@
     ------------------------------------------------------------  */
 
 .button {
-    @include button-variant( #8b99a5 );
+    @include button-variant( rgba(255,255,255,1) );
 
-    border: 2px solid #8b99a5;
+    border: 2px solid rgba(255,255,255,.7);
     border-radius: 2px;
     color: #fff;
     cursor: pointer;
@@ -42,7 +42,7 @@
 
     &:focus,
     &:hover {
-        color: #fff;
+        color: rgba(255,255,255,1);
     }
 
     &[disabled] {
