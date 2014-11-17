@@ -1,0 +1,89 @@
+@mixin grid( $prefix ) {
+    @for $i from 1 through 12 {
+        .#{ $prefix }-#{ $i } {
+            width: percentage( $i / 12 );
+        }
+    }
+}
+
+/*  ------------------------------------------------------------
+    Container and grid
+    ------------------------------------------------------------  */
+
+.container {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 1100px;
+    padding-left: 20px;
+    padding-right: 20px;
+
+    @media ( min-width: $screen-tablet-min ) {
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+    @media ( min-width: $screen-desktop-min ) {
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+}
+
+.grid {
+    @include inline-block-reset();
+
+    margin-left: -20px;
+
+    > * {
+        padding-left: 20px;
+    }
+
+    @media ( min-width: $screen-tablet-min ) {
+        margin-left: -40px;
+
+        > * {
+            padding-left: 40px;
+            vertical-align: top;
+        }
+    }
+    @media ( min-width: $screen-desktop-min ) {
+        margin-left: -60px;
+
+        > * {
+            padding-left: 60px;
+        }
+    }
+}
+
+.vertically-centered.grid > * {
+    vertical-align: middle;
+}
+
+.justified.grid {
+    @include justify-content();
+}
+
+.description.grid {
+    margin-bottom: -40px;
+
+    > * {
+        margin-bottom: 40px;
+    }
+
+    @media ( min-width: $screen-tablet-min ) {
+        margin-bottom: -60px;
+
+        > * {
+            margin-bottom: 60px;
+        }
+    }
+}
+.description.object p {
+    @extend .muted;
+}
+
+@media ( min-width: $screen-tablet-min ) {
+    @include grid( 'tablet' );
+}
+
+@media ( min-width: $screen-desktop-min ) {
+    @include grid( 'desktop' );
+}

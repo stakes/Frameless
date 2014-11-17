@@ -1,0 +1,41 @@
+/*  ------------------------------------------------------------
+    Responsive utilities
+    ------------------------------------------------------------  */
+
+.visible-on-phones,
+.visible-on-tablets,
+.visible-on-desktop {
+    display: none !important;
+}
+
+.visible-on-phones {
+    @media ( max-width: $screen-phone-max ) {
+        display: block !important;
+    }
+}
+.visible-on-tablets {
+    @media ( min-width: $screen-tablet-min ) and ( max-width: $screen-tablet-max ) {
+        display: block !important;
+    }
+}
+.visible-on-desktop {
+    @media ( min-width: $screen-desktop-min ) {
+        display: block !important;
+    }
+}
+
+.hidden-on-phones {
+    @media ( max-width: $screen-phone-max ) {
+        display: none !important;
+    }
+}
+.hidden-on-tablets {
+    @media ( min-width: $screen-tablet-min ) and ( max-width: $screen-tablet-max ) {
+        display: none !important;
+    }
+}
+.hidden-on-desktop {
+    @media ( min-width: $screen-desktop-min ) {
+        display: none !important;
+    }
+}

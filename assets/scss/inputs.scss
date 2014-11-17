@@ -1,0 +1,60 @@
+/*  ------------------------------------------------------------
+    Inputs and input groups
+    ------------------------------------------------------------  */
+
+.input {
+    border: 2px solid rgba( #8b99a5, 0.25 );
+    border-radius: 2px;
+    color: #33333f;
+    display: inline-block;
+    line-height: 26px;
+    padding: 5px 15px 7px;
+    vertical-align: middle;
+    width: 100%;
+
+    &:focus {
+        border-color: #48aef4;
+        outline: 0;
+    }
+
+    .background-image &:not(:focus) {
+        border-color: transparent;
+    }
+}
+
+textarea.input {
+    height: auto;
+}
+
+.large.input {
+    height: 50px;
+    padding: 9px 20px 11px;
+}
+
+.input-group {
+    display: table;
+
+    > .input,
+    > .input-group-button {
+        display: table-cell;
+    }
+
+    > .input-group-button {
+        width: 1%;
+
+        > .button {
+            position: relative;
+        }
+
+        &:first-child > .button {
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+            margin-right: -2px;
+        } 
+        &:last-child > .button {
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+            margin-left: -2px;
+        }
+    }
+}

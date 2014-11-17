@@ -1,0 +1,89 @@
+@mixin button-variant( $background-color ) {
+    background-color: $background-color;
+    border-color: $background-color;
+
+    &:focus,
+    &:hover {
+        background-color: lighten( $background-color, 5% );
+        border-color: lighten( $background-color, 5% );
+    }
+
+    &.hollow {
+        color: $background-color;
+
+        &:focus,
+        &:hover {
+            border-color: lighten( $background-color, 15% );
+            color: lighten( $background-color, 15% );
+        }
+    }
+}
+
+/*  ------------------------------------------------------------
+    Buttons
+    ------------------------------------------------------------  */
+
+.button {
+    @include button-variant( #8b99a5 );
+
+    border: 2px solid #8b99a5;
+    border-radius: 2px;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 26px;
+    padding: 5px 20px 7px;
+    text-decoration: none;
+    transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out, color 0.2s ease-in-out;
+    vertical-align: middle;
+    white-space: nowrap;
+
+    &:focus,
+    &:hover {
+        color: #fff;
+    }
+
+    &[disabled] {
+        cursor: not-allowed;
+        opacity: 0.6;
+        pointer-events: none;
+    }
+}
+
+.large.button {
+    // font-size: 18px;
+    padding: 9px 25px 11px;
+}
+
+.primary.button {
+    @include button-variant( mix( #389b17, #5aba47 ) );
+}
+
+.hollow.button {
+    background-color: transparent;
+
+    &:focus,
+    &:hover {
+        background-color: transparent;
+    }
+}
+
+.button-group {
+    .button {
+        @media ( max-width: $screen-phone-max ) {
+            display: block;
+            text-align: center;
+
+            + .button {
+                margin-top: 10px;
+            }
+        }
+        @media ( min-width: $screen-tablet-min ) {
+            + .button {
+                margin-left: 10px;
+            }
+        }
+    }
+}

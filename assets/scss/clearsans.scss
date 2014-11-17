@@ -1,0 +1,108 @@
+/*!
+ * Clear Sans Webfont
+ *
+ * Webfont conversion of the Clear Sans typeface, designed by the
+ * Intel Open Source Technology Center <https://01.org/clear-sans>
+ *
+ * Original font file released under the Apache 2.0 License
+ * <http://www.apache.org/licenses/LICENSE-2.0.html>
+ *
+ * Webfont version by Resi Respati <resir014@gmail.com>
+ * Released under the MIT License.
+ */
+
+@font-face {
+    font-family: 'Clear Sans';
+    font-style: normal;
+    font-weight: 100;
+    src: local('ClearSans-Thin'), local('Clear Sans Thin'),
+         url('../fonts/ClearSans-Thin.eot'),
+         url('../fonts/ClearSans-Thin.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/ClearSans-Thin.woff') format('woff'),
+         url('../fonts/ClearSans-Thin.ttf') format('truetype'),
+         url('../fonts/ClearSans-Thin.svg') format('svg');
+}
+
+@font-face {
+    font-family: 'Clear Sans';
+    font-style: normal;
+    font-weight: 300;
+    src: local('ClearSans-Light'), local('Clear Sans Light'),
+         url('../fonts/ClearSans-Light.eot'),
+         url('../fonts/ClearSans-Light.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/ClearSans-Light.woff') format('woff'),
+         url('../fonts/ClearSans-Light.ttf') format('truetype'),
+         url('../fonts/ClearSans-Light.svg') format('svg');
+}
+
+@font-face {
+    font-family: 'Clear Sans';
+    font-style: normal;
+    font-weight: 400;
+    src: local('ClearSans'), local('Clear Sans'),
+         url('../fonts/ClearSans-Regular.eot'),
+         url('../fonts/ClearSans-Regular.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/ClearSans-Regular.woff') format('woff'),
+         url('../fonts/ClearSans-Regular.ttf') format('truetype'),
+         url('../fonts/ClearSans-Regular.svg') format('svg');
+}
+
+@font-face {
+    font-family: 'Clear Sans';
+    font-style: italic;
+    font-weight: 400;
+    src: local('ClearSans-Italic'), local('Clear Sans Italic'),
+         url('../fonts/ClearSans-Italic.eot'),
+         url('../fonts/ClearSans-Italic.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/ClearSans-Italic.woff') format('woff'),
+         url('../fonts/ClearSans-Italic.ttf') format('truetype'),
+         url('../fonts/ClearSans-Italic.svg') format('svg');
+}
+
+@font-face {
+    font-family: 'Clear Sans';
+    font-style: normal;
+    font-weight: 500;
+    src: local('ClearSans-Medium'), local('Clear Sans Medium'),
+         url('../fonts/ClearSans-Medium.eot'),
+         url('../fonts/ClearSans-Medium.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/ClearSans-Medium.woff') format('woff'),
+         url('../fonts/ClearSans-Medium.ttf') format('truetype'),
+         url('../fonts/ClearSans-Medium.svg') format('svg');
+}
+
+@font-face {
+    font-family: 'Clear Sans';
+    font-style: italic;
+    font-weight: 500;
+    src: local('ClearSans-MediumItalic'), local('Clear Sans Medium Italic'),
+         url('../fonts/ClearSans-MediumItalic.eot'),
+         url('../fonts/ClearSans-MediumItalic.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/ClearSans-MediumItalic.woff') format('woff'),
+         url('../fonts/ClearSans-MediumItalic.ttf') format('truetype'),
+         url('../fonts/ClearSans-MediumItalic.svg') format('svg');
+}
+
+@font-face {
+    font-family: 'Clear Sans';
+    font-style: normal;
+    font-weight: 700;
+    src: local('ClearSans-Bold'), local('Clear Sans Bold'),
+         url('../fonts/ClearSans-Bold.eot'),
+         url('../fonts/ClearSans-Bold.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/ClearSans-Bold.woff') format('woff'),
+         url('../fonts/ClearSans-Bold.ttf') format('truetype'),
+         url('../fonts/ClearSans-Bold.svg') format('svg');
+}
+
+@font-face {
+    font-family: 'Clear Sans';
+    font-style: italic;
+    font-weight: 700;
+    src: local('ClearSans-BoldItalic'), local('Clear Sans Bold Italic'),
+         url('../fonts/ClearSans-BoldItalic.eot'),
+         url('../fonts/ClearSans-BoldItalic.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/ClearSans-BoldItalic.woff') format('woff'),
+         url('../fonts/ClearSans-BoldItalic.ttf') format('truetype'),
+         url('../fonts/ClearSans-BoldItalic.svg') format('svg');
+}

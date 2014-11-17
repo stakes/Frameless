@@ -1,0 +1,38 @@
+/*  ------------------------------------------------------------
+    Utilities
+    ------------------------------------------------------------  */
+
+.centered.text {
+    text-align: center;
+}
+
+img.centered {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.tiny.margin {
+    margin-top: $spacing-unit;
+    margin-bottom: $spacing-unit;
+}
+.small.margin {
+    margin-top: $spacing-unit * 2;
+    margin-bottom: $spacing-unit * 2;
+}
+.medium.margin {
+    @extend .small.margin;
+
+    @media ( min-width: $screen-tablet-min ) {
+        margin-top: $spacing-unit * 4;
+        margin-bottom: $spacing-unit * 4;
+    }
+}
+.large.margin {
+    @extend .medium.margin;
+
+    @media ( min-width: $screen-large-desktop-min ) {
+        margin-top: $spacing-unit * 8;
+        margin-bottom: $spacing-unit * 8;
+    }
+}

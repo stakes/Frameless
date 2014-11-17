@@ -1,0 +1,647 @@
+/*  ------------------------------------------------------------
+
+    Lancelot - app landing page
+
+    Version     1.0.1
+    URL         http://demo.happytodesign.com/lancelot/landing  
+    Author      happytodesign.com
+
+
+    Table of contents:
+
+     1. Load custom fonts
+     2. Normalize CSS
+     3. Global styles (box-model, body, links)
+     4. Typography
+     5. Buttons
+     6. Inputs and input groups
+     7. Forms and form components
+     8. Container and grid
+     9. Utilities
+    10. Responsive utilities
+
+    11. Navigation bar
+    12. Intro
+    13. Testimonials
+    14. Footer
+    15. Contact form
+
+    16. Sliders
+    17. Social likes widget
+
+------------------------------------------------------------  */
+
+
+// Normalize css
+@import 'normalize.scss';
+
+// Core variables
+@import 'variables.scss';
+
+// Mixins
+@import 'mixins.scss';
+
+// Core components
+@import 'scaffolding.scss';
+@import 'type.scss';
+@import 'buttons.scss';
+@import 'inputs.scss';
+@import 'forms.scss';
+@import 'grid.scss';
+
+// Utilities
+@import 'utilities.scss';
+@import 'responsive-utilities.scss';
+
+// Fonts
+@import 'clearsans.scss';
+
+/*  ------------------------------------------------------------
+    Navigation bar
+    ------------------------------------------------------------  */
+
+.navbar {
+    -webkit-backface-visibility: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    transition: background-color 0.2s ease-in-out, opacity 0.4s 0.4s ease-in-out, transform 0.4s ease-in-out;
+    z-index: 5;
+
+    &.fixed {
+        position: fixed;
+
+        &[data-scrolling="true"] {
+            background-color: rgba( #111115, 0.95 );
+        }
+    }
+
+    .open & {
+        transform: translateY(-100%);
+    }
+
+    @media ( max-width: $screen-tablet-max ) {
+        z-index: 4;
+    }
+}
+
+.navbar-inner {
+    border-bottom: 1px solid rgba( #8b99a5, 0.2 );
+    padding: 20px 0;
+    transition: border-bottom-color 0.2s ease-in-out, padding 0.2s ease-in-out;
+
+    [data-scrolling="true"] & {
+        border-bottom-color: transparent;
+        padding: 10px 0;
+    }
+
+    .inverse & {
+        border-bottom-color: rgba( #fff, 0.2 );
+    }
+}
+
+.navbar-logo {
+    border-bottom: 0;
+    color: #22222a;
+    font-size: 24px !important;
+    font-weight: 300;
+    line-height: 1;
+    letter-spacing: -1px;
+
+    &:active,
+    &:hover {
+        color: #fff;
+    }
+
+    .inverse & {
+        color: #fbfbfb;
+    }
+
+    @media ( min-width: $screen-tablet-min ) {
+        font-size: 30px !important;
+    }
+
+    @media ( max-width: $screen-tablet-max ) {
+        position: relative;
+        top: -2px;
+    }
+}
+
+.navbar-nav-toggle {
+    background: none;
+    border: 0;
+    display: block;
+    padding: 6px 5px 5px;
+
+    .icon-bar {
+        background-color: #22222a;
+        border-radius: 1px;
+        display: block;
+        height: 3px;
+        width: 24px;
+
+        + .icon-bar {
+            margin-top: 4px;
+        }
+
+        .inverse & {
+            background-color: #f4f4f4;
+        }
+    }
+}
+
+.navbar-nav {
+    ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+
+        li a:not(.button) {
+            @include link-color( rgba( #fff, 0.6 ), #fff, 0.2, 0.4 );;
+            border-bottom: 0;
+            display: block;
+        }
+    }
+
+    @media ( max-width: $screen-tablet-max ) {
+        margin: 20px -20px 0;
+
+        @media ( min-width: $screen-tablet-min ) {
+            margin: 20px -30px 0;
+        }
+
+        ul li {
+            display: block;
+
+            a,
+            .button {
+                padding: 10px 20px;
+
+                @media ( min-width: $screen-tablet-min ) {
+                    padding: 10px 30px;
+                }
+            }
+
+            .button {
+                border-radius: 0;
+                font-weight: normal;
+                margin-top: 10px;
+                width: 100%;
+            }
+        }
+    }
+
+    @media ( min-width: $screen-desktop-min ) {
+
+        ul {
+            @include inline-block-reset();
+
+            li {
+                display: inline-block;
+                vertical-align: middle;
+
+                a {
+                    font-size: 16px;
+                    margin: 5px 20px;
+                }
+
+                .button {
+                    margin: 0 20px;
+                    padding: 5px 15px;
+                }
+                &:last-child .button {
+                    margin-right: 0;
+                }
+                &:first-child .button {
+                    margin-left: 0;
+                }
+            }
+        }
+    }
+}
+
+/*  ------------------------------------------------------------
+    Responsive navbar navigation
+    This is separated from navbar for readability
+    ------------------------------------------------------------  */
+
+.navbar-inner {
+    @media ( min-width: $screen-desktop-min ) {
+        @include inline-block-reset();
+        @include justify-content();
+
+        > * {
+            vertical-align: middle;
+        }
+    }
+}
+
+.navbar-header {
+    @media ( max-width: $screen-tablet-max ) {
+        @include inline-block-reset();
+        @include justify-content();
+
+        > * {
+            vertical-align: middle;
+        }
+    }
+
+    @media ( min-width: $screen-desktop-min ) {
+        display: inline-block;
+    }
+}
+
+.navbar-nav-toggle {
+    @media ( min-width: $screen-desktop-min ) {
+        display: none;
+    }
+}
+
+.navbar-nav {
+    @media ( max-width: $screen-tablet-max ) {
+        display: none;
+    }
+    @media ( min-width: $screen-desktop-min ) {
+        display: inline-block !important;
+    }
+}
+
+/*  ------------------------------------------------------------
+    Intro section
+    ------------------------------------------------------------  */
+
+html, body {
+    height: 100%;
+}
+
+#intro {
+    padding-top: 120px;
+
+    @media ( min-width: $screen-tablet-min ) {
+        padding-top: 160px;
+    }
+}
+
+.intro-copy {
+    padding-bottom: 80px;
+
+    @media ( min-width: $screen-tablet-min ) {
+        padding-bottom: 160px;
+    }
+}
+
+.section {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+}
+.section-title {
+    @media ( min-width: $screen-tablet-min ) {
+        text-align: center;
+    }
+}
+.section-content {
+    @extend .large.margin;
+}
+
+.background-image {
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+
+    &:after {
+        background-color: rgba( #8F76E0, 1 );
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        transition: background-color 0.2s ease-in-out;
+        z-index: 0;
+    }
+
+    &.loaded:after  {
+        background: rgba(143,118,224,1);
+        background: -moz-linear-gradient(top, rgba(143,118,224,1) 0%, rgba(107,88,168,1) 100%);
+        background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(143,118,224,1)), color-stop(100%, rgba(107,88,168,1)));
+        background: -webkit-linear-gradient(top, rgba(143,118,224,1) 0%, rgba(107,88,168,1) 100%);
+        background: -o-linear-gradient(top, rgba(143,118,224,1) 0%, rgba(107,88,168,1) 100%);
+        background: -ms-linear-gradient(top, rgba(143,118,224,1) 0%, rgba(107,88,168,1) 100%);
+        background: linear-gradient(to bottom, rgba(143,118,224,1) 0%, rgba(107,88,168,1) 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8f76e0', endColorstr='#6b58a8', GradientType=0 );
+    }
+
+    > * {
+        position: relative;
+        z-index: 2;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        color: #fbfbfb;
+
+        small {
+            color: #a2adb7;
+        }
+    }
+}
+
+/*  ------------------------------------------------------------
+    Testimonials
+    ------------------------------------------------------------  */
+
+.testimonial {
+    border: 0;
+    color: inherit;
+    margin: 0;
+    padding-left: 0;
+
+    p {
+        font-size: 24px;
+        font-weight: 200;
+        line-height: 1.45;
+        margin: 0;
+
+        @media ( min-width: $screen-tablet-min ) {
+            font-size: 30px;
+        }
+        @media ( min-width: $screen-desktop-min ) {
+            font-size: 36px;
+        }
+    }
+
+    footer {
+        color: #8b99a5;
+        margin-top: 40px;
+
+        cite {
+            font-style: normal;
+        }
+
+        .avatar {
+            display: none;  
+        }
+
+        @media ( min-width: $screen-tablet-min ) {
+            .avatar {
+                display: inline-block;
+                margin-right: 20px;
+                vertical-align: middle;
+            }
+        }
+    }
+
+    @media ( min-width: $screen-tablet-min ) {
+        text-align: center;
+    }
+}
+
+/*  ------------------------------------------------------------
+    Footer
+    ------------------------------------------------------------  */
+
+.footer {
+    background-color: #f3f4f6;
+    font-size: 16px;
+    overflow: auto;
+
+    .grid > * {
+        font-size: 16px;
+    }
+}
+
+[class*="icon-social"] {
+    background-image: url('../img/social-icons.png');
+    border-bottom: 0;
+    display: inline-block;
+    height: 32px;
+    opacity: 0.8;
+    transition: opacity 0.2s ease-in-out;
+    vertical-align: middle;
+    width: 32px;
+
+    &:hover {
+        opacity: 1;
+    }
+
+    + [class*="icon-social"] {
+        margin-left: 5px;
+    }
+
+    @media only screen and ( -webkit-min-device-pixel-ratio: 2 ), only screen and ( min-resolution: 192dpi ) { 
+        background-image: url('../img/social-icons_2x.png');
+        background-size: 128px 32px;
+    }
+}
+.icon-social-twitter {
+    background-position: 0 0;
+}
+.icon-social-facebook {
+    background-position: -32px 0;
+}
+.icon-social-instagram {
+    background-position: -64px 0;
+}
+.icon-social-google {
+    background-position: -96px 0;
+}
+
+/*  ------------------------------------------------------------
+    Contact form
+    ------------------------------------------------------------  */
+
+.content-wrapper {
+    background-color: inherit;
+    height: 100%;
+    position: relative;
+    right: 0; // Firefox
+    transition: transform 0.4s ease-in-out;
+    z-index: 2;
+
+    .open & {
+        transform: translateX(-98%);
+    }
+}
+
+.content {
+    background-color: inherit;
+    overflow: auto;
+}
+
+.contact-wrapper {
+    -webkit-backface-visibility: hidden;
+    background-color: #11111a;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transform: translate3d(0, 0, 0);
+    z-index: 0;
+
+    .close {
+        background: none;
+        border: 0;
+        color: #fff;
+        font-size: 36px;
+        line-height: 1;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+
+        @media ( min-width: $screen-tablet-min ) {
+            top: 20px;
+            right: 20px;
+        }
+    }
+}
+
+.contact-form-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.contact-form {
+    max-width: 500px;
+    min-width: 280px;
+
+    .form-group {
+        margin-bottom: 20px;
+
+        &:not( [class*="has-"] ) {
+            .input:not(:focus) {
+                border-color: transparent;
+            }
+        }
+    }
+
+    .button {
+        float: right;
+    }
+}
+
+/*  ------------------------------------------------------------
+    Sliders
+    ------------------------------------------------------------  */
+
+.owl-controls {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -34px;
+    z-index: 1;
+}
+.owl-theme .owl-controls .owl-page {
+    span {
+        background-color: #8b99a5;
+        height: 11px;
+        margin: 0 4px;
+        opacity: 0.4;
+        width: 11px;
+    }
+
+    &.active span {
+        opacity: 1;
+    }
+}
+
+.bx-wrapper .bx-viewport {
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+    left: 0;
+}
+
+/*  ------------------------------------------------------------
+    Social likes widget
+    ------------------------------------------------------------  */
+
+.social-likes {
+    @include inline-block-reset();
+
+    margin-top: -2px;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+
+    &_visible {
+        opacity: 1;
+    }
+}
+.social-likes__widget {
+    cursor: pointer;
+    display: inline-block;
+    line-height: 1;
+    opacity: 0.8;
+    transition: opacity 0.2s ease-in-out;
+
+    &:hover {
+        opacity: 1;
+    }
+
+    @media ( min-width: $screen-desktop-min ) {
+        + .social-likes__widget {
+            margin-left: 20px;
+        }
+    }
+}
+.social-likes__button {
+    border-radius: 2px;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 2px 10px 3px;
+
+    @media ( max-width: $screen-tablet-max ) {
+        border-radius: 0;
+        display: block;
+        padding: 10px 20px;
+        text-align: center;
+
+        @media ( min-width: $screen-tablet-min ) {
+            padding: 10px 30px;
+        }
+    }
+}
+.social-likes__counter {
+    background-color: #fff;
+    border-radius: 2px;
+    color: #555;
+    font-size: 12px;
+    margin-left: 6px;
+    padding: 4px 8px 3px;
+    position: relative;
+
+    &.social-likes__counter_empty {
+        display: none;
+    }
+
+    &:after {
+        border-top: 4px solid transparent;
+        border-bottom: 4px solid transparent; 
+        border-right: 4px solid #fff;
+        content: '';
+        margin-top: -4px;
+        position: absolute;
+        left: -4px;
+        top: 50%;
+    }
+
+    @media ( max-width: $screen-tablet-max ) {
+        display: none;
+    }
+}
+.social-likes__button_facebook {
+    background-color: #3b5998;
+    color: #fff;
+}
+.social-likes__button_twitter {
+    background-color: #55acee;
+    color: #fff;
+}
+.social-likes__button_plusone {
+    background-color: #dd4b39;
+    color: #fff;
+}

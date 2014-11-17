@@ -1,0 +1,40 @@
+/*  ------------------------------------------------------------
+    Forms and form components
+    ------------------------------------------------------------  */
+
+.form-group {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+}
+
+.has-error {
+    .input {
+        border-color: #f44848;
+    }
+    .helper {
+        background-color: #f44848;
+        color: #fff;
+    }
+}
+.has-success {
+    .input {
+        border-color: #389b17;
+    }
+    .helper {
+        background-color: #389b17;
+        color: #fff;
+    }
+}
+
+.helper {
+    border-radius: 0 0 2px 2px;
+    font-size: 14px;
+    margin: 0;
+    padding: 0 7px 2px;
+    position: absolute;
+    left: 10px; // Input padding + border-width
+    bottom: 0;
+    transform: translateY(100%);
+    z-index: 1; // Prevent other inputs from cropping the helper
+}

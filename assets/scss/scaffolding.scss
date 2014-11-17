@@ -1,0 +1,57 @@
+/*  ------------------------------------------------------------
+    Global styles
+    ------------------------------------------------------------  */
+
+*, *:before, *:after {
+    box-sizing: border-box;
+}
+
+html {
+    background-color: #fff;
+    color: #44444a;
+    font-family: 'Clear Sans', 'Helvetica Neue', Arial, sans-serif;
+    font-size: 18px;
+    line-height: 1.56;
+}
+
+body {
+    background-color: inherit;
+}
+
+a {
+    @include link-color( #48aef4, darken( #48aef4, 10% ), 0.4 );
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    text-decoration: none;
+    transition: color 0.2s ease-in-out, border-bottom-color 0.2s ease-in-out;
+
+    &:not(.button) {
+
+        u {
+            border-bottom-style: solid;
+            border-bottom-width: 1px;
+            text-decoration: none;
+            transition: border-bottom-color 0.2s ease-in-out;
+        }
+
+        &[href^="#"] {
+            border-bottom-style: dashed;
+
+            u {
+                border-bottom-style: dashed;
+            }
+        }
+    }
+}
+
+hr {
+    border: 0;
+    border-bottom: 1px solid rgba( #8b99a5, 0.2 );
+    margin: 0;
+}
+
+img {
+    height: auto;
+    max-width: 100%;
+    vertical-align: middle;
+}

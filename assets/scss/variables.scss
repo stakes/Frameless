@@ -1,0 +1,19 @@
+//  ------------------------------------------------------------
+//  Core variables
+//  ------------------------------------------------------------
+
+$spacing-unit: 20px;
+
+
+//  ------------------------------------------------------------
+//  Media breakpoints
+//  ------------------------------------------------------------
+
+$screen-phone-max:          480px;
+
+$screen-tablet-min:         $screen-phone-max + 1;
+$screen-tablet-max:         768px;
+
+$screen-desktop-min:        $screen-tablet-max + 1;
+
+$screen-large-desktop-min:  1200px;

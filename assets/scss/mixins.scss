@@ -1,0 +1,71 @@
+// Crearfix
+// We use a little older version to eliminate margin collapsing
+@mixin clearfix() {
+    &:after {
+        clear: both;
+        content: '';
+        display: table;
+    }
+}
+
+// Vertical align elements in a parent
+// This is deprecated and will be removed in v1.1.0
+@mixin vertical-align( $element-height ) {
+    margin-top: ( ( 40px - $element-height ) / 2 );
+    margin-bottom: ( ( 40px - $element-height ) / 2 );
+}
+
+// Reset spaces between inline-block elements
+// There are several different methods to do this, we use font-size: 0
+@mixin inline-block-reset( $font-size: 1rem ) {
+    font-size: 0;
+
+    & > * {
+        font-size: $font-size;
+        display: inline-block;
+    }
+
+    @media ( max-width: $screen-phone-max ) {
+        > .margin + .margin {
+            margin-top: 0;
+        }
+    }
+}
+
+// Justify child elements
+@mixin justify-content() {
+    html[lang='\en'] & { font-size: 0.04px; } // IE9 fix. It refuses to justify content unless there is space between elements.
+
+    text-align: justify;
+        
+    > * {
+        text-align: left;
+    }
+
+    &:after {
+        content: '';
+        display: inline-block;
+        width: 100%;
+    }
+}
+
+// Mixins for easy link color manupulation in menus, areas with different background-color, etc.
+@mixin link-color( $color, $hover-color, $underline-transparency: 0.4, $hover-underline-transparency: $underline-transparency ) {
+    border-bottom-color: rgba( $color, $underline-transparency );
+    color: $color;
+
+    u {
+        border-bottom-color: rgba( $color, $underline-transparency );
+    }
+
+    &.active,
+    &:focus,
+    &:hover {
+        border-bottom-color: rgba( $hover-color, $hover-underline-transparency );
+        color: $hover-color;
+
+        u {
+            border-bottom-color: rgba( $hover-color, $hover-underline-transparency );
+        }
+    }
+}
