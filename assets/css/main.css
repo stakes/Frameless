@@ -1026,6 +1026,8 @@ html, body {
   overflow: auto; }
   .footer .grid > * {
     font-size: 16px; }
+  .footer small {
+    margin-top: 24px; }
 
 [class*="icon-social"] {
   background-image: url("../img/social-icons.png");
