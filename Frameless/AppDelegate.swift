@@ -48,12 +48,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func createIntroViewController() -> OnboardingViewController {
-        let page01: OnboardingContentViewController = OnboardingContentViewController(title: nil, body: "Frameless is a chromeless,\n full-screen web browser. Load a\npage and everything else hides", image: UIImage(named: "introimage01"), buttonText: nil) {
+        let page01: OnboardingContentViewController = OnboardingContentViewController(title: nil, body: "Frameless is a chromeless,\nfull-screen web browser. Load a\npage and everything else hides", image: UIImage(named: "introimage01"), buttonText: nil) {
         }
         page01.iconWidth = 158
         page01.iconHeight = 258.5
         
-        let page02: OnboardingContentViewController = OnboardingContentViewController(title: nil, body: "Pull up from the bottom of your\nscreen or shake the device to show\nthe browser bar and keyboard", image: UIImage(named: "introimage02"), buttonText: nil) {
+        let page02: OnboardingContentViewController = OnboardingContentViewController(title: nil, body: "Swipe up, tap with three fingers\nor shake the device to show\nthe browser bar and keyboard", image: UIImage(named: "introimage02"), buttonText: nil) {
         }
         page02.iconWidth = 158
         page02.iconHeight = 258.5
@@ -64,7 +64,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         page03.iconWidth = 158
         page03.iconHeight = 258.5
         
-        let page04: OnboardingContentViewController = OnboardingContentViewController(title: nil, body: "And turn off shaking, swiping\nor both if they get in your\nway. Happy internetting!", image: UIImage(named: "introimage04"), buttonText: "LET'S GO") {
+        let page04: OnboardingContentViewController = OnboardingContentViewController(title: nil, body: "And disable any of the gestures\nif they get in your way", image: UIImage(named: "introimage04"), buttonText: "LET'S GO!") {
             self.introCompletion()
         }
         page04.iconWidth = 158
