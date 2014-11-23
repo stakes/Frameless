@@ -168,6 +168,9 @@ class ViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizer
     }
     
     func showSearch() {
+        if let urlString = _webView?.URL?.absoluteString {
+            _searchBar.text = urlString
+        }
         UIView.animateWithDuration(0.5, delay: 0.05, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.5, options: nil, animations: {
             self._searchBar.transform = CGAffineTransformMakeTranslation(0, 0)
         }, nil)
@@ -285,7 +288,6 @@ class ViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizer
     }
     
     func loadURL(urlString: String) {
-        println("-- loadURL --")
         let addrStr = httpifyString(urlString)
         let addr = NSURL(string: addrStr)
         if let webAddr = addr {
