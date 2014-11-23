@@ -260,6 +260,9 @@ class ViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizer
     }
     
     func webView(webView: WKWebView, decidePolicyForNavigationAction navigationAction: WKNavigationAction, decisionHandler: (WKNavigationActionPolicy) -> Void) {
+        if (navigationAction.targetFrame == nil && navigationAction.navigationType == .LinkActivated) {
+            _webView!.loadRequest(navigationAction.request)
+        }
         _isMainFrameNavigationAction = navigationAction.targetFrame?.mainFrame
         decisionHandler(.Allow)
     }
