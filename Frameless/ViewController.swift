@@ -245,7 +245,11 @@ class ViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizer
     }
 
     func webView(webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: NSError) {
-        handleWebViewError()
+        if let newFrameLoading = _isMainFrameNavigationAction {
+            // do nothing, I'm pretty sure it's a new page load into target="_blank" before the old one's subframes are finished
+        } else {
+            handleWebViewError()
+        }
     }
     
     func webView(webView: WKWebView, didFailNavigation navigation: WKNavigation!, withError error: NSError) {
@@ -271,7 +275,6 @@ class ViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizer
         _loadingTimer!.invalidate()
         _isWebViewLoading = false
         showSearch()
-        displayLoadingErrorMessage()
     }
     
     func progressTimerCallback() {
