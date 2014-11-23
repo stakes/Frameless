@@ -275,6 +275,7 @@ class ViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizer
         _loadingTimer!.invalidate()
         _isWebViewLoading = false
         showSearch()
+        displayLoadingErrorMessage()
     }
     
     func progressTimerCallback() {
@@ -319,7 +320,6 @@ class ViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizer
 
     
     func displayLoadingErrorMessage() {
-        _searchBar.showsCancelButton = false
         _loadingErrorView.hidden = false
     }
     
