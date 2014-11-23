@@ -18,6 +18,7 @@ class ViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizer
     @IBOutlet weak var _loadingErrorView: UIView!
     
     var _webView: WKWebView?
+    var _isMainFrameNavigationAction: Bool?
     var _loadingTimer: NSTimer?
     
     var _tapRecognizer: UITapGestureRecognizer?
@@ -245,7 +246,19 @@ class ViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizer
     }
     
     func webView(webView: WKWebView, didFailNavigation navigation: WKNavigation!, withError error: NSError) {
-        handleWebViewError()
+        if let newFrameLoading = _isMainFrameNavigationAction {
+            // do nothing, it's a new page load before the old one's subframes are finished
+        } else {
+            handleWebViewError()
+        }
+    }
+    
+    func webView(webView: WKWebView, didCommitNavigation navigation: WKNavigation!) {
+    }
+    
+    func webView(webView: WKWebView, decidePolicyForNavigationAction navigationAction: WKNavigationAction, decisionHandler: (WKNavigationActionPolicy) -> Void) {
+        _isMainFrameNavigationAction = navigationAction.targetFrame?.mainFrame
+        decisionHandler(.Allow)
     }
 
     func handleWebViewError() {
@@ -272,6 +285,7 @@ class ViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizer
     }
     
     func loadURL(urlString: String) {
+        println("-- loadURL --")
         let addrStr = httpifyString(urlString)
         let addr = NSURL(string: addrStr)
         if let webAddr = addr {
