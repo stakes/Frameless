@@ -18,7 +18,6 @@ class ViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizer
     @IBOutlet weak var _loadingErrorView: UIView!
     
     var _webView: WKWebView?
-    var _isMainFrameNavigationAction: Bool?
     var _loadingTimer: NSTimer?
     
     var _tapRecognizer: UITapGestureRecognizer?
@@ -168,9 +167,6 @@ class ViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizer
     }
     
     func showSearch() {
-        if let urlString = _webView?.URL?.absoluteString {
-            _searchBar.text = urlString
-        }
         UIView.animateWithDuration(0.5, delay: 0.05, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.5, options: nil, animations: {
             self._searchBar.transform = CGAffineTransformMakeTranslation(0, 0)
         }, nil)
@@ -253,22 +249,7 @@ class ViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizer
     }
     
     func webView(webView: WKWebView, didFailNavigation navigation: WKNavigation!, withError error: NSError) {
-        if let newFrameLoading = _isMainFrameNavigationAction {
-            // do nothing, it's a new page load before the old one's subframes are finished
-        } else {
-            handleWebViewError()
-        }
-    }
-    
-    func webView(webView: WKWebView, didCommitNavigation navigation: WKNavigation!) {
-    }
-    
-    func webView(webView: WKWebView, decidePolicyForNavigationAction navigationAction: WKNavigationAction, decisionHandler: (WKNavigationActionPolicy) -> Void) {
-        if (navigationAction.targetFrame == nil && navigationAction.navigationType == .LinkActivated) {
-            _webView!.loadRequest(navigationAction.request)
-        }
-        _isMainFrameNavigationAction = navigationAction.targetFrame?.mainFrame
-        decisionHandler(.Allow)
+        handleWebViewError()
     }
 
     func handleWebViewError() {
