@@ -310,12 +310,12 @@ class ViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizer
         let lcStr:String = (str as NSString).lowercaseString
         if (countElements(lcStr) >= 7) {
             if (lcStr.rangeOfString("http://") != nil) {
-                return lcStr
+                return str
             } else if (lcStr.rangeOfString("https://") != nil) {
-                return lcStr
+                return str
             }
         }
-        return "http://"+lcStr
+        return "http://"+str
     }
 
     
