@@ -305,6 +305,13 @@ html, body {
     @extend .large.margin;
 }
 
+img.button-image {
+    height: 50px;  
+    &:hover {
+        opacity: .8;
+    } 
+}
+
 .background-image {
     background-position: center center;
     background-repeat: no-repeat;
@@ -412,6 +419,12 @@ html, body {
     }
     small {
         margin-top: 24px;
+        em {
+            line-height: 32px;
+        }
+    }
+    .buttons.hollow {
+        color: rgba(0,0,0,.7);
     }
 }
 

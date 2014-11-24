@@ -26,14 +26,14 @@
 .button {
     @include button-variant( rgba(255,255,255,1) );
 
-    border: 2px solid rgba(255,255,255,.7);
-    border-radius: 2px;
+    border: 1px solid rgba(255,255,255,.7);
+    border-radius: 5px;
     color: #fff;
     cursor: pointer;
     display: inline-block;
     font-size: 1rem;
     font-weight: 600;
-    line-height: 26px;
+    line-height: 28px;
     padding: 5px 20px 7px;
     text-decoration: none;
     transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out, color 0.2s ease-in-out;
@@ -71,7 +71,7 @@
 }
 
 .button-group {
-    .button {
+    .button, .button-image {
         @media ( max-width: $screen-phone-max ) {
             display: block;
             text-align: center;
@@ -81,9 +81,11 @@
             }
         }
         @media ( min-width: $screen-tablet-min ) {
-            + .button {
-                margin-left: 10px;
-            }
+            // + .button {
+            //     margin-left: 10px;
+            // }
+            margin-right: 10px;
+            margin-top: 10px;
         }
     }
 }

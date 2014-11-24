@@ -195,19 +195,19 @@ body {
   background-color: inherit; }
 
 a {
-  border-bottom-color: rgba(72, 174, 244, 0.4);
-  color: #48aef4;
+  border-bottom-color: rgba(143, 118, 224, 0.4);
+  color: #8F76E0;
   border-bottom-style: solid;
   border-bottom-width: 1px;
   text-decoration: none;
   transition: color 0.2s ease-in-out, border-bottom-color 0.2s ease-in-out; }
   a u {
-    border-bottom-color: rgba(72, 174, 244, 0.4); }
+    border-bottom-color: rgba(143, 118, 224, 0.4); }
   a.active, a:focus, a:hover {
-    border-bottom-color: rgba(24, 153, 241, 0.4);
-    color: #1899f1; }
+    border-bottom-color: rgba(109, 76, 215, 0.4);
+    color: #6d4cd7; }
     a.active u, a:focus u, a:hover u {
-      border-bottom-color: rgba(24, 153, 241, 0.4); }
+      border-bottom-color: rgba(109, 76, 215, 0.4); }
   a:not(.button) u {
     border-bottom-style: solid;
     border-bottom-width: 1px;
@@ -291,7 +291,7 @@ h4:first-child, h5:first-child, h6:first-child {
 @media (min-width: 769px) {
   h1 {
     font-size: 48px;
-    margin-bottom: 43px; }
+    margin-bottom: 33px; }
     h1 small {
       margin-top: 26px; }
 
@@ -351,14 +351,14 @@ blockquote {
 .button {
   background-color: white;
   border-color: white;
-  border: 2px solid rgba(255, 255, 255, 0.7);
-  border-radius: 2px;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: 5px;
   color: #fff;
   cursor: pointer;
   display: inline-block;
   font-size: 1rem;
   font-weight: 600;
-  line-height: 26px;
+  line-height: 28px;
   padding: 5px 20px 7px;
   text-decoration: none;
   transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out, color 0.2s ease-in-out;
@@ -400,14 +400,15 @@ blockquote {
     background-color: transparent; }
 
 @media (max-width: 480px) {
-  .button-group .button {
+  .button-group .button, .button-group .button-image {
     display: block;
     text-align: center; }
-    .button-group .button + .button {
+    .button-group .button + .button, .button-group .button-image + .button {
       margin-top: 10px; } }
 @media (min-width: 481px) {
-  .button-group .button + .button {
-    margin-left: 10px; } }
+  .button-group .button, .button-group .button-image {
+    margin-right: 10px;
+    margin-top: 10px; } }
 
 /*  ------------------------------------------------------------
     Inputs and input groups
@@ -646,8 +647,8 @@ img.centered {
 
 @media (min-width: 1200px) {
   .large.margin, .section-content {
-    margin-top: 160px;
-    margin-bottom: 160px; } }
+    margin-top: 80px;
+    margin-bottom: 80px; } }
 
 /*  ------------------------------------------------------------
     Responsive utilities
@@ -950,6 +951,11 @@ html, body {
   .section-title {
     text-align: center; } }
 
+img.button-image {
+  height: 50px; }
+  img.button-image:hover {
+    opacity: .8; }
+
 .background-image {
   background-position: center center;
   background-repeat: no-repeat;
@@ -1028,6 +1034,10 @@ html, body {
     font-size: 16px; }
   .footer small {
     margin-top: 24px; }
+    .footer small em {
+      line-height: 32px; }
+  .footer .buttons.hollow {
+    color: rgba(0, 0, 0, 0.7); }
 
 [class*="icon-social"] {
   background-image: url("../img/social-icons.png");

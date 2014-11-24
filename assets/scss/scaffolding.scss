@@ -19,7 +19,7 @@ body {
 }
 
 a {
-    @include link-color( #48aef4, darken( #48aef4, 10% ), 0.4 );
+    @include link-color( #8F76E0, darken( #8F76E0, 10% ), 0.4 );
     border-bottom-style: solid;
     border-bottom-width: 1px;
     text-decoration: none;
