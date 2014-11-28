@@ -25,8 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         setUserSettingsDefaults()
-        
-        
+                
         return true
     }
     
@@ -69,7 +68,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         page04.iconHeight = 258.5
         
         let bgImage = UIImage.withColor(UIColorFromHex(0x9178E2))
-        let onboardingViewController = OnboardingViewController(
+        let onboardingViewController = PortraitOnboardingViewController(
             backgroundImage: bgImage,
             contents: [page01, page02, page03, page04])
         onboardingViewController.fontName = "ClearSans"
