@@ -26,7 +26,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         setUserSettingsDefaults()
         
-        self.window!.makeKeyAndVisible()
         
         return true
     }
@@ -104,6 +103,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         else {
             self.window?.rootViewController = appViewController
         }
+        self.window!.makeKeyAndVisible()
     }
     
 
