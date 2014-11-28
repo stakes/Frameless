@@ -130,7 +130,9 @@ class ViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizer
     }
     
     func handleBottomEdgePan(sender: AnyObject) {
-        showSearch()
+        if NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.PanFromBottomGesture.rawValue) as Bool == true {
+            showSearch()
+        }
     }
     
     func handleThreeFingerTap(sender: AnyObject) {
