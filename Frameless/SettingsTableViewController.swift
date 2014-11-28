@@ -33,24 +33,20 @@ class SettingsTableViewController: UITableViewController {
     
     @IBAction func toggleShakeSwitch(sender: AnyObject) {
         var value = (sender as UISwitch).on
-        if checkControlsSettings() {
-            NSUserDefaults.standardUserDefaults().setValue(value, forKey: AppDefaultKeys.ShakeGesture.rawValue)
-        }
+        NSUserDefaults.standardUserDefaults().setValue(value, forKey: AppDefaultKeys.ShakeGesture.rawValue)
+        checkControlsSettings()
     }
 
     @IBAction func toggleSwipeUpSwitch(sender: AnyObject) {
         var value = (sender as UISwitch).on
-        if checkControlsSettings() {
-            NSUserDefaults.standardUserDefaults().setValue(value, forKey: AppDefaultKeys.PanFromBottomGesture.rawValue)
-        }
+        NSUserDefaults.standardUserDefaults().setValue(value, forKey: AppDefaultKeys.PanFromBottomGesture.rawValue)
+        checkControlsSettings()
     }
     
     @IBAction func toggleTripleTapSwitch(sender: AnyObject) {
         var value = (sender as UISwitch).on
-        if checkControlsSettings() {
-            NSUserDefaults.standardUserDefaults().setValue(value, forKey: AppDefaultKeys.TripleTapGesture.rawValue)
-            checkControlsSettings()
-        }
+        NSUserDefaults.standardUserDefaults().setValue(value, forKey: AppDefaultKeys.TripleTapGesture.rawValue)
+        checkControlsSettings()
     }
     
     @IBAction func toggleBrowserNavSwitch(sender: AnyObject) {

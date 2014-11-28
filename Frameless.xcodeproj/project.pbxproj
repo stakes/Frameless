@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0D4915AD1A29031B0018BEC6 /* PortraitOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D4915AC1A29031B0018BEC6 /* PortraitOnboardingViewController.swift */; };
 		0DA5BB4F19FAD12800B2FDD1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA5BB4219FAD12800B2FDD1 /* AppDelegate.swift */; };
 		0DA5BB5119FAD12800B2FDD1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0DA5BB4519FAD12800B2FDD1 /* Main.storyboard */; };
 		0DA5BB5319FAD12800B2FDD1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0DA5BB4919FAD12800B2FDD1 /* Images.xcassets */; };
@@ -36,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0D4915AC1A29031B0018BEC6 /* PortraitOnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PortraitOnboardingViewController.swift; sourceTree = "<group>"; };
 		0DA5BB1919FAD10F00B2FDD1 /* Frameless.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Frameless.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0DA5BB3119FAD10F00B2FDD1 /* FramelessTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FramelessTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0DA5BB4219FAD12800B2FDD1 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -111,6 +113,7 @@
 				0DA5BB7719FC2EAE00B2FDD1 /* AppearanceBridge.h */,
 				0DA5BB7819FC2EBF00B2FDD1 /* AppearanceBridge.m */,
 				0DA5BB4219FAD12800B2FDD1 /* AppDelegate.swift */,
+				0D4915AC1A29031B0018BEC6 /* PortraitOnboardingViewController.swift */,
 				0DA5BB4E19FAD12800B2FDD1 /* ViewController.swift */,
 				0DD869F41A08A7A000BF196E /* SettingsViewController.swift */,
 				0DAB64411A09FDD00046287E /* SettingsTableViewController.swift */,
@@ -315,6 +318,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0D4915AD1A29031B0018BEC6 /* PortraitOnboardingViewController.swift in Sources */,
 				0DA5BBA019FDE2AC00B2FDD1 /* AppDefaults.swift in Sources */,
 				0DA5BB5719FAD12800B2FDD1 /* ViewController.swift in Sources */,
 				0DA5BB4F19FAD12800B2FDD1 /* AppDelegate.swift in Sources */,
@@ -447,6 +451,7 @@
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Frameless/Frameless-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -464,6 +469,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Frameless/Frameless-Bridging-Header.h";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

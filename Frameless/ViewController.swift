@@ -220,6 +220,7 @@ class ViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizer
     func presentSettingsView(sender:UIButton!) {
         var settingsController: SettingsViewController = storyboard?.instantiateViewControllerWithIdentifier("settingsController") as SettingsViewController
         settingsController.delegate = self
+        settingsController.modalPresentationStyle = .FormSheet
         self.presentViewController(settingsController, animated: true, completion: nil)
     }
     
@@ -382,6 +383,12 @@ class ViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizer
     
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
         hideSearch()
+    }
+    
+    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+        coordinator.animateAlongsideTransition({ context in
+            self._webView!.frame = CGRectMake(0, 0, size.width, size.height)
+        }, completion: nil)
     }
 
 
