@@ -22,6 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             setupAppViewController(false)
         } else {
             self.window!.rootViewController = createIntroViewController()
+            self.window!.makeKeyAndVisible()
         }
         
         setUserSettingsDefaults()
