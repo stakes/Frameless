@@ -32,6 +32,9 @@
                         <subviews>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B2i-8Y-xZt">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="9f0-H2-5rz"/>
+                                </constraints>
                                 <color key="barTintColor" red="0.61937248706817627" green="0.51502001285552979" blue="0.90843188762664795" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <textAttributes key="titleTextAttributes">
                                     <fontDescription key="fontDescription" name="ClearSans" family="Clear Sans" pointSize="18"/>
@@ -252,6 +255,9 @@
                                     <constraint firstAttribute="height" constant="3" id="oH9-eE-ffU"/>
                                 </constraints>
                                 <color key="trackTintColor" red="0.88926827907562256" green="0.87280172109603882" blue="0.94037115573883057" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <variation key="heightClass=compact-widthClass=regular" misplaced="YES">
+                                    <rect key="frame" x="0.0" y="0.0" width="800" height="3"/>
+                                </variation>
                             </progressView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dZA-Ao-ZpJ">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
