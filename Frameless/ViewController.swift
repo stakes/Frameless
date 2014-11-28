@@ -220,6 +220,7 @@ class ViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizer
     func presentSettingsView(sender:UIButton!) {
         var settingsController: SettingsViewController = storyboard?.instantiateViewControllerWithIdentifier("settingsController") as SettingsViewController
         settingsController.delegate = self
+        settingsController.modalPresentationStyle = .FormSheet
         self.presentViewController(settingsController, animated: true, completion: nil)
     }
     
