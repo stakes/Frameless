@@ -13,7 +13,7 @@ class ViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizer
 
 
     
-    @IBOutlet weak var _searchBar: SearchBar!
+    @IBOutlet weak var _searchBar: UISearchBar!
     @IBOutlet weak var _progressView: UIProgressView!
     @IBOutlet weak var _loadingErrorView: UIView!
     

@@ -11,7 +11,6 @@
 		0DA5BB5119FAD12800B2FDD1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0DA5BB4519FAD12800B2FDD1 /* Main.storyboard */; };
 		0DA5BB5219FAD12800B2FDD1 /* Frameless.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0DA5BB4719FAD12800B2FDD1 /* Frameless.xcdatamodeld */; };
 		0DA5BB5319FAD12800B2FDD1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0DA5BB4919FAD12800B2FDD1 /* Images.xcassets */; };
-		0DA5BB5519FAD12800B2FDD1 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA5BB4B19FAD12800B2FDD1 /* SearchBar.swift */; };
 		0DA5BB5719FAD12800B2FDD1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA5BB4E19FAD12800B2FDD1 /* ViewController.swift */; };
 		0DA5BB6019FAD23A00B2FDD1 /* FramelessTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA5BB5E19FAD23A00B2FDD1 /* FramelessTests.swift */; };
 		0DA5BB6C19FC24D500B2FDD1 /* ClearSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0DA5BB6819FC24D500B2FDD1 /* ClearSans-Bold.ttf */; };
@@ -45,7 +44,6 @@
 		0DA5BB4819FAD12800B2FDD1 /* Frameless.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Frameless.xcdatamodel; sourceTree = "<group>"; };
 		0DA5BB4919FAD12800B2FDD1 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		0DA5BB4A19FAD12800B2FDD1 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0DA5BB4B19FAD12800B2FDD1 /* SearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		0DA5BB4E19FAD12800B2FDD1 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		0DA5BB5E19FAD23A00B2FDD1 /* FramelessTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FramelessTests.swift; sourceTree = "<group>"; };
 		0DA5BB5F19FAD23A00B2FDD1 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -115,7 +113,6 @@
 				0DA5BB7719FC2EAE00B2FDD1 /* AppearanceBridge.h */,
 				0DA5BB7819FC2EBF00B2FDD1 /* AppearanceBridge.m */,
 				0DA5BB4219FAD12800B2FDD1 /* AppDelegate.swift */,
-				0DA5BB4B19FAD12800B2FDD1 /* SearchBar.swift */,
 				0DA5BB4E19FAD12800B2FDD1 /* ViewController.swift */,
 				0DD869F41A08A7A000BF196E /* SettingsViewController.swift */,
 				0DAB64411A09FDD00046287E /* SettingsTableViewController.swift */,
@@ -327,7 +324,6 @@
 				0DA5BB4F19FAD12800B2FDD1 /* AppDelegate.swift in Sources */,
 				0DA5BB7219FC25F000B2FDD1 /* Helpers.swift in Sources */,
 				0DA5BB7919FC2EBF00B2FDD1 /* AppearanceBridge.m in Sources */,
-				0DA5BB5519FAD12800B2FDD1 /* SearchBar.swift in Sources */,
 				0DD869F51A08A7A000BF196E /* SettingsViewController.swift in Sources */,
 				0DAB64421A09FDD00046287E /* SettingsTableViewController.swift in Sources */,
 			);
