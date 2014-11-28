@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		0DA5BB4F19FAD12800B2FDD1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA5BB4219FAD12800B2FDD1 /* AppDelegate.swift */; };
 		0DA5BB5119FAD12800B2FDD1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0DA5BB4519FAD12800B2FDD1 /* Main.storyboard */; };
-		0DA5BB5219FAD12800B2FDD1 /* Frameless.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0DA5BB4719FAD12800B2FDD1 /* Frameless.xcdatamodeld */; };
 		0DA5BB5319FAD12800B2FDD1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0DA5BB4919FAD12800B2FDD1 /* Images.xcassets */; };
 		0DA5BB5719FAD12800B2FDD1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA5BB4E19FAD12800B2FDD1 /* ViewController.swift */; };
 		0DA5BB6019FAD23A00B2FDD1 /* FramelessTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA5BB5E19FAD23A00B2FDD1 /* FramelessTests.swift */; };
@@ -41,7 +40,6 @@
 		0DA5BB3119FAD10F00B2FDD1 /* FramelessTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FramelessTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0DA5BB4219FAD12800B2FDD1 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0DA5BB4619FAD12800B2FDD1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		0DA5BB4819FAD12800B2FDD1 /* Frameless.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Frameless.xcdatamodel; sourceTree = "<group>"; };
 		0DA5BB4919FAD12800B2FDD1 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		0DA5BB4A19FAD12800B2FDD1 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0DA5BB4E19FAD12800B2FDD1 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -117,7 +115,6 @@
 				0DD869F41A08A7A000BF196E /* SettingsViewController.swift */,
 				0DAB64411A09FDD00046287E /* SettingsTableViewController.swift */,
 				0DA5BB4519FAD12800B2FDD1 /* Main.storyboard */,
-				0DA5BB4719FAD12800B2FDD1 /* Frameless.xcdatamodeld */,
 				0DA5BB4919FAD12800B2FDD1 /* Images.xcassets */,
 				0DA5BB6219FAD36700B2FDD1 /* Supporting Files */,
 				0DA5BB7019FC24D900B2FDD1 /* Resources */,
@@ -320,7 +317,6 @@
 			files = (
 				0DA5BBA019FDE2AC00B2FDD1 /* AppDefaults.swift in Sources */,
 				0DA5BB5719FAD12800B2FDD1 /* ViewController.swift in Sources */,
-				0DA5BB5219FAD12800B2FDD1 /* Frameless.xcdatamodeld in Sources */,
 				0DA5BB4F19FAD12800B2FDD1 /* AppDelegate.swift in Sources */,
 				0DA5BB7219FC25F000B2FDD1 /* Helpers.swift in Sources */,
 				0DA5BB7919FC2EBF00B2FDD1 /* AppearanceBridge.m in Sources */,
@@ -536,19 +532,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		0DA5BB4719FAD12800B2FDD1 /* Frameless.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				0DA5BB4819FAD12800B2FDD1 /* Frameless.xcdatamodel */,
-			);
-			currentVersion = 0DA5BB4819FAD12800B2FDD1 /* Frameless.xcdatamodel */;
-			path = Frameless.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 0DA5BB1119FAD10F00B2FDD1 /* Project object */;
 }
