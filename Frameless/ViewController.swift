@@ -42,11 +42,13 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        var webViewConfiguration: WKWebViewConfiguration = WKWebViewConfiguration()
+        webViewConfiguration.allowsInlineMediaPlayback = true
+        webViewConfiguration.mediaPlaybackRequiresUserAction = false
         
-        var config = WKWebViewConfiguration()
-        config.allowsInlineMediaPlayback = true
-        config.mediaPlaybackRequiresUserAction = false
-        _webView = WKWebView(frame: CGRectMake(0, 0, self.view.frame.width, self.view.frame.height), configuration: config)
+        _webView = WKWebView(frame: self.view.frame, configuration: webViewConfiguration)
+
         self.view.addSubview(_webView!)
         //        _webView!.scalesPageToFit = true
         _webView!.navigationDelegate = self
