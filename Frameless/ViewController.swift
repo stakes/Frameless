@@ -44,7 +44,8 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
         super.viewDidLoad()
         
         _webView = WKWebView()
-        _webView?.configuration.allowsInlineMediaPlayback = true;
+        _webView?.configuration.allowsInlineMediaPlayback = true
+        _webView?.configuration.mediaPlaybackRequiresUserAction = false
         self.view.addSubview(_webView!)
         //        _webView!.scalesPageToFit = true
         _webView!.navigationDelegate = self
