@@ -42,13 +42,15 @@ class ViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizer
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        _webView = WKWebView()
-        _webView?.configuration.allowsInlineMediaPlayback = true;
-        _webView?.configuration.mediaPlaybackRequiresUserAction = false;
+        var webViewConfiguration: WKWebViewConfiguration = WKWebViewConfiguration()
+        webViewConfiguration.allowsInlineMediaPlayback = true
+        webViewConfiguration.mediaPlaybackRequiresUserAction = false
+        
+        _webView = WKWebView(frame: self.view.frame, configuration: webViewConfiguration)
+
         self.view.addSubview(_webView!)
         //        _webView!.scalesPageToFit = true
         _webView!.navigationDelegate = self
-        _webView!.frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height)
         self.view.sendSubviewToBack(_webView!)
         
         _defaultsObject = NSUserDefaults.standardUserDefaults()
