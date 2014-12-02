@@ -9,11 +9,11 @@
 import UIKit
 import WebKit
 
-class ViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizerDelegate, WKNavigationDelegate {
+class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarDelegate, UIGestureRecognizerDelegate, WKNavigationDelegate {
 
 
     
-    @IBOutlet weak var _searchBar: UISearchBar!
+    @IBOutlet weak var _searchBar: FramelessSearchBar!
     @IBOutlet weak var _progressView: UIProgressView!
     @IBOutlet weak var _loadingErrorView: UIView!
     
@@ -33,6 +33,7 @@ class ViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizer
     var _settingsBarView: UIView?
     var _defaultsObject: NSUserDefaults?
     var _onboardingViewController: OnboardingViewController?
+    var _isCurrentPageLoaded = false
     
     // Loading progress? Fake it till you make it.
     var _progressTimer: NSTimer?
@@ -43,7 +44,8 @@ class ViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizer
         super.viewDidLoad()
         
         _webView = WKWebView()
-        _webView?.configuration.allowsInlineMediaPlayback = true;
+        _webView?.configuration.allowsInlineMediaPlayback = true
+        _webView?.configuration.mediaPlaybackRequiresUserAction = false
         self.view.addSubview(_webView!)
         //        _webView!.scalesPageToFit = true
         _webView!.navigationDelegate = self
@@ -76,12 +78,10 @@ class ViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizer
         self.view.addGestureRecognizer(_panFromRightRecognizer!)
 
         _searchBar.delegate = self
-        _searchBar.autocapitalizationType = .None
-        _searchBar.returnKeyType = .Go
-        _searchBar.keyboardType = .URL
+        _searchBar.framelessSearchBarDelegate = self
         _searchBar.showsCancelButton = false
         _searchBar.becomeFirstResponder()
-        customizeSearchBarAppearance()
+         AppearanceBridge.setSearchBarTextInputAppearance()
         
         _settingsBarView = UIView(frame: CGRectMake(0, self.view.frame.height, self.view.frame.width, 44))
         var settingsButton = UIButton(frame: CGRectMake(7, 0, 36, 36))
@@ -244,6 +244,7 @@ class ViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizer
     }
     
     func webView(webView: WKWebView, didFinishNavigation navigation: WKNavigation!) {
+        _isCurrentPageLoaded = true
         _loadingTimer!.invalidate()
         _isWebViewLoading = false
     }
@@ -264,19 +265,18 @@ class ViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizer
         }
     }
     
-    func webView(webView: WKWebView, didCommitNavigation navigation: WKNavigation!) {
-    }
-    
     func webView(webView: WKWebView, decidePolicyForNavigationAction navigationAction: WKNavigationAction, decisionHandler: (WKNavigationActionPolicy) -> Void) {
         if (navigationAction.targetFrame == nil && navigationAction.navigationType == .LinkActivated) {
             _webView!.loadRequest(navigationAction.request)
         }
+//        NSURLCache.sharedURLCache().removeAllCachedResponses()
         _isMainFrameNavigationAction = navigationAction.targetFrame?.mainFrame
         decisionHandler(.Allow)
     }
 
     func handleWebViewError() {
         _loadingTimer!.invalidate()
+        _isCurrentPageLoaded = false
         _isWebViewLoading = false
         showSearch()
         displayLoadingErrorMessage()
@@ -346,36 +346,7 @@ class ViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizer
     
     
     // Search bar
-    func customizeSearchBarAppearance() {
-        let clearSans = UIFont(name: "ClearSans", size: 16)
-        if let font = clearSans {
-            var normalTextAttributes: Dictionary = [
-                NSFontAttributeName: font
-            ]
-            UIBarButtonItem.appearance().setTitleTextAttributes(normalTextAttributes, forState: .Normal)
-            
-            // See: http://stackoverflow.com/a/26224862/534343
-            AppearanceBridge.setSearchBarTextInputAppearance()
-            
-            // Change search bar icon
-            var searchField: UITextField?
-            var searchBarSubviews = _searchBar.subviews.first?.subviews
-            for subview in searchBarSubviews! {
-                if subview.isKindOfClass(UITextField) {
-                    searchField = subview as? UITextField
-                    break
-                }
-            }
-            if let field = searchField {
-                var iconImage = UIImage(named: "compass")
-                var imageView = UIImageView(frame: CGRectMake(0, 0, 14, 14))
-                imageView.image = iconImage
-                field.leftView = imageView
-            }
-        }
-    }
-    
-    
+
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         hideSearch()
         loadURL(searchBar.text)
@@ -383,6 +354,27 @@ class ViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizer
     
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
         hideSearch()
+    }
+    
+    func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool {
+        var enable = false
+        if (countElements(_searchBar.text) > 0 && _isCurrentPageLoaded) {
+            enable = true
+        }
+        _searchBar.refreshButton().enabled = enable
+        return true
+    }
+    
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        _searchBar.refreshButton().enabled = false
+    }
+    
+    func searchBarRefreshWasPressed() {
+        hideSearch()
+        if let urlString = _webView?.URL?.absoluteString {
+            _searchBar.text = urlString
+        }
+        loadURL(_searchBar.text)
     }
     
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
