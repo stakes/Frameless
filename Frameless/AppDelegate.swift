@@ -26,6 +26,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         setUserSettingsDefaults()
+        
+        UIButton.appearance().tintColor = UIColorFromHex(0x9178E2)
                 
         return true
     }
