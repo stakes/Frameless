@@ -323,7 +323,6 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
         }
         return "http://"+str
     }
-
     
     func displayLoadingErrorMessage() {
         _loadingErrorView.hidden = false
@@ -343,6 +342,10 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
                 _webView!.goForward()
             }
         }
+    }
+    
+    func clearBrowserCache() {
+        println("CLEAR")
     }
     
     

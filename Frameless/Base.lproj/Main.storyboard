@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="ClearSans-Regular.ttf">
+            <string>ClearSans</string>
             <string>ClearSans</string>
             <string>ClearSans</string>
             <string>ClearSans</string>
@@ -194,7 +195,7 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="Browser navigation" id="omO-ec-fQI">
+                            <tableViewSection headerTitle="Browser" id="omO-ec-fQI">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="56" id="blj-xa-5l5">
                                         <autoresizingMask key="autoresizingMask"/>
@@ -225,6 +226,24 @@
                                                 <constraint firstItem="fIL-z9-y1y" firstAttribute="top" secondItem="hWo-38-cAA" secondAttribute="topMargin" constant="4" id="9pz-Qa-J9j"/>
                                                 <constraint firstItem="fIL-z9-y1y" firstAttribute="trailing" secondItem="hWo-38-cAA" secondAttribute="trailingMargin" constant="-4" id="xSl-a9-2cx"/>
                                             </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="56" id="uam-kL-vMv">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="uam-kL-vMv" id="mXl-Wl-2w7">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hup-aV-pfX">
+                                                    <rect key="frame" x="17" y="9" width="156" height="35"/>
+                                                    <fontDescription key="fontDescription" name="ClearSans" family="Clear Sans" pointSize="17"/>
+                                                    <state key="normal" title="Clear browser cache">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="clearCacheButtonPress:" destination="lCY-Sl-eE7" eventType="touchUpInside" id="Ach-66-7CM"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </cells>

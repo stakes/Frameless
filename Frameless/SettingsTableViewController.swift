@@ -17,7 +17,6 @@ class SettingsTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         _shakeSwitch.on = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.ShakeGesture.rawValue) as Bool
         _swipeUpSwitch.on = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.PanFromBottomGesture.rawValue) as Bool
         _tripleTapSwitch.on = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.TripleTapGesture.rawValue) as Bool
@@ -28,6 +27,8 @@ class SettingsTableViewController: UITableViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+
 
     // Settings
     
@@ -65,6 +66,14 @@ class SettingsTableViewController: UITableViewController {
             parent.closeButtonEnabled(true)
             return true
         }
+    }
+    
+    // Actions
+    
+    @IBAction func clearCacheButtonPress(sender: AnyObject) {
+        let appDelegate  = UIApplication.sharedApplication().delegate as AppDelegate
+        let rootViewController = appDelegate.window!.rootViewController as ViewController
+        rootViewController.clearBrowserCache()
     }
 
 
