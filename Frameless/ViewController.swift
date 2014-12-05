@@ -345,7 +345,12 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     }
     
     func clearBrowserCache() {
-        println("CLEAR")
+        let fileManager = NSFileManager.defaultManager()
+        let cacheDir = NSHomeDirectory()+"/Library/Caches"
+        if fileManager.removeItemAtPath(cacheDir, error: nil) {
+            println("BOOM")
+        }
+        fileManager.createDirectoryAtPath(cacheDir, withIntermediateDirectories: false, attributes: nil, error: nil )
     }
     
     
