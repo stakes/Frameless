@@ -43,16 +43,7 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        var webViewConfiguration: WKWebViewConfiguration = WKWebViewConfiguration()
-        webViewConfiguration.allowsInlineMediaPlayback = true
-        webViewConfiguration.mediaPlaybackRequiresUserAction = false
-        
-        _webView = WKWebView(frame: self.view.frame, configuration: webViewConfiguration)
-
-        self.view.addSubview(_webView!)
-        //        _webView!.scalesPageToFit = true
-        _webView!.navigationDelegate = self
-        self.view.sendSubviewToBack(_webView!)
+        createWKWebView()
         
         _defaultsObject = NSUserDefaults.standardUserDefaults()
         
@@ -110,6 +101,17 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
         // Dispose of any resources that can be recreated.
     }
 
+    func createWKWebView() {
+        var webViewConfiguration: WKWebViewConfiguration = WKWebViewConfiguration()
+        webViewConfiguration.allowsInlineMediaPlayback = true
+        webViewConfiguration.mediaPlaybackRequiresUserAction = false
+        
+        _webView = WKWebView(frame: self.view.frame, configuration: webViewConfiguration)
+        
+        self.view.addSubview(_webView!)
+        _webView!.navigationDelegate = self
+        self.view.sendSubviewToBack(_webView!)
+    }
 
     func introCompletion() {
         _onboardingViewController?.dismissViewControllerAnimated(true, completion: nil)
@@ -345,12 +347,19 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     }
     
     func clearBrowserCache() {
+        // clear cache
+        let urlcache = NSURLCache.sharedURLCache()
+        urlcache.removeAllCachedResponses()
+        // remove caches directory
         let fileManager = NSFileManager.defaultManager()
         let cacheDir = NSHomeDirectory()+"/Library/Caches"
-        if fileManager.removeItemAtPath(cacheDir, error: nil) {
-            println("BOOM")
-        }
+        fileManager.removeItemAtPath(cacheDir, error: nil)
         fileManager.createDirectoryAtPath(cacheDir, withIntermediateDirectories: false, attributes: nil, error: nil )
+        // create a new WKWebView and re-layout
+        _webView?.removeFromSuperview()
+        _webView = nil
+        createWKWebView()
+        println("Cleart")
     }
     
     
