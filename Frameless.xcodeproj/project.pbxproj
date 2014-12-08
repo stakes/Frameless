@@ -236,7 +236,7 @@
 					};
 					0DA5BB3019FAD10F00B2FDD1 = {
 						CreatedOnToolsVersion = 6.1;
-						DevelopmentTeam = K2XB837E84;
+						DevelopmentTeam = F725AN38JF;
 						TestTargetID = 0DA5BB1819FAD10F00B2FDD1;
 					};
 				};
