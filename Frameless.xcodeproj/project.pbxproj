@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0D0741CD1A366F0800A6D270 /* FramerBonjour.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D0741CC1A366F0800A6D270 /* FramerBonjour.swift */; };
 		0D18E4271A2D8B1200337D91 /* FramelessSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D18E4261A2D8B1200337D91 /* FramelessSearchBar.swift */; };
 		0D4915AD1A29031B0018BEC6 /* PortraitOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D4915AC1A29031B0018BEC6 /* PortraitOnboardingViewController.swift */; };
 		0DA5BB4F19FAD12800B2FDD1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA5BB4219FAD12800B2FDD1 /* AppDelegate.swift */; };
@@ -38,6 +39,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0D0741CC1A366F0800A6D270 /* FramerBonjour.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FramerBonjour.swift; sourceTree = "<group>"; };
 		0D18E4261A2D8B1200337D91 /* FramelessSearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FramelessSearchBar.swift; sourceTree = "<group>"; };
 		0D4915AC1A29031B0018BEC6 /* PortraitOnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PortraitOnboardingViewController.swift; sourceTree = "<group>"; };
 		0DA5BB1919FAD10F00B2FDD1 /* Frameless.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Frameless.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -120,6 +122,7 @@
 				0DD869F41A08A7A000BF196E /* SettingsViewController.swift */,
 				0DAB64411A09FDD00046287E /* SettingsTableViewController.swift */,
 				0DA5BB4519FAD12800B2FDD1 /* Main.storyboard */,
+				0D0741CC1A366F0800A6D270 /* FramerBonjour.swift */,
 				0DA5BB4919FAD12800B2FDD1 /* Images.xcassets */,
 				0DA5BB6219FAD36700B2FDD1 /* Supporting Files */,
 				0DA5BB7019FC24D900B2FDD1 /* Resources */,
@@ -323,6 +326,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0D4915AD1A29031B0018BEC6 /* PortraitOnboardingViewController.swift in Sources */,
+				0D0741CD1A366F0800A6D270 /* FramerBonjour.swift in Sources */,
 				0DA5BBA019FDE2AC00B2FDD1 /* AppDefaults.swift in Sources */,
 				0DA5BB5719FAD12800B2FDD1 /* ViewController.swift in Sources */,
 				0DA5BB4F19FAD12800B2FDD1 /* AppDelegate.swift in Sources */,

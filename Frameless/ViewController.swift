@@ -9,7 +9,7 @@
 import UIKit
 import WebKit
 
-class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarDelegate, UIGestureRecognizerDelegate, WKNavigationDelegate {
+class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarDelegate, UIGestureRecognizerDelegate, WKNavigationDelegate, FramerBonjourDelegate {
 
 
     
@@ -34,6 +34,8 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     var _defaultsObject: NSUserDefaults?
     var _onboardingViewController: OnboardingViewController?
     var _isCurrentPageLoaded = false
+    
+    var _framerBonjour = FramerBonjour()
     
     // Loading progress? Fake it till you make it.
     var _progressTimer: NSTimer?
@@ -97,6 +99,9 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
 
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name:UIKeyboardWillShowNotification, object: nil);
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name:UIKeyboardWillHideNotification, object: nil);
+        
+        _framerBonjour.delegate = self
+        _framerBonjour.start()
         
         _progressView.hidden = true
     }
@@ -219,6 +224,7 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     }
     
     // Settings view
+    
     func presentSettingsView(sender:UIButton!) {
         var settingsController: SettingsViewController = storyboard?.instantiateViewControllerWithIdentifier("settingsController") as SettingsViewController
         settingsController.delegate = self
@@ -271,7 +277,6 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
         if (navigationAction.targetFrame == nil && navigationAction.navigationType == .LinkActivated) {
             _webView!.loadRequest(navigationAction.request)
         }
-//        NSURLCache.sharedURLCache().removeAllCachedResponses()
         _isMainFrameNavigationAction = navigationAction.targetFrame?.mainFrame
         decisionHandler(.Allow)
     }
@@ -343,6 +348,13 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
                 _webView!.goForward()
             }
         }
+    }
+    
+    // Framer.js Bonjour Integration
+    
+    func didResolveAddress(address: String) {
+        hideSearch()
+        loadURL(address)
     }
     
     
