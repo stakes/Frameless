@@ -121,7 +121,7 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     }
     
     
-    // UI show/hide
+    //MARK: - UI show/hide
     
     func keyboardWillShow(sender: NSNotification) {
         let dict:NSDictionary = sender.userInfo! as NSDictionary
@@ -222,8 +222,9 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     func focusOnSearchBar() {
         _searchBar.becomeFirstResponder()
     }
+
     
-    // Settings view
+    //MARK: -  Settings view
     
     func presentSettingsView(sender:UIButton!) {
         var settingsController: SettingsViewController = storyboard?.instantiateViewControllerWithIdentifier("settingsController") as SettingsViewController
@@ -233,7 +234,7 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     }
     
     
-    // Web view
+    //MARK: -  Web view
     
     func webView(webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
         _searchBar.showsCancelButton = true
@@ -359,7 +360,7 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     
     
     
-    // Search bar
+    //MARK: -  Search bar
 
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         hideSearch()
