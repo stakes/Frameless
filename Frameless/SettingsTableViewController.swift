@@ -30,6 +30,16 @@ class SettingsTableViewController: UITableViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    override func viewDidDisappear(animated: Bool) {
+        let value = _framerSwitch.on
+        let rootViewController = UIApplication.sharedApplication().keyWindow?.rootViewController? as ViewController
+        if value == true {
+            rootViewController.startSearching()
+        } else {
+            rootViewController.stopSearching()
+        }
+    }
 
     // Settings
     

@@ -24,6 +24,10 @@ class FramerBonjour:NSObject, NSNetServiceDelegate, NSNetServiceBrowserDelegate 
         _browser.searchForServicesOfType("_framerstudio._tcp", inDomain: "")
     }
     
+    func stop() {
+        _browser.stop()
+    }
+    
     func netServiceBrowser(aNetServiceBrowser: NSNetServiceBrowser, didFindService aNetService: NSNetService, moreComing: Bool) {
         if !moreComing {
             _service = aNetService

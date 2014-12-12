@@ -101,8 +101,10 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name:UIKeyboardWillHideNotification, object: nil);
         
         _framerBonjour.delegate = self
-        _framerBonjour.start()
-        
+        if NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.FramerBonjour.rawValue) as Bool == true {
+            _framerBonjour.start()
+        }
+            
         _progressView.hidden = true
     }
     
@@ -354,8 +356,25 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     // Framer.js Bonjour Integration
     
     func didResolveAddress(address: String) {
+        var alert = UIAlertController(title: "Connect to Framer?", message: "Looks like you (or someone on your network) is running Framer Studio. Want to connect?", preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "Nope", style: UIAlertActionStyle.Cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Sure", style: UIAlertActionStyle.Default, handler: { action in
+            self.loadFramer(address)
+        }))
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    func loadFramer(address: String) {
         hideSearch()
         loadURL(address)
+    }
+    
+    func startSearching() {
+        _framerBonjour.start()
+    }
+    
+    func stopSearching() {
+        _framerBonjour.stop()
     }
     
     
