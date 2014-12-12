@@ -10,7 +10,6 @@
 		0D0741CD1A366F0800A6D270 /* FramerBonjour.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D0741CC1A366F0800A6D270 /* FramerBonjour.swift */; };
 		0D18E4271A2D8B1200337D91 /* FramelessSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D18E4261A2D8B1200337D91 /* FramelessSearchBar.swift */; };
 		0D4915AD1A29031B0018BEC6 /* PortraitOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D4915AC1A29031B0018BEC6 /* PortraitOnboardingViewController.swift */; };
-		0D72BABD1A3AD8A700DAC81B /* JSSAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D72BABC1A3AD8A700DAC81B /* JSSAlertView.swift */; };
 		0DA5BB4F19FAD12800B2FDD1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA5BB4219FAD12800B2FDD1 /* AppDelegate.swift */; };
 		0DA5BB5119FAD12800B2FDD1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0DA5BB4519FAD12800B2FDD1 /* Main.storyboard */; };
 		0DA5BB5319FAD12800B2FDD1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0DA5BB4919FAD12800B2FDD1 /* Images.xcassets */; };
@@ -43,7 +42,6 @@
 		0D0741CC1A366F0800A6D270 /* FramerBonjour.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FramerBonjour.swift; sourceTree = "<group>"; };
 		0D18E4261A2D8B1200337D91 /* FramelessSearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FramelessSearchBar.swift; sourceTree = "<group>"; };
 		0D4915AC1A29031B0018BEC6 /* PortraitOnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PortraitOnboardingViewController.swift; sourceTree = "<group>"; };
-		0D72BABC1A3AD8A700DAC81B /* JSSAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSSAlertView.swift; sourceTree = "<group>"; };
 		0DA5BB1919FAD10F00B2FDD1 /* Frameless.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Frameless.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0DA5BB3119FAD10F00B2FDD1 /* FramelessTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FramelessTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0DA5BB4219FAD12800B2FDD1 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -129,7 +127,6 @@
 				0DA5BB6219FAD36700B2FDD1 /* Supporting Files */,
 				0DA5BB7019FC24D900B2FDD1 /* Resources */,
 				0D18E4261A2D8B1200337D91 /* FramelessSearchBar.swift */,
-				0D72BABC1A3AD8A700DAC81B /* JSSAlertView.swift */,
 			);
 			path = Frameless;
 			sourceTree = "<group>";
@@ -334,7 +331,6 @@
 				0DA5BB5719FAD12800B2FDD1 /* ViewController.swift in Sources */,
 				0DA5BB4F19FAD12800B2FDD1 /* AppDelegate.swift in Sources */,
 				0DA5BB7219FC25F000B2FDD1 /* Helpers.swift in Sources */,
-				0D72BABD1A3AD8A700DAC81B /* JSSAlertView.swift in Sources */,
 				0DA5BB7919FC2EBF00B2FDD1 /* AppearanceBridge.m in Sources */,
 				0DD869F51A08A7A000BF196E /* SettingsViewController.swift in Sources */,
 				0D18E4271A2D8B1200337D91 /* FramelessSearchBar.swift in Sources */,
