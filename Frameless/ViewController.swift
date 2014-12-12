@@ -122,6 +122,7 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
         let dict:NSDictionary = sender.userInfo! as NSDictionary
         let s:NSValue = dict.valueForKey(UIKeyboardFrameEndUserInfoKey) as NSValue
         let rect :CGRect = s.CGRectValue()
+        _searchBar.selectAllText()
         _settingsBarView!.frame.origin.y = self.view.frame.height - rect.height - _settingsBarView!.frame.height
         _settingsBarView!.alpha = 1
     }

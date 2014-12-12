@@ -12,6 +12,7 @@ class FramelessSearchBar: UISearchBar {
     
     var framelessSearchBarDelegate:FramelessSearchBarDelegate?
     var _refreshButton:UIButton!
+    var _field:UITextField!
 
     func handleRefreshTap() {
         framelessSearchBarDelegate?.searchBarRefreshWasPressed!()
@@ -58,6 +59,7 @@ class FramelessSearchBar: UISearchBar {
                 }
             }
             if let field = searchField {
+                _field = field
                 var iconImage = UIImage(named: "refresh")
                 var iconImageDisabled = UIImage(named: "refresh-disabled")
                 if _refreshButton == nil {
@@ -68,6 +70,14 @@ class FramelessSearchBar: UISearchBar {
                 _refreshButton.addTarget(self, action: Selector("handleRefreshTap"), forControlEvents: .TouchUpInside)
                 _refreshButton.enabled = false
                 field.leftView = _refreshButton
+            }
+        }
+    }
+    
+    func selectAllText() {
+        if let field = _field {
+            if field.text != "" {
+                field.selectAll(self)
             }
         }
     }
