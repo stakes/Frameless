@@ -15,6 +15,8 @@
             <string>ClearSans</string>
             <string>ClearSans</string>
             <string>ClearSans</string>
+            <string>ClearSans</string>
+            <string>ClearSans</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -194,7 +196,7 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="Browser navigation" id="omO-ec-fQI">
+                            <tableViewSection headerTitle="Browser settings" id="omO-ec-fQI">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="56" id="blj-xa-5l5">
                                         <autoresizingMask key="autoresizingMask"/>
@@ -227,6 +229,37 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="56" id="6mF-rO-eJu">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6mF-rO-eJu" id="Jrx-Hm-NhT">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vyj-7R-UEs">
+                                                    <rect key="frame" x="539" y="12" width="51" height="31"/>
+                                                    <color key="onTintColor" red="0.61937248710000004" green="0.51502001289999999" blue="0.90843188760000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <connections>
+                                                        <action selector="toggleFramerSwitch:" destination="lCY-Sl-eE7" eventType="valueChanged" id="ac9-Ip-W7l"/>
+                                                    </connections>
+                                                </switch>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Auto-connect to Framer Studio" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wba-pV-wv4">
+                                                    <rect key="frame" x="16" y="7" width="237" height="23"/>
+                                                    <fontDescription key="fontDescription" name="ClearSans" family="Clear Sans" pointSize="17"/>
+                                                    <color key="textColor" red="0.55673807860000002" green="0.55652600529999996" blue="0.57718861099999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="On startup, automatically connect to Framer's Mirror" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7KK-eb-BTg">
+                                                    <rect key="frame" x="16" y="26" width="301" height="23"/>
+                                                    <fontDescription key="fontDescription" name="ClearSans" family="Clear Sans" pointSize="12"/>
+                                                    <color key="textColor" red="0.55673807860000002" green="0.55652600529999996" blue="0.57718861099999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Vyj-7R-UEs" firstAttribute="top" secondItem="Jrx-Hm-NhT" secondAttribute="topMargin" constant="4" id="Psd-Ey-2xm"/>
+                                                <constraint firstItem="Vyj-7R-UEs" firstAttribute="trailing" secondItem="Jrx-Hm-NhT" secondAttribute="trailingMargin" constant="-4" id="kyB-sc-G00"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -237,6 +270,7 @@
                     </tableView>
                     <connections>
                         <outlet property="_browserSwitch" destination="fIL-z9-y1y" id="hd6-Uz-FAr"/>
+                        <outlet property="_framerSwitch" destination="Vyj-7R-UEs" id="3vh-0s-wr9"/>
                         <outlet property="_shakeSwitch" destination="4yd-mc-Ohq" id="hVN-0x-IGW"/>
                         <outlet property="_swipeUpSwitch" destination="bpD-iZ-A9f" id="yal-l5-dtx"/>
                         <outlet property="_tripleTapSwitch" destination="ggJ-AG-Bhe" id="bPC-GM-Rrh"/>
