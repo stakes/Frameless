@@ -119,11 +119,13 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     //MARK: - UI show/hide
     
     func keyboardWillShow(sender: NSNotification) {
-        let dict:NSDictionary = sender.userInfo! as NSDictionary
-        let s:NSValue = dict.valueForKey(UIKeyboardFrameEndUserInfoKey) as NSValue
-        let rect :CGRect = s.CGRectValue()
-        _settingsBarView!.frame.origin.y = self.view.frame.height - rect.height - _settingsBarView!.frame.height
-        _settingsBarView!.alpha = 1
+        if _searchBar.isFirstResponder() {
+            let dict:NSDictionary = sender.userInfo! as NSDictionary
+            let s:NSValue = dict.valueForKey(UIKeyboardFrameEndUserInfoKey) as NSValue
+            let rect :CGRect = s.CGRectValue()
+            _settingsBarView!.frame.origin.y = self.view.frame.height - rect.height - _settingsBarView!.frame.height
+            _settingsBarView!.alpha = 1
+        }
     }
     
     func keyboardWillHide(sender: NSNotification) {
