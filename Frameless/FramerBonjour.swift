@@ -61,7 +61,6 @@ class FramerBonjour:NSObject, NSNetServiceDelegate, NSNetServiceBrowserDelegate 
     }
     
     func resolveToHost(host: String, port: Int) {
-        println(port)
         let httpd = "http://\(host):\(port)/"
         delegate?.didResolveAddress(httpd)
     }
