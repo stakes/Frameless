@@ -18,14 +18,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
         self.window!.backgroundColor = UIColor.whiteColor()
         
+        setUserSettingsDefaults()
+        
         if let lastIntro: AnyObject = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.IntroVersionSeen.rawValue) {
             setupAppViewController(false)
         } else {
             self.window!.rootViewController = createIntroViewController()
             self.window!.makeKeyAndVisible()
         }
-        
-        setUserSettingsDefaults()
+
         
         UIButton.appearance().tintColor = UIColorFromHex(0x9178E2)
                 
