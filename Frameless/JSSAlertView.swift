@@ -26,6 +26,7 @@ class JSSAlertView: UIViewController {
     var iconImage:UIImage!
     var iconImageView:UIImageView!
     var closeAction:(()->Void)!
+    var isAlertOpen:Bool = false
     
     enum FontType {
         case Title, Text, Button
@@ -294,6 +295,7 @@ class JSSAlertView: UIViewController {
         // View text
         if let text = text? {
             self.textView = UITextView()
+            self.textView.userInteractionEnabled = false
             textView.editable = false
             textView.textColor = textColor
             textView.textAlignment = .Center
@@ -326,7 +328,7 @@ class JSSAlertView: UIViewController {
         // Second cancel button
         if let btnText = cancelButtonText {
             self.cancelButton = UIButton()
-            let buttonColor = UIImage.withColor(adjustBrightness(baseColor!, 0.85))
+            let buttonColor = UIImage.withColor(adjustBrightness(baseColor!, 0.8))
             let buttonHighlightColor = UIImage.withColor(adjustBrightness(baseColor!, 0.9))
             cancelButton.setBackgroundImage(buttonColor, forState: .Normal)
             cancelButton.setBackgroundImage(buttonHighlightColor, forState: .Highlighted)
@@ -334,7 +336,7 @@ class JSSAlertView: UIViewController {
             alertBackgroundView!.addSubview(cancelButton)
             // Button text
             self.cancelButtonLabel = UILabel()
-            cancelButtonLabel.alpha = 0.75
+            cancelButtonLabel.alpha = 0.7
             cancelButtonLabel.textColor = textColor
             cancelButtonLabel.numberOfLines = 1
             cancelButtonLabel.textAlignment = .Center
@@ -358,6 +360,7 @@ class JSSAlertView: UIViewController {
                 
         })
         
+        isAlertOpen = true
         return JSSAlertViewResponder(alertview: self)
     }
     
@@ -392,6 +395,7 @@ class JSSAlertView: UIViewController {
     }
     
     func removeView() {
+        isAlertOpen = false
         self.view.removeFromSuperview()
     }
     
