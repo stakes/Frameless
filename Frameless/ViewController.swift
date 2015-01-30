@@ -9,7 +9,7 @@
 import UIKit
 import WebKit
 
-class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarDelegate, UIGestureRecognizerDelegate, WKNavigationDelegate {
+class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarDelegate, UIGestureRecognizerDelegate, WKNavigationDelegate, FramerBonjourDelegate {
 
 
     
@@ -34,6 +34,11 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     var _defaultsObject: NSUserDefaults?
     var _onboardingViewController: OnboardingViewController?
     var _isCurrentPageLoaded = false
+    
+    var _framerBonjour = FramerBonjour()
+    var _framerAddress: String?
+    
+    var _alertBuilder: JSSAlertView = JSSAlertView()
     
     // Loading progress? Fake it till you make it.
     var _progressTimer: NSTimer?
@@ -98,6 +103,11 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name:UIKeyboardWillShowNotification, object: nil);
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name:UIKeyboardWillHideNotification, object: nil);
         
+        _framerBonjour.delegate = self
+        if NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.FramerBonjour.rawValue) as Bool == true {
+            _framerBonjour.start()
+        }
+            
         _progressView.hidden = true
     }
     
@@ -220,8 +230,10 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     func focusOnSearchBar() {
         _searchBar.becomeFirstResponder()
     }
+
     
     //MARK: -  Settings view
+    
     func presentSettingsView(sender:UIButton!) {
         var settingsController: SettingsViewController = storyboard?.instantiateViewControllerWithIdentifier("settingsController") as SettingsViewController
         settingsController.delegate = self
@@ -274,7 +286,6 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
         if (navigationAction.targetFrame == nil && navigationAction.navigationType == .LinkActivated) {
             _webView!.loadRequest(navigationAction.request)
         }
-//        NSURLCache.sharedURLCache().removeAllCachedResponses()
         _isMainFrameNavigationAction = navigationAction.targetFrame?.mainFrame
         decisionHandler(.Allow)
     }
@@ -346,6 +357,39 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
                 _webView!.goForward()
             }
         }
+    }
+    
+    // Framer.js Bonjour Integration
+    
+    func didResolveAddress(address: String) {
+        if !_alertBuilder.isAlertOpen {
+            var windowCount = UIApplication.sharedApplication().windows.count
+            var targetView = UIApplication.sharedApplication().windows[windowCount-1].rootViewController!
+            _framerAddress = address
+            var alert = _alertBuilder.show(targetView as UIViewController!, title: "Connect to Framer?", text: "Looks like you (or someone on your network) is running Framer Studio. Want to connect?", cancelButtonText: "Nope", buttonText: "Sure!", color: UIColorFromHex(0x9178E2))
+            alert.addAction(handleAlertConfirmTap)
+            alert.setTextTheme(.Light)
+            alert.setTitleFont("ClearSans")
+            alert.setTextFont("ClearSans")
+            alert.setButtonFont("ClearSans")
+        }
+    }
+    
+    func handleAlertConfirmTap() {
+        loadFramer(_framerAddress!)
+    }
+    
+    func loadFramer(address: String) {
+        hideSearch()
+        loadURL(address)
+    }
+    
+    func startSearching() {
+        _framerBonjour.start()
+    }
+    
+    func stopSearching() {
+        _framerBonjour.stop()
     }
     
     

@@ -14,6 +14,7 @@ class SettingsTableViewController: UITableViewController {
     @IBOutlet weak var _swipeUpSwitch: UISwitch!
     @IBOutlet weak var _tripleTapSwitch: UISwitch!
     @IBOutlet weak var _browserSwitch: UISwitch!
+    @IBOutlet weak var _framerSwitch: UISwitch!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,11 +23,22 @@ class SettingsTableViewController: UITableViewController {
         _swipeUpSwitch.on = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.PanFromBottomGesture.rawValue) as Bool
         _tripleTapSwitch.on = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.TripleTapGesture.rawValue) as Bool
         _browserSwitch.on = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.ForwardBackGesture.rawValue) as Bool
+        _framerSwitch.on = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.FramerBonjour.rawValue) as Bool
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewDidDisappear(animated: Bool) {
+        let value = _framerSwitch.on
+        let rootViewController = UIApplication.sharedApplication().keyWindow?.rootViewController? as ViewController
+        if value == true {
+            rootViewController.startSearching()
+        } else {
+            rootViewController.stopSearching()
+        }
     }
 
     // Settings
@@ -52,6 +64,11 @@ class SettingsTableViewController: UITableViewController {
     @IBAction func toggleBrowserNavSwitch(sender: AnyObject) {
         var value = (sender as UISwitch).on
         NSUserDefaults.standardUserDefaults().setValue(value, forKey: AppDefaultKeys.ForwardBackGesture.rawValue)
+    }
+    
+    @IBAction func toggleFramerSwitch(sender: AnyObject) {
+        var value = (sender as UISwitch).on
+        NSUserDefaults.standardUserDefaults().setValue(value, forKey: AppDefaultKeys.FramerBonjour.rawValue)
     }
     
     func checkControlsSettings() -> Bool {
