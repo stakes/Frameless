@@ -38,6 +38,8 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     var _framerBonjour = FramerBonjour()
     var _framerAddress: String?
     
+    var _alertBuilder: JSSAlertView = JSSAlertView()
+    
     // Loading progress? Fake it till you make it.
     var _progressTimer: NSTimer?
     var _isWebViewLoading = false
@@ -357,15 +359,17 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     // Framer.js Bonjour Integration
     
     func didResolveAddress(address: String) {
-        println(UIWindowLevelStatusBar)
-//        var targetView:UIViewController = UIApplication.sharedApplication().keyWindow? as UIViewController
-        _framerAddress = address
-        var alert = JSSAlertView().show(self, title: "Connect to Framer?", text: "Looks like you (or someone on your network) is running Framer Studio. Want to connect?", cancelButtonText: "Nope", buttonText: "Sure!", color: UIColorFromHex(0x9178E2))
-        alert.addAction(handleAlertConfirmTap)
-        alert.setTextTheme(.Light)
-        alert.setTitleFont("ClearSans")
-        alert.setTextFont("ClearSans")
-        alert.setButtonFont("ClearSans")
+        if !_alertBuilder.isAlertOpen {
+            var windowCount = UIApplication.sharedApplication().windows.count
+            var targetView = UIApplication.sharedApplication().windows[windowCount-1].rootViewController!
+            _framerAddress = address
+            var alert = _alertBuilder.show(targetView as UIViewController!, title: "Connect to Framer?", text: "Looks like you (or someone on your network) is running Framer Studio. Want to connect?", cancelButtonText: "Nope", buttonText: "Sure!", color: UIColorFromHex(0x9178E2))
+            alert.addAction(handleAlertConfirmTap)
+            alert.setTextTheme(.Light)
+            alert.setTitleFont("ClearSans")
+            alert.setTextFont("ClearSans")
+            alert.setButtonFont("ClearSans")
+        }
     }
     
     func handleAlertConfirmTap() {
