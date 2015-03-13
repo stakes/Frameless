@@ -366,12 +366,12 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
             var windowCount = UIApplication.sharedApplication().windows.count
             var targetView = UIApplication.sharedApplication().windows[windowCount-1].rootViewController!
             _framerAddress = address
-            var alert = _alertBuilder.show(targetView as UIViewController!, title: "Connect to Framer?", text: "Looks like you (or someone on your network) is running Framer Studio. Want to connect?", cancelButtonText: "Nope", buttonText: "Sure!", color: UIColorFromHex(0x9178E2))
+            var alert = _alertBuilder.show(targetView as UIViewController!, title: "Connect to Framer?", text: "Looks like you (or someone on your network) is running Framer Studio. Want to connect?", cancelButtonText: "Nope", buttonText: "Sure!", color: FRAMER_BLUE)
             alert.addAction(handleAlertConfirmTap)
             alert.setTextTheme(.Light)
-            alert.setTitleFont("ClearSans")
-            alert.setTextFont("ClearSans")
-            alert.setButtonFont("ClearSans")
+            alert.setTitleFont("HelveticaNeue")
+            alert.setTextFont("HelveticaNeue")
+            alert.setButtonFont("HelveticaNeue")
         }
     }
     
