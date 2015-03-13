@@ -15,4 +15,7 @@ enum AppDefaultKeys: String {
     case FramerBonjour = "framerConnect"
 }
 
-
+let FRAMER_BLUE = UIColorFromHex(0x28AFFA)
+let FRAMER_GREEN = UIColorFromHex(0x7DDC16)
+let FRAMER_PURPLE = UIColorFromHex(0x9178E2)
+let FRAMER_CYAN = UIColorFromHex(0x2DD7AA)
