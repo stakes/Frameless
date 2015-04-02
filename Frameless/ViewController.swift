@@ -161,13 +161,15 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     
     override func motionEnded(motion: UIEventSubtype, withEvent event: UIEvent) {
         if let isShakeActive:Bool = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.ShakeGesture.rawValue) as? Bool {
-            if(event.subtype == UIEventSubtype.MotionShake && isShakeActive == true) {
-                if (!_areControlsVisible) {
-                    showSearch()
-                } else {
-                    hideSearch()
-                }
-            }
+//            if(event.subtype == UIEventSubtype.MotionShake && isShakeActive == true) {
+//                if (!_areControlsVisible) {
+//                    showSearch()
+//                } else {
+//                    hideSearch()
+//                }
+//            }
+            searchBarRefreshWasPressed()
+
         }
     }
     
