@@ -10,11 +10,11 @@ import UIKit
 
 class SettingsTableViewController: UITableViewController {
 
+    @IBOutlet weak var _forwardBackSwitch: UISwitch!
     @IBOutlet weak var _shakeSwitch: UISwitch!
     @IBOutlet weak var _swipeUpSwitch: UISwitch!
     @IBOutlet weak var _tripleTapSwitch: UISwitch!
-    @IBOutlet weak var _browserSwitch: UISwitch!
-    @IBOutlet weak var _framerSwitch: UISwitch!
+    @IBOutlet weak var _bonjourSwitch: UISwitch!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,8 +22,8 @@ class SettingsTableViewController: UITableViewController {
         _shakeSwitch.on = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.ShakeGesture.rawValue) as Bool
         _swipeUpSwitch.on = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.PanFromBottomGesture.rawValue) as Bool
         _tripleTapSwitch.on = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.TripleTapGesture.rawValue) as Bool
-        _browserSwitch.on = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.ForwardBackGesture.rawValue) as Bool
-        _framerSwitch.on = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.FramerBonjour.rawValue) as Bool
+        _forwardBackSwitch.on = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.ForwardBackGesture.rawValue) as Bool
+        _bonjourSwitch.on = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.FramerBonjour.rawValue) as Bool
     }
 
     override func didReceiveMemoryWarning() {
@@ -32,7 +32,7 @@ class SettingsTableViewController: UITableViewController {
     }
     
     override func viewDidDisappear(animated: Bool) {
-        let value = _framerSwitch.on
+        let value = _bonjourSwitch.on
         let rootViewController = UIApplication.sharedApplication().keyWindow?.rootViewController? as ViewController
         if value == true {
             rootViewController.startSearching()
