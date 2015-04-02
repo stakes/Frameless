@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -84,39 +84,8 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                         <sections>
-                            <tableViewSection headerTitle="Show and hide controls" footerTitle="At least one gesture needs to be enabled" id="SZM-dh-YgJ">
+                            <tableViewSection headerTitle="BROWSER BAR" footerTitle="At least one gesture needs to be enabled" id="SZM-dh-YgJ">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="56" id="Yug-VB-1fX">
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Yug-VB-1fX" id="7Wa-wj-u1F">
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4yd-mc-Ohq">
-                                                    <rect key="frame" x="539" y="12" width="51" height="31"/>
-                                                    <color key="onTintColor" red="0.091372095048427582" green="0.68040317296981812" blue="0.9921455979347229" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <connections>
-                                                        <action selector="toggleShakeSwitch:" destination="lCY-Sl-eE7" eventType="valueChanged" id="8vp-oe-sBB"/>
-                                                    </connections>
-                                                </switch>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Shake device" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hx3-LR-Exi">
-                                                    <rect key="frame" x="16" y="8" width="112" height="23"/>
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
-                                                    <color key="textColor" red="0.14088734984397888" green="0.14875462651252747" blue="0.16537460684776306" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="To show and hide the browser bar" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ADz-68-azo">
-                                                    <rect key="frame" x="16" y="27" width="301" height="23"/>
-                                                    <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
-                                                    <color key="textColor" red="0.68175029754638672" green="0.69754528999328613" blue="0.73074942827224731" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="4yd-mc-Ohq" firstAttribute="top" secondItem="7Wa-wj-u1F" secondAttribute="topMargin" constant="4" id="qYD-Ik-cEZ"/>
-                                                <constraint firstItem="4yd-mc-Ohq" firstAttribute="trailing" secondItem="7Wa-wj-u1F" secondAttribute="trailingMargin" constant="-4" id="qhP-Vb-T7Z"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="56" id="J07-9e-uQT">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="J07-9e-uQT" id="5rs-Hu-Z7y">
@@ -181,67 +150,102 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="Browser settings" id="omO-ec-fQI">
+                            <tableViewSection headerTitle="SHAKE-TO-REFRESH" id="9sF-FA-XPg">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="56" id="blj-xa-5l5">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="56" id="Gzb-1K-zIf">
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="blj-xa-5l5" id="hWo-38-cAA">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Gzb-1K-zIf" id="F45-8s-evd">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fIL-z9-y1y">
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UV9-qK-nrt">
                                                     <rect key="frame" x="539" y="12" width="51" height="31"/>
-                                                    <color key="onTintColor" red="0.091372095048427582" green="0.68040317296981812" blue="0.9921455979347229" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="onTintColor" red="0.091372095050000005" green="0.68040317299999997" blue="0.99214559790000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <connections>
-                                                        <action selector="toggleBrowserNavSwitch:" destination="lCY-Sl-eE7" eventType="valueChanged" id="5eM-Rm-NIp"/>
+                                                        <action selector="toggleShakeSwitch:" destination="lCY-Sl-eE7" eventType="valueChanged" id="xUN-cB-88d"/>
                                                     </connections>
                                                 </switch>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Swipe left and right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wwW-T0-qjY">
-                                                    <rect key="frame" x="16" y="8" width="149" height="23"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Shake device" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TuT-H3-92u">
+                                                    <rect key="frame" x="16" y="8" width="112" height="23"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
-                                                    <color key="textColor" red="0.14088734984397888" green="0.14875462651252747" blue="0.16537460684776306" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="textColor" red="0.14088734980000001" green="0.14875462649999999" blue="0.16537460679999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="To go back or forward" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OfN-DP-TB9">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="To refresh the contents of the browser" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iDv-Go-6eU">
                                                     <rect key="frame" x="16" y="27" width="301" height="23"/>
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
-                                                    <color key="textColor" red="0.68175029754638672" green="0.69754528999328613" blue="0.73074942827224731" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
+                                                    <color key="textColor" red="0.68175029750000005" green="0.69754528999999998" blue="0.7307494283" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="fIL-z9-y1y" firstAttribute="top" secondItem="hWo-38-cAA" secondAttribute="topMargin" constant="4" id="9pz-Qa-J9j"/>
-                                                <constraint firstItem="fIL-z9-y1y" firstAttribute="trailing" secondItem="hWo-38-cAA" secondAttribute="trailingMargin" constant="-4" id="xSl-a9-2cx"/>
+                                                <constraint firstItem="UV9-qK-nrt" firstAttribute="top" secondItem="F45-8s-evd" secondAttribute="topMargin" constant="4" id="ab7-Go-c7R"/>
+                                                <constraint firstItem="UV9-qK-nrt" firstAttribute="trailing" secondItem="F45-8s-evd" secondAttribute="trailingMargin" constant="-4" id="daH-k8-9po"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="56" id="6mF-rO-eJu">
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection headerTitle="Browser settings" id="Dp1-5x-kbu">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="56" id="Phd-Pz-jzU">
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6mF-rO-eJu" id="Jrx-Hm-NhT">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Phd-Pz-jzU" id="rRR-fp-UEu">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vyj-7R-UEs">
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iT4-Bt-pZT">
                                                     <rect key="frame" x="539" y="12" width="51" height="31"/>
-                                                    <color key="onTintColor" red="0.091372095048427582" green="0.68040317296981812" blue="0.9921455979347229" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="onTintColor" red="0.091372095050000005" green="0.68040317299999997" blue="0.99214559790000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <connections>
-                                                        <action selector="toggleFramerSwitch:" destination="lCY-Sl-eE7" eventType="valueChanged" id="ac9-Ip-W7l"/>
+                                                        <action selector="toggleBrowserNavSwitch:" destination="lCY-Sl-eE7" eventType="valueChanged" id="txn-gn-722"/>
                                                     </connections>
                                                 </switch>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Autoconnect to Framer Studio" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wba-pV-wv4">
-                                                    <rect key="frame" x="16" y="7" width="230" height="23"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Swipe left and right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hkv-pF-HW2">
+                                                    <rect key="frame" x="16" y="8" width="149" height="23"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
-                                                    <color key="textColor" red="0.14088734984397888" green="0.14875462651252747" blue="0.16537460684776306" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="textColor" red="0.14088734980000001" green="0.14875462649999999" blue="0.16537460679999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="If Framer is running, ask to connect" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7KK-eb-BTg">
-                                                    <rect key="frame" x="16" y="25" width="301" height="23"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="To go back or forward" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CbY-qD-CDr">
+                                                    <rect key="frame" x="16" y="27" width="301" height="23"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
-                                                    <color key="textColor" red="0.68175029754638672" green="0.69754528999328613" blue="0.73074942827224731" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="textColor" red="0.68175029750000005" green="0.69754528999999998" blue="0.7307494283" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="Vyj-7R-UEs" firstAttribute="top" secondItem="Jrx-Hm-NhT" secondAttribute="topMargin" constant="4" id="Psd-Ey-2xm"/>
-                                                <constraint firstItem="Vyj-7R-UEs" firstAttribute="trailing" secondItem="Jrx-Hm-NhT" secondAttribute="trailingMargin" constant="-4" id="kyB-sc-G00"/>
+                                                <constraint firstItem="iT4-Bt-pZT" firstAttribute="trailing" secondItem="rRR-fp-UEu" secondAttribute="trailingMargin" constant="-4" id="64g-7i-wUB"/>
+                                                <constraint firstItem="iT4-Bt-pZT" firstAttribute="top" secondItem="rRR-fp-UEu" secondAttribute="topMargin" constant="4" id="zRN-sC-9zs"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="56" id="5Ih-qP-uFp">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5Ih-qP-uFp" id="s6L-gx-dZV">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NaM-LI-gaw">
+                                                    <rect key="frame" x="539" y="12" width="51" height="31"/>
+                                                    <color key="onTintColor" red="0.091372095050000005" green="0.68040317299999997" blue="0.99214559790000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <connections>
+                                                        <action selector="toggleFramerSwitch:" destination="lCY-Sl-eE7" eventType="valueChanged" id="n3P-iW-Z5h"/>
+                                                    </connections>
+                                                </switch>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Autoconnect to Framer Studio" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gII-qj-obH">
+                                                    <rect key="frame" x="16" y="7" width="230" height="23"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                                    <color key="textColor" red="0.14088734980000001" green="0.14875462649999999" blue="0.16537460679999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="If Framer is running, ask to connect" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7eQ-Fu-51j">
+                                                    <rect key="frame" x="16" y="25" width="301" height="23"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                                                    <color key="textColor" red="0.68175029750000005" green="0.69754528999999998" blue="0.7307494283" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="NaM-LI-gaw" firstAttribute="trailing" secondItem="s6L-gx-dZV" secondAttribute="trailingMargin" constant="-4" id="29c-1I-ZSR"/>
+                                                <constraint firstItem="NaM-LI-gaw" firstAttribute="top" secondItem="s6L-gx-dZV" secondAttribute="topMargin" constant="4" id="og3-4u-C2X"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -254,9 +258,9 @@
                         </connections>
                     </tableView>
                     <connections>
-                        <outlet property="_browserSwitch" destination="fIL-z9-y1y" id="hd6-Uz-FAr"/>
-                        <outlet property="_framerSwitch" destination="Vyj-7R-UEs" id="3vh-0s-wr9"/>
-                        <outlet property="_shakeSwitch" destination="4yd-mc-Ohq" id="hVN-0x-IGW"/>
+                        <outlet property="_bonjourSwitch" destination="NaM-LI-gaw" id="0ot-e6-REY"/>
+                        <outlet property="_forwardBackSwitch" destination="iT4-Bt-pZT" id="aZb-Du-Ppc"/>
+                        <outlet property="_shakeSwitch" destination="UV9-qK-nrt" id="UDK-8R-RCw"/>
                         <outlet property="_swipeUpSwitch" destination="bpD-iZ-A9f" id="yal-l5-dtx"/>
                         <outlet property="_tripleTapSwitch" destination="ggJ-AG-Bhe" id="bPC-GM-Rrh"/>
                     </connections>
@@ -279,15 +283,21 @@
                         <subviews>
                             <progressView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" verticalHuggingPriority="750" misplaced="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="2LR-xw-2qa">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="3"/>
-                                <color key="tintColor" red="0.56927031278610229" green="0.45753145217895508" blue="0.8976520299911499" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" red="0.085985027253627777" green="0.26070842146873474" blue="0.49741166830062866" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="3" id="oH9-eE-ffU"/>
                                 </constraints>
-                                <color key="trackTintColor" red="0.88926827907562256" green="0.87280172109603882" blue="0.94037115573883057" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="trackTintColor" red="0.62316322326660156" green="0.85742080211639404" blue="0.97457593679428101" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <variation key="heightClass=compact-widthClass=regular" misplaced="YES">
                                     <rect key="frame" x="0.0" y="0.0" width="800" height="3"/>
                                 </variation>
                             </progressView>
+                            <searchBar contentMode="redraw" searchBarStyle="minimal" text="" placeholder="Website url" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="50v-cP-i7q" customClass="FramelessSearchBar" customModule="Frameless" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                <color key="tintColor" red="0.091372095048427582" green="0.68040317296981812" blue="0.9921455979347229" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <offsetWrapper key="searchTextPositionAdjustment" horizontal="0.0" vertical="0.0"/>
+                                <textInputTraits key="textInputTraits" keyboardType="URL" returnKeyType="go"/>
+                            </searchBar>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dZA-Ao-ZpJ">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <subviews>
@@ -313,12 +323,6 @@
                                     <constraint firstAttribute="centerX" secondItem="Sve-Sf-iR0" secondAttribute="centerX" id="XMY-8X-DHE"/>
                                 </constraints>
                             </view>
-                            <searchBar contentMode="redraw" searchBarStyle="minimal" text="" placeholder="Website url" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="50v-cP-i7q" customClass="FramelessSearchBar" customModule="Frameless" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
-                                <color key="tintColor" red="0.56927031278610229" green="0.45753145217895508" blue="0.8976520299911499" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <offsetWrapper key="searchTextPositionAdjustment" horizontal="0.0" vertical="0.0"/>
-                                <textInputTraits key="textInputTraits" keyboardType="URL" returnKeyType="go"/>
-                            </searchBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -346,5 +350,5 @@
             <point key="canvasLocation" x="139" y="127"/>
         </scene>
     </scenes>
-    <color key="tintColor" red="0.56927031278610229" green="0.45753145217895508" blue="0.8976520299911499" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+    <color key="tintColor" red="0.091372095048427582" green="0.68040317296981812" blue="0.9921455979347229" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>
