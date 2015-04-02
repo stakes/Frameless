@@ -27,7 +27,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.window!.makeKeyAndVisible()
         }
 
-        
         UIButton.appearance().tintColor = UIColorFromHex(0x9178E2)
                 
         return true
@@ -74,15 +73,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         page04.iconWidth = 158
         page04.iconHeight = 258.5
         
-        let bgImage = UIImage.withColor(UIColorFromHex(0x9178E2))
+        let bgImage = UIImage.withColor(FRAMER_BLUE)
         let onboardingViewController = PortraitOnboardingViewController(
             backgroundImage: bgImage,
             contents: [page01, page02, page03, page04])
-        onboardingViewController.fontName = "ClearSans"
+        onboardingViewController.fontName = "HelveticaNeue"
         onboardingViewController.bodyFontSize = 16
-        onboardingViewController.titleFontName = "ClearSans-Bold"
+        onboardingViewController.titleFontName = "HelveticaNeue-Bold"
         onboardingViewController.titleFontSize = 22
-        onboardingViewController.buttonFontName = "ClearSans-Bold"
+        onboardingViewController.buttonFontName = "HelveticaNeue-Bold"
         onboardingViewController.buttonFontSize = 20
         onboardingViewController.topPadding = 60+(self.window!.frame.height/12)
         onboardingViewController.underTitlePadding = 8
