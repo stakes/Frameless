@@ -316,7 +316,7 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
         }
     }
     
-    func loadURL(urlString: String) {
+    func loadURL(urlString: String, andCloseSearch: Bool = false) {
         let addrStr = httpifyString(urlString)
         let addr = NSURL(string: addrStr)
         if let webAddr = addr {
@@ -324,6 +324,9 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
             _webView!.loadRequest(req)
         } else {
             displayLoadingErrorMessage()
+        }
+        if andCloseSearch == true {
+            hideSearch()
         }
         
     }

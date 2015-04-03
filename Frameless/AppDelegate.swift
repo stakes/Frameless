@@ -32,6 +32,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
+    // Open from custom URL scheme
+    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
+        if let host = url.host? {
+            var urlstr = "http://" + host
+            if let port = url.port {
+                var portstr = port.stringValue
+                urlstr += ":" + portstr
+            }
+            if let path = url.path {
+                urlstr += url.path!
+            }
+            
+            let vc = self.window?.rootViewController as ViewController
+            vc.loadURL(urlstr, andCloseSearch: true)
+            return true
+        } else {
+            return false
+        }
+        
+    }
+    
     func setUserSettingsDefaults() {
         if NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.ShakeGesture.rawValue) == nil {
             NSUserDefaults.standardUserDefaults().setValue(true, forKey: AppDefaultKeys.ShakeGesture.rawValue)
