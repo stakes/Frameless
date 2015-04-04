@@ -169,7 +169,6 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
 //                }
 //            }
             searchBarRefreshWasPressed()
-
         }
     }
     
@@ -424,6 +423,7 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     }
     
     func searchBarRefreshWasPressed() {
+        _loadingTimer!.invalidate()
         hideSearch()
         if let urlString = _webView?.URL?.absoluteString {
             _searchBar.text = urlString
