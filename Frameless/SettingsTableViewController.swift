@@ -72,7 +72,7 @@ class SettingsTableViewController: UITableViewController {
     }
     
     func checkControlsSettings() -> Bool {
-        var arr = [_shakeSwitch.on, _swipeUpSwitch.on, _tripleTapSwitch.on]
+        var arr = [_swipeUpSwitch.on, _tripleTapSwitch.on]
         let filtered = arr.filter { $0 == true }
         var parent = self.parentViewController as SettingsViewController
         if filtered.count == 0 {
