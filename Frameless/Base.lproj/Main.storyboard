@@ -295,7 +295,6 @@
                         <outlet property="_swipeDownSwitch" destination="IT9-Qf-Hin" id="nJL-N7-nd0"/>
                         <outlet property="_swipeUpSwitch" destination="bpD-iZ-A9f" id="yal-l5-dtx"/>
                         <outlet property="_tripleTapSwitch" destination="ggJ-AG-Bhe" id="bPC-GM-Rrh"/>
-                        <outlet property="toggleSwipeDownSwitch" destination="IT9-Qf-Hin" id="FZS-64-btf"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ppZ-Fq-25f" userLabel="First Responder" sceneMemberID="firstResponder"/>
