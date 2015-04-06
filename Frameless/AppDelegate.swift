@@ -60,6 +60,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.PanFromBottomGesture.rawValue) == nil {
             NSUserDefaults.standardUserDefaults().setValue(true, forKey: AppDefaultKeys.PanFromBottomGesture.rawValue)
         }
+        if NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.PanFromTopGesture.rawValue) == nil {
+            NSUserDefaults.standardUserDefaults().setValue(true, forKey: AppDefaultKeys.PanFromTopGesture.rawValue)
+        }
         if NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.TripleTapGesture.rawValue) == nil {
             NSUserDefaults.standardUserDefaults().setValue(true, forKey: AppDefaultKeys.TripleTapGesture.rawValue)
         }

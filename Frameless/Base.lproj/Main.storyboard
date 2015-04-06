@@ -117,6 +117,37 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="56" id="2gb-Pd-3Go">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2gb-Pd-3Go" id="jB7-4C-or3">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IT9-Qf-Hin">
+                                                    <rect key="frame" x="539" y="12" width="51" height="31"/>
+                                                    <color key="onTintColor" red="0.091372095050000005" green="0.68040317299999997" blue="0.99214559790000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <connections>
+                                                        <action selector="toggleSwipeDownSwitch:" destination="lCY-Sl-eE7" eventType="valueChanged" id="6xJ-Fh-v9s"/>
+                                                    </connections>
+                                                </switch>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Swipe down from top" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RGy-yj-WLz">
+                                                    <rect key="frame" x="16" y="6" width="166" height="23"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                                    <color key="textColor" red="0.14088734980000001" green="0.14875462649999999" blue="0.16537460679999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="To show the browser bar" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sRP-e3-E6Z">
+                                                    <rect key="frame" x="16" y="24" width="301" height="23"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                                                    <color key="textColor" red="0.68175029750000005" green="0.69754528999999998" blue="0.7307494283" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="IT9-Qf-Hin" firstAttribute="top" secondItem="jB7-4C-or3" secondAttribute="topMargin" constant="4" id="euY-ki-srQ"/>
+                                                <constraint firstItem="IT9-Qf-Hin" firstAttribute="trailing" secondItem="jB7-4C-or3" secondAttribute="trailingMargin" constant="-4" id="guV-R6-Ubn"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="56" id="Ufv-Vb-ryp">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ufv-Vb-ryp" id="MtC-aD-2Sg">
@@ -261,8 +292,10 @@
                         <outlet property="_bonjourSwitch" destination="NaM-LI-gaw" id="0ot-e6-REY"/>
                         <outlet property="_forwardBackSwitch" destination="iT4-Bt-pZT" id="aZb-Du-Ppc"/>
                         <outlet property="_shakeSwitch" destination="UV9-qK-nrt" id="UDK-8R-RCw"/>
+                        <outlet property="_swipeDownSwitch" destination="IT9-Qf-Hin" id="nJL-N7-nd0"/>
                         <outlet property="_swipeUpSwitch" destination="bpD-iZ-A9f" id="yal-l5-dtx"/>
                         <outlet property="_tripleTapSwitch" destination="ggJ-AG-Bhe" id="bPC-GM-Rrh"/>
+                        <outlet property="toggleSwipeDownSwitch" destination="IT9-Qf-Hin" id="FZS-64-btf"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ppZ-Fq-25f" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -10,6 +10,7 @@ enum AppDefaultKeys: String {
     case IntroVersionSeen = "introVersionSeen"
     case ShakeGesture = "shake"
     case PanFromBottomGesture = "panFromBottom"
+    case PanFromTopGesture = "panFromTop"
     case ForwardBackGesture = "panLeftRight"
     case TripleTapGesture = "tripleTap"
     case FramerBonjour = "framerConnect"

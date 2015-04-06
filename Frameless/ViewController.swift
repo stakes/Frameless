@@ -24,6 +24,7 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     var _tapRecognizer: UITapGestureRecognizer?
     var _threeFingerTapRecognizer: UITapGestureRecognizer?
     var _panFromBottomRecognizer: UIScreenEdgePanGestureRecognizer?
+    var _panFromTopRecognizer: UIScreenEdgePanGestureRecognizer?
     var _panFromRightRecognizer: UIScreenEdgePanGestureRecognizer?
     var _panFromLeftRecognizer: UIScreenEdgePanGestureRecognizer?
     var _areControlsVisible = true
@@ -73,6 +74,11 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
         _panFromBottomRecognizer!.edges = UIRectEdge.Bottom
         _panFromBottomRecognizer!.delegate = self
         self.view.addGestureRecognizer(_panFromBottomRecognizer!)
+        
+        _panFromTopRecognizer = UIScreenEdgePanGestureRecognizer(target: self, action: Selector("handleTopEdgePan:"))
+        _panFromTopRecognizer!.edges = UIRectEdge.Top
+        _panFromTopRecognizer!.delegate = self
+        self.view.addGestureRecognizer(_panFromTopRecognizer!)
         
         _panFromLeftRecognizer = UIScreenEdgePanGestureRecognizer(target: self, action: Selector("handleGoBackPan:"))
         _panFromLeftRecognizer!.edges = UIRectEdge.Left
@@ -145,6 +151,12 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     
     func handleBottomEdgePan(sender: AnyObject) {
         if NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.PanFromBottomGesture.rawValue) as Bool == true {
+            showSearch()
+        }
+    }
+    
+    func handleTopEdgePan(sender: AnyObject) {
+        if NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.PanFromTopGesture.rawValue) as Bool == true {
             showSearch()
         }
     }

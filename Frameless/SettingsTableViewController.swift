@@ -13,6 +13,7 @@ class SettingsTableViewController: UITableViewController {
     @IBOutlet weak var _forwardBackSwitch: UISwitch!
     @IBOutlet weak var _shakeSwitch: UISwitch!
     @IBOutlet weak var _swipeUpSwitch: UISwitch!
+    @IBOutlet weak var _swipeDownSwitch: UISwitch!
     @IBOutlet weak var _tripleTapSwitch: UISwitch!
     @IBOutlet weak var _bonjourSwitch: UISwitch!
     
@@ -21,6 +22,7 @@ class SettingsTableViewController: UITableViewController {
 
         _shakeSwitch.on = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.ShakeGesture.rawValue) as Bool
         _swipeUpSwitch.on = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.PanFromBottomGesture.rawValue) as Bool
+        _swipeDownSwitch.on = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.PanFromTopGesture.rawValue) as Bool
         _tripleTapSwitch.on = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.TripleTapGesture.rawValue) as Bool
         _forwardBackSwitch.on = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.ForwardBackGesture.rawValue) as Bool
         _bonjourSwitch.on = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.FramerBonjour.rawValue) as Bool
@@ -55,6 +57,12 @@ class SettingsTableViewController: UITableViewController {
         checkControlsSettings()
     }
     
+    @IBAction func toggleSwipeDownSwitch(sender: AnyObject) {
+        var value = (sender as UISwitch).on
+        NSUserDefaults.standardUserDefaults().setValue(value, forKey: AppDefaultKeys.PanFromTopGesture.rawValue)
+        checkControlsSettings()
+    }
+    
     @IBAction func toggleTripleTapSwitch(sender: AnyObject) {
         var value = (sender as UISwitch).on
         NSUserDefaults.standardUserDefaults().setValue(value, forKey: AppDefaultKeys.TripleTapGesture.rawValue)
@@ -72,7 +80,7 @@ class SettingsTableViewController: UITableViewController {
     }
     
     func checkControlsSettings() -> Bool {
-        var arr = [_swipeUpSwitch.on, _tripleTapSwitch.on]
+        var arr = [_swipeUpSwitch.on, _swipeDownSwitch.on, _tripleTapSwitch.on]
         let filtered = arr.filter { $0 == true }
         var parent = self.parentViewController as SettingsViewController
         if filtered.count == 0 {
