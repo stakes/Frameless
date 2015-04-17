@@ -34,7 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // Open from custom URL scheme
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
-        if let host = url.host? {
+        if let host = url.host {
             var urlstr = "http://" + host
             if let port = url.port {
                 var portstr = port.stringValue
@@ -44,7 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 urlstr += url.path!
             }
             
-            let vc = self.window?.rootViewController as ViewController
+            let vc = self.window?.rootViewController as! ViewController
             vc.loadURL(urlstr, andCloseSearch: true)
             return true
         } else {
@@ -123,7 +123,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func setupAppViewController(animated : Bool) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let appViewController = storyboard.instantiateViewControllerWithIdentifier("mainViewController") as UIViewController
+        let appViewController = storyboard.instantiateViewControllerWithIdentifier("mainViewController") as! UIViewController
         if animated {
             UIView.transitionWithView(self.window!, duration: 0.5, options:UIViewAnimationOptions.TransitionFlipFromBottom, animations: { () -> Void in
                 self.window!.rootViewController = appViewController
