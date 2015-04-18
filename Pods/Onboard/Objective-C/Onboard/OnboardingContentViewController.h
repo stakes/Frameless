@@ -11,8 +11,8 @@
 @class OnboardingViewController;
 
 @interface OnboardingContentViewController : UIViewController {
-    NSString *_titleText;
-    NSString *_body;
+    id _titleText;
+    id _body;
     UIImage *_image;
     NSString *_buttonText;
     dispatch_block_t _actionHandler;
@@ -46,7 +46,7 @@
 @property (nonatomic) CGFloat underTitlePadding;
 @property (nonatomic) CGFloat bottomPadding;
 
-- (id)initWithTitle:(NSString *)title body:(NSString *)body image:(UIImage *)image buttonText:(NSString *)buttonText action:(dispatch_block_t)action;
+- (id)initWithTitle:(id)title body:(id)body image:(UIImage *)image buttonText:(NSString *)buttonText action:(dispatch_block_t)action;
 
 - (void)updateAlphas:(CGFloat)newAlpha;
 
