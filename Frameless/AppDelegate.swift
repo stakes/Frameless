@@ -75,32 +75,51 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func createIntroViewController() -> OnboardingViewController {
-        let page01: OnboardingContentViewController = OnboardingContentViewController(title: nil, body: "Frameless is a chromeless,\nfull-screen web browser. Load a\npage and everything else hides", image: UIImage(named: "introimage01"), buttonText: nil) {
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 4
+        
+        let str01 = NSMutableAttributedString(string: "Framer for iOS is a full-screen\nbrowser that hides all controls")
+        str01.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyle, range: NSMakeRange(0, str01.length))
+        
+        let page01: OnboardingContentViewController = OnboardingContentViewController(title: nil, body: str01, image: UIImage(named: "introimage01"), buttonText: nil) {
         }
         page01.iconWidth = 158
         page01.iconHeight = 258.5
         
-        let page02: OnboardingContentViewController = OnboardingContentViewController(title: nil, body: "Swipe up, tap with three fingers\nor shake the device to show\nthe browser bar and keyboard", image: UIImage(named: "introimage02"), buttonText: nil) {
+        let str02 = NSMutableAttributedString(string: "Swipe up, swipe down,\nor tap with three fingers to show\nthe browser bar and keyboard")
+        str02.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyle, range: NSMakeRange(0, str02.length))
+        let page02: OnboardingContentViewController = OnboardingContentViewController(title: nil, body: str02, image: UIImage(named: "introimage02"), buttonText: nil) {
         }
         page02.iconWidth = 158
         page02.iconHeight = 258.5
         
-        let page03: OnboardingContentViewController = OnboardingContentViewController(title: nil, body: "Swipe left and right to go\nforward and back in your\nsession history", image: UIImage(named: "introimage03"), buttonText: nil) {
-            self.introCompletion()
+        let str03 = NSMutableAttributedString(string: "Shake the device\nto refresh your prototype")
+        str03.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyle, range: NSMakeRange(0, str03.length))
+        let page03: OnboardingContentViewController = OnboardingContentViewController(title: nil, body: str03, image: UIImage(named: "introimage03"), buttonText: nil) {
         }
         page03.iconWidth = 158
         page03.iconHeight = 258.5
         
-        let page04: OnboardingContentViewController = OnboardingContentViewController(title: nil, body: "And disable any of the gestures\nif they get in your way", image: UIImage(named: "introimage04"), buttonText: "LET'S GO!") {
+        let str04 = NSMutableAttributedString(string: "Swipe left or right to go\nback or forward in your history")
+        str04.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyle, range: NSMakeRange(0, str04.length))
+        let page04: OnboardingContentViewController = OnboardingContentViewController(title: nil, body: str04, image: UIImage(named: "introimage04"), buttonText: nil) {
             self.introCompletion()
         }
         page04.iconWidth = 158
         page04.iconHeight = 258.5
         
+        let str05 = NSMutableAttributedString(string: "And disable any of the gestures\nif they get in your way")
+        str05.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyle, range: NSMakeRange(0, str05.length))
+        let page05: OnboardingContentViewController = OnboardingContentViewController(title: nil, body: str05, image: UIImage(named: "introimage05"), buttonText: "Done") {
+            self.introCompletion()
+        }
+        page05.iconWidth = 158
+        page05.iconHeight = 258.5
+        
         let bgImage = UIImage.withColor(FRAMER_BLUE)
         let onboardingViewController = PortraitOnboardingViewController(
             backgroundImage: bgImage,
-            contents: [page01, page02, page03, page04])
+            contents: [page01, page02, page03, page04, page05])
         onboardingViewController.fontName = "HelveticaNeue"
         onboardingViewController.bodyFontSize = 16
         onboardingViewController.titleFontName = "HelveticaNeue-Bold"
