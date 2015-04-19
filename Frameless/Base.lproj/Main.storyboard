@@ -130,13 +130,13 @@
                                                     </connections>
                                                 </switch>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Swipe down from top" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RGy-yj-WLz">
-                                                    <rect key="frame" x="16" y="6" width="166" height="23"/>
+                                                    <rect key="frame" x="16" y="7" width="166" height="23"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                                     <color key="textColor" red="0.14088734980000001" green="0.14875462649999999" blue="0.16537460679999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="To show the browser bar" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sRP-e3-E6Z">
-                                                    <rect key="frame" x="16" y="24" width="301" height="23"/>
+                                                    <rect key="frame" x="16" y="29" width="301" height="17"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
                                                     <color key="textColor" red="0.68175029750000005" green="0.69754528999999998" blue="0.7307494283" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -161,13 +161,13 @@
                                                     </connections>
                                                 </switch>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tap with three fingers" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V0M-GJ-rkg">
-                                                    <rect key="frame" x="16" y="6" width="166" height="23"/>
+                                                    <rect key="frame" x="16" y="7" width="166" height="23"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                                     <color key="textColor" red="0.14088734984397888" green="0.14875462651252747" blue="0.16537460684776306" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="To show the browser bar" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uyK-Eb-ZSy">
-                                                    <rect key="frame" x="16" y="24" width="301" height="23"/>
+                                                    <rect key="frame" x="16" y="29" width="301" height="17"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
                                                     <color key="textColor" red="0.68175029754638672" green="0.69754528999328613" blue="0.73074942827224731" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -196,13 +196,13 @@
                                                     </connections>
                                                 </switch>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Shake device" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TuT-H3-92u">
-                                                    <rect key="frame" x="16" y="8" width="112" height="23"/>
+                                                    <rect key="frame" x="16" y="7" width="112" height="23"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                                     <color key="textColor" red="0.14088734980000001" green="0.14875462649999999" blue="0.16537460679999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="To refresh the contents of the browser" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iDv-Go-6eU">
-                                                    <rect key="frame" x="16" y="27" width="301" height="23"/>
+                                                    <rect key="frame" x="16" y="29" width="301" height="17"/>
                                                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
                                                     <color key="textColor" red="0.68175029750000005" green="0.69754528999999998" blue="0.7307494283" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -216,7 +216,7 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="Browser settings" id="Dp1-5x-kbu">
+                            <tableViewSection headerTitle="SETTINGS" id="Dp1-5x-kbu">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="56" id="Phd-Pz-jzU">
                                         <autoresizingMask key="autoresizingMask"/>
@@ -231,13 +231,13 @@
                                                     </connections>
                                                 </switch>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Swipe left and right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hkv-pF-HW2">
-                                                    <rect key="frame" x="16" y="8" width="149" height="23"/>
+                                                    <rect key="frame" x="16" y="7" width="149" height="23"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                                     <color key="textColor" red="0.14088734980000001" green="0.14875462649999999" blue="0.16537460679999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="To go back or forward" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CbY-qD-CDr">
-                                                    <rect key="frame" x="16" y="27" width="301" height="23"/>
+                                                    <rect key="frame" x="16" y="29" width="301" height="17"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
                                                     <color key="textColor" red="0.68175029750000005" green="0.69754528999999998" blue="0.7307494283" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -268,7 +268,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="If Framer is running, ask to connect" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7eQ-Fu-51j">
-                                                    <rect key="frame" x="16" y="25" width="301" height="23"/>
+                                                    <rect key="frame" x="16" y="29" width="301" height="17"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
                                                     <color key="textColor" red="0.68175029750000005" green="0.69754528999999998" blue="0.7307494283" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -277,6 +277,37 @@
                                             <constraints>
                                                 <constraint firstItem="NaM-LI-gaw" firstAttribute="trailing" secondItem="s6L-gx-dZV" secondAttribute="trailingMargin" constant="-4" id="29c-1I-ZSR"/>
                                                 <constraint firstItem="NaM-LI-gaw" firstAttribute="top" secondItem="s6L-gx-dZV" secondAttribute="topMargin" constant="4" id="og3-4u-C2X"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="56" id="Ks6-K7-HDc">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ks6-K7-HDc" id="7Em-ag-CE8">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lzM-CK-vpE">
+                                                    <rect key="frame" x="539" y="12" width="51" height="31"/>
+                                                    <color key="onTintColor" red="0.091372095050000005" green="0.68040317299999997" blue="0.99214559790000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <connections>
+                                                        <action selector="toggleKeepAwakeSwitch:" destination="lCY-Sl-eE7" eventType="valueChanged" id="0fJ-oa-huS"/>
+                                                    </connections>
+                                                </switch>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="While the app is open" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JLM-fl-bfz">
+                                                    <rect key="frame" x="16" y="29" width="301" height="17"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                                                    <color key="textColor" red="0.68175029750000005" green="0.69754528999999998" blue="0.7307494283" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Keep device awake" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IHj-ax-NvQ">
+                                                    <rect key="frame" x="16" y="7" width="230" height="23"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                                    <color key="textColor" red="0.14088734980000001" green="0.14875462649999999" blue="0.16537460679999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="lzM-CK-vpE" firstAttribute="trailing" secondItem="7Em-ag-CE8" secondAttribute="trailingMargin" constant="-4" id="SEQ-Wy-h84"/>
+                                                <constraint firstItem="lzM-CK-vpE" firstAttribute="top" secondItem="7Em-ag-CE8" secondAttribute="topMargin" constant="4" id="rGn-kQ-i7W"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -291,6 +322,7 @@
                     <connections>
                         <outlet property="_bonjourSwitch" destination="NaM-LI-gaw" id="0ot-e6-REY"/>
                         <outlet property="_forwardBackSwitch" destination="iT4-Bt-pZT" id="aZb-Du-Ppc"/>
+                        <outlet property="_keepAwakeSwitch" destination="lzM-CK-vpE" id="dxp-Ig-ajL"/>
                         <outlet property="_shakeSwitch" destination="UV9-qK-nrt" id="UDK-8R-RCw"/>
                         <outlet property="_swipeDownSwitch" destination="IT9-Qf-Hin" id="nJL-N7-nd0"/>
                         <outlet property="_swipeUpSwitch" destination="bpD-iZ-A9f" id="yal-l5-dtx"/>

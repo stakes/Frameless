@@ -14,6 +14,7 @@ enum AppDefaultKeys: String {
     case ForwardBackGesture = "panLeftRight"
     case TripleTapGesture = "tripleTap"
     case FramerBonjour = "framerConnect"
+    case KeepAwake = "keepAwake"
 }
 
 let FRAMER_BLUE = UIColorFromHex(0x28AFFA)
