@@ -49,6 +49,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.FramerBonjour.rawValue) == nil {
             NSUserDefaults.standardUserDefaults().setValue(true, forKey: AppDefaultKeys.FramerBonjour.rawValue)
         }
+        if NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.KeepAwake.rawValue) == nil {
+            NSUserDefaults.standardUserDefaults().setValue(false, forKey: AppDefaultKeys.KeepAwake.rawValue)
+        } else {
+            let isIdleTimer = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.KeepAwake.rawValue) as? Bool
+            UIApplication.sharedApplication().idleTimerDisabled = isIdleTimer!
+        }
     }
     
     func createIntroViewController() -> OnboardingViewController {

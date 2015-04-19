@@ -15,6 +15,7 @@ class SettingsTableViewController: UITableViewController {
     @IBOutlet weak var _tripleTapSwitch: UISwitch!
     @IBOutlet weak var _browserSwitch: UISwitch!
     @IBOutlet weak var _framerSwitch: UISwitch!
+    @IBOutlet weak var _sleepSwitch: UISwitch!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +25,7 @@ class SettingsTableViewController: UITableViewController {
         _tripleTapSwitch.on = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.TripleTapGesture.rawValue) as! Bool
         _browserSwitch.on = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.ForwardBackGesture.rawValue) as! Bool
         _framerSwitch.on = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.FramerBonjour.rawValue) as! Bool
+        _sleepSwitch.on = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.KeepAwake.rawValue) as! Bool
     }
 
     override func didReceiveMemoryWarning() {
@@ -69,6 +71,12 @@ class SettingsTableViewController: UITableViewController {
     @IBAction func toggleFramerSwitch(sender: AnyObject) {
         var value = (sender as! UISwitch).on
         NSUserDefaults.standardUserDefaults().setValue(value, forKey: AppDefaultKeys.FramerBonjour.rawValue)
+    }
+    
+    @IBAction func toggleSleepSwitch(sender: AnyObject) {
+        var value = (sender as! UISwitch).on
+         UIApplication.sharedApplication().idleTimerDisabled = value
+        NSUserDefaults.standardUserDefaults().setValue(value, forKey: AppDefaultKeys.KeepAwake.rawValue)
     }
     
     func checkControlsSettings() -> Bool {
