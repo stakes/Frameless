@@ -17,6 +17,8 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     @IBOutlet weak var _progressView: UIProgressView!
     @IBOutlet weak var _loadingErrorView: UIView!
     
+    let _confirmFramerConnect = true
+    
     var _webView: WKWebView?
     var _isMainFrameNavigationAction: Bool?
     var _loadingTimer: NSTimer?
@@ -378,22 +380,26 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     // Framer.js Bonjour Integration
     
     func didResolveAddress(address: String) {
-        if !_alertBuilder.isAlertOpen {
-            var windowCount = UIApplication.sharedApplication().windows.count
-            var targetView = UIApplication.sharedApplication().windows[windowCount-1].rootViewController!
-            _framerAddress = address
-            
-            let paragraphStyle = NSMutableParagraphStyle()
-            paragraphStyle.lineSpacing = 2
-            paragraphStyle.alignment = .Center
-            let alertStr = NSMutableAttributedString(string: "Framer Studio is running on your network. Connect now?")
-            alertStr.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyle, range: NSMakeRange(0, alertStr.length))
-            var alert = _alertBuilder.show(targetView as UIViewController!, title: "Framer Mirror", text: alertStr, cancelButtonText: "Cancel", buttonText: "Connect", color: FRAMER_BLUE)
-            alert.addAction(handleAlertConfirmTap)
-            alert.setTextTheme(.Light)
-            alert.setTitleFont("HelveticaNeue-Bold")
-            alert.setTextFont("HelveticaNeue")
-            alert.setButtonFont("HelveticaNeue")
+        if _confirmFramerConnect {
+            if !_alertBuilder.isAlertOpen {
+                var windowCount = UIApplication.sharedApplication().windows.count
+                var targetView = UIApplication.sharedApplication().windows[windowCount-1].rootViewController!
+                _framerAddress = address
+                
+                let paragraphStyle = NSMutableParagraphStyle()
+                paragraphStyle.lineSpacing = 2
+                paragraphStyle.alignment = .Center
+                let alertStr = NSMutableAttributedString(string: "Framer Studio is running on your network. Connect now?")
+                alertStr.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyle, range: NSMakeRange(0, alertStr.length))
+                var alert = _alertBuilder.show(targetView as UIViewController!, title: "Framer Mirror", text: alertStr, cancelButtonText: "Cancel", buttonText: "Connect", color: FRAMER_BLUE)
+                alert.addAction(handleAlertConfirmTap)
+                alert.setTextTheme(.Light)
+                alert.setTitleFont("HelveticaNeue-Bold")
+                alert.setTextFont("HelveticaNeue")
+                alert.setButtonFont("HelveticaNeue")
+            }
+        } else {
+            loadFramer(address)
         }
     }
     
