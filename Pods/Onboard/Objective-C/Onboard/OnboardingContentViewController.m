@@ -130,7 +130,13 @@ static CGFloat const kMainPageControlHeight = 35;
     
     // create and configure the sub text label
     _subTextLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_mainTextLabel.frame) + self.underTitlePadding, contentWidth, 0)];
-    _subTextLabel.text = _body;
+    if ([_body isKindOfClass:[NSString class]]) {
+        NSLog(@"Value of body = %@", _body);
+        _subTextLabel.text = _body;
+    } else {
+        NSLog(@"Value of attributed text = %@", _body);
+        _subTextLabel.attributedText = _body;
+    }
     _subTextLabel.textColor = self.bodyTextColor;
     _subTextLabel.font = [UIFont fontWithName:self.bodyFontName size:self.bodyFontSize];
     _subTextLabel.numberOfLines = 0;

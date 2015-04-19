@@ -10,20 +10,22 @@ import UIKit
 
 class SettingsTableViewController: UITableViewController {
 
+    @IBOutlet weak var _forwardBackSwitch: UISwitch!
     @IBOutlet weak var _shakeSwitch: UISwitch!
     @IBOutlet weak var _swipeUpSwitch: UISwitch!
+    @IBOutlet weak var _swipeDownSwitch: UISwitch!
     @IBOutlet weak var _tripleTapSwitch: UISwitch!
-    @IBOutlet weak var _browserSwitch: UISwitch!
-    @IBOutlet weak var _framerSwitch: UISwitch!
+    @IBOutlet weak var _bonjourSwitch: UISwitch!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        _shakeSwitch.on = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.ShakeGesture.rawValue) as Bool
-        _swipeUpSwitch.on = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.PanFromBottomGesture.rawValue) as Bool
-        _tripleTapSwitch.on = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.TripleTapGesture.rawValue) as Bool
-        _browserSwitch.on = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.ForwardBackGesture.rawValue) as Bool
-        _framerSwitch.on = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.FramerBonjour.rawValue) as Bool
+        _shakeSwitch.on = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.ShakeGesture.rawValue) as! Bool
+        _swipeUpSwitch.on = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.PanFromBottomGesture.rawValue) as! Bool
+        _swipeDownSwitch.on = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.PanFromTopGesture.rawValue) as! Bool
+        _tripleTapSwitch.on = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.TripleTapGesture.rawValue)as! Bool
+        _forwardBackSwitch.on = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.ForwardBackGesture.rawValue) as! Bool
+        _bonjourSwitch.on = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.FramerBonjour.rawValue) as! Bool
     }
 
     override func didReceiveMemoryWarning() {
@@ -32,8 +34,8 @@ class SettingsTableViewController: UITableViewController {
     }
     
     override func viewDidDisappear(animated: Bool) {
-        let value = _framerSwitch.on
-        let rootViewController = UIApplication.sharedApplication().keyWindow?.rootViewController? as ViewController
+        let value = _bonjourSwitch.on
+        let rootViewController = UIApplication.sharedApplication().keyWindow?.rootViewController as! ViewController
         if value == true {
             rootViewController.startSearching()
         } else {
@@ -44,37 +46,43 @@ class SettingsTableViewController: UITableViewController {
     // Settings
     
     @IBAction func toggleShakeSwitch(sender: AnyObject) {
-        var value = (sender as UISwitch).on
+        var value = (sender as! UISwitch).on
         NSUserDefaults.standardUserDefaults().setValue(value, forKey: AppDefaultKeys.ShakeGesture.rawValue)
         checkControlsSettings()
     }
 
     @IBAction func toggleSwipeUpSwitch(sender: AnyObject) {
-        var value = (sender as UISwitch).on
+        var value = (sender as! UISwitch).on
         NSUserDefaults.standardUserDefaults().setValue(value, forKey: AppDefaultKeys.PanFromBottomGesture.rawValue)
         checkControlsSettings()
     }
     
+    @IBAction func toggleSwipeDownSwitch(sender: AnyObject) {
+        var value = (sender as! UISwitch).on
+        NSUserDefaults.standardUserDefaults().setValue(value, forKey: AppDefaultKeys.PanFromTopGesture.rawValue)
+        checkControlsSettings()
+    }
+    
     @IBAction func toggleTripleTapSwitch(sender: AnyObject) {
-        var value = (sender as UISwitch).on
+        var value = (sender as! UISwitch).on
         NSUserDefaults.standardUserDefaults().setValue(value, forKey: AppDefaultKeys.TripleTapGesture.rawValue)
         checkControlsSettings()
     }
     
     @IBAction func toggleBrowserNavSwitch(sender: AnyObject) {
-        var value = (sender as UISwitch).on
+        var value = (sender as! UISwitch).on
         NSUserDefaults.standardUserDefaults().setValue(value, forKey: AppDefaultKeys.ForwardBackGesture.rawValue)
     }
     
     @IBAction func toggleFramerSwitch(sender: AnyObject) {
-        var value = (sender as UISwitch).on
+        var value = (sender as! UISwitch).on
         NSUserDefaults.standardUserDefaults().setValue(value, forKey: AppDefaultKeys.FramerBonjour.rawValue)
     }
     
     func checkControlsSettings() -> Bool {
-        var arr = [_shakeSwitch.on, _swipeUpSwitch.on, _tripleTapSwitch.on]
+        var arr = [_swipeUpSwitch.on, _swipeDownSwitch.on, _tripleTapSwitch.on]
         let filtered = arr.filter { $0 == true }
-        var parent = self.parentViewController as SettingsViewController
+        var parent = self.parentViewController as! SettingsViewController
         if filtered.count == 0 {
             parent.closeButtonEnabled(false)
             return false

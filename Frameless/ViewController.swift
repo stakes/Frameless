@@ -17,6 +17,8 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     @IBOutlet weak var _progressView: UIProgressView!
     @IBOutlet weak var _loadingErrorView: UIView!
     
+    let _confirmFramerConnect = true
+    
     var _webView: WKWebView?
     var _isMainFrameNavigationAction: Bool?
     var _loadingTimer: NSTimer?
@@ -24,6 +26,7 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     var _tapRecognizer: UITapGestureRecognizer?
     var _threeFingerTapRecognizer: UITapGestureRecognizer?
     var _panFromBottomRecognizer: UIScreenEdgePanGestureRecognizer?
+    var _panFromTopRecognizer: UIScreenEdgePanGestureRecognizer?
     var _panFromRightRecognizer: UIScreenEdgePanGestureRecognizer?
     var _panFromLeftRecognizer: UIScreenEdgePanGestureRecognizer?
     var _areControlsVisible = true
@@ -74,6 +77,11 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
         _panFromBottomRecognizer!.delegate = self
         self.view.addGestureRecognizer(_panFromBottomRecognizer!)
         
+        _panFromTopRecognizer = UIScreenEdgePanGestureRecognizer(target: self, action: Selector("handleTopEdgePan:"))
+        _panFromTopRecognizer!.edges = UIRectEdge.Top
+        _panFromTopRecognizer!.delegate = self
+        self.view.addGestureRecognizer(_panFromTopRecognizer!)
+        
         _panFromLeftRecognizer = UIScreenEdgePanGestureRecognizer(target: self, action: Selector("handleGoBackPan:"))
         _panFromLeftRecognizer!.edges = UIRectEdge.Left
         _panFromLeftRecognizer!.delegate = self
@@ -104,7 +112,7 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name:UIKeyboardWillHideNotification, object: nil);
         
         _framerBonjour.delegate = self
-        if NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.FramerBonjour.rawValue) as Bool == true {
+        if NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.FramerBonjour.rawValue) as! Bool == true {
             _framerBonjour.start()
         }
             
@@ -131,7 +139,7 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     func keyboardWillShow(sender: NSNotification) {
         if _searchBar.isFirstResponder() {
             let dict:NSDictionary = sender.userInfo! as NSDictionary
-            let s:NSValue = dict.valueForKey(UIKeyboardFrameEndUserInfoKey) as NSValue
+            let s:NSValue = dict.valueForKey(UIKeyboardFrameEndUserInfoKey) as! NSValue
             let rect :CGRect = s.CGRectValue()
             _settingsBarView!.frame.origin.y = self.view.frame.height - rect.height - _settingsBarView!.frame.height
             _settingsBarView!.alpha = 1
@@ -144,13 +152,19 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     }
     
     func handleBottomEdgePan(sender: AnyObject) {
-        if NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.PanFromBottomGesture.rawValue) as Bool == true {
+        if NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.PanFromBottomGesture.rawValue) as! Bool == true {
+            showSearch()
+        }
+    }
+    
+    func handleTopEdgePan(sender: AnyObject) {
+        if NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.PanFromTopGesture.rawValue) as! Bool == true {
             showSearch()
         }
     }
     
     func handleThreeFingerTap(sender: AnyObject) {
-        if NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.TripleTapGesture.rawValue) as Bool == true {
+        if NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.TripleTapGesture.rawValue) as! Bool == true {
             showSearch()
         }
     }
@@ -161,13 +175,14 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     
     override func motionEnded(motion: UIEventSubtype, withEvent event: UIEvent) {
         if let isShakeActive:Bool = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.ShakeGesture.rawValue) as? Bool {
-            if(event.subtype == UIEventSubtype.MotionShake && isShakeActive == true) {
-                if (!_areControlsVisible) {
-                    showSearch()
-                } else {
-                    hideSearch()
-                }
-            }
+//            if(event.subtype == UIEventSubtype.MotionShake && isShakeActive == true) {
+//                if (!_areControlsVisible) {
+//                    showSearch()
+//                } else {
+//                    hideSearch()
+//                }
+//            }
+            searchBarRefreshWasPressed()
         }
     }
     
@@ -179,7 +194,7 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
         _searchBar.resignFirstResponder()
         UIView.animateWithDuration(0.5, delay: 0.05, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.5, options: nil, animations: {
             self._searchBar.transform = CGAffineTransformMakeTranslation(0, -44)
-        }, nil)
+        }, completion: nil)
         _areControlsVisible = false
         removeBackgroundBlur()
     }
@@ -190,7 +205,7 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
         }
         UIView.animateWithDuration(0.5, delay: 0.05, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.5, options: nil, animations: {
             self._searchBar.transform = CGAffineTransformMakeTranslation(0, 0)
-        }, nil)
+        }, completion: nil)
         _areControlsVisible = true
         _searchBar.selectAllText()
         _searchBar.becomeFirstResponder()
@@ -211,7 +226,7 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
                 _webView!.alpha = 0.25
                 UIView.animateWithDuration(0.25, animations: {
                     self._effectView!.alpha = 1
-                }, nil)
+                }, completion: nil)
             }
         }
     }
@@ -235,7 +250,7 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     //MARK: -  Settings view
     
     func presentSettingsView(sender:UIButton!) {
-        var settingsController: SettingsViewController = storyboard?.instantiateViewControllerWithIdentifier("settingsController") as SettingsViewController
+        var settingsController: SettingsViewController = storyboard?.instantiateViewControllerWithIdentifier("settingsController") as! SettingsViewController
         settingsController.delegate = self
         settingsController.modalPresentationStyle = .FormSheet
         self.presentViewController(settingsController, animated: true, completion: nil)
@@ -314,7 +329,7 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
         }
     }
     
-    func loadURL(urlString: String) {
+    func loadURL(urlString: String, andCloseSearch: Bool = false) {
         let addrStr = httpifyString(urlString)
         let addr = NSURL(string: addrStr)
         if let webAddr = addr {
@@ -323,12 +338,15 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
         } else {
             displayLoadingErrorMessage()
         }
+        if andCloseSearch == true {
+            hideSearch()
+        }
         
     }
     
     func httpifyString(str: String) -> String {
         let lcStr:String = (str as NSString).lowercaseString
-        if (countElements(lcStr) >= 7) {
+        if (count(lcStr) >= 7) {
             if (lcStr.rangeOfString("http://") != nil) {
                 return str
             } else if (lcStr.rangeOfString("https://") != nil) {
@@ -344,7 +362,7 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     }
     
     func handleGoBackPan(sender: UIScreenEdgePanGestureRecognizer) {
-        if NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.ForwardBackGesture.rawValue) as Bool == true {
+        if NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.ForwardBackGesture.rawValue) as! Bool == true {
             if (sender.state == .Began) {
                 _webView!.goBack()
             }
@@ -352,7 +370,7 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     }
     
     func handleGoForwardPan(sender: AnyObject) {
-        if NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.ForwardBackGesture.rawValue) as Bool == true {
+        if NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.ForwardBackGesture.rawValue) as! Bool == true {
             if (sender.state == .Began) {
                 _webView!.goForward()
             }
@@ -362,16 +380,26 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     // Framer.js Bonjour Integration
     
     func didResolveAddress(address: String) {
-        if !_alertBuilder.isAlertOpen {
-            var windowCount = UIApplication.sharedApplication().windows.count
-            var targetView = UIApplication.sharedApplication().windows[windowCount-1].rootViewController!
-            _framerAddress = address
-            var alert = _alertBuilder.show(targetView as UIViewController!, title: "Connect to Framer?", text: "Looks like you (or someone on your network) is running Framer Studio. Want to connect?", cancelButtonText: "Nope", buttonText: "Sure!", color: UIColorFromHex(0x9178E2))
-            alert.addAction(handleAlertConfirmTap)
-            alert.setTextTheme(.Light)
-            alert.setTitleFont("ClearSans")
-            alert.setTextFont("ClearSans")
-            alert.setButtonFont("ClearSans")
+        if _confirmFramerConnect {
+            if !_alertBuilder.isAlertOpen {
+                var windowCount = UIApplication.sharedApplication().windows.count
+                var targetView = UIApplication.sharedApplication().windows[windowCount-1].rootViewController!
+                _framerAddress = address
+                
+                let paragraphStyle = NSMutableParagraphStyle()
+                paragraphStyle.lineSpacing = 2
+                paragraphStyle.alignment = .Center
+                let alertStr = NSMutableAttributedString(string: "Framer Studio is running on your network. Connect now?")
+                alertStr.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyle, range: NSMakeRange(0, alertStr.length))
+                var alert = _alertBuilder.show(targetView as UIViewController!, title: "Framer Mirror", text: alertStr, cancelButtonText: "Cancel", buttonText: "Connect", color: FRAMER_BLUE)
+                alert.addAction(handleAlertConfirmTap)
+                alert.setTextTheme(.Light)
+                alert.setTitleFont("HelveticaNeue-Bold")
+                alert.setTextFont("HelveticaNeue")
+                alert.setButtonFont("HelveticaNeue")
+            }
+        } else {
+            loadFramer(address)
         }
     }
     
@@ -407,7 +435,7 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     
     func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool {
         var enable = false
-        if (countElements(_searchBar.text) > 0 && _isCurrentPageLoaded) {
+        if (count(_searchBar.text as String) > 0) && _isCurrentPageLoaded {
             enable = true
         }
         _searchBar.refreshButton().enabled = enable
@@ -419,6 +447,7 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     }
     
     func searchBarRefreshWasPressed() {
+        _loadingTimer!.invalidate()
         hideSearch()
         if let urlString = _webView?.URL?.absoluteString {
             _searchBar.text = urlString

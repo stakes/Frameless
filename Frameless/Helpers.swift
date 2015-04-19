@@ -56,7 +56,7 @@ extension UIImage {
 func listAllAvailableFonts() {
     for family: AnyObject in UIFont.familyNames() {
         println("\(family)")
-        for font: AnyObject in UIFont.fontNamesForFamilyName(family as NSString) {
+        for font: AnyObject in UIFont.fontNamesForFamilyName(family as! String) {
             println(" \(font)")
         }
     }

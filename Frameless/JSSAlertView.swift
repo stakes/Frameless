@@ -44,8 +44,8 @@ class JSSAlertView: UIViewController {
     var lightTextColor = UIColorFromHex(0xffffff, alpha: 0.9)
     
     let baseHeight:CGFloat = 160.0
-    var alertWidth:CGFloat = 290.0
-    let buttonHeight:CGFloat = 70.0
+    var alertWidth:CGFloat = 260.0
+    let buttonHeight:CGFloat = 48.0
     let padding:CGFloat = 20.0
     
     var viewWidth:CGFloat?
@@ -88,26 +88,26 @@ class JSSAlertView: UIViewController {
         switch type {
         case .Title:
             self.titleFont = fontStr
-            if let font = UIFont(name: self.titleFont, size: 24) {
+            if let font = UIFont(name: self.titleFont, size: 18) {
                 self.titleLabel.font = font
             } else {
-                self.titleLabel.font = UIFont.systemFontOfSize(24)
+                self.titleLabel.font = UIFont.systemFontOfSize(18)
             }
         case .Text:
             if self.textView != nil {
                 self.textFont = fontStr
-                if let font = UIFont(name: self.textFont, size: 16) {
+                if let font = UIFont(name: self.textFont, size: 14) {
                     self.textView.font = font
                 } else {
-                    self.textView.font = UIFont.systemFontOfSize(16)
+                    self.textView.font = UIFont.systemFontOfSize(14)
                 }
             }
         case .Button:
             self.buttonFont = fontStr
-            if let font = UIFont(name: self.buttonFont, size: 24) {
+            if let font = UIFont(name: self.buttonFont, size: 18) {
                 self.buttonLabel.font = font
             } else {
-                self.buttonLabel.font = UIFont.systemFontOfSize(24)
+                self.buttonLabel.font = UIFont.systemFontOfSize(18)
             }
         }
         // relayout to account for size changes
@@ -136,10 +136,6 @@ class JSSAlertView: UIViewController {
     
     required init(coder aDecoder: NSCoder) {
         fatalError("NSCoding not supported")
-    }
-    
-    required override init() {
-        super.init()
     }
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
@@ -181,11 +177,16 @@ class JSSAlertView: UIViewController {
         // position text
         if self.textView != nil {
             let textString = textView.text! as NSString
-            let textAttr = [NSFontAttributeName:textView.font]
-            let textSize = CGSize(width: contentWidth, height: 90)
+            var range = NSMakeRange(0, 1)
+            let pStyle: AnyObject? = textView.attributedText.attribute(NSParagraphStyleAttributeName, atIndex: 0, effectiveRange: &range)
+            var textAttr = [NSFontAttributeName: textView.font]
+            if let style: AnyObject = pStyle {
+                var textAttr = [NSFontAttributeName: textView.font, NSParagraphStyleAttributeName: style]
+            }
+            let textSize = CGSize(width: contentWidth, height: 0)
             let textRect = textString.boundingRectWithSize(textSize, options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: textAttr, context: nil)
             self.textView.frame = CGRect(x: self.padding, y: yPos, width: self.alertWidth - (self.padding*2), height: ceil(textRect.size.height)*2)
-            yPos += ceil(textRect.size.height) + padding/2
+            yPos += ceil(textRect.size.height) + padding/1.5
         }
         
         // position the buttons
@@ -196,22 +197,22 @@ class JSSAlertView: UIViewController {
             buttonWidth = self.alertWidth/2
             self.cancelButton.frame = CGRect(x: 0, y: yPos, width: buttonWidth-0.5, height: self.buttonHeight)
             if self.cancelButtonLabel != nil {
-                self.cancelButtonLabel.frame = CGRect(x: self.padding, y: (self.buttonHeight/2) - 15, width: buttonWidth - (self.padding*2), height: 30)
+                self.cancelButtonLabel.frame = CGRect(x: self.padding, y: (self.buttonHeight/2) - 12, width: buttonWidth - (self.padding*2), height: 24)
             }
         }
         
         var buttonX = buttonWidth == self.alertWidth ? 0 : buttonWidth
         self.dismissButton.frame = CGRect(x: buttonX, y: yPos, width: buttonWidth, height: self.buttonHeight)
         if self.buttonLabel != nil {
-            self.buttonLabel.frame = CGRect(x: self.padding, y: (self.buttonHeight/2) - 15, width: buttonWidth - (self.padding*2), height: 30)
+            self.buttonLabel.frame = CGRect(x: self.padding, y: (self.buttonHeight/2) - 12, width: buttonWidth - (self.padding*2), height: 24)
         }
         
         // set button fonts
         if self.buttonLabel != nil {
-            buttonLabel.font = UIFont(name: self.buttonFont, size: 20)
+            buttonLabel.font = UIFont(name: self.buttonFont, size: 18)
         }
         if self.cancelButtonLabel != nil {
-            cancelButtonLabel.font = UIFont(name: self.buttonFont, size: 20)
+            cancelButtonLabel.font = UIFont(name: self.buttonFont, size: 18)
         }
     
         yPos += self.buttonHeight
@@ -245,7 +246,7 @@ class JSSAlertView: UIViewController {
         return alertview
     }
     
-    func show(viewController: UIViewController, title: String, text: String?=nil, buttonText: String?=nil, cancelButtonText: String?=nil, color: UIColor?=nil, iconImage: UIImage?=nil) -> JSSAlertViewResponder {
+    func show(viewController: UIViewController, title: String, text: AnyObject?=nil, buttonText: String?=nil, cancelButtonText: String?=nil, color: UIColor?=nil, iconImage: UIImage?=nil) -> JSSAlertViewResponder {
         
         self.rootViewController = viewController
         self.rootViewController.addChildViewController(self)
@@ -293,7 +294,7 @@ class JSSAlertView: UIViewController {
         self.containerView.addSubview(titleLabel)
         
         // View text
-        if let text = text? {
+        if let textObj: AnyObject = text {
             self.textView = UITextView()
             self.textView.userInteractionEnabled = false
             textView.editable = false
@@ -301,7 +302,13 @@ class JSSAlertView: UIViewController {
             textView.textAlignment = .Center
             textView.font = UIFont(name: self.textFont, size: 16)
             textView.backgroundColor = UIColor.clearColor()
-            textView.text = text
+            if let attStr = textObj as? NSAttributedString {
+                textView.attributedText = attStr
+            }
+            if let str = textObj as? String {
+                textView.text = str
+            }
+            
             self.containerView.addSubview(textView)
         }
         
@@ -384,7 +391,7 @@ class JSSAlertView: UIViewController {
                     self.view.alpha = 0
                     }, completion: { finished in
                         if withCallback == true {
-                            if let action = self.closeAction? {
+                            if let action = self.closeAction {
                                 action()
                             }
                         }

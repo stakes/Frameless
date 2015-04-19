@@ -18,7 +18,7 @@ class SettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         UIButton.appearance().tintColor = UIColor.whiteColor()
-        var font = UIFont(name: "ClearSans-Bold", size: 18)
+        var font = UIFont(name: "HelveticaNeue-Medium", size: 16)
         var textAttributes = [NSFontAttributeName: font!, NSForegroundColorAttributeName: UIColor.whiteColor()]
         UINavigationBar.appearance().titleTextAttributes = textAttributes
     }

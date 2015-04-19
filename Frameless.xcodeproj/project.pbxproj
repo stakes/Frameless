@@ -89,6 +89,46 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0D96CEF61AE1CAF5002B16CA /* viewcontrollers */ = {
+			isa = PBXGroup;
+			children = (
+				0D4915AC1A29031B0018BEC6 /* PortraitOnboardingViewController.swift */,
+				0DA5BB4E19FAD12800B2FDD1 /* ViewController.swift */,
+				0DD869F41A08A7A000BF196E /* SettingsViewController.swift */,
+				0DAB64411A09FDD00046287E /* SettingsTableViewController.swift */,
+			);
+			name = viewcontrollers;
+			sourceTree = "<group>";
+		};
+		0D96CEF71AE1CB21002B16CA /* bridging */ = {
+			isa = PBXGroup;
+			children = (
+				0DA5BB7319FC2E5400B2FDD1 /* Frameless-Bridging-Header.h */,
+				0DA5BB7719FC2EAE00B2FDD1 /* AppearanceBridge.h */,
+				0DA5BB7819FC2EBF00B2FDD1 /* AppearanceBridge.m */,
+			);
+			name = bridging;
+			sourceTree = "<group>";
+		};
+		0D96CEF81AE1CB30002B16CA /* shared */ = {
+			isa = PBXGroup;
+			children = (
+				0DA5BB9F19FDE2AC00B2FDD1 /* AppDefaults.swift */,
+				0D18E4261A2D8B1200337D91 /* FramelessSearchBar.swift */,
+				0DA5BB7119FC25F000B2FDD1 /* Helpers.swift */,
+				0D0741CC1A366F0800A6D270 /* FramerBonjour.swift */,
+			);
+			name = shared;
+			sourceTree = "<group>";
+		};
+		0D96CEF91AE1CB5B002B16CA /* external */ = {
+			isa = PBXGroup;
+			children = (
+				0DD7EC1B1A72FC0F00BED2DC /* JSSAlertView.swift */,
+			);
+			name = external;
+			sourceTree = "<group>";
+		};
 		0DA5BB1019FAD10F00B2FDD1 = {
 			isa = PBXGroup;
 			children = (
@@ -112,24 +152,15 @@
 		0DA5BB4119FAD12800B2FDD1 /* Frameless */ = {
 			isa = PBXGroup;
 			children = (
-				0DA5BB9E19FDE0A800B2FDD1 /* Interface Builder Files */,
-				0DA5BB9F19FDE2AC00B2FDD1 /* AppDefaults.swift */,
-				0DA5BB7119FC25F000B2FDD1 /* Helpers.swift */,
-				0DA5BB7319FC2E5400B2FDD1 /* Frameless-Bridging-Header.h */,
-				0DA5BB7719FC2EAE00B2FDD1 /* AppearanceBridge.h */,
-				0DA5BB7819FC2EBF00B2FDD1 /* AppearanceBridge.m */,
 				0DA5BB4219FAD12800B2FDD1 /* AppDelegate.swift */,
-				0D4915AC1A29031B0018BEC6 /* PortraitOnboardingViewController.swift */,
-				0DA5BB4E19FAD12800B2FDD1 /* ViewController.swift */,
-				0DD869F41A08A7A000BF196E /* SettingsViewController.swift */,
-				0DAB64411A09FDD00046287E /* SettingsTableViewController.swift */,
-				0DA5BB4519FAD12800B2FDD1 /* Main.storyboard */,
-				0D0741CC1A366F0800A6D270 /* FramerBonjour.swift */,
+				0D96CEF71AE1CB21002B16CA /* bridging */,
+				0D96CEF91AE1CB5B002B16CA /* external */,
+				0D96CEF81AE1CB30002B16CA /* shared */,
+				0D96CEF61AE1CAF5002B16CA /* viewcontrollers */,
+				0DA5BB9E19FDE0A800B2FDD1 /* Interface Builder Files */,
 				0DA5BB4919FAD12800B2FDD1 /* Images.xcassets */,
 				0DA5BB6219FAD36700B2FDD1 /* Supporting Files */,
 				0DA5BB7019FC24D900B2FDD1 /* Resources */,
-				0D18E4261A2D8B1200337D91 /* FramelessSearchBar.swift */,
-				0DD7EC1B1A72FC0F00BED2DC /* JSSAlertView.swift */,
 			);
 			path = Frameless;
 			sourceTree = "<group>";
@@ -165,6 +196,7 @@
 		0DA5BB9E19FDE0A800B2FDD1 /* Interface Builder Files */ = {
 			isa = PBXGroup;
 			children = (
+				0DA5BB4519FAD12800B2FDD1 /* Main.storyboard */,
 				0DA5BB9C19FC7C7000B2FDD1 /* LaunchScreen.xib */,
 			);
 			name = "Interface Builder Files";
