@@ -100,7 +100,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func setupAppViewController(animated : Bool) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let appViewController = storyboard.instantiateViewControllerWithIdentifier("mainViewController") as UIViewController
+        let appViewController = storyboard.instantiateViewControllerWithIdentifier("mainViewController") as! UIViewController
         if animated {
             UIView.transitionWithView(self.window!, duration: 0.5, options:UIViewAnimationOptions.TransitionFlipFromBottom, animations: { () -> Void in
                 self.window!.rootViewController = appViewController
