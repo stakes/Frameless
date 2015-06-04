@@ -14,6 +14,7 @@ enum AppDefaultKeys: String {
     case TripleTapGesture = "tripleTap"
     case FramerBonjour = "framerConnect"
     case KeepAwake = "keepAwake"
+    case HomePage = "homePage"
 }
 
 
