@@ -16,6 +16,7 @@ class SettingsTableViewController: UITableViewController {
     @IBOutlet weak var _browserSwitch: UISwitch!
     @IBOutlet weak var _framerSwitch: UISwitch!
     @IBOutlet weak var _sleepSwitch: UISwitch!
+    @IBOutlet weak var _screenIdleTimeoutTextField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +27,7 @@ class SettingsTableViewController: UITableViewController {
         _browserSwitch.on = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.ForwardBackGesture.rawValue) as! Bool
         _framerSwitch.on = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.FramerBonjour.rawValue) as! Bool
         _sleepSwitch.on = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.KeepAwake.rawValue) as! Bool
+        _screenIdleTimeoutTextField.text = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.ScreenIdleTimeout.rawValue) as! String
     }
 
     override func didReceiveMemoryWarning() {
@@ -77,6 +79,11 @@ class SettingsTableViewController: UITableViewController {
         var value = (sender as! UISwitch).on
          UIApplication.sharedApplication().idleTimerDisabled = value
         NSUserDefaults.standardUserDefaults().setValue(value, forKey: AppDefaultKeys.KeepAwake.rawValue)
+    }
+    
+    @IBAction func screenIdleTimeoutChanged(sender: AnyObject) {
+        var value = (sender as! UITextField).text
+        NSUserDefaults.standardUserDefaults().setValue(value, forKey: AppDefaultKeys.ScreenIdleTimeout.rawValue)
     }
     
     func checkControlsSettings() -> Bool {
