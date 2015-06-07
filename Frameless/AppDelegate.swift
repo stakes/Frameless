@@ -55,6 +55,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let isIdleTimer = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.KeepAwake.rawValue) as? Bool
             UIApplication.sharedApplication().idleTimerDisabled = isIdleTimer!
         }
+        if NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.HomePage.rawValue) == nil {
+            NSUserDefaults.standardUserDefaults().setValue("", forKey: AppDefaultKeys.HomePage.rawValue)
+        }
     }
     
     func createIntroViewController() -> OnboardingViewController {

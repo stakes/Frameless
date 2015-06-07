@@ -88,6 +88,7 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
         _searchBar.framelessSearchBarDelegate = self
         _searchBar.showsCancelButton = false
         _searchBar.becomeFirstResponder()
+        _searchBar.text = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.HomePage.rawValue) as! String
          AppearanceBridge.setSearchBarTextInputAppearance()
         
         _settingsBarView = UIView(frame: CGRectMake(0, self.view.frame.height, self.view.frame.width, 44))
@@ -107,8 +108,14 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
         if NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.FramerBonjour.rawValue) as! Bool == true {
             _framerBonjour.start()
         }
-            
-        _progressView.hidden = true
+        
+        // load the URL immediately in case it is not empty (e.g. HomePage setting is set)
+        if _searchBar.text.isEmpty == false {
+            hideSearch()
+            loadURL(_searchBar.text)
+        } else {
+            _progressView.hidden = true
+        }
     }
     
     deinit {
