@@ -14,6 +14,7 @@ class SettingsTableViewController: UITableViewController {
     @IBOutlet weak var _swipeUpSwitch: UISwitch!
     @IBOutlet weak var _tripleTapSwitch: UISwitch!
     @IBOutlet weak var _browserSwitch: UISwitch!
+    @IBOutlet weak var _bounceSwitch: UISwitch!
     @IBOutlet weak var _framerSwitch: UISwitch!
     @IBOutlet weak var _sleepSwitch: UISwitch!
     
@@ -24,6 +25,7 @@ class SettingsTableViewController: UITableViewController {
         _swipeUpSwitch.on = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.PanFromBottomGesture.rawValue) as! Bool
         _tripleTapSwitch.on = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.TripleTapGesture.rawValue) as! Bool
         _browserSwitch.on = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.ForwardBackGesture.rawValue) as! Bool
+        _bounceSwitch.on = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.NoBounceAnimation.rawValue) as! Bool
         _framerSwitch.on = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.FramerBonjour.rawValue) as! Bool
         _sleepSwitch.on = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.KeepAwake.rawValue) as! Bool
     }
@@ -66,6 +68,11 @@ class SettingsTableViewController: UITableViewController {
     @IBAction func toggleBrowserNavSwitch(sender: AnyObject) {
         var value = (sender as! UISwitch).on
         NSUserDefaults.standardUserDefaults().setValue(value, forKey: AppDefaultKeys.ForwardBackGesture.rawValue)
+    }
+    
+    @IBAction func toggleBounceSwitch(sender: AnyObject) {
+        var value = (sender as! UISwitch).on
+        NSUserDefaults.standardUserDefaults().setValue(value, forKey: AppDefaultKeys.NoBounceAnimation.rawValue)
     }
     
     @IBAction func toggleFramerSwitch(sender: AnyObject) {

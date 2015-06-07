@@ -46,6 +46,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.ForwardBackGesture.rawValue) == nil {
             NSUserDefaults.standardUserDefaults().setValue(true, forKey: AppDefaultKeys.ForwardBackGesture.rawValue)
         }
+        if NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.NoBounceAnimation.rawValue) == nil {
+            NSUserDefaults.standardUserDefaults().setValue(false, forKey: AppDefaultKeys.NoBounceAnimation.rawValue)
+        }
         if NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.FramerBonjour.rawValue) == nil {
             NSUserDefaults.standardUserDefaults().setValue(true, forKey: AppDefaultKeys.FramerBonjour.rawValue)
         }

@@ -12,6 +12,7 @@ enum AppDefaultKeys: String {
     case PanFromBottomGesture = "panFromBottom"
     case ForwardBackGesture = "panLeftRight"
     case TripleTapGesture = "tripleTap"
+    case NoBounceAnimation = "noBounceAnimation"
     case FramerBonjour = "framerConnect"
     case KeepAwake = "keepAwake"
 }
