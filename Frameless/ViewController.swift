@@ -315,6 +315,11 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     }
     
     func loadURL(urlString: String) {
+        
+        // disable the typical webview bounce animations and keep the scrollView
+        // as it is.
+        _webView?.scrollView.bounces = !(NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.NoBounceAnimation.rawValue) as! Bool)
+
         let addrStr = httpifyString(urlString)
         let addr = NSURL(string: addrStr)
         if let webAddr = addr {
