@@ -19,6 +19,10 @@
             <string>ClearSans</string>
             <string>ClearSans</string>
             <string>ClearSans</string>
+            <string>ClearSans</string>
+            <string>ClearSans</string>
+            <string>ClearSans</string>
+            <string>ClearSans</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -293,6 +297,71 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="56" id="VOa-EK-z8D">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VOa-EK-z8D" id="vSO-th-4zx">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Screen timeout" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pmR-J0-RHs">
+                                                    <rect key="frame" x="16" y="7" width="116" height="23"/>
+                                                    <fontDescription key="fontDescription" name="ClearSans" family="Clear Sans" pointSize="17"/>
+                                                    <color key="textColor" red="0.55673807860000002" green="0.55652600529999996" blue="0.57718861099999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Timeout in seconds until screen goes blank" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Soo-8r-9Ge">
+                                                    <rect key="frame" x="16" y="26" width="233" height="23"/>
+                                                    <fontDescription key="fontDescription" name="ClearSans" family="Clear Sans" pointSize="12"/>
+                                                    <color key="textColor" red="0.55673807860000002" green="0.55652600529999996" blue="0.57718861099999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="QqS-AU-0LP">
+                                                    <rect key="frame" x="431" y="13" width="161" height="30"/>
+                                                    <accessibility key="accessibilityConfiguration">
+                                                        <accessibilityTraits key="traits" none="YES" link="YES"/>
+                                                    </accessibility>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad" enablesReturnKeyAutomatically="YES"/>
+                                                    <connections>
+                                                        <action selector="screenIdleTimeoutChanged:" destination="lCY-Sl-eE7" eventType="editingDidEnd" id="0SH-xR-6tE"/>
+                                                    </connections>
+                                                </textField>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="QqS-AU-0LP" secondAttribute="trailing" constant="16" id="fb8-rV-eUE"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="56" id="4ra-ki-ipo">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4ra-ki-ipo" id="6ea-i7-LjW">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Motion detection" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sag-AS-86B">
+                                                    <rect key="frame" x="16" y="7" width="129" height="23"/>
+                                                    <fontDescription key="fontDescription" name="ClearSans" family="Clear Sans" pointSize="17"/>
+                                                    <color key="textColor" red="0.55673807860000002" green="0.55652600529999996" blue="0.57718861099999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Use front camera to detect motion and stop screen blanking" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PnV-jG-RPa">
+                                                    <rect key="frame" x="16" y="26" width="324" height="23"/>
+                                                    <fontDescription key="fontDescription" name="ClearSans" family="Clear Sans" pointSize="12"/>
+                                                    <color key="textColor" red="0.55673807860000002" green="0.55652600529999996" blue="0.57718861099999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="t6P-T8-tMY">
+                                                    <rect key="frame" x="531" y="12" width="51" height="31"/>
+                                                    <color key="onTintColor" red="0.61937248710000004" green="0.51502001289999999" blue="0.90843188760000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <connections>
+                                                        <action selector="motionDetectionSwitch:" destination="lCY-Sl-eE7" eventType="valueChanged" id="Bdy-3R-BTg"/>
+                                                    </connections>
+                                                </switch>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailingMargin" secondItem="t6P-T8-tMY" secondAttribute="trailing" constant="5" id="dy6-ly-o4V"/>
+                                                <constraint firstItem="t6P-T8-tMY" firstAttribute="top" secondItem="6ea-i7-LjW" secondAttribute="topMargin" constant="4" id="rN1-6m-9PY"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -304,6 +373,8 @@
                     <connections>
                         <outlet property="_browserSwitch" destination="fIL-z9-y1y" id="hd6-Uz-FAr"/>
                         <outlet property="_framerSwitch" destination="Vyj-7R-UEs" id="3vh-0s-wr9"/>
+                        <outlet property="_motionDetectionSwitch" destination="t6P-T8-tMY" id="A4x-EU-lUa"/>
+                        <outlet property="_screenIdleTimeoutTextField" destination="QqS-AU-0LP" id="S3s-SX-apr"/>
                         <outlet property="_shakeSwitch" destination="4yd-mc-Ohq" id="hVN-0x-IGW"/>
                         <outlet property="_sleepSwitch" destination="rM4-QM-crQ" id="EkR-N9-K6T"/>
                         <outlet property="_swipeUpSwitch" destination="bpD-iZ-A9f" id="yal-l5-dtx"/>

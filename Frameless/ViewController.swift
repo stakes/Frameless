@@ -20,20 +20,27 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     var _webView: WKWebView?
     var _isMainFrameNavigationAction: Bool?
     var _loadingTimer: NSTimer?
+    var _screenIdleTimer: NSTimer?
     
     var _tapRecognizer: UITapGestureRecognizer?
+    var _globalTapRecognizer: UITapGestureRecognizer?
     var _threeFingerTapRecognizer: UITapGestureRecognizer?
     var _panFromBottomRecognizer: UIScreenEdgePanGestureRecognizer?
     var _panFromRightRecognizer: UIScreenEdgePanGestureRecognizer?
     var _panFromLeftRecognizer: UIScreenEdgePanGestureRecognizer?
+    var _swipeGestureRecognizerH: UISwipeGestureRecognizer?
+    var _swipeGestureRecognizerV: UISwipeGestureRecognizer?
     var _areControlsVisible = true
     var _isFirstRun = true
     var _effectView: UIVisualEffectView?
     var _errorView: UIView?
     var _settingsBarView: UIView?
+    var _screenIdleView: UIView?
     var _defaultsObject: NSUserDefaults?
     var _onboardingViewController: OnboardingViewController?
     var _isCurrentPageLoaded = false
+    var _isScreenBlanked = false
+    var _orgBrightness: CGFloat?
     
     var _framerBonjour = FramerBonjour()
     var _framerAddress: String?
@@ -44,10 +51,17 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     var _progressTimer: NSTimer?
     var _isWebViewLoading = false
     
+    // camera / video capturing
+    let _motionDetectionSensitivity: CGFloat = 0.05
+    var _enabledMotionDetection = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // enable software dimming to get the display as black as possible in
+        // case our idleTimer executes.
+        UIScreen.mainScreen().wantsSoftwareDimming = true
+       
         var webViewConfiguration: WKWebViewConfiguration = WKWebViewConfiguration()
         webViewConfiguration.allowsInlineMediaPlayback = true
         webViewConfiguration.mediaPlaybackRequiresUserAction = false
@@ -65,8 +79,14 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
         
         _tapRecognizer = UITapGestureRecognizer(target: self, action: Selector("hideSearch"))
         
+        _globalTapRecognizer = UITapGestureRecognizer(target: self, action: Selector("handleFingerTap:"))
+        _globalTapRecognizer?.numberOfTouchesRequired = 1
+        _globalTapRecognizer?.delegate = self
+        self.view.addGestureRecognizer(_globalTapRecognizer!)
+        
         _threeFingerTapRecognizer = UITapGestureRecognizer(target: self, action: Selector("handleThreeFingerTap:"))
         _threeFingerTapRecognizer?.numberOfTouchesRequired = 3
+        _threeFingerTapRecognizer?.delegate = self
         self.view.addGestureRecognizer(_threeFingerTapRecognizer!)
         
         _panFromBottomRecognizer = UIScreenEdgePanGestureRecognizer(target: self, action: Selector("handleBottomEdgePan:"))
@@ -84,6 +104,16 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
         _panFromRightRecognizer!.delegate = self
         self.view.addGestureRecognizer(_panFromRightRecognizer!)
 
+        _swipeGestureRecognizerH = UISwipeGestureRecognizer(target: self, action: Selector("respondToSwipeGesture:"))
+        _swipeGestureRecognizerH!.direction = UISwipeGestureRecognizerDirection.Right|UISwipeGestureRecognizerDirection.Left
+        _swipeGestureRecognizerH!.delegate = self
+        self.view.addGestureRecognizer(_swipeGestureRecognizerH!)
+
+        _swipeGestureRecognizerV = UISwipeGestureRecognizer(target: self, action: Selector("respondToSwipeGesture:"))
+        _swipeGestureRecognizerV!.direction = UISwipeGestureRecognizerDirection.Up|UISwipeGestureRecognizerDirection.Down
+        _swipeGestureRecognizerV!.delegate = self
+        self.view.addGestureRecognizer(_swipeGestureRecognizerV!)
+        
         _searchBar.delegate = self
         _searchBar.framelessSearchBarDelegate = self
         _searchBar.showsCancelButton = false
@@ -99,7 +129,15 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
         settingsButton.addTarget(self, action: "presentSettingsView:", forControlEvents: .TouchUpInside)
         _settingsBarView?.addSubview(settingsButton)
         self.view.addSubview(_settingsBarView!)
-
+        
+        // create a screen idle view as large as the screen with a black background
+        _screenIdleView = UIView(frame: UIScreen.mainScreen().bounds)
+        _screenIdleView!.backgroundColor=UIColor.blackColor()
+        _screenIdleView!.hidden = true
+        _screenIdleView!.autoresizingMask = UIViewAutoresizing.FlexibleHeight | UIViewAutoresizing.FlexibleWidth;
+        self.view.addSubview(_screenIdleView!)
+        self.view.sendSubviewToBack(_screenIdleView!)
+        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name:UIKeyboardWillShowNotification, object: nil);
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name:UIKeyboardWillHideNotification, object: nil);
         
@@ -110,7 +148,23 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
             
         _progressView.hidden = true
     }
+
+    override func viewDidAppear(animated: Bool)
+    {
+        // if the user wants to have motion detection running to
+        // disable the screen saver we perform this here since GPUImage stuff
+        // starts to work in viewDidAppear()
+        if NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.MotionDetection.rawValue) as! Bool == true {
+            videoCamera?.startCameraCapture()
+        }
+    }
     
+    override func viewDidDisappear(animated: Bool)
+    {
+        self.videoCamera?.stopCameraCapture()
+        super.viewDidDisappear(animated)
+    }
+
     deinit {
         NSNotificationCenter.defaultCenter().removeObserver(self);
     }
@@ -119,8 +173,39 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-
+    
+    // lazy variable dealing with our motiondetection stuff
+    lazy var videoCamera: GPUImageVideoCamera? =
+    {
+        var tempVideoCamera = GPUImageVideoCamera(sessionPreset: AVCaptureSessionPresetLow, cameraPosition: .Front)
+        if (tempVideoCamera != nil)
+        {
+            tempVideoCamera.outputImageOrientation = .Portrait
+            var filter = GPUImageMotionDetector()
+            filter.motionDetectionBlock =
+            {
+                [unowned self]
+                (CGPoint motionCentroid, CGFloat motionIntensity, CMTime frameTime) -> Void in
+                if motionIntensity > self._motionDetectionSensitivity
+                {
+                    if self._enabledMotionDetection
+                    {
+                        NSLog("motion detected")
+                        dispatch_async(dispatch_get_main_queue(), {
+                            self.resetScreenIdleTimer()
+                        })
+                    }
+                    else
+                    {
+                        NSLog("motion ignored")
+                    }
+                }
+            }
+            tempVideoCamera.addTarget(filter)
+        }
+        return tempVideoCamera
+    }()
+    
     func introCompletion() {
         _onboardingViewController?.dismissViewControllerAnimated(true, completion: nil)
     }
@@ -149,10 +234,18 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
         }
     }
     
+    func handleFingerTap(sender: AnyObject) {
+        resetScreenIdleTimer()
+    }
+    
     func handleThreeFingerTap(sender: AnyObject) {
         if NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.TripleTapGesture.rawValue) as! Bool == true {
             showSearch()
         }
+    }
+  
+    func respondToSwipeGesture(sender: AnyObject) {
+        resetScreenIdleTimer()
     }
     
     override func canBecomeFirstResponder() -> Bool {
@@ -182,6 +275,7 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
         }, completion:  nil)
         _areControlsVisible = false
         removeBackgroundBlur()
+        resetScreenIdleTimer()   
     }
     
     func showSearch() {
@@ -192,6 +286,7 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
             self._searchBar.transform = CGAffineTransformMakeTranslation(0, 0)
         }, completion: nil)
         _areControlsVisible = true
+        resetScreenIdleTimer()
         _searchBar.selectAllText()
         _searchBar.becomeFirstResponder()
         blurBackground()
@@ -252,6 +347,7 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     func webView(webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
         _searchBar.showsCancelButton = true
         _loadingErrorView.hidden = true
+        _screenIdleView!.hidden = true
         _isFirstRun = false
         _isWebViewLoading = true
         _progressView.hidden = false
@@ -265,10 +361,133 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
         handleWebViewError()
     }
     
+    func screenIdleTimeoutCallback() {
+        
+        // make sure the timer is invalidated
+        _screenIdleTimer!.invalidate()
+        
+        // remember the original screen brightness so that we can
+        // restore it accordingly.
+        _orgBrightness = UIScreen.mainScreen().brightness
+        fadeScreenBrightnessTo(0.0)
+    }
+    
+    func fadeScreenBrightnessTo(var endValue: CGFloat, var fadeInterval: CGFloat = 0.01, var delayInSeconds: Double = 0.005) {
+        var startValue: CGFloat = UIScreen.mainScreen().brightness
+        
+        if endValue < startValue {
+            fadeInterval = -fadeInterval
+        } else {
+            // in case the user starts fading from 0 we have to disable screen blanking
+            // first
+            if _isScreenBlanked {
+                // hide our black screenIdleView again and send it to the back.
+                _screenIdleView!.hidden = true
+                self.view.sendSubviewToBack(_screenIdleView!)
+                _isScreenBlanked = false
+            }
+        }
+        
+        var brightness: CGFloat = startValue
+        var i: Int = 0
+        var dispatchTime: dispatch_time_t = DISPATCH_TIME_NOW
+        
+        while fabsf(Float(brightness - endValue)) > 0 {
+    
+            i++
+            brightness += fadeInterval;
+            
+            if fabsf(Float(brightness - endValue)) < fabsf(Float(fadeInterval)) {
+                brightness = endValue;
+            }
+
+            dispatchTime = dispatch_time(dispatchTime, Int64(delayInSeconds * Double(NSEC_PER_SEC)))
+            if i == 1 {
+                dispatch_after(dispatchTime, dispatch_get_main_queue()) {
+                    // disable motion detection for the time being
+                    self._enabledMotionDetection = false
+                    UIScreen.mainScreen().brightness += fadeInterval;
+                }
+            } else {
+                dispatch_after(dispatchTime, dispatch_get_main_queue()) {
+                    UIScreen.mainScreen().brightness += fadeInterval
+                }
+            }
+        }
+
+        // in case the user wants to completly blank a screen lets do it as the last operation
+        if endValue == 0.0 {
+            dispatchTime = dispatch_time(dispatchTime, Int64(delayInSeconds * Double(NSEC_PER_SEC)))
+            dispatch_after(dispatchTime, dispatch_get_main_queue()) {
+                
+                // completely set the brightness to zero
+                UIScreen.mainScreen().brightness = 0;
+                
+                // bring the screenIdleView to the front
+                self.view.bringSubviewToFront(self._screenIdleView!)
+                self._screenIdleView!.hidden = false
+                self._isScreenBlanked = true
+            }
+        }
+        
+        dispatchTime = dispatch_time(dispatchTime, Int64(0.5 * Double(NSEC_PER_SEC)))
+        dispatch_after(dispatchTime, dispatch_get_main_queue()) {
+            self._enabledMotionDetection = true
+        }
+    }
+    
+    func resetScreenIdleTimer(var fadeScreen: Bool = true) {
+        NSLog("resetScreenIdleTimer")
+        
+        // invalidate screen idle timer
+        if _screenIdleTimer != nil {
+            _screenIdleTimer!.invalidate()
+        }
+        
+        // if the screen is currently blanked bringt it back
+        // online
+        if _isScreenBlanked == true {
+            if fadeScreen {
+                fadeScreenBrightnessTo(_orgBrightness!)
+            } else {
+                // disable motion detection for the time being
+                _enabledMotionDetection = false
+                
+                // hide our black screenIdleView again and send it to the back.
+                _screenIdleView!.hidden = true
+                self.view.sendSubviewToBack(_screenIdleView!)
+                UIScreen.mainScreen().brightness = _orgBrightness!
+                
+                // bring motion detection back online
+                _enabledMotionDetection = true
+            }
+            _isScreenBlanked = false
+        }
+
+        // restart screen idle timer in case no controls are visible
+        if _areControlsVisible == false {
+            let idleTimeout = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.ScreenIdleTimeout.rawValue) as! String
+            if idleTimeout.isEmpty == false {
+                let timeout = NSNumberFormatter().numberFromString(idleTimeout)
+                _screenIdleTimer = NSTimer.scheduledTimerWithTimeInterval(timeout as! Double, target: self, selector: "screenIdleTimeoutCallback", userInfo: nil, repeats: false)
+            }
+        }
+    }
+  
+    func stopScreenIdleTimer() {
+        // invalidate screen idle timer
+        if _screenIdleTimer != nil {
+            _screenIdleTimer!.invalidate()
+        }
+    }
+    
     func webView(webView: WKWebView, didFinishNavigation navigation: WKNavigation!) {
         _isCurrentPageLoaded = true
         _loadingTimer!.invalidate()
         _isWebViewLoading = false
+        
+        // lets fire the screen idle timer
+        resetScreenIdleTimer()
     }
 
     func webView(webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: NSError) {
@@ -436,7 +655,5 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
             self._webView!.frame = CGRectMake(0, 0, size.width, size.height)
         }, completion: nil)
     }
-
-
 }
 

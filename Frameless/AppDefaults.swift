@@ -14,6 +14,8 @@ enum AppDefaultKeys: String {
     case TripleTapGesture = "tripleTap"
     case FramerBonjour = "framerConnect"
     case KeepAwake = "keepAwake"
+    case ScreenIdleTimeout = "screenIdleTimeout"
+    case MotionDetection = "motionDetection"
 }
 
 

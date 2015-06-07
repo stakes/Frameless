@@ -65,6 +65,7 @@
 		0DAB64411A09FDD00046287E /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		0DD7EC1B1A72FC0F00BED2DC /* JSSAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSSAlertView.swift; sourceTree = "<group>"; };
 		0DD869F41A08A7A000BF196E /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		1E92D37F1B22778D00E2B45E /* libPods-Frameless-GPUImage.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-Frameless-GPUImage.a"; path = "Pods/../build/Debug-iphoneos/libPods-Frameless-GPUImage.a"; sourceTree = "<group>"; };
 		5ABAB4BA5DBE39442812DB61 /* libPods-Frameless.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Frameless.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DC7091992089D05BD351118 /* Pods-Frameless.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Frameless.release.xcconfig"; path = "Pods/Target Support Files/Pods-Frameless/Pods-Frameless.release.xcconfig"; sourceTree = "<group>"; };
 		DAC237240666B2261B5088CD /* Pods-Frameless.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Frameless.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Frameless/Pods-Frameless.debug.xcconfig"; sourceTree = "<group>"; };
@@ -173,6 +174,7 @@
 		3B605A57B8762CE7D092BD2D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1E92D37F1B22778D00E2B45E /* libPods-Frameless-GPUImage.a */,
 				5ABAB4BA5DBE39442812DB61 /* libPods-Frameless.a */,
 			);
 			name = Frameworks;
@@ -436,6 +438,7 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 3;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -460,6 +463,10 @@
 				INFOPLIST_FILE = Frameless/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Frameless/Frameless-Bridging-Header.h";
@@ -479,6 +486,10 @@
 				INFOPLIST_FILE = Frameless/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Frameless/Frameless-Bridging-Header.h";

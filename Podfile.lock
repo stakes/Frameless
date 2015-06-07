@@ -1,14 +1,24 @@
 PODS:
+  - GPUImage (0.1.7)
   - Onboard (1.1)
 
 DEPENDENCIES:
+  - GPUImage (from `https://github.com/BradLarson/GPUImage.git`)
   - Onboard (from `https://github.com/mamaral/Onboard.git`)
 
 EXTERNAL SOURCES:
+  GPUImage:
+    :git: https://github.com/BradLarson/GPUImage.git
   Onboard:
     :git: https://github.com/mamaral/Onboard.git
 
-SPEC CHECKSUMS:
-  Onboard: 40270e520b6df51e90de7fe0d57eb54057dc22d9
+CHECKOUT OPTIONS:
+  GPUImage:
+    :commit: b270f452755b5edb616c3579d10c41e3c9460013
+    :git: https://github.com/BradLarson/GPUImage.git
 
-COCOAPODS: 0.34.4
+SPEC CHECKSUMS:
+  GPUImage: 733a5f0fab92df9de1c37ba9df520a833ccb406d
+  Onboard: ba0b7708c1a36f212c73e220758eeab5dfc8943a
+
+COCOAPODS: 0.37.2
