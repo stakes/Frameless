@@ -1,0 +1,2 @@
+PODS_FRAMELESS_GPUIMAGE_CLANG_MODULES_AUTOLINK = YES
+PODS_FRAMELESS_GPUIMAGE_OTHER_LDFLAGS = -framework "AVFoundation" -framework "CoreMedia" -framework "OpenGLES" -framework "QuartzCore"

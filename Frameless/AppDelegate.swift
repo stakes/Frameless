@@ -58,6 +58,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.ScreenIdleTimeout.rawValue) == nil {
             NSUserDefaults.standardUserDefaults().setValue("", forKey: AppDefaultKeys.ScreenIdleTimeout.rawValue)
         }
+        if NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.MotionDetection.rawValue) == nil {
+            NSUserDefaults.standardUserDefaults().setValue(false, forKey: AppDefaultKeys.MotionDetection.rawValue)
+        }
     }
     
     func createIntroViewController() -> OnboardingViewController {

@@ -15,6 +15,7 @@ enum AppDefaultKeys: String {
     case FramerBonjour = "framerConnect"
     case KeepAwake = "keepAwake"
     case ScreenIdleTimeout = "screenIdleTimeout"
+    case MotionDetection = "motionDetection"
 }
 
 

@@ -51,6 +51,9 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     var _progressTimer: NSTimer?
     var _isWebViewLoading = false
     
+    // camera / video capturing
+    let _motionDetectionSensitivity: CGFloat = 0.05
+    var _enabledMotionDetection = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -145,7 +148,23 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
             
         _progressView.hidden = true
     }
+
+    override func viewDidAppear(animated: Bool)
+    {
+        // if the user wants to have motion detection running to
+        // disable the screen saver we perform this here since GPUImage stuff
+        // starts to work in viewDidAppear()
+        if NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.MotionDetection.rawValue) as! Bool == true {
+            videoCamera?.startCameraCapture()
+        }
+    }
     
+    override func viewDidDisappear(animated: Bool)
+    {
+        self.videoCamera?.stopCameraCapture()
+        super.viewDidDisappear(animated)
+    }
+
     deinit {
         NSNotificationCenter.defaultCenter().removeObserver(self);
     }
@@ -154,8 +173,39 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-
+    
+    // lazy variable dealing with our motiondetection stuff
+    lazy var videoCamera: GPUImageVideoCamera? =
+    {
+        var tempVideoCamera = GPUImageVideoCamera(sessionPreset: AVCaptureSessionPresetLow, cameraPosition: .Front)
+        if (tempVideoCamera != nil)
+        {
+            tempVideoCamera.outputImageOrientation = .Portrait
+            var filter = GPUImageMotionDetector()
+            filter.motionDetectionBlock =
+            {
+                [unowned self]
+                (CGPoint motionCentroid, CGFloat motionIntensity, CMTime frameTime) -> Void in
+                if motionIntensity > self._motionDetectionSensitivity
+                {
+                    if self._enabledMotionDetection
+                    {
+                        NSLog("motion detected")
+                        dispatch_async(dispatch_get_main_queue(), {
+                            self.resetScreenIdleTimer()
+                        })
+                    }
+                    else
+                    {
+                        NSLog("motion ignored")
+                    }
+                }
+            }
+            tempVideoCamera.addTarget(filter)
+        }
+        return tempVideoCamera
+    }()
+    
     func introCompletion() {
         _onboardingViewController?.dismissViewControllerAnimated(true, completion: nil)
     }
@@ -334,25 +384,35 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
         }
         
         var brightness: CGFloat = startValue
-        var delay: Double = 0
+        var i: Int = 0
+        var dispatchTime: dispatch_time_t = DISPATCH_TIME_NOW
+        
         while fabsf(Float(brightness - endValue)) > 0 {
     
+            i++
             brightness += fadeInterval;
-            delay += delayInSeconds;
             
             if fabsf(Float(brightness - endValue)) < fabsf(Float(fadeInterval)) {
                 brightness = endValue;
             }
 
-            let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay * Double(NSEC_PER_SEC)))
-            dispatch_after(dispatchTime, dispatch_get_main_queue()) {
-                UIScreen.mainScreen().brightness += fadeInterval;
+            dispatchTime = dispatch_time(dispatchTime, Int64(delayInSeconds * Double(NSEC_PER_SEC)))
+            if i == 1 {
+                dispatch_after(dispatchTime, dispatch_get_main_queue()) {
+                    // disable motion detection for the time being
+                    self._enabledMotionDetection = false
+                    UIScreen.mainScreen().brightness += fadeInterval;
+                }
+            } else {
+                dispatch_after(dispatchTime, dispatch_get_main_queue()) {
+                    UIScreen.mainScreen().brightness += fadeInterval
+                }
             }
         }
 
         // in case the user wants to completly blank a screen lets do it as the last operation
         if endValue == 0.0 {
-            let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay * Double(NSEC_PER_SEC)))
+            dispatchTime = dispatch_time(dispatchTime, Int64(delayInSeconds * Double(NSEC_PER_SEC)))
             dispatch_after(dispatchTime, dispatch_get_main_queue()) {
                 
                 // completely set the brightness to zero
@@ -364,9 +424,16 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
                 self._isScreenBlanked = true
             }
         }
+        
+        dispatchTime = dispatch_time(dispatchTime, Int64(0.5 * Double(NSEC_PER_SEC)))
+        dispatch_after(dispatchTime, dispatch_get_main_queue()) {
+            self._enabledMotionDetection = true
+        }
     }
     
     func resetScreenIdleTimer(var fadeScreen: Bool = true) {
+        NSLog("resetScreenIdleTimer")
+        
         // invalidate screen idle timer
         if _screenIdleTimer != nil {
             _screenIdleTimer!.invalidate()
@@ -378,12 +445,18 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
             if fadeScreen {
                 fadeScreenBrightnessTo(_orgBrightness!)
             } else {
+                // disable motion detection for the time being
+                _enabledMotionDetection = false
+                
                 // hide our black screenIdleView again and send it to the back.
                 _screenIdleView!.hidden = true
                 self.view.sendSubviewToBack(_screenIdleView!)
-                _isScreenBlanked = false
                 UIScreen.mainScreen().brightness = _orgBrightness!
+                
+                // bring motion detection back online
+                _enabledMotionDetection = true
             }
+            _isScreenBlanked = false
         }
 
         // restart screen idle timer in case no controls are visible
@@ -577,7 +650,5 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
             self._webView!.frame = CGRectMake(0, 0, size.width, size.height)
         }, completion: nil)
     }
-
-
 }
 

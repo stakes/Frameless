@@ -17,6 +17,7 @@ class SettingsTableViewController: UITableViewController {
     @IBOutlet weak var _framerSwitch: UISwitch!
     @IBOutlet weak var _sleepSwitch: UISwitch!
     @IBOutlet weak var _screenIdleTimeoutTextField: UITextField!
+    @IBOutlet weak var _motionDetectionSwitch: UISwitch!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +29,7 @@ class SettingsTableViewController: UITableViewController {
         _framerSwitch.on = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.FramerBonjour.rawValue) as! Bool
         _sleepSwitch.on = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.KeepAwake.rawValue) as! Bool
         _screenIdleTimeoutTextField.text = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.ScreenIdleTimeout.rawValue) as! String
+        _motionDetectionSwitch.on = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.MotionDetection.rawValue) as! Bool
     }
 
     override func didReceiveMemoryWarning() {
@@ -86,6 +88,11 @@ class SettingsTableViewController: UITableViewController {
         NSUserDefaults.standardUserDefaults().setValue(value, forKey: AppDefaultKeys.ScreenIdleTimeout.rawValue)
     }
     
+    @IBAction func motionDetectionSwitch(sender: AnyObject) {
+        var value = (sender as! UISwitch).on
+        NSUserDefaults.standardUserDefaults().setValue(value, forKey: AppDefaultKeys.MotionDetection.rawValue)
+    }
+
     func checkControlsSettings() -> Bool {
         var arr = [_shakeSwitch.on, _swipeUpSwitch.on, _tripleTapSwitch.on]
         let filtered = arr.filter { $0 == true }
