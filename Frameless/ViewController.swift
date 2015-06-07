@@ -238,7 +238,12 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
         var settingsController: SettingsViewController = storyboard?.instantiateViewControllerWithIdentifier("settingsController") as! SettingsViewController
         settingsController.delegate = self
         settingsController.modalPresentationStyle = .FormSheet
-        self.presentViewController(settingsController, animated: true, completion: nil)
+        
+        // Animated form sheet presentation was crashing on regular size class (all iPads, and iPhone 6+ landscape).
+        // Disabling the animation until the root cause of that crash is found.
+        let shouldAnimateSettingsPresentation: Bool = self.traitCollection.horizontalSizeClass != .Regular
+        
+        self.presentViewController(settingsController, animated: shouldAnimateSettingsPresentation, completion: nil)
     }
     
     
