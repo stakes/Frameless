@@ -34,27 +34,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func setUserSettingsDefaults() {
-        if NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.ShakeGesture.rawValue) == nil {
-            NSUserDefaults.standardUserDefaults().setValue(true, forKey: AppDefaultKeys.ShakeGesture.rawValue)
-        }
-        if NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.PanFromBottomGesture.rawValue) == nil {
-            NSUserDefaults.standardUserDefaults().setValue(true, forKey: AppDefaultKeys.PanFromBottomGesture.rawValue)
-        }
-        if NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.TripleTapGesture.rawValue) == nil {
-            NSUserDefaults.standardUserDefaults().setValue(true, forKey: AppDefaultKeys.TripleTapGesture.rawValue)
-        }
-        if NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.ForwardBackGesture.rawValue) == nil {
-            NSUserDefaults.standardUserDefaults().setValue(true, forKey: AppDefaultKeys.ForwardBackGesture.rawValue)
-        }
-        if NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.FramerBonjour.rawValue) == nil {
-            NSUserDefaults.standardUserDefaults().setValue(true, forKey: AppDefaultKeys.FramerBonjour.rawValue)
-        }
-        if NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.KeepAwake.rawValue) == nil {
-            NSUserDefaults.standardUserDefaults().setValue(false, forKey: AppDefaultKeys.KeepAwake.rawValue)
-        } else {
-            let isIdleTimer = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.KeepAwake.rawValue) as? Bool
-            UIApplication.sharedApplication().idleTimerDisabled = isIdleTimer!
-        }
+        
+        NSUserDefaults.standardUserDefaults().registerDefaults([
+            AppDefaultKeys.ShakeGesture.rawValue: true,
+            AppDefaultKeys.PanFromBottomGesture.rawValue: true,
+            AppDefaultKeys.TripleTapGesture.rawValue: true,
+            AppDefaultKeys.ForwardBackGesture.rawValue: true,
+            AppDefaultKeys.FramerBonjour.rawValue: true,
+            AppDefaultKeys.KeepAwake.rawValue: true,
+            AppDefaultKeys.SearchEngine.rawValue: SearchEngineType.DuckDuckGo.rawValue
+        ])
+        
+        let isIdleTimer = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.KeepAwake.rawValue) as? Bool
+        UIApplication.sharedApplication().idleTimerDisabled = isIdleTimer!
     }
     
     func createIntroViewController() -> OnboardingViewController {
