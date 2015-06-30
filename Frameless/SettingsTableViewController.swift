@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SettingsTableViewController: UITableViewController {
+class SettingsTableViewController: UITableViewController, UINavigationControllerDelegate {
 
     @IBOutlet weak var _forwardBackSwitch: UISwitch!
     @IBOutlet weak var _shakeSwitch: UISwitch!
@@ -18,8 +18,17 @@ class SettingsTableViewController: UITableViewController {
     @IBOutlet weak var _bonjourSwitch: UISwitch!
     @IBOutlet weak var _keepAwakeSwitch: UISwitch!
     
+    @IBOutlet weak var _closeButton: UIBarButtonItem!
+    @IBOutlet weak var _searchEngineLabel: UILabel!
+    
+    var delegate:ViewController?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setupNavigationBarAppearance()
+        let navigationController = self.navigationController
+        navigationController?.delegate = self
 
         _shakeSwitch.on = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.ShakeGesture.rawValue) as! Bool
         _swipeUpSwitch.on = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.PanFromBottomGesture.rawValue) as! Bool
@@ -45,8 +54,30 @@ class SettingsTableViewController: UITableViewController {
             rootViewController.stopSearching()
         }
     }
+    
+    func setupNavigationBarAppearance() {
+        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+        _closeButton.tintColor = UIColor.whiteColor()
+        var font = UIFont(name: "ClearSans-Bold", size: 18)
+        var textAttributes = [NSFontAttributeName: font!, NSForegroundColorAttributeName: UIColor.whiteColor()]
+        self.navigationController?.navigationBar.titleTextAttributes = textAttributes
+    }
+    
+    @IBAction func close(sender: AnyObject) {
+        self.dismissViewControllerAnimated(true, completion: {
+            self.delegate?.focusOnSearchBar()
+        })
+    }
 
-    // Settings
+    // MARK: - Settings
+    
+    func updateSearchEngineLabel() {
+        if let selectedEngineKey = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.SearchEngine.rawValue) as? String {
+            if let searchEngine = searchEngine(selectedEngineKey) {
+                _searchEngineLabel.text = "Search engine: \(searchEngine.displayName)"
+            }
+        }
+    }
     
     @IBAction func toggleShakeSwitch(sender: AnyObject) {
         var value = (sender as! UISwitch).on
@@ -91,13 +122,20 @@ class SettingsTableViewController: UITableViewController {
     func checkControlsSettings() -> Bool {
         var arr = [_swipeUpSwitch.on, _swipeDownSwitch.on, _tripleTapSwitch.on]
         let filtered = arr.filter { $0 == true }
-        var parent = self.parentViewController as! SettingsViewController
         if filtered.count == 0 {
-            parent.closeButtonEnabled(false)
+            _closeButton.enabled = false
             return false
         } else {
-            parent.closeButtonEnabled(true)
+            _closeButton.enabled = true
             return true
+        }
+    }
+    
+    // MARK: - UINavigationControllerDelegate
+    
+    func navigationController(navigationController: UINavigationController, willShowViewController viewController: UIViewController, animated: Bool) {
+        if viewController == self {
+            updateSearchEngineLabel()
         }
     }
 

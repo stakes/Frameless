@@ -250,10 +250,17 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     //MARK: -  Settings view
     
     func presentSettingsView(sender:UIButton!) {
-        var settingsController: SettingsViewController = storyboard?.instantiateViewControllerWithIdentifier("settingsController") as! SettingsViewController
-        settingsController.delegate = self
-        settingsController.modalPresentationStyle = .FormSheet
-        self.presentViewController(settingsController, animated: true, completion: nil)
+        
+        let settingsNavigationController = storyboard?.instantiateViewControllerWithIdentifier("settingsController") as! UINavigationController
+        
+        let settingsTableViewController = settingsNavigationController.topViewController as! SettingsTableViewController
+        settingsTableViewController.delegate = self
+        
+        // Animated form sheet presentation was crashing on regular size class (all iPads, and iPhone 6+ landscape).
+        // Disabling the animation until the root cause of that crash is found.
+        let shouldAnimateSettingsPresentation: Bool = self.traitCollection.horizontalSizeClass != .Regular
+        
+        self.presentViewController(settingsNavigationController, animated: shouldAnimateSettingsPresentation, completion: nil)
     }
     
     
@@ -330,7 +337,7 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     }
     
     func loadURL(urlString: String, andCloseSearch: Bool = false) {
-        let addrStr = httpifyString(urlString)
+        let addrStr = urlifyUserInput(urlString)
         let addr = NSURL(string: addrStr)
         if let webAddr = addr {
             let req = NSURLRequest(URL: webAddr)
@@ -344,18 +351,6 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
         
     }
     
-    func httpifyString(str: String) -> String {
-        let lcStr:String = (str as NSString).lowercaseString
-        if (count(lcStr) >= 7) {
-            if (lcStr.rangeOfString("http://") != nil) {
-                return str
-            } else if (lcStr.rangeOfString("https://") != nil) {
-                return str
-            }
-        }
-        return "http://"+str
-    }
-
     
     func displayLoadingErrorMessage() {
         _loadingErrorView.hidden = false

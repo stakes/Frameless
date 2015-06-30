@@ -62,3 +62,56 @@ func listAllAvailableFonts() {
     }
 }
 
+/// Given input from user, turn it into a URL, which could be either a direct URL or a search query
+func urlifyUserInput(input: String) -> String {
+    
+    // This method should really be tested, but I ran into trouble adding unit tests into this project due to some Cocoapods thing
+    
+    let normalizedInput = input.lowercaseStringWithLocale(NSLocale.currentLocale())
+    
+    // true = treat as URL, false = treat as search query
+    var looksLikeUrl = false
+    
+    // test various cases
+    if normalizedInput.hasPrefix("http://") || normalizedInput.hasPrefix("https://") {
+        // normal prefixed urls
+        looksLikeUrl = true
+    } else if (normalizedInput.rangeOfString("\\w:\\d+", options: .RegularExpressionSearch) != nil) {
+        // "internal:4000"
+        // "192.168.1.2:4000"
+        looksLikeUrl = true
+    } else if (normalizedInput.rangeOfString("\\w\\.\\w", options: .RegularExpressionSearch) != nil) {
+        // "example.com"
+        // "192.168.1.2"
+        looksLikeUrl = true
+    }
+    
+    if (looksLikeUrl) {
+        
+        // This is a URL. Prefix it if needed, otherwise just pass through
+        
+        var urlCandidate = normalizedInput
+        if normalizedInput.hasPrefix("http://") || normalizedInput.hasPrefix("https://") {
+            return urlCandidate
+        } else {
+            return "http://" + urlCandidate
+        }
+    } else {
+        
+        // This is a search query. Grab the correct URL template and drop the encoded query into it
+        // We are optimists here, assuming that userdefault value and search engine spec is always present,
+        // encoding never fails etc
+        
+        let engineType = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.SearchEngine.rawValue) as! String
+        let engine = searchEngine(engineType)
+        
+        let urlTemplate = engine!.queryURLTemplate
+        
+        let encodedInput = normalizedInput.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())
+        
+        let url = urlTemplate.stringByReplacingOccurrencesOfString("{query}", withString: encodedInput!)
+        
+        return url
+        
+    }
+}

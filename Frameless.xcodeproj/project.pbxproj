@@ -10,6 +10,8 @@
 		0D0741CD1A366F0800A6D270 /* FramerBonjour.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D0741CC1A366F0800A6D270 /* FramerBonjour.swift */; };
 		0D18E4271A2D8B1200337D91 /* FramelessSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D18E4261A2D8B1200337D91 /* FramelessSearchBar.swift */; };
 		0D4915AD1A29031B0018BEC6 /* PortraitOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D4915AC1A29031B0018BEC6 /* PortraitOnboardingViewController.swift */; };
+		0D80914D1B434012009D5562 /* SearchEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D80914C1B434012009D5562 /* SearchEngine.swift */; };
+		0D80914F1B43402D009D5562 /* SearchEnginesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D80914E1B43402D009D5562 /* SearchEnginesViewController.swift */; };
 		0DA5BB4F19FAD12800B2FDD1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA5BB4219FAD12800B2FDD1 /* AppDelegate.swift */; };
 		0DA5BB5119FAD12800B2FDD1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0DA5BB4519FAD12800B2FDD1 /* Main.storyboard */; };
 		0DA5BB5319FAD12800B2FDD1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0DA5BB4919FAD12800B2FDD1 /* Images.xcassets */; };
@@ -25,7 +27,6 @@
 		0DA5BBA019FDE2AC00B2FDD1 /* AppDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA5BB9F19FDE2AC00B2FDD1 /* AppDefaults.swift */; };
 		0DAB64421A09FDD00046287E /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DAB64411A09FDD00046287E /* SettingsTableViewController.swift */; };
 		0DD7EC1C1A72FC0F00BED2DC /* JSSAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DD7EC1B1A72FC0F00BED2DC /* JSSAlertView.swift */; };
-		0DD869F51A08A7A000BF196E /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DD869F41A08A7A000BF196E /* SettingsViewController.swift */; };
 		4CBAC84B197969C60DC1899B /* libPods-Frameless.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5ABAB4BA5DBE39442812DB61 /* libPods-Frameless.a */; };
 /* End PBXBuildFile section */
 
@@ -43,6 +44,8 @@
 		0D0741CC1A366F0800A6D270 /* FramerBonjour.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FramerBonjour.swift; sourceTree = "<group>"; };
 		0D18E4261A2D8B1200337D91 /* FramelessSearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FramelessSearchBar.swift; sourceTree = "<group>"; };
 		0D4915AC1A29031B0018BEC6 /* PortraitOnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PortraitOnboardingViewController.swift; sourceTree = "<group>"; };
+		0D80914C1B434012009D5562 /* SearchEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchEngine.swift; sourceTree = "<group>"; };
+		0D80914E1B43402D009D5562 /* SearchEnginesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchEnginesViewController.swift; sourceTree = "<group>"; };
 		0DA5BB1919FAD10F00B2FDD1 /* Frameless.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Frameless.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0DA5BB3119FAD10F00B2FDD1 /* FramelessTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FramelessTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0DA5BB4219FAD12800B2FDD1 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -64,7 +67,6 @@
 		0DA5BB9F19FDE2AC00B2FDD1 /* AppDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDefaults.swift; sourceTree = "<group>"; };
 		0DAB64411A09FDD00046287E /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		0DD7EC1B1A72FC0F00BED2DC /* JSSAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSSAlertView.swift; sourceTree = "<group>"; };
-		0DD869F41A08A7A000BF196E /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		5ABAB4BA5DBE39442812DB61 /* libPods-Frameless.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Frameless.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DC7091992089D05BD351118 /* Pods-Frameless.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Frameless.release.xcconfig"; path = "Pods/Target Support Files/Pods-Frameless/Pods-Frameless.release.xcconfig"; sourceTree = "<group>"; };
 		DAC237240666B2261B5088CD /* Pods-Frameless.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Frameless.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Frameless/Pods-Frameless.debug.xcconfig"; sourceTree = "<group>"; };
@@ -94,8 +96,8 @@
 			children = (
 				0D4915AC1A29031B0018BEC6 /* PortraitOnboardingViewController.swift */,
 				0DA5BB4E19FAD12800B2FDD1 /* ViewController.swift */,
-				0DD869F41A08A7A000BF196E /* SettingsViewController.swift */,
 				0DAB64411A09FDD00046287E /* SettingsTableViewController.swift */,
+				0D80914E1B43402D009D5562 /* SearchEnginesViewController.swift */,
 			);
 			name = viewcontrollers;
 			sourceTree = "<group>";
@@ -117,6 +119,7 @@
 				0D18E4261A2D8B1200337D91 /* FramelessSearchBar.swift */,
 				0DA5BB7119FC25F000B2FDD1 /* Helpers.swift */,
 				0D0741CC1A366F0800A6D270 /* FramerBonjour.swift */,
+				0D80914C1B434012009D5562 /* SearchEngine.swift */,
 			);
 			name = shared;
 			sourceTree = "<group>";
@@ -368,7 +371,8 @@
 				0DA5BB7219FC25F000B2FDD1 /* Helpers.swift in Sources */,
 				0DD7EC1C1A72FC0F00BED2DC /* JSSAlertView.swift in Sources */,
 				0DA5BB7919FC2EBF00B2FDD1 /* AppearanceBridge.m in Sources */,
-				0DD869F51A08A7A000BF196E /* SettingsViewController.swift in Sources */,
+				0D80914F1B43402D009D5562 /* SearchEnginesViewController.swift in Sources */,
+				0D80914D1B434012009D5562 /* SearchEngine.swift in Sources */,
 				0D18E4271A2D8B1200337D91 /* FramelessSearchBar.swift in Sources */,
 				0DAB64421A09FDD00046287E /* SettingsTableViewController.swift in Sources */,
 			);
