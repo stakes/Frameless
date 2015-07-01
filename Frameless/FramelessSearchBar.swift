@@ -54,7 +54,7 @@ class FramelessSearchBar: UISearchBar {
             for subview in searchBarSubviews! {
                 if subview.isKindOfClass(UITextField) {
                     searchField = subview as? UITextField
-                    searchField?.rightView?.backgroundColor = FRAMER_BLUE
+                    searchField?.rightView?.backgroundColor = BLUE
                     break
                 }
             }

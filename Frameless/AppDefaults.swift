@@ -18,10 +18,10 @@ enum AppDefaultKeys: String {
     case SearchEngine = "searchEngine"
 }
 
-let FRAMER_BLUE = UIColorFromHex(0x28AFFA)
-let FRAMER_GREEN = UIColorFromHex(0x7DDC16)
-let FRAMER_PURPLE = UIColorFromHex(0x9178E2)
-let FRAMER_CYAN = UIColorFromHex(0x2DD7AA)
+let BLUE = UIColorFromHex(0x28AFFA)
+let GREEN = UIColorFromHex(0x7DDC16)
+let PURPLE = UIColorFromHex(0x9178E2)
+let CYAN = UIColorFromHex(0x2DD7AA)
 
-let FRAMER_TEXT = UIColorFromHex(0x24262A)
-let FRAMER_LIGHT_TEXT = UIColorFromHex(0xAEB2BA)
+let TEXT = UIColorFromHex(0x24262A)
+let LIGHT_TEXT = UIColorFromHex(0xAEB2BA)

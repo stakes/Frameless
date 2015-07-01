@@ -111,7 +111,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         page05.iconWidth = 158
         page05.iconHeight = 258.5
         
-        let bgImage = UIImage.withColor(FRAMER_BLUE)
+        let bgImage = UIImage.withColor(BLUE)
         let onboardingViewController = PortraitOnboardingViewController(
             backgroundImage: bgImage,
             contents: [page01, page02, page03, page04, page05])

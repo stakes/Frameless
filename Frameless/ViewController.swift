@@ -386,7 +386,7 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
                 paragraphStyle.alignment = .Center
                 let alertStr = NSMutableAttributedString(string: "Framer Studio is running on your network. Connect now?")
                 alertStr.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyle, range: NSMakeRange(0, alertStr.length))
-                var alert = _alertBuilder.show(targetView as UIViewController!, title: "Framer Mirror", text: alertStr, cancelButtonText: "Cancel", buttonText: "Connect", color: FRAMER_BLUE)
+                var alert = _alertBuilder.show(targetView as UIViewController!, title: "Framer Mirror", text: alertStr, cancelButtonText: "Cancel", buttonText: "Connect", color: BLUE)
                 alert.addAction(handleAlertConfirmTap)
                 alert.setTextTheme(.Light)
                 alert.setTitleFont("HelveticaNeue-Bold")
