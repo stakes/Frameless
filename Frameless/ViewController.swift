@@ -1,6 +1,6 @@
 //
 //  ViewController.swift
-//  Unframed
+//  Frameless
 //
 //  Created by Jay Stakelon on 10/23/14.
 //  Copyright (c) 2014 Jay Stakelon. All rights reserved.

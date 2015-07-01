@@ -33,7 +33,7 @@ func searchEngine(type: SearchEngineType) -> SearchEngine {
             queryURLTemplate: "https://google.com/search?q={query}")
     case .DuckDuckGo:
         return SearchEngine(type: .DuckDuckGo, displayName: "DuckDuckGo",
-            queryURLTemplate: "https://duckduckgo.com/?q={query}&kp=-1&kae=%239E83E8")
+            queryURLTemplate: "https://duckduckgo.com/?q={query}&kp=-1&kj=%2328AFFA&kt=h&ka=h")
     }
 }
 
