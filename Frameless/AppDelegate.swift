@@ -73,7 +73,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = 4
         
-        let str01 = NSMutableAttributedString(string: "Framer for iOS is a full-screen\nbrowser that hides all controls")
+        let str01 = NSMutableAttributedString(string: "Frameless for iOS is a full-screen\nbrowser that hides all controls")
         str01.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyle, range: NSMakeRange(0, str01.length))
         
         let page01: OnboardingContentViewController = OnboardingContentViewController(title: nil, body: str01, image: UIImage(named: "introimage01"), buttonText: nil) {
@@ -88,7 +88,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         page02.iconWidth = 158
         page02.iconHeight = 258.5
         
-        let str03 = NSMutableAttributedString(string: "Shake the device\nto refresh your prototype")
+        let str03 = NSMutableAttributedString(string: "Shake the device\nto refresh content")
         str03.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyle, range: NSMakeRange(0, str03.length))
         let page03: OnboardingContentViewController = OnboardingContentViewController(title: nil, body: str03, image: UIImage(named: "introimage03"), buttonText: nil) {
         }
