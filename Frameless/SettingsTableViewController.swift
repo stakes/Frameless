@@ -10,14 +10,13 @@ import UIKit
 
 class SettingsTableViewController: UITableViewController, UINavigationControllerDelegate {
 
-    @IBOutlet weak var _forwardBackSwitch: UISwitch!
-    @IBOutlet weak var _shakeSwitch: UISwitch!
     @IBOutlet weak var _swipeUpSwitch: UISwitch!
     @IBOutlet weak var _swipeDownSwitch: UISwitch!
     @IBOutlet weak var _tripleTapSwitch: UISwitch!
-    @IBOutlet weak var _bonjourSwitch: UISwitch!
-    @IBOutlet weak var _keepAwakeSwitch: UISwitch!
-    
+    @IBOutlet weak var _forwardBackSwitch: UISwitch!
+    @IBOutlet weak var _shakeSwitch: UISwitch!
+    @IBOutlet weak var _framerSwitch: UISwitch!
+    @IBOutlet weak var _sleepSwitch: UISwitch!
     @IBOutlet weak var _closeButton: UIBarButtonItem!
     @IBOutlet weak var _searchEngineLabel: UILabel!
     
@@ -35,8 +34,8 @@ class SettingsTableViewController: UITableViewController, UINavigationController
         _swipeDownSwitch.on = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.PanFromTopGesture.rawValue) as! Bool
         _tripleTapSwitch.on = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.TripleTapGesture.rawValue)as! Bool
         _forwardBackSwitch.on = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.ForwardBackGesture.rawValue) as! Bool
-        _bonjourSwitch.on = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.FramerBonjour.rawValue) as! Bool
-        _keepAwakeSwitch.on = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.KeepAwake.rawValue) as! Bool
+        _framerSwitch.on = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.FramerBonjour.rawValue) as! Bool
+        _sleepSwitch.on = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.KeepAwake.rawValue) as! Bool
 
     }
 
@@ -46,7 +45,7 @@ class SettingsTableViewController: UITableViewController, UINavigationController
     }
     
     override func viewDidDisappear(animated: Bool) {
-        let value = _bonjourSwitch.on
+        let value = _framerSwitch.on
         let rootViewController = UIApplication.sharedApplication().keyWindow?.rootViewController as! ViewController
         if value == true {
             rootViewController.startSearching()
@@ -58,9 +57,9 @@ class SettingsTableViewController: UITableViewController, UINavigationController
     func setupNavigationBarAppearance() {
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         _closeButton.tintColor = UIColor.whiteColor()
-        var font = UIFont(name: "ClearSans-Bold", size: 18)
-        var textAttributes = [NSFontAttributeName: font!, NSForegroundColorAttributeName: UIColor.whiteColor()]
-        self.navigationController?.navigationBar.titleTextAttributes = textAttributes
+//        var font = UIFont(name: "ClearSans-Bold", size: 18)
+//        var textAttributes = [NSFontAttributeName: font!, NSForegroundColorAttributeName: UIColor.whiteColor()]
+//        self.navigationController?.navigationBar.titleTextAttributes = textAttributes
     }
     
     @IBAction func close(sender: AnyObject) {
@@ -113,7 +112,7 @@ class SettingsTableViewController: UITableViewController, UINavigationController
         NSUserDefaults.standardUserDefaults().setValue(value, forKey: AppDefaultKeys.FramerBonjour.rawValue)
     }
     
-    @IBAction func toggleKeepAwakeSwitch(sender: AnyObject) {
+    @IBAction func toggleSleepSwitch(sender: AnyObject) {
         var value = (sender as! UISwitch).on
         UIApplication.sharedApplication().idleTimerDisabled = value
         NSUserDefaults.standardUserDefaults().setValue(value, forKey: AppDefaultKeys.KeepAwake.rawValue)
