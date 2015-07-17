@@ -31,7 +31,7 @@ class FramelessSearchBar: UISearchBar {
         
         self.autocapitalizationType = .None
         self.returnKeyType = .Go
-        self.keyboardType = .URL
+        self.keyboardType = .WebSearch
         
         let helvetica = UIFont(name: "HelveticaNeue", size: 16)
         if let font = helvetica {

@@ -29,7 +29,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                 <color key="tintColor" red="0.091372095048427582" green="0.68040317296981812" blue="0.9921455979347229" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <offsetWrapper key="searchTextPositionAdjustment" horizontal="0.0" vertical="0.0"/>
-                                <textInputTraits key="textInputTraits" keyboardType="URL" returnKeyType="go"/>
+                                <textInputTraits key="textInputTraits" keyboardType="webSearch" returnKeyType="go"/>
                             </searchBar>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dZA-Ao-ZpJ">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
