@@ -9,7 +9,7 @@
 import UIKit
 import WebKit
 
-class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarDelegate, UIGestureRecognizerDelegate, WKNavigationDelegate, FramerBonjourDelegate {
+class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarDelegate, UIGestureRecognizerDelegate, WKNavigationDelegate, FramerBonjourDelegate, UITableViewDataSource {
 
 
     
@@ -42,6 +42,10 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     var _framerAddress: String?
     
     var _alertBuilder: JSSAlertView = JSSAlertView()
+    
+    var _suggestionsTableView: UITableView?
+    var _history: Array<HistoryEntry> = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.History.rawValue) as! Array<HistoryEntry>
+    var _historyDisplayURLs: Array<HistoryEntry> = Array<HistoryEntry>()
     
     // Loading progress? Fake it till you make it.
     var _progressTimer: NSTimer?
@@ -191,6 +195,7 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     }
     
     func hideSearch() {
+        removeSuggestionsTableView()
         _searchBar.resignFirstResponder()
         UIView.animateWithDuration(0.5, delay: 0.05, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.5, options: nil, animations: {
             self._searchBar.transform = CGAffineTransformMakeTranslation(0, -44)
@@ -283,6 +288,11 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     }
     
     func webView(webView: WKWebView, didFinishNavigation navigation: WKNavigation!) {
+        if let urlStr = _webView!.URL?.absoluteString as String! {
+            let historyEntry = HistoryEntry(url: webView.URL!, urlString: urlStr, title: webView.title)
+            _history.append(historyEntry)
+        }
+        removeSuggestionsTableView()
         _isCurrentPageLoaded = true
         _loadingTimer!.invalidate()
         _isWebViewLoading = false
@@ -438,6 +448,7 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     }
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        updateSuggestions(searchText)
         _searchBar.refreshButton().enabled = false
     }
     
@@ -454,6 +465,51 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
         coordinator.animateAlongsideTransition({ context in
             self._webView!.frame = CGRectMake(0, 0, size.width, size.height)
         }, completion: nil)
+    }
+    
+    //MARK: - History & favorites suggestions
+    
+    func updateSuggestions(text: String) {
+        if text == "" {
+            removeSuggestionsTableView()
+        } else {
+            showSuggestionsTableView()
+        }
+    }
+    
+    func showSuggestionsTableView() {
+        if _suggestionsTableView == nil {
+            let size = UIScreen.mainScreen().bounds.size
+            _suggestionsTableView = UITableView(frame: CGRectMake(0, 44, size.width, size.height-44))
+            _suggestionsTableView?.dataSource = self
+            self.view.addSubview(_suggestionsTableView!)
+        }
+        _historyDisplayURLs.removeAll(keepCapacity: false)
+        for entry:HistoryEntry in _history {
+            if entry.title?.lowercaseString.rangeOfString(_searchBar.text) != nil {
+                _historyDisplayURLs.append(entry)
+            } else if entry.urlString.lowercaseString.rangeOfString(_searchBar.text) != nil {
+                _historyDisplayURLs.append(entry)
+            }
+        }
+        _suggestionsTableView?.reloadData()
+    }
+    
+    func removeSuggestionsTableView() {
+        _suggestionsTableView?.removeFromSuperview()
+        _suggestionsTableView = nil
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        var cell:UITableViewCell = UITableViewCell(style: .Subtitle, reuseIdentifier: nil)
+        var entry = _historyDisplayURLs[indexPath.row]
+        cell.textLabel?.text = entry.title
+        cell.detailTextLabel?.text = entry.urlString
+        return cell
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return _historyDisplayURLs.count
     }
 
 

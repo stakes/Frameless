@@ -7,6 +7,8 @@
 //
 
 enum AppDefaultKeys: String {
+    case History = "browserHistory"
+    case Favorites = "browserFavorites"
     case IntroVersionSeen = "introVersionSeen"
     case ShakeGesture = "shake"
     case PanFromBottomGesture = "panFromBottom"
