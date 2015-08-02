@@ -44,7 +44,7 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     var _alertBuilder: JSSAlertView = JSSAlertView()
     
     var _suggestionsTableView: UITableView?
-    var _history: Array<HistoryEntry> = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.History.rawValue) as! Array<HistoryEntry>
+    var _history: Array<HistoryEntry>?
     var _historyDisplayURLs: Array<HistoryEntry> = Array<HistoryEntry>()
     
     // Loading progress? Fake it till you make it.
@@ -119,6 +119,8 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
         if NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.FramerBonjour.rawValue) as! Bool == true {
             _framerBonjour.start()
         }
+        
+        _history = readHistory()
             
         _progressView.hidden = true
     }
@@ -288,10 +290,7 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     }
     
     func webView(webView: WKWebView, didFinishNavigation navigation: WKNavigation!) {
-        if let urlStr = _webView!.URL?.absoluteString as String! {
-            let historyEntry = HistoryEntry(url: webView.URL!, urlString: urlStr, title: webView.title)
-            _history.append(historyEntry)
-        }
+        addToHistory(webView)
         removeSuggestionsTableView()
         _isCurrentPageLoaded = true
         _loadingTimer!.invalidate()
@@ -485,7 +484,7 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
             self.view.addSubview(_suggestionsTableView!)
         }
         _historyDisplayURLs.removeAll(keepCapacity: false)
-        for entry:HistoryEntry in _history {
+        for entry:HistoryEntry in _history! {
             if entry.title?.lowercaseString.rangeOfString(_searchBar.text) != nil {
                 _historyDisplayURLs.append(entry)
             } else if entry.urlString.lowercaseString.rangeOfString(_searchBar.text) != nil {
@@ -511,7 +510,40 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return _historyDisplayURLs.count
     }
-
+    
+    func addToHistory(webView: WKWebView) {
+        if let urlStr = _webView!.URL?.absoluteString as String! {
+            if verifyUniquenessOfURL(urlStr) {
+                let historyEntry = HistoryEntry(url: webView.URL!, urlString: urlStr, title: webView.title)
+                _history?.append(historyEntry)
+                saveHistory()
+            }
+        }
+    }
+    
+    func verifyUniquenessOfURL(urlStr: String) -> Bool {
+        for entry:HistoryEntry in _history! {
+            if entry.urlString.lowercaseString.rangeOfString(urlStr) != nil {
+                return false
+            }
+        }
+        return true
+    }
+    
+    func saveHistory() {
+        let archivedObject = NSKeyedArchiver.archivedDataWithRootObject(_history as Array<HistoryEntry>!)
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.setObject(archivedObject, forKey: AppDefaultKeys.History.rawValue  )
+        defaults.synchronize()
+    }
+    
+    func readHistory() -> Array<HistoryEntry>? {
+        if let unarchivedObject = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.History.rawValue) as? NSData {
+            return (NSKeyedUnarchiver.unarchiveObjectWithData(unarchivedObject) as? [HistoryEntry])!
+        } else {
+            return Array<HistoryEntry>()
+        }
+    }
 
 }
 
