@@ -514,16 +514,31 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     func addToHistory(webView: WKWebView) {
         if let urlStr = _webView!.URL?.absoluteString as String! {
             if verifyUniquenessOfURL(urlStr) {
-                let historyEntry = HistoryEntry(url: webView.URL!, urlString: urlStr, title: webView.title)
+                let historyEntry = HistoryEntry(url: webView.URL!, urlString: createDisplayURLString(webView.URL!), title: webView.title)
                 _history?.append(historyEntry)
                 saveHistory()
             }
         }
     }
     
+    func createDisplayURLString(url: NSURL) -> String {
+        var str = url.resourceSpecifier!
+        if str.hasPrefix("//") {
+            str = str.substringFromIndex(advance(str.startIndex, 2))
+        }
+        if str.hasPrefix("www.") {
+            str = str.substringFromIndex(advance(str.startIndex, 4))
+        }
+        if str.hasSuffix("/") {
+            str = str.substringToIndex(str.endIndex.predecessor())
+        }
+        return str
+    }
+    
     func verifyUniquenessOfURL(urlStr: String) -> Bool {
         for entry:HistoryEntry in _history! {
-            if entry.urlString.lowercaseString.rangeOfString(urlStr) != nil {
+            let fullURLString = entry.url.absoluteString as String!
+            if fullURLString.lowercaseString.rangeOfString(urlStr) != nil {
                 return false
             }
         }
@@ -533,7 +548,7 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     func saveHistory() {
         let archivedObject = NSKeyedArchiver.archivedDataWithRootObject(_history as Array<HistoryEntry>!)
         let defaults = NSUserDefaults.standardUserDefaults()
-        defaults.setObject(archivedObject, forKey: AppDefaultKeys.History.rawValue  )
+        defaults.setObject(archivedObject, forKey: AppDefaultKeys.History.rawValue)
         defaults.synchronize()
     }
     
