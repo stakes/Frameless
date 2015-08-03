@@ -66,6 +66,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             AppDefaultKeys.KeepAwake.rawValue: true,
             AppDefaultKeys.SearchEngine.rawValue: SearchEngineType.DuckDuckGo.rawValue
         ])
+//        let defaults = NSUserDefaults.standardUserDefaults()
+//        defaults.setObject(Array<HistoryEntry>(), forKey: AppDefaultKeys.History.rawValue)
         let isIdleTimer = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.KeepAwake.rawValue) as? Bool
         UIApplication.sharedApplication().idleTimerDisabled = isIdleTimer!
     }
