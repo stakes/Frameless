@@ -23,7 +23,6 @@ class HistoryTableViewCell: UITableViewCell {
         self.textLabel?.font = UIFont(name: "HelveticaNeue", size: 16)
         self.detailTextLabel?.textColor = UIColorFromHex(0xA5A6A9)
         self.detailTextLabel?.font = UIFont(name: "HelveticaNeue", size: 12)
-        println("Ohai")
     }
     
     required init(coder aDecoder: NSCoder) {
