@@ -485,6 +485,7 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
             _suggestionsTableView = UITableView(frame: CGRectMake(0, 44, size.width, size.height-44))
             _suggestionsTableView?.delegate = self
             _suggestionsTableView?.dataSource = self
+            _suggestionsTableView?.separatorColor = UIColorFromHex(0xE9E9E9)
 //            self.view.addSubview(_suggestionsTableView!)
             self.view.insertSubview(_suggestionsTableView!, belowSubview: _settingsBarView!)
         }
