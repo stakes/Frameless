@@ -43,6 +43,7 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     
     var _alertBuilder: JSSAlertView = JSSAlertView()
     
+    var _keyboardHeight:CGFloat = 216
     var _suggestionsTableView: UITableView?
     var _history: Array<HistoryEntry>?
     var _historyDisplayURLs: Array<HistoryEntry> = Array<HistoryEntry>()
@@ -114,6 +115,7 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
 
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name:UIKeyboardWillShowNotification, object: nil);
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name:UIKeyboardWillHideNotification, object: nil);
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardShown:"), name: UIKeyboardDidShowNotification, object: nil)
         
         _framerBonjour.delegate = self
         if NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.FramerBonjour.rawValue) as! Bool == true {
@@ -141,6 +143,14 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     
     
     //MARK: - UI show/hide
+    
+    func keyboardShown(sender: NSNotification) {
+        let info  = sender.userInfo!
+        let value: AnyObject = info[UIKeyboardFrameEndUserInfoKey]!
+        let rawFrame = value.CGRectValue()
+        let keyboardFrame = view.convertRect(rawFrame, fromView: nil)
+        _keyboardHeight = keyboardFrame.height
+    }
     
     func keyboardWillShow(sender: NSNotification) {
         if _searchBar.isFirstResponder() {
@@ -482,7 +492,8 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     func showSuggestionsTableView() {
         if _suggestionsTableView == nil {
             let size = UIScreen.mainScreen().bounds.size
-            _suggestionsTableView = UITableView(frame: CGRectMake(0, 44, size.width, size.height-44))
+            let availHeight = size.height - 44 - CGFloat(_keyboardHeight)
+            _suggestionsTableView = UITableView(frame: CGRectMake(0, 44, size.width, availHeight))
             _suggestionsTableView?.delegate = self
             _suggestionsTableView?.dataSource = self
             _suggestionsTableView?.separatorColor = UIColorFromHex(0xE9E9E9)
