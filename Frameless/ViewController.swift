@@ -349,6 +349,10 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
         let addrStr = urlifyUserInput(urlString)
         let addr = NSURL(string: addrStr)
         if let webAddr = addr {
+            if let loadTimer = _loadingTimer {
+                loadTimer.invalidate()
+            }
+            _webView!.stopLoading()
             let req = NSURLRequest(URL: webAddr)
             _webView!.loadRequest(req)
         } else {
