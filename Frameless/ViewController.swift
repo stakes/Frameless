@@ -43,6 +43,7 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     
     var _alertBuilder: JSSAlertView = JSSAlertView()
     
+    let _maxHistoryItems = 50
     var _keyboardHeight:CGFloat = 216
     var _suggestionsTableView: UITableView?
     var _history: Array<HistoryEntry>?
@@ -538,7 +539,19 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
             if verifyUniquenessOfURL(urlStr) {
                 let historyEntry = HistoryEntry(url: webView.URL!, urlString: createDisplayURLString(webView.URL!), title: webView.title)
                 _history?.append(historyEntry)
+                trimHistory()
                 saveHistory()
+            }
+        }
+    }
+    
+    func trimHistory() {
+        if let arr = _history {
+            if arr.count > _maxHistoryItems {
+                var count = arr.count as Int
+                var extraCount = count - _maxHistoryItems
+                var newarr = arr[extraCount...(arr.endIndex-1)]
+                _history = Array<HistoryEntry>(newarr)
             }
         }
     }
