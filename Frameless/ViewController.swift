@@ -497,8 +497,9 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
             _suggestionsTableView = UITableView(frame: CGRectMake(0, 44, size.width, availHeight))
             _suggestionsTableView?.delegate = self
             _suggestionsTableView?.dataSource = self
-            _suggestionsTableView?.separatorColor = UIColorFromHex(0xE9E9E9)
-//            self.view.addSubview(_suggestionsTableView!)
+            _suggestionsTableView?.backgroundColor = UIColor.clearColor()
+            _suggestionsTableView?.separatorColor = UIColorFromHex(0x000000, alpha: 0.1)
+            _suggestionsTableView?.tableFooterView = UIView(frame: CGRectZero)
             self.view.insertSubview(_suggestionsTableView!, belowSubview: _settingsBarView!)
         }
         _historyDisplayURLs.removeAll(keepCapacity: false)
@@ -520,6 +521,7 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell:HistoryTableViewCell = HistoryTableViewCell(style: .Subtitle, reuseIdentifier: nil)
         var entry = _historyDisplayURLs[indexPath.row]
+        cell.backgroundColor = UIColor.clearColor()
         cell.entry = entry
         return cell
     }
