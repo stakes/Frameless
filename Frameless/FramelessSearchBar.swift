@@ -73,11 +73,11 @@ class FramelessSearchBar: UISearchBar {
             }
         }
     }
-    
+
     func selectAllText() {
         if let field = _field {
             if field.text != "" {
-                field.selectAll(self)
+                field.selectAll(nil)
             }
         }
     }
