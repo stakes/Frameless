@@ -87,17 +87,15 @@ func urlifyUserInput(input: String) -> String {
     }
     
     if (looksLikeUrl) {
-        
         // This is a URL. Prefix it if needed, otherwise just pass through
         
-        var urlCandidate = normalizedInput
+        var urlCandidate = input
         if normalizedInput.hasPrefix("http://") || normalizedInput.hasPrefix("https://") {
             return urlCandidate
         } else {
             return "http://" + urlCandidate
         }
     } else {
-        
         // This is a search query. Grab the correct URL template and drop the encoded query into it
         // We are optimists here, assuming that userdefault value and search engine spec is always present,
         // encoding never fails etc
