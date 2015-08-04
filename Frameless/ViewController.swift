@@ -47,6 +47,7 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     var _keyboardHeight:CGFloat = 216
     var _suggestionsTableView: UITableView?
     var _history: Array<HistoryEntry>?
+    var _historyTopMatches: Array<HistoryEntry> = Array<HistoryEntry>()
     var _historyDisplayURLs: Array<HistoryEntry> = Array<HistoryEntry>()
     
     // Loading progress? Fake it till you make it.
@@ -401,20 +402,21 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
         if _confirmFramerConnect {
             if !_alertBuilder.isAlertOpen {
                 var windowCount = UIApplication.sharedApplication().windows.count
-                var targetView = UIApplication.sharedApplication().windows[windowCount-1].rootViewController!
-                _framerAddress = address
-                
-                let paragraphStyle = NSMutableParagraphStyle()
-                paragraphStyle.lineSpacing = 2
-                paragraphStyle.alignment = .Center
-                let alertStr = NSMutableAttributedString(string: "Framer Studio is running on your network. Connect now?")
-                alertStr.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyle, range: NSMakeRange(0, alertStr.length))
-                var alert = _alertBuilder.show(targetView as UIViewController!, title: "Framer Mirror", text: alertStr, cancelButtonText: "Cancel", buttonText: "Connect", color: BLUE)
-                alert.addAction(handleAlertConfirmTap)
-                alert.setTextTheme(.Light)
-                alert.setTitleFont("HelveticaNeue-Bold")
-                alert.setTextFont("HelveticaNeue")
-                alert.setButtonFont("HelveticaNeue")
+                if let targetView = UIApplication.sharedApplication().windows[windowCount-1].rootViewController! {
+                    _framerAddress = address
+                    
+                    let paragraphStyle = NSMutableParagraphStyle()
+                    paragraphStyle.lineSpacing = 2
+                    paragraphStyle.alignment = .Center
+                    let alertStr = NSMutableAttributedString(string: "Framer Studio is running on your network. Connect now?")
+                    alertStr.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyle, range: NSMakeRange(0, alertStr.length))
+                    var alert = _alertBuilder.show(targetView as UIViewController!, title: "Framer Mirror", text: alertStr, cancelButtonText: "Cancel", buttonText: "Connect", color: BLUE)
+                    alert.addAction(handleAlertConfirmTap)
+                    alert.setTextTheme(.Light)
+                    alert.setTitleFont("HelveticaNeue-Bold")
+                    alert.setTextFont("HelveticaNeue")
+                    alert.setButtonFont("HelveticaNeue")
+                }
             }
         } else {
             loadFramer(address)
@@ -502,13 +504,43 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
             _suggestionsTableView?.tableFooterView = UIView(frame: CGRectZero)
             self.view.insertSubview(_suggestionsTableView!, belowSubview: _settingsBarView!)
         }
+        populateSuggestionsTableView()
+    }
+    
+    func populateSuggestionsTableView() {
         _historyDisplayURLs.removeAll(keepCapacity: false)
+        _historyTopMatches.removeAll(keepCapacity: false)
+        var stringToFind = _searchBar.text
+        var framerMatches = Array<HistoryEntry>()
+        var domainMatches = Array<HistoryEntry>()
+        var titleMatches = Array<HistoryEntry>()
         for entry:HistoryEntry in _history! {
-            if entry.title?.lowercaseString.rangeOfString(_searchBar.text) != nil {
-                _historyDisplayURLs.append(entry)
-            } else if entry.urlString.lowercaseString.rangeOfString(_searchBar.text) != nil {
-                _historyDisplayURLs.append(entry)
+            var entryUrl = entry.urlString.lowercaseString
+            var entryTitle = entry.title?.lowercaseString
+            println(entryUrl)
+            println(stringToFind)
+            if entryTitle?.rangeOfString(stringToFind) != nil && entryTitle?.rangeOfString("framer studio") != nil {
+                // Put Framer Studio home in the top matches
+                _historyTopMatches.append(entry)
+            } else if entryUrl.rangeOfString(stringToFind) != nil {
+                if stringToFind.lowercaseString.rangeOfString(".framer") != nil {
+                    // is it a framer project URL? these go first
+                    framerMatches.append(entry)
+                } else {
+                    if entryUrl.hasPrefix(stringToFind) && entryUrl.lowercaseString.rangeOfString(".framer") == nil {
+                        // is it a domain match? if it's a letter-for-letter match put in top matches
+                        // unless it's a local Framer Studio URL because that list will get long
+                        _historyTopMatches.append(entry)
+                    } else {
+                        // otherwise add to history
+                        domainMatches.append(entry)
+                    }
+                }
+            } else if entryTitle?.rangeOfString(stringToFind) != nil {
+                // is it a title match? cause these go last
+                titleMatches.append(entry)
             }
+        _historyDisplayURLs = framerMatches + domainMatches + titleMatches
         }
         _suggestionsTableView?.reloadData()
     }
@@ -518,9 +550,19 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
         _suggestionsTableView = nil
     }
     
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 2
+    }
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        println(indexPath.section)
         var cell:HistoryTableViewCell = HistoryTableViewCell(style: .Subtitle, reuseIdentifier: nil)
-        var entry = _historyDisplayURLs[indexPath.row]
+        var entry:HistoryEntry
+        if indexPath.section == 0 {
+            entry = _historyTopMatches[indexPath.row]
+        } else {
+            entry = _historyDisplayURLs[indexPath.row]
+        }
         cell.backgroundColor = UIColor.clearColor()
         cell.entry = entry
         return cell
@@ -533,7 +575,19 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return _historyDisplayURLs.count
+        if section == 0 {
+            return _historyTopMatches.count
+        } else {
+            return _historyDisplayURLs.count
+        }
+    }
+    
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0 {
+            return "Top Matches"
+        } else {
+            return "History"
+        }
     }
     
     func addToHistory(webView: WKWebView) {
@@ -575,7 +629,7 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     func verifyUniquenessOfURL(urlStr: String) -> Bool {
         for entry:HistoryEntry in _history! {
             let fullURLString = entry.url.absoluteString as String!
-            if fullURLString.lowercaseString.rangeOfString(urlStr) != nil {
+            if fullURLString == urlStr {
                 return false
             }
         }
