@@ -517,15 +517,13 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
         for entry:HistoryEntry in _history! {
             var entryUrl = entry.urlString.lowercaseString
             var entryTitle = entry.title?.lowercaseString
-            println(entryUrl)
-            println(stringToFind)
-            if entryTitle?.rangeOfString(stringToFind) != nil && entryTitle?.rangeOfString("framer studio") != nil {
+            if entryTitle?.rangeOfString(stringToFind) != nil && entryTitle?.rangeOfString("framer studio projects") != nil {
                 // Put Framer Studio home in the top matches
-                _historyTopMatches.append(entry)
+                _historyTopMatches.insert(entry, atIndex: 0)
             } else if entryUrl.rangeOfString(stringToFind) != nil {
-                if stringToFind.lowercaseString.rangeOfString(".framer") != nil {
+                if entryUrl.lowercaseString.rangeOfString(".framer") != nil {
                     // is it a framer project URL? these go first
-                    framerMatches.append(entry)
+                    framerMatches.insert(entry, atIndex: 0)
                 } else {
                     if entryUrl.hasPrefix(stringToFind) && entryUrl.lowercaseString.rangeOfString(".framer") == nil {
                         // is it a domain match? if it's a letter-for-letter match put in top matches
@@ -533,12 +531,12 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
                         _historyTopMatches.append(entry)
                     } else {
                         // otherwise add to history
-                        domainMatches.append(entry)
+                        domainMatches.insert(entry, atIndex: 0)
                     }
                 }
             } else if entryTitle?.rangeOfString(stringToFind) != nil {
                 // is it a title match? cause these go last
-                titleMatches.append(entry)
+                titleMatches.insert(entry, atIndex: 0)
             }
         _historyDisplayURLs = framerMatches + domainMatches + titleMatches
         }
@@ -551,11 +549,11 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        println(_historyTopMatches.count)
         return 2
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        println(indexPath.section)
         var cell:HistoryTableViewCell = HistoryTableViewCell(style: .Subtitle, reuseIdentifier: nil)
         var entry:HistoryEntry
         if indexPath.section == 0 {
