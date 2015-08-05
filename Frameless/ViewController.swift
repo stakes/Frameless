@@ -496,12 +496,11 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
         if _suggestionsTableView == nil {
             let size = UIScreen.mainScreen().bounds.size
             let availHeight = size.height - 44 - CGFloat(_keyboardHeight)
-            _suggestionsTableView = UITableView(frame: CGRectMake(0, 44, size.width, availHeight))
+            _suggestionsTableView = UITableView(frame: CGRectMake(0, 44, size.width, availHeight), style: .Grouped)
             _suggestionsTableView?.delegate = self
             _suggestionsTableView?.dataSource = self
             _suggestionsTableView?.backgroundColor = UIColor.clearColor()
             _suggestionsTableView?.separatorColor = UIColorFromHex(0x000000, alpha: 0.1)
-            _suggestionsTableView?.tableFooterView = UIView(frame: CGRectZero)
             self.view.insertSubview(_suggestionsTableView!, belowSubview: _settingsBarView!)
         }
         populateSuggestionsTableView()
@@ -591,7 +590,8 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     }
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        var label = UILabel(frame: CGRectMake(14, 4, 320, 20))
+        let size = UIScreen.mainScreen().bounds.size
+        var label = UILabel(frame: CGRectMake(14, 4, size.width - 28, 13))
         label.font = UIFont(name: "HelveticaNeue", size: 13)
         label.textColor = UIColorFromHex(0x000000, alpha: 0.5)
         label.text = self.tableView(tableView, titleForHeaderInSection: section)?.uppercaseString
@@ -600,7 +600,14 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
         headerView.backgroundColor = UIColorFromHex(0x000000, alpha: 0.05)
         headerView.addSubview(label)
         return headerView
-
+    }
+    
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 21
+    }
+    
+    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return CGFloat.min
     }
     
     func addToHistory(webView: WKWebView) {
