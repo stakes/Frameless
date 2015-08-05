@@ -549,7 +549,6 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        println(_historyTopMatches.count)
         return 2
     }
     
@@ -581,11 +580,27 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     }
     
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if section == 0 {
+        var rows = self.tableView(tableView, numberOfRowsInSection: section)
+        if rows == 0 {
+            return ""
+        } else if section == 0 {
             return "Top Matches"
         } else {
             return "History"
         }
+    }
+    
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        var label = UILabel(frame: CGRectMake(14, 4, 320, 20))
+        label.font = UIFont(name: "HelveticaNeue", size: 13)
+        label.textColor = UIColorFromHex(0x000000, alpha: 0.5)
+        label.text = self.tableView(tableView, titleForHeaderInSection: section)?.uppercaseString
+
+        var headerView = UIView()
+        headerView.backgroundColor = UIColorFromHex(0x000000, alpha: 0.05)
+        headerView.addSubview(label)
+        return headerView
+
     }
     
     func addToHistory(webView: WKWebView) {
