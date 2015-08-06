@@ -529,7 +529,7 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     func showSuggestionsTableView() {   
         if _suggestionsTableView == nil {
             let size = UIScreen.mainScreen().bounds.size
-            let availHeight = size.height - 44 - CGFloat(_keyboardHeight)
+            let availHeight = size.height - 88 - CGFloat(_keyboardHeight)
             _suggestionsTableView = UITableView(frame: CGRectMake(0, 44, size.width, availHeight), style: .Grouped)
             _suggestionsTableView?.delegate = self
             _suggestionsTableView?.dataSource = self
