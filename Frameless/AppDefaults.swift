@@ -30,5 +30,6 @@ let CYAN = UIColorFromHex(0x2DD7AA)
 let TEXT = UIColorFromHex(0x24262A)
 let LIGHT_TEXT = UIColorFromHex(0xAEB2BA)
 let LIGHT_GREY = UIColorFromHex(0xF2F5F9)
+let LIGHT_GREY_BORDER = UIColorFromHex(0xCACED3)
 
 let HISTORY_UPDATED_NOTIFICATION = "HistoryUpdatedNotification"
