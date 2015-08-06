@@ -135,14 +135,13 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name:UIKeyboardWillShowNotification, object: nil);
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name:UIKeyboardWillHideNotification, object: nil);
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardShown:"), name: UIKeyboardDidShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("historyUpdated:"), name: HISTORY_UPDATED_NOTIFICATION, object: nil)
         
         _framerBonjour.delegate = self
         if NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.FramerBonjour.rawValue) as! Bool == true {
             _framerBonjour.start()
         }
         
-        checkHistoryButton()
-            
         _progressView.hidden = true
     }
     
@@ -321,7 +320,6 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     func webView(webView: WKWebView, didFinishNavigation navigation: WKNavigation!) {
         HistoryManager.manager.addToHistory(webView)
         removeSuggestionsTableView()
-        checkHistoryButton()
         _isCurrentPageLoaded = true
         _loadingTimer!.invalidate()
         _isWebViewLoading = false
@@ -502,10 +500,14 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     
     //MARK: - History & favorites suggestions
     
+    func historyUpdated(notification: NSNotification) {
+        checkHistoryButton()
+        _suggestionsTableView?.reloadData()
+    }
+    
     func didTapClearHistory(sender: UIButton!) {
         HistoryManager.manager.clearHistory()
         _suggestionsTableView?.reloadData()
-        checkHistoryButton()
     }
     
     func checkHistoryButton() {
@@ -540,7 +542,6 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     
     func populateSuggestionsTableView() {
         HistoryManager.manager.getHistoryDataFor(_searchBar.text)
-        _suggestionsTableView?.reloadData()
     }
     
     func removeSuggestionsTableView() {

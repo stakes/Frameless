@@ -17,8 +17,7 @@ class HistoryManager: NSObject {
     
     var totalEntries: Int {
         get {
-            println(self._fullHistory!.count)
-            return self._fullHistory!.count
+            return _fullHistory!.count
         }
     }
     var matches: Array<HistoryEntry> = Array<HistoryEntry>()
@@ -61,6 +60,7 @@ class HistoryManager: NSObject {
             }
             history = framerMatches + domainMatches + titleMatches
         }
+        NSNotificationCenter.defaultCenter().postNotificationName(HISTORY_UPDATED_NOTIFICATION, object: nil)
     }
     
     func addToHistory(webView: WKWebView) {
@@ -71,6 +71,7 @@ class HistoryManager: NSObject {
                     _fullHistory?.append(historyEntry)
                     trimHistory()
                     saveHistory()
+                    NSNotificationCenter.defaultCenter().postNotificationName(HISTORY_UPDATED_NOTIFICATION, object: nil)
                 }
             }
         }
@@ -116,6 +117,7 @@ class HistoryManager: NSObject {
         matches.removeAll(keepCapacity: false)
         _fullHistory?.removeAll(keepCapacity: false)
         saveHistory()
+        NSNotificationCenter.defaultCenter().postNotificationName(HISTORY_UPDATED_NOTIFICATION, object: nil)
     }
     
     func saveHistory() {

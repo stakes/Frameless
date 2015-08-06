@@ -122,6 +122,9 @@ class SettingsTableViewController: UITableViewController, UINavigationController
     
     @IBAction func toggleHistorySwitch(sender: AnyObject) {
         var value = (sender as! UISwitch).on
+        if !value {
+            HistoryManager.manager.clearHistory()
+        }
         NSUserDefaults.standardUserDefaults().setValue(value, forKey: AppDefaultKeys.KeepHistory.rawValue)
     }
     
