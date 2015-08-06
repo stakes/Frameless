@@ -49,6 +49,7 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     var _history: Array<HistoryEntry>?
     var _historyTopMatches: Array<HistoryEntry> = Array<HistoryEntry>()
     var _historyDisplayURLs: Array<HistoryEntry> = Array<HistoryEntry>()
+    var _clearHistoryButton: UIButton?
     
     // Loading progress? Fake it till you make it.
     var _progressTimer: NSTimer?
@@ -117,21 +118,23 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
         settingsFrame.origin.x = _settingsBarView!.frame.width - settingsFrame.width - 14
         settingsFrame.origin.y = 7
         settingsButton.frame = settingsFrame
-        var clearHistoryButton = UIButton(frame: CGRectZero)
-        clearHistoryButton.setTitle("Clear History", forState: .Normal)
-        clearHistoryButton.setTitleColor(BLUE, forState: .Normal)
-        clearHistoryButton.setTitleColor(HIGHLIGHT_BLUE, forState: .Highlighted)
-        clearHistoryButton.titleLabel!.font = UIFont(name: "HelveticaNeue", size: 14)
-        clearHistoryButton.sizeToFit()
-        var clearFrame = clearHistoryButton.frame
+        _clearHistoryButton = UIButton(frame: CGRectZero)
+        _clearHistoryButton!.setTitle("Clear History", forState: .Normal)
+        _clearHistoryButton!.setTitleColor(BLUE, forState: .Normal)
+        _clearHistoryButton!.setTitleColor(HIGHLIGHT_BLUE, forState: .Highlighted)
+        _clearHistoryButton!.setTitleColor(LIGHT_TEXT, forState: .Disabled)
+        _clearHistoryButton!.titleLabel!.font = UIFont(name: "HelveticaNeue", size: 14)
+        _clearHistoryButton!.sizeToFit()
+        var clearFrame = _clearHistoryButton!.frame
         clearFrame.origin.x = 14
         clearFrame.origin.y = 7
-        clearHistoryButton.frame = clearFrame
+        _clearHistoryButton!.frame = clearFrame
+        checkHistoryButton()
 
         settingsButton.addTarget(self, action: "presentSettingsView:", forControlEvents: .TouchUpInside)
-        clearHistoryButton.addTarget(self, action: "didTapClearHistory:", forControlEvents: .TouchUpInside)
+        _clearHistoryButton!.addTarget(self, action: "didTapClearHistory:", forControlEvents: .TouchUpInside)
         _settingsBarView?.addSubview(settingsButton)
-        _settingsBarView?.addSubview(clearHistoryButton)
+        _settingsBarView?.addSubview(_clearHistoryButton!)
         self.view.addSubview(_settingsBarView!)
 
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name:UIKeyboardWillShowNotification, object: nil);
@@ -506,6 +509,7 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     func didTapClearHistory(sender: UIButton!) {
         clearHistory()
         _suggestionsTableView?.reloadData()
+        checkHistoryButton()
     }
     
     func clearHistory() {
@@ -513,6 +517,14 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
         _historyTopMatches.removeAll(keepCapacity: false)
         _history?.removeAll(keepCapacity: false)
         saveHistory()
+    }
+    
+    func checkHistoryButton() {
+        if _history?.count > 0 {
+            _clearHistoryButton!.enabled = true
+        } else {
+            _clearHistoryButton!.enabled = false
+        }
     }
     
     func updateSuggestions(text: String) {
@@ -654,6 +666,7 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
                 _history?.append(historyEntry)
                 trimHistory()
                 saveHistory()
+                checkHistoryButton()
             }
         }
     }
