@@ -104,6 +104,7 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
         
         _settingsBarView = UIView(frame: CGRectMake(0, self.view.frame.height, self.view.frame.width, 44))
         _settingsBarView?.backgroundColor = LIGHT_GREY
+        
         var settingsButton = UIButton(frame: CGRectZero)
         settingsButton.setTitle("Settings", forState: .Normal)
         settingsButton.setTitleColor(BLUE, forState: .Normal)
@@ -114,6 +115,7 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
         settingsFrame.origin.x = _settingsBarView!.frame.width - settingsFrame.width - 14
         settingsFrame.origin.y = 7
         settingsButton.frame = settingsFrame
+        
         _clearHistoryButton = UIButton(frame: CGRectZero)
         _clearHistoryButton!.setTitle("Clear History", forState: .Normal)
         _clearHistoryButton!.setTitleColor(BLUE, forState: .Normal)
@@ -128,6 +130,12 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
 
         settingsButton.addTarget(self, action: "presentSettingsView:", forControlEvents: .TouchUpInside)
         _clearHistoryButton!.addTarget(self, action: "didTapClearHistory:", forControlEvents: .TouchUpInside)
+        
+        var topBorder = UIView()
+        topBorder.frame = CGRectMake(0, 0, _settingsBarView!.frame.width, 0.5)
+        topBorder.backgroundColor = LIGHT_GREY_BORDER
+        
+        _settingsBarView?.addSubview(topBorder)
         _settingsBarView?.addSubview(settingsButton)
         _settingsBarView?.addSubview(_clearHistoryButton!)
         self.view.addSubview(_settingsBarView!)
