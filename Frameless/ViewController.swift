@@ -603,7 +603,13 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     }
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 21
+        if section == 0 && _historyTopMatches.count > 0 {
+            return 21
+        } else if section == 1 && _historyDisplayURLs.count > 0 {
+            return 21
+        } else {
+            return CGFloat.min
+        }
     }
     
     func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
