@@ -67,7 +67,11 @@ class HistoryManager: NSObject {
         if NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.KeepHistory.rawValue) as! Bool == true {
             if let urlStr = webView.URL?.absoluteString as String! {
                 if verifyUniquenessOfURL(urlStr) {
-                    let historyEntry = HistoryEntry(url: webView.URL!, urlString: createDisplayURLString(webView.URL!), title: webView.title)
+                    var title = webView.title
+                    if title == nil || title == "" {
+                        title = " "
+                    }
+                    let historyEntry = HistoryEntry(url: webView.URL!, urlString: createDisplayURLString(webView.URL!), title: title)
                     _fullHistory?.append(historyEntry)
                     trimHistory()
                     saveHistory()
