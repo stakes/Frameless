@@ -21,9 +21,11 @@ enum AppDefaultKeys: String {
 }
 
 let BLUE = UIColorFromHex(0x28AFFA)
+let HIGHLIGHT_BLUE = UIColorFromHex(0x28AFFA, alpha: 0.6)
 let GREEN = UIColorFromHex(0x7DDC16)
 let PURPLE = UIColorFromHex(0x9178E2)
 let CYAN = UIColorFromHex(0x2DD7AA)
 
 let TEXT = UIColorFromHex(0x24262A)
 let LIGHT_TEXT = UIColorFromHex(0xAEB2BA)
+let LIGHT_GREY = UIColorFromHex(0xF2F5F9)

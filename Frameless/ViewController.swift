@@ -106,13 +106,32 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
          AppearanceBridge.setSearchBarTextInputAppearance()
         
         _settingsBarView = UIView(frame: CGRectMake(0, self.view.frame.height, self.view.frame.width, 44))
-        var settingsButton = UIButton(frame: CGRectMake(7, 0, 36, 36))
-        var buttonImg = UIImage(named: "settings-icon")
-        settingsButton.setImage(buttonImg, forState: .Normal)
-        var buttonHighlightImg = UIImage(named: "settings-icon-highlighted")
-        settingsButton.setImage(buttonHighlightImg, forState: .Highlighted)
+        _settingsBarView?.backgroundColor = LIGHT_GREY
+        var settingsButton = UIButton(frame: CGRectZero)
+        settingsButton.setTitle("Settings", forState: .Normal)
+        settingsButton.setTitleColor(BLUE, forState: .Normal)
+        settingsButton.setTitleColor(HIGHLIGHT_BLUE, forState: .Highlighted)
+        settingsButton.titleLabel!.font = UIFont(name: "HelveticaNeue-Bold", size: 14)
+        settingsButton.sizeToFit()
+        var settingsFrame = settingsButton.frame
+        settingsFrame.origin.x = _settingsBarView!.frame.width - settingsFrame.width - 14
+        settingsFrame.origin.y = 7
+        settingsButton.frame = settingsFrame
+        var clearHistoryButton = UIButton(frame: CGRectZero)
+        clearHistoryButton.setTitle("Clear History", forState: .Normal)
+        clearHistoryButton.setTitleColor(BLUE, forState: .Normal)
+        clearHistoryButton.setTitleColor(HIGHLIGHT_BLUE, forState: .Highlighted)
+        clearHistoryButton.titleLabel!.font = UIFont(name: "HelveticaNeue", size: 14)
+        clearHistoryButton.sizeToFit()
+        var clearFrame = clearHistoryButton.frame
+        clearFrame.origin.x = 14
+        clearFrame.origin.y = 7
+        clearHistoryButton.frame = clearFrame
+
         settingsButton.addTarget(self, action: "presentSettingsView:", forControlEvents: .TouchUpInside)
+        clearHistoryButton.addTarget(self, action: "didTapClearHistory:", forControlEvents: .TouchUpInside)
         _settingsBarView?.addSubview(settingsButton)
+        _settingsBarView?.addSubview(clearHistoryButton)
         self.view.addSubview(_settingsBarView!)
 
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name:UIKeyboardWillShowNotification, object: nil);
@@ -483,6 +502,18 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     }
     
     //MARK: - History & favorites suggestions
+    
+    func didTapClearHistory(sender: UIButton!) {
+        clearHistory()
+        _suggestionsTableView?.reloadData()
+    }
+    
+    func clearHistory() {
+        _historyDisplayURLs.removeAll(keepCapacity: false)
+        _historyTopMatches.removeAll(keepCapacity: false)
+        _history?.removeAll(keepCapacity: false)
+        saveHistory()
+    }
     
     func updateSuggestions(text: String) {
         if text == "" {
