@@ -271,8 +271,63 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="SHAKE-TO-REFRESH" id="4rn-gC-ovg">
+                            <tableViewSection headerTitle="Browser settings" id="I9l-rW-EhH">
                                 <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="56" id="uMm-Gj-t69">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="uMm-Gj-t69" id="fyi-zF-X7C">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Keep history" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="njZ-el-mDr">
+                                                    <rect key="frame" x="9" y="7" width="388" height="23"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="388" id="s4B-fY-sN0"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                                    <color key="textColor" red="0.14088734980000001" green="0.14875462649999999" blue="0.16537460679999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Remember the last 50 pages you visited" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lmm-Hy-wqX">
+                                                    <rect key="frame" x="9" y="26" width="301" height="23"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="301" id="55h-ns-4Gs"/>
+                                                        <constraint firstAttribute="width" constant="301" id="eSA-hk-2cg"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                                                    <color key="textColor" red="0.68175029750000005" green="0.69754528999999998" blue="0.7307494283" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <variation key="default">
+                                                        <mask key="constraints">
+                                                            <exclude reference="eSA-hk-2cg"/>
+                                                        </mask>
+                                                    </variation>
+                                                    <variation key="heightClass=regular">
+                                                        <mask key="constraints">
+                                                            <exclude reference="eSA-hk-2cg"/>
+                                                        </mask>
+                                                    </variation>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="czB-Jq-4Ug">
+                                                    <rect key="frame" x="539" y="12" width="51" height="31"/>
+                                                    <color key="onTintColor" red="0.091372095050000005" green="0.68040317299999997" blue="0.99214559790000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <connections>
+                                                        <action selector="toggleHistorySwitch:" destination="1xQ-tw-6te" eventType="valueChanged" id="n43-OI-dss"/>
+                                                    </connections>
+                                                </switch>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottomMargin" secondItem="lmm-Hy-wqX" secondAttribute="bottom" constant="-1.5" id="D0s-sT-7jr"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="njZ-el-mDr" secondAttribute="bottom" constant="17.5" id="Ja8-NC-bNB"/>
+                                                <constraint firstItem="njZ-el-mDr" firstAttribute="leading" secondItem="fyi-zF-X7C" secondAttribute="leadingMargin" constant="1" id="LSp-FE-Jk0"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="czB-Jq-4Ug" secondAttribute="trailing" constant="4" id="NzS-4W-cAw"/>
+                                                <constraint firstItem="czB-Jq-4Ug" firstAttribute="top" secondItem="fyi-zF-X7C" secondAttribute="topMargin" constant="4" id="P3z-GO-DEH"/>
+                                                <constraint firstItem="njZ-el-mDr" firstAttribute="top" secondItem="fyi-zF-X7C" secondAttribute="topMargin" constant="-1" id="Sv9-4X-epf"/>
+                                                <constraint firstItem="lmm-Hy-wqX" firstAttribute="top" secondItem="fyi-zF-X7C" secondAttribute="topMargin" constant="18" id="pbz-im-Zcb"/>
+                                                <constraint firstItem="njZ-el-mDr" firstAttribute="leading" secondItem="lmm-Hy-wqX" secondAttribute="leading" id="xUX-VL-6L9"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="56" id="cfY-nT-pCQ">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cfY-nT-pCQ" id="bjH-hs-4zT">
@@ -285,8 +340,8 @@
                                                         <action selector="toggleShakeSwitch:" destination="1xQ-tw-6te" eventType="valueChanged" id="bpS-KP-Dob"/>
                                                     </connections>
                                                 </switch>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Shake device" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IcQ-2L-etE">
-                                                    <rect key="frame" x="9" y="7" width="90.5" height="23"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Shake-to-refresh" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IcQ-2L-etE">
+                                                    <rect key="frame" x="9" y="7" width="113" height="23"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                                     <color key="textColor" red="0.14088734980000001" green="0.14875462649999999" blue="0.16537460679999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -294,8 +349,8 @@
                                                         <rect key="frame" x="9" y="7" width="112" height="23"/>
                                                     </variation>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To refresh the contents of the browser" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kmy-4D-WzT">
-                                                    <rect key="frame" x="9" y="29" width="201.5" height="17"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Shake device to reload the page" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kmy-4D-WzT">
+                                                    <rect key="frame" x="9" y="29" width="172" height="17"/>
                                                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
                                                     <color key="textColor" red="0.68175029750000005" green="0.69754528999999998" blue="0.7307494283" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -316,10 +371,6 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                </cells>
-                            </tableViewSection>
-                            <tableViewSection headerTitle="Browser settings" id="I9l-rW-EhH">
-                                <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="56" id="ThW-ch-dxd">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ThW-ch-dxd" id="aQq-1B-ESX">
@@ -469,6 +520,7 @@
                         <outlet property="_closeButton" destination="9zR-iQ-zeg" id="5Ww-xk-Rl1"/>
                         <outlet property="_forwardBackSwitch" destination="xTg-ja-QjM" id="Zh7-aD-wav"/>
                         <outlet property="_framerSwitch" destination="PwF-ho-h5C" id="y9d-rV-Vw2"/>
+                        <outlet property="_historySwitch" destination="czB-Jq-4Ug" id="BFg-ea-KvT"/>
                         <outlet property="_searchEngineLabel" destination="Udg-ax-suG" id="fci-Yl-aC1"/>
                         <outlet property="_shakeSwitch" destination="L2Y-1L-Qec" id="aq2-Sa-yCv"/>
                         <outlet property="_sleepSwitch" destination="NlI-Z2-C2v" id="3KO-z3-2JX"/>

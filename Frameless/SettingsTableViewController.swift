@@ -19,6 +19,7 @@ class SettingsTableViewController: UITableViewController, UINavigationController
     @IBOutlet weak var _sleepSwitch: UISwitch!
     @IBOutlet weak var _closeButton: UIBarButtonItem!
     @IBOutlet weak var _searchEngineLabel: UILabel!
+    @IBOutlet weak var _historySwitch: UISwitch!
     
     var delegate:ViewController?
     
@@ -36,6 +37,7 @@ class SettingsTableViewController: UITableViewController, UINavigationController
         _forwardBackSwitch.on = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.ForwardBackGesture.rawValue) as! Bool
         _framerSwitch.on = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.FramerBonjour.rawValue) as! Bool
         _sleepSwitch.on = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.KeepAwake.rawValue) as! Bool
+        _historySwitch.on = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.KeepHistory.rawValue) as! Bool
 
     }
 
@@ -116,6 +118,11 @@ class SettingsTableViewController: UITableViewController, UINavigationController
         var value = (sender as! UISwitch).on
         UIApplication.sharedApplication().idleTimerDisabled = value
         NSUserDefaults.standardUserDefaults().setValue(value, forKey: AppDefaultKeys.KeepAwake.rawValue)
+    }
+    
+    @IBAction func toggleHistorySwitch(sender: AnyObject) {
+        var value = (sender as! UISwitch).on
+        NSUserDefaults.standardUserDefaults().setValue(value, forKey: AppDefaultKeys.KeepHistory.rawValue)
     }
     
     func checkControlsSettings() -> Bool {

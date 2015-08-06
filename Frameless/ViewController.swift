@@ -129,7 +129,6 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
         clearFrame.origin.x = 14
         clearFrame.origin.y = 7
         _clearHistoryButton!.frame = clearFrame
-        checkHistoryButton()
 
         settingsButton.addTarget(self, action: "presentSettingsView:", forControlEvents: .TouchUpInside)
         _clearHistoryButton!.addTarget(self, action: "didTapClearHistory:", forControlEvents: .TouchUpInside)
@@ -147,6 +146,7 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
         }
         
         _history = readHistory()
+        checkHistoryButton()
             
         _progressView.hidden = true
     }
@@ -520,6 +520,8 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     }
     
     func checkHistoryButton() {
+        println("checking")
+        println(_history?.count)
         if _history?.count > 0 {
             _clearHistoryButton!.enabled = true
         } else {
@@ -660,13 +662,15 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     }
     
     func addToHistory(webView: WKWebView) {
-        if let urlStr = _webView!.URL?.absoluteString as String! {
-            if verifyUniquenessOfURL(urlStr) {
-                let historyEntry = HistoryEntry(url: webView.URL!, urlString: createDisplayURLString(webView.URL!), title: webView.title)
-                _history?.append(historyEntry)
-                trimHistory()
-                saveHistory()
-                checkHistoryButton()
+        if NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.KeepHistory.rawValue) as! Bool == true {
+            if let urlStr = _webView!.URL?.absoluteString as String! {
+                if verifyUniquenessOfURL(urlStr) {
+                    let historyEntry = HistoryEntry(url: webView.URL!, urlString: createDisplayURLString(webView.URL!), title: webView.title)
+                    _history?.append(historyEntry)
+                    trimHistory()
+                    saveHistory()
+                    checkHistoryButton()
+                }
             }
         }
     }

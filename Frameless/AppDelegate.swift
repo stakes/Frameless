@@ -57,6 +57,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         NSUserDefaults.standardUserDefaults().registerDefaults([
             AppDefaultKeys.History.rawValue: Array<HistoryEntry>(),
+            AppDefaultKeys.KeepHistory.rawValue: true,
             AppDefaultKeys.ShakeGesture.rawValue: true,
             AppDefaultKeys.PanFromBottomGesture.rawValue: true,
             AppDefaultKeys.PanFromTopGesture.rawValue: true,
