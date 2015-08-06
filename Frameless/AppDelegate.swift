@@ -65,7 +65,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             AppDefaultKeys.ForwardBackGesture.rawValue: true,
             AppDefaultKeys.FramerBonjour.rawValue: true,
             AppDefaultKeys.KeepAwake.rawValue: true,
-            AppDefaultKeys.SearchEngine.rawValue: SearchEngineType.DuckDuckGo.rawValue
+            AppDefaultKeys.SearchEngine.rawValue: SearchEngineType.Google.rawValue
         ])
 //        let defaults = NSUserDefaults.standardUserDefaults()
 //        defaults.setObject(Array<HistoryEntry>(), forKey: AppDefaultKeys.History.rawValue)
