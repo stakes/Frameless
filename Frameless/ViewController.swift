@@ -43,12 +43,8 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     
     var _alertBuilder: JSSAlertView = JSSAlertView()
     
-    let _maxHistoryItems = 50
     var _keyboardHeight:CGFloat = 216
     var _suggestionsTableView: UITableView?
-    var _history: Array<HistoryEntry>?
-    var _historyTopMatches: Array<HistoryEntry> = Array<HistoryEntry>()
-    var _historyDisplayURLs: Array<HistoryEntry> = Array<HistoryEntry>()
     var _clearHistoryButton: UIButton?
     
     // Loading progress? Fake it till you make it.
@@ -145,7 +141,6 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
             _framerBonjour.start()
         }
         
-        _history = readHistory()
         checkHistoryButton()
             
         _progressView.hidden = true
@@ -324,8 +319,9 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     }
     
     func webView(webView: WKWebView, didFinishNavigation navigation: WKNavigation!) {
-        addToHistory(webView)
+        HistoryManager.manager.addToHistory(webView)
         removeSuggestionsTableView()
+        checkHistoryButton()
         _isCurrentPageLoaded = true
         _loadingTimer!.invalidate()
         _isWebViewLoading = false
@@ -507,22 +503,13 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     //MARK: - History & favorites suggestions
     
     func didTapClearHistory(sender: UIButton!) {
-        clearHistory()
+        HistoryManager.manager.clearHistory()
         _suggestionsTableView?.reloadData()
         checkHistoryButton()
     }
     
-    func clearHistory() {
-        _historyDisplayURLs.removeAll(keepCapacity: false)
-        _historyTopMatches.removeAll(keepCapacity: false)
-        _history?.removeAll(keepCapacity: false)
-        saveHistory()
-    }
-    
     func checkHistoryButton() {
-        println("checking")
-        println(_history?.count)
-        if _history?.count > 0 {
+        if HistoryManager.manager.totalEntries > 0 {
             _clearHistoryButton!.enabled = true
         } else {
             _clearHistoryButton!.enabled = false
@@ -537,7 +524,7 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
         }
     }
     
-    func showSuggestionsTableView() {
+    func showSuggestionsTableView() {   
         if _suggestionsTableView == nil {
             let size = UIScreen.mainScreen().bounds.size
             let availHeight = size.height - 44 - CGFloat(_keyboardHeight)
@@ -552,38 +539,7 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     }
     
     func populateSuggestionsTableView() {
-        _historyDisplayURLs.removeAll(keepCapacity: false)
-        _historyTopMatches.removeAll(keepCapacity: false)
-        var stringToFind = _searchBar.text
-        var framerMatches = Array<HistoryEntry>()
-        var domainMatches = Array<HistoryEntry>()
-        var titleMatches = Array<HistoryEntry>()
-        for entry:HistoryEntry in _history! {
-            var entryUrl = entry.urlString.lowercaseString
-            var entryTitle = entry.title?.lowercaseString
-            if entryTitle?.rangeOfString(stringToFind) != nil && entryTitle?.rangeOfString("framer studio projects") != nil {
-                // Put Framer Studio home in the top matches
-                _historyTopMatches.insert(entry, atIndex: 0)
-            } else if entryUrl.rangeOfString(stringToFind) != nil {
-                if entryUrl.lowercaseString.rangeOfString(".framer") != nil {
-                    // is it a framer project URL? these go first
-                    framerMatches.insert(entry, atIndex: 0)
-                } else {
-                    if entryUrl.hasPrefix(stringToFind) && entryUrl.lowercaseString.rangeOfString(".framer") == nil {
-                        // is it a domain match? if it's a letter-for-letter match put in top matches
-                        // unless it's a local Framer Studio URL because that list will get long
-                        _historyTopMatches.append(entry)
-                    } else {
-                        // otherwise add to history
-                        domainMatches.insert(entry, atIndex: 0)
-                    }
-                }
-            } else if entryTitle?.rangeOfString(stringToFind) != nil {
-                // is it a title match? cause these go last
-                titleMatches.insert(entry, atIndex: 0)
-            }
-        _historyDisplayURLs = framerMatches + domainMatches + titleMatches
-        }
+        HistoryManager.manager.getHistoryDataFor(_searchBar.text)
         _suggestionsTableView?.reloadData()
     }
     
@@ -600,9 +556,9 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
         var cell:HistoryTableViewCell = HistoryTableViewCell(style: .Subtitle, reuseIdentifier: nil)
         var entry:HistoryEntry
         if indexPath.section == 0 {
-            entry = _historyTopMatches[indexPath.row]
+            entry = HistoryManager.manager.matches[indexPath.row]
         } else {
-            entry = _historyDisplayURLs[indexPath.row]
+            entry = HistoryManager.manager.history[indexPath.row]
         }
         cell.backgroundColor = UIColor.clearColor()
         cell.entry = entry
@@ -617,9 +573,9 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            return _historyTopMatches.count
+            return HistoryManager.manager.matches.count
         } else {
-            return _historyDisplayURLs.count
+            return HistoryManager.manager.history.count
         }
     }
     
@@ -648,9 +604,9 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     }
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if section == 0 && _historyTopMatches.count > 0 {
+        if section == 0 && HistoryManager.manager.matches.count > 0 {
             return 21
-        } else if section == 1 && _historyDisplayURLs.count > 0 {
+        } else if section == 1 && HistoryManager.manager.history.count > 0 {
             return 21
         } else {
             return CGFloat.min
@@ -661,69 +617,5 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
         return CGFloat.min
     }
     
-    func addToHistory(webView: WKWebView) {
-        if NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.KeepHistory.rawValue) as! Bool == true {
-            if let urlStr = _webView!.URL?.absoluteString as String! {
-                if verifyUniquenessOfURL(urlStr) {
-                    let historyEntry = HistoryEntry(url: webView.URL!, urlString: createDisplayURLString(webView.URL!), title: webView.title)
-                    _history?.append(historyEntry)
-                    trimHistory()
-                    saveHistory()
-                    checkHistoryButton()
-                }
-            }
-        }
-    }
-    
-    func trimHistory() {
-        if let arr = _history {
-            if arr.count > _maxHistoryItems {
-                var count = arr.count as Int
-                var extraCount = count - _maxHistoryItems
-                var newarr = arr[extraCount...(arr.endIndex-1)]
-                _history = Array<HistoryEntry>(newarr)
-            }
-        }
-    }
-    
-    func createDisplayURLString(url: NSURL) -> String {
-        var str = url.resourceSpecifier!
-        if str.hasPrefix("//") {
-            str = str.substringFromIndex(advance(str.startIndex, 2))
-        }
-        if str.hasPrefix("www.") {
-            str = str.substringFromIndex(advance(str.startIndex, 4))
-        }
-        if str.hasSuffix("/") {
-            str = str.substringToIndex(str.endIndex.predecessor())
-        }
-        return str
-    }
-    
-    func verifyUniquenessOfURL(urlStr: String) -> Bool {
-        for entry:HistoryEntry in _history! {
-            let fullURLString = entry.url.absoluteString as String!
-            if fullURLString == urlStr {
-                return false
-            }
-        }
-        return true
-    }
-    
-    func saveHistory() {
-        let archivedObject = NSKeyedArchiver.archivedDataWithRootObject(_history as Array<HistoryEntry>!)
-        let defaults = NSUserDefaults.standardUserDefaults()
-        defaults.setObject(archivedObject, forKey: AppDefaultKeys.History.rawValue)
-        defaults.synchronize()
-    }
-    
-    func readHistory() -> Array<HistoryEntry>? {
-        if let unarchivedObject = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.History.rawValue) as? NSData {
-            return (NSKeyedUnarchiver.unarchiveObjectWithData(unarchivedObject) as? [HistoryEntry])!
-        } else {
-            return Array<HistoryEntry>()
-        }
-    }
-
 }
 
