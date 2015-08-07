@@ -99,6 +99,7 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
         _searchBar.delegate = self
         _searchBar.framelessSearchBarDelegate = self
         _searchBar.showsCancelButton = false
+        _searchBar.autocapitalizationType = .None
         _searchBar.becomeFirstResponder()
          AppearanceBridge.setSearchBarTextInputAppearance()
         

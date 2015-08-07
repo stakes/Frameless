@@ -28,7 +28,8 @@ class HistoryManager: NSObject {
         _fullHistory = readHistory()
     }
     
-    func getHistoryDataFor(stringToFind: String) {
+    func getHistoryDataFor(originalString: String) {
+        var stringToFind = originalString.lowercaseString
         history.removeAll(keepCapacity: false)
         matches.removeAll(keepCapacity: false)
         var framerMatches = Array<HistoryEntry>()
