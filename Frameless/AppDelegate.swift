@@ -61,7 +61,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             AppDefaultKeys.ShakeGesture.rawValue: true,
             AppDefaultKeys.PanFromBottomGesture.rawValue: true,
             AppDefaultKeys.PanFromTopGesture.rawValue: true,
-            AppDefaultKeys.TripleTapGesture.rawValue: true,
             AppDefaultKeys.ForwardBackGesture.rawValue: true,
             AppDefaultKeys.FramerBonjour.rawValue: true,
             AppDefaultKeys.KeepAwake.rawValue: true,

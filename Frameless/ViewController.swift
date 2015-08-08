@@ -24,7 +24,6 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     var _loadingTimer: NSTimer?
     
     var _tapRecognizer: UITapGestureRecognizer?
-    var _threeFingerTapRecognizer: UITapGestureRecognizer?
     var _panFromBottomRecognizer: UIScreenEdgePanGestureRecognizer?
     var _panFromTopRecognizer: UIScreenEdgePanGestureRecognizer?
     var _panFromRightRecognizer: UIScreenEdgePanGestureRecognizer?
@@ -71,11 +70,7 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
         _loadingErrorView.hidden = true
         
         _tapRecognizer = UITapGestureRecognizer(target: self, action: Selector("hideSearch"))
-        
-        _threeFingerTapRecognizer = UITapGestureRecognizer(target: self, action: Selector("handleThreeFingerTap:"))
-        _threeFingerTapRecognizer?.numberOfTouchesRequired = 3
-        self.view.addGestureRecognizer(_threeFingerTapRecognizer!)
-        
+
         _panFromBottomRecognizer = UIScreenEdgePanGestureRecognizer(target: self, action: Selector("handleBottomEdgePan:"))
         _panFromBottomRecognizer!.edges = UIRectEdge.Bottom
         _panFromBottomRecognizer!.delegate = self
@@ -206,12 +201,6 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
         }
     }
     
-    func handleThreeFingerTap(sender: AnyObject) {
-        if NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.TripleTapGesture.rawValue) as! Bool == true {
-            showSearch()
-        }
-    }
-    
     override func canBecomeFirstResponder() -> Bool {
         return true
     }
@@ -230,6 +219,10 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     }
     
     func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
+    
+    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldReceiveTouch touch: UITouch) -> Bool {
         return true
     }
     

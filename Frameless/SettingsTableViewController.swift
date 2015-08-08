@@ -12,7 +12,6 @@ class SettingsTableViewController: UITableViewController, UINavigationController
 
     @IBOutlet weak var _swipeUpSwitch: UISwitch!
     @IBOutlet weak var _swipeDownSwitch: UISwitch!
-    @IBOutlet weak var _tripleTapSwitch: UISwitch!
     @IBOutlet weak var _forwardBackSwitch: UISwitch!
     @IBOutlet weak var _shakeSwitch: UISwitch!
     @IBOutlet weak var _framerSwitch: UISwitch!
@@ -33,7 +32,6 @@ class SettingsTableViewController: UITableViewController, UINavigationController
         _shakeSwitch.on = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.ShakeGesture.rawValue) as! Bool
         _swipeUpSwitch.on = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.PanFromBottomGesture.rawValue) as! Bool
         _swipeDownSwitch.on = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.PanFromTopGesture.rawValue) as! Bool
-        _tripleTapSwitch.on = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.TripleTapGesture.rawValue)as! Bool
         _forwardBackSwitch.on = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.ForwardBackGesture.rawValue) as! Bool
         _framerSwitch.on = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.FramerBonjour.rawValue) as! Bool
         _sleepSwitch.on = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.KeepAwake.rawValue) as! Bool
@@ -97,12 +95,7 @@ class SettingsTableViewController: UITableViewController, UINavigationController
         NSUserDefaults.standardUserDefaults().setValue(value, forKey: AppDefaultKeys.PanFromTopGesture.rawValue)
         checkControlsSettings()
     }
-    
-    @IBAction func toggleTripleTapSwitch(sender: AnyObject) {
-        var value = (sender as! UISwitch).on
-        NSUserDefaults.standardUserDefaults().setValue(value, forKey: AppDefaultKeys.TripleTapGesture.rawValue)
-        checkControlsSettings()
-    }
+
     
     @IBAction func toggleBrowserNavSwitch(sender: AnyObject) {
         var value = (sender as! UISwitch).on
@@ -129,7 +122,7 @@ class SettingsTableViewController: UITableViewController, UINavigationController
     }
     
     func checkControlsSettings() -> Bool {
-        var arr = [_swipeUpSwitch.on, _swipeDownSwitch.on, _tripleTapSwitch.on]
+        var arr = [_swipeUpSwitch.on, _swipeDownSwitch.on]
         let filtered = arr.filter { $0 == true }
         if filtered.count == 0 {
             _closeButton.enabled = false
