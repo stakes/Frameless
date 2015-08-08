@@ -93,7 +93,7 @@
                         <sections>
                             <tableViewSection headerTitle="CONTROLS" footerTitle="At least one gesture needs to be enabled" id="PtL-5i-tq0">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="56" id="y42-bC-qmX">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="56" id="y42-bC-qmX">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="y42-bC-qmX" id="rdG-nX-KPn">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -136,7 +136,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="56" id="Xgv-Ua-fyu">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="56" id="Xgv-Ua-fyu">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Xgv-Ua-fyu" id="2Of-g8-uiC">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -176,49 +176,6 @@
                                                 <constraint firstItem="3ok-Zt-p7a" firstAttribute="top" secondItem="2Of-g8-uiC" secondAttribute="topMargin" constant="21" id="og2-QX-hto"/>
                                                 <constraint firstItem="mnt-3R-B72" firstAttribute="trailing" secondItem="2Of-g8-uiC" secondAttribute="trailingMargin" constant="-4" id="rgp-yi-TXf"/>
                                                 <constraint firstItem="5By-yb-Yc2" firstAttribute="top" secondItem="2Of-g8-uiC" secondAttribute="topMargin" constant="-1" id="wME-TF-giM"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="56" id="k1b-Jm-d8Q">
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="k1b-Jm-d8Q" id="MbW-TU-APb">
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UPC-IN-ih4">
-                                                    <rect key="frame" x="539" y="12" width="51" height="31"/>
-                                                    <color key="onTintColor" red="0.1058824360370636" green="0.60392165184020996" blue="0.9843137264251709" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <connections>
-                                                        <action selector="toggleTripleTapSwitch:" destination="1xQ-tw-6te" eventType="valueChanged" id="Gj2-G2-cVv"/>
-                                                    </connections>
-                                                </switch>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap with three fingers" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yy4-dW-rJ4">
-                                                    <rect key="frame" x="9" y="7" width="143.5" height="23"/>
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
-                                                    <color key="textColor" red="0.14088734980000001" green="0.14875462649999999" blue="0.16537460679999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                    <variation key="heightClass=regular" misplaced="YES">
-                                                        <rect key="frame" x="9" y="7" width="166" height="23"/>
-                                                    </variation>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To show the browser bar and keyboard" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QQm-bK-tyq">
-                                                    <rect key="frame" x="9" y="29" width="209.5" height="17"/>
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
-                                                    <color key="textColor" red="0.68175029750000005" green="0.69754528999999998" blue="0.7307494283" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                    <variation key="heightClass=regular" misplaced="YES">
-                                                        <rect key="frame" x="9" y="29" width="301" height="17"/>
-                                                    </variation>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="QQm-bK-tyq" firstAttribute="top" secondItem="MbW-TU-APb" secondAttribute="topMargin" constant="21" id="Bke-eZ-88Z"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="QQm-bK-tyq" secondAttribute="bottom" constant="1.5" id="LIg-bY-JN8"/>
-                                                <constraint firstItem="UPC-IN-ih4" firstAttribute="trailing" secondItem="MbW-TU-APb" secondAttribute="trailingMargin" constant="-4" id="OVA-t4-1XA"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="yy4-dW-rJ4" secondAttribute="bottom" constant="17.5" id="V77-1a-omR"/>
-                                                <constraint firstItem="UPC-IN-ih4" firstAttribute="top" secondItem="MbW-TU-APb" secondAttribute="topMargin" constant="4" id="Xhp-nJ-bfa"/>
-                                                <constraint firstItem="yy4-dW-rJ4" firstAttribute="top" secondItem="MbW-TU-APb" secondAttribute="topMargin" constant="-1" id="bFa-LX-gnb"/>
-                                                <constraint firstItem="yy4-dW-rJ4" firstAttribute="leading" secondItem="QQm-bK-tyq" secondAttribute="leading" id="oGa-ei-hRQ"/>
-                                                <constraint firstItem="yy4-dW-rJ4" firstAttribute="leading" secondItem="MbW-TU-APb" secondAttribute="leadingMargin" constant="1" id="tmB-sx-WKv"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -273,7 +230,7 @@
                             </tableViewSection>
                             <tableViewSection headerTitle="Browser settings" id="I9l-rW-EhH">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="56" id="uMm-Gj-t69">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="56" id="uMm-Gj-t69">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="uMm-Gj-t69" id="fyi-zF-X7C">
@@ -328,7 +285,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="56" id="cfY-nT-pCQ">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="56" id="cfY-nT-pCQ">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cfY-nT-pCQ" id="bjH-hs-4zT">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -526,7 +483,6 @@
                         <outlet property="_sleepSwitch" destination="NlI-Z2-C2v" id="3KO-z3-2JX"/>
                         <outlet property="_swipeDownSwitch" destination="mnt-3R-B72" id="k9U-to-LHN"/>
                         <outlet property="_swipeUpSwitch" destination="2rG-dl-09i" id="Dea-oQ-z5q"/>
-                        <outlet property="_tripleTapSwitch" destination="UPC-IN-ih4" id="bI4-LZ-aBL"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9S0-aN-aaT" userLabel="First Responder" sceneMemberID="firstResponder"/>
