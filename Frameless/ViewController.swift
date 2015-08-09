@@ -486,12 +486,14 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     }
     
     func searchBarRefreshWasPressed() {
-        _loadingTimer!.invalidate()
-        hideSearch()
-        if let urlString = _webView?.URL?.absoluteString {
-            _searchBar.text = urlString
+        if let timer = _loadingTimer {
+            timer.invalidate()
+            hideSearch()
+            if let urlString = _webView?.URL?.absoluteString {
+                _searchBar.text = urlString
+            }
+            loadURL(_searchBar.text)
         }
-        loadURL(_searchBar.text)
     }
     
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
