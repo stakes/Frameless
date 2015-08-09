@@ -237,16 +237,20 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     }
     
     func showSearch() {
-        if let urlString = _webView?.URL?.absoluteString {
-            _searchBar.text = urlString
+        if !_areControlsVisible {
+            if let urlString = _webView?.URL?.absoluteString {
+                _searchBar.text = urlString
+            }
+            UIView.animateWithDuration(0.5, delay: 0.05, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.5, options: nil, animations: {
+                self._searchBar.transform = CGAffineTransformMakeTranslation(0, 0)
+            }, completion: nil)
+            _areControlsVisible = true
+            _searchBar.selectAllText()
+            _searchBar.becomeFirstResponder()
+            showSuggestionsTableView()
+            fadeInSuggestionsTable()
+            blurBackground()
         }
-        UIView.animateWithDuration(0.5, delay: 0.05, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.5, options: nil, animations: {
-            self._searchBar.transform = CGAffineTransformMakeTranslation(0, 0)
-        }, completion: nil)
-        _areControlsVisible = true
-        _searchBar.selectAllText()
-        _searchBar.becomeFirstResponder()
-        blurBackground()
     }
     
     func blurBackground() {
@@ -281,6 +285,15 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     
     func focusOnSearchBar() {
         _searchBar.becomeFirstResponder()
+    }
+    
+    func fadeInSuggestionsTable() {
+        if let tableView = _suggestionsTableView {
+            tableView.alpha = 0
+            UIView.animateWithDuration(0.25, delay: 0.25, options: nil, animations: {
+                self._suggestionsTableView!.alpha = 1
+            }, completion: nil)
+        }
     }
 
     
@@ -523,11 +536,7 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     }
     
     func updateSuggestions(text: String) {
-        if text == "" {
-            removeSuggestionsTableView()
-        } else {
-            showSuggestionsTableView()
-        }
+        showSuggestionsTableView()
     }
     
     func showSuggestionsTableView() {   

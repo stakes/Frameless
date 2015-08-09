@@ -40,7 +40,7 @@ class HistoryManager: NSObject {
         for entry:HistoryEntry in _fullHistory! {
             var entryUrl = entry.urlString.lowercaseString
             var entryTitle = entry.title?.lowercaseString
-            if entryTitle?.rangeOfString(stringToFind) != nil && entryTitle?.rangeOfString("framer studio projects") != nil {
+            if entryTitle?.rangeOfString("framer studio projects") != nil {
                 // Put Framer Studio home in the top matches
                 studio = entry
             } else if entryUrl.rangeOfString(stringToFind) != nil {
