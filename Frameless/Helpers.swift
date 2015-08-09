@@ -68,7 +68,7 @@ func urlifyUserInput(input: String) -> String {
     // This method should really be tested, but I ran into trouble adding unit tests into this project due to some Cocoapods thing
     
     let normalizedInput = input.lowercaseStringWithLocale(NSLocale.currentLocale())
-
+    
     // true = treat as URL, false = treat as search query
     var looksLikeUrl = false
     

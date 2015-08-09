@@ -10,31 +10,33 @@ import UIKit
 
 class SettingsTableViewController: UITableViewController, UINavigationControllerDelegate {
 
-    @IBOutlet weak var _shakeSwitch: UISwitch!
     @IBOutlet weak var _swipeUpSwitch: UISwitch!
-    @IBOutlet weak var _tripleTapSwitch: UISwitch!
-    @IBOutlet weak var _browserSwitch: UISwitch!
+    @IBOutlet weak var _swipeDownSwitch: UISwitch!
+    @IBOutlet weak var _forwardBackSwitch: UISwitch!
+    @IBOutlet weak var _shakeSwitch: UISwitch!
     @IBOutlet weak var _framerSwitch: UISwitch!
     @IBOutlet weak var _sleepSwitch: UISwitch!
-    
     @IBOutlet weak var _closeButton: UIBarButtonItem!
     @IBOutlet weak var _searchEngineLabel: UILabel!
+    @IBOutlet weak var _historySwitch: UISwitch!
     
     var delegate:ViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         setupNavigationBarAppearance()
         let navigationController = self.navigationController
         navigationController?.delegate = self
-        
+
         _shakeSwitch.on = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.ShakeGesture.rawValue) as! Bool
         _swipeUpSwitch.on = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.PanFromBottomGesture.rawValue) as! Bool
-        _tripleTapSwitch.on = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.TripleTapGesture.rawValue) as! Bool
-        _browserSwitch.on = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.ForwardBackGesture.rawValue) as! Bool
+        _swipeDownSwitch.on = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.PanFromTopGesture.rawValue) as! Bool
+        _forwardBackSwitch.on = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.ForwardBackGesture.rawValue) as! Bool
         _framerSwitch.on = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.FramerBonjour.rawValue) as! Bool
         _sleepSwitch.on = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.KeepAwake.rawValue) as! Bool
+        _historySwitch.on = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.KeepHistory.rawValue) as! Bool
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -55,9 +57,9 @@ class SettingsTableViewController: UITableViewController, UINavigationController
     func setupNavigationBarAppearance() {
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         _closeButton.tintColor = UIColor.whiteColor()
-        var font = UIFont(name: "ClearSans-Bold", size: 18)
-        var textAttributes = [NSFontAttributeName: font!, NSForegroundColorAttributeName: UIColor.whiteColor()]
-        self.navigationController?.navigationBar.titleTextAttributes = textAttributes
+//        var font = UIFont(name: "ClearSans-Bold", size: 18)
+//        var textAttributes = [NSFontAttributeName: font!, NSForegroundColorAttributeName: UIColor.whiteColor()]
+//        self.navigationController?.navigationBar.titleTextAttributes = textAttributes
     }
     
     @IBAction func close(sender: AnyObject) {
@@ -65,9 +67,7 @@ class SettingsTableViewController: UITableViewController, UINavigationController
             self.delegate?.focusOnSearchBar()
         })
     }
-    
-    
-    
+
     // MARK: - Settings
     
     func updateSearchEngineLabel() {
@@ -90,11 +90,12 @@ class SettingsTableViewController: UITableViewController, UINavigationController
         checkControlsSettings()
     }
     
-    @IBAction func toggleTripleTapSwitch(sender: AnyObject) {
+    @IBAction func toggleSwipeDownSwitch(sender: AnyObject) {
         var value = (sender as! UISwitch).on
-        NSUserDefaults.standardUserDefaults().setValue(value, forKey: AppDefaultKeys.TripleTapGesture.rawValue)
+        NSUserDefaults.standardUserDefaults().setValue(value, forKey: AppDefaultKeys.PanFromTopGesture.rawValue)
         checkControlsSettings()
     }
+
     
     @IBAction func toggleBrowserNavSwitch(sender: AnyObject) {
         var value = (sender as! UISwitch).on
@@ -108,12 +109,20 @@ class SettingsTableViewController: UITableViewController, UINavigationController
     
     @IBAction func toggleSleepSwitch(sender: AnyObject) {
         var value = (sender as! UISwitch).on
-         UIApplication.sharedApplication().idleTimerDisabled = value
+        UIApplication.sharedApplication().idleTimerDisabled = value
         NSUserDefaults.standardUserDefaults().setValue(value, forKey: AppDefaultKeys.KeepAwake.rawValue)
     }
     
+    @IBAction func toggleHistorySwitch(sender: AnyObject) {
+        var value = (sender as! UISwitch).on
+        if !value {
+            HistoryManager.manager.clearHistory()
+        }
+        NSUserDefaults.standardUserDefaults().setValue(value, forKey: AppDefaultKeys.KeepHistory.rawValue)
+    }
+    
     func checkControlsSettings() -> Bool {
-        var arr = [_shakeSwitch.on, _swipeUpSwitch.on, _tripleTapSwitch.on]
+        var arr = [_swipeUpSwitch.on, _swipeDownSwitch.on]
         let filtered = arr.filter { $0 == true }
         if filtered.count == 0 {
             _closeButton.enabled = false
@@ -124,14 +133,13 @@ class SettingsTableViewController: UITableViewController, UINavigationController
         }
     }
     
-    
-    
     // MARK: - UINavigationControllerDelegate
-
+    
     func navigationController(navigationController: UINavigationController, willShowViewController viewController: UIViewController, animated: Bool) {
         if viewController == self {
             updateSearchEngineLabel()
         }
     }
+
 
 }

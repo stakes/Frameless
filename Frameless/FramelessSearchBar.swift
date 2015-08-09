@@ -31,10 +31,10 @@ class FramelessSearchBar: UISearchBar {
         
         self.autocapitalizationType = .None
         self.returnKeyType = .Go
-        self.keyboardType = .URL
+        self.keyboardType = .WebSearch
         
-        let clearSans = UIFont(name: "ClearSans", size: 16)
-        if let font = clearSans {
+        let helvetica = UIFont(name: "HelveticaNeue", size: 16)
+        if let font = helvetica {
             var normalTextAttributes: Dictionary = [
                 NSFontAttributeName: font
             ]
@@ -54,7 +54,7 @@ class FramelessSearchBar: UISearchBar {
             for subview in searchBarSubviews! {
                 if subview.isKindOfClass(UITextField) {
                     searchField = subview as? UITextField
-                    searchField?.rightView?.backgroundColor = UIColorFromHex(0x9178E2)
+                    searchField?.rightView?.backgroundColor = BLUE
                     break
                 }
             }
@@ -73,11 +73,11 @@ class FramelessSearchBar: UISearchBar {
             }
         }
     }
-    
+
     func selectAllText() {
         if let field = _field {
             if field.text != "" {
-                field.selectAll(self)
+                field.selectAll(nil)
             }
         }
     }
