@@ -20,6 +20,7 @@ class HistoryManager: NSObject {
             return _fullHistory!.count
         }
     }
+    var studio: HistoryEntry?
     var matches: Array<HistoryEntry> = Array<HistoryEntry>()
     var history: Array<HistoryEntry> = Array<HistoryEntry>()
     
@@ -30,6 +31,7 @@ class HistoryManager: NSObject {
     
     func getHistoryDataFor(originalString: String) {
         var stringToFind = originalString.lowercaseString
+        studio = nil
         history.removeAll(keepCapacity: false)
         matches.removeAll(keepCapacity: false)
         var framerMatches = Array<HistoryEntry>()
@@ -40,7 +42,7 @@ class HistoryManager: NSObject {
             var entryTitle = entry.title?.lowercaseString
             if entryTitle?.rangeOfString(stringToFind) != nil && entryTitle?.rangeOfString("framer studio projects") != nil {
                 // Put Framer Studio home in the top matches
-                matches.insert(entry, atIndex: 0)
+                studio = entry
             } else if entryUrl.rangeOfString(stringToFind) != nil {
                 if entryUrl.lowercaseString.rangeOfString(".framer") != nil {
                     // is it a framer project URL? these go first

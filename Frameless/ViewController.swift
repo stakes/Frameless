@@ -554,13 +554,15 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 2
+        return 3
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell:HistoryTableViewCell = HistoryTableViewCell(style: .Subtitle, reuseIdentifier: nil)
         var entry:HistoryEntry
         if indexPath.section == 0 {
+            entry = HistoryManager.manager.studio!
+        } else if indexPath.section == 1 {
             entry = HistoryManager.manager.matches[indexPath.row]
         } else {
             entry = HistoryManager.manager.history[indexPath.row]
@@ -578,6 +580,12 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
+            if let studio = HistoryManager.manager.studio {
+                return 1
+            } else {
+                return 0
+            }
+        } else if section == 1 {
             return HistoryManager.manager.matches.count
         } else {
             return HistoryManager.manager.history.count
@@ -589,6 +597,8 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
         if rows == 0 {
             return ""
         } else if section == 0 {
+            return "Framer Studio"
+        } else if section == 1 {
             return "Top Matches"
         } else {
             return "History"
@@ -609,9 +619,11 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     }
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if section == 0 && HistoryManager.manager.matches.count > 0 {
+        if section == 0 && HistoryManager.manager.studio != nil {
             return 21
-        } else if section == 1 && HistoryManager.manager.history.count > 0 {
+        } else if section == 1 && HistoryManager.manager.matches.count > 0 {
+            return 21
+        }else if section == 2 && HistoryManager.manager.history.count > 0 {
             return 21
         } else {
             return CGFloat.min
