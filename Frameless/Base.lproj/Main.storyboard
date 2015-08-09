@@ -19,8 +19,8 @@
                         <subviews>
                             <progressView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="2LR-xw-2qa">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="2"/>
-                                <color key="tintColor" red="0.085985027253627777" green="0.26070842146873474" blue="0.49741166830062866" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <color key="trackTintColor" red="0.62316322326660156" green="0.85742080211639404" blue="0.97457593679428101" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" red="0.1058824360370636" green="0.60392165184020996" blue="0.9843137264251709" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="trackTintColor" red="0.08235294371843338" green="0.19607843458652496" blue="0.41568627953529358" alpha="1" colorSpace="calibratedRGB"/>
                                 <variation key="heightClass=compact-widthClass=regular" misplaced="YES">
                                     <rect key="frame" x="0.0" y="0.0" width="800" height="3"/>
                                 </variation>
