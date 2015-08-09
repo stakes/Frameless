@@ -68,6 +68,7 @@ class HistoryManager: NSObject {
         if NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.KeepHistory.rawValue) as! Bool == true {
             if let urlStr = webView.URL?.absoluteString as String! {
                 if verifyUniquenessOfURL(urlStr) {
+                    checkForFramerStudio(webView)
                     var title = webView.title
                     if title == nil || title == "" {
                         title = " "
@@ -115,6 +116,18 @@ class HistoryManager: NSObject {
             }
         }
         return true
+    }
+    
+    func checkForFramerStudio(webView:WKWebView) {
+        // if this is a Framer Studio URL
+        if webView.title?.lowercaseString.rangeOfString("framer studio projects") != nil {
+            // remove old framer studios
+            var filteredHistory = _fullHistory!.filter({
+                return $0.title?.lowercaseString.rangeOfString("framer studio projects") == nil
+            })
+            _fullHistory = filteredHistory
+            saveHistory()
+        }
     }
     
     func clearHistory() {
