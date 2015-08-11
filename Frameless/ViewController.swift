@@ -364,6 +364,51 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
         _isMainFrameNavigationAction = navigationAction.targetFrame?.mainFrame
         decisionHandler(.Allow)
     }
+    
+    func webView(webView: WKWebView, didReceiveAuthenticationChallenge challenge: NSURLAuthenticationChallenge, completionHandler: (NSURLSessionAuthChallengeDisposition, NSURLCredential!) -> Void) {
+        var hostname = webView.URL?.host
+        var authMethod = challenge.protectionSpace.authenticationMethod
+        if authMethod == NSURLAuthenticationMethodDefault {
+            if let loadTimer = _loadingTimer {
+                loadTimer.invalidate()
+            }
+            if let progTimer = _progressTimer {
+                progTimer.invalidate()
+            }
+            _progressView.hidden = true
+            let title = "Authentication Required"
+            var message = "The server requires a username and password."
+            if let hostStr = hostname {
+                message = "The server at \(hostStr) requires a username and password."
+            }
+            var alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+            alert.addTextFieldWithConfigurationHandler( { (textField: UITextField!) in
+                textField.placeholder = "Username"
+            })
+            alert.addTextFieldWithConfigurationHandler( { (textField: UITextField!) in
+                textField.placeholder = "Password"
+                textField.secureTextEntry = true
+            })
+            var okAction = UIAlertAction(title: "OK", style: .Default, handler: { (UIAlertaction) in
+                var usernameTextfield = alert.textFields![0] as! UITextField
+                var pwTextfield = alert.textFields![1] as! UITextField
+                var username = usernameTextfield.text
+                var pw = pwTextfield.text
+                var credential = NSURLCredential(user: username, password: pw, persistence: .ForSession)
+                completionHandler(NSURLSessionAuthChallengeDisposition.UseCredential, credential)
+            })
+            var cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: { (UIAlertAction) in
+                completionHandler(NSURLSessionAuthChallengeDisposition.CancelAuthenticationChallenge, nil)
+            })
+            alert.addAction(okAction)
+            alert.addAction(cancelAction)
+            dispatch_async(dispatch_get_main_queue(), {
+                self.presentViewController(alert, animated: true, completion: nil)
+            })
+        } else {
+            completionHandler(NSURLSessionAuthChallengeDisposition.CancelAuthenticationChallenge, nil)
+        }
+    }
 
     func handleWebViewError() {
         _loadingTimer!.invalidate()
