@@ -147,6 +147,7 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
         }
         
         _progressView.hidden = true
+        showSuggestionsTableView()
     }
     
     deinit {
