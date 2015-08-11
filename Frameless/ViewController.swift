@@ -408,6 +408,7 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     
     
     func displayLoadingErrorMessage() {
+        self.view.sendSubviewToBack(_loadingErrorView)
         _loadingErrorView.hidden = false
     }
     
