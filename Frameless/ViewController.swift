@@ -33,6 +33,8 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     var _effectView: UIVisualEffectView?
     var _errorView: UIView?
     var _settingsBarView: UIView?
+    var _settingsButton: UIButton?
+    var _topBorder: UIView?
     var _defaultsObject: NSUserDefaults?
     var _onboardingViewController: OnboardingViewController?
     var _isCurrentPageLoaded = false
@@ -101,16 +103,16 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
         _settingsBarView = UIView(frame: CGRectMake(0, self.view.frame.height, self.view.frame.width, 44))
         _settingsBarView?.backgroundColor = LIGHT_GREY
         
-        var settingsButton = UIButton(frame: CGRectZero)
-        settingsButton.setTitle("Settings", forState: .Normal)
-        settingsButton.setTitleColor(BLUE, forState: .Normal)
-        settingsButton.setTitleColor(HIGHLIGHT_BLUE, forState: .Highlighted)
-        settingsButton.titleLabel!.font = UIFont(name: "HelveticaNeue-Bold", size: 14)
-        settingsButton.sizeToFit()
-        var settingsFrame = settingsButton.frame
+        _settingsButton = UIButton(frame: CGRectZero)
+        _settingsButton!.setTitle("Settings", forState: .Normal)
+        _settingsButton!.setTitleColor(BLUE, forState: .Normal)
+        _settingsButton!.setTitleColor(HIGHLIGHT_BLUE, forState: .Highlighted)
+        _settingsButton!.titleLabel!.font = UIFont(name: "HelveticaNeue-Bold", size: 14)
+        _settingsButton!.sizeToFit()
+        var settingsFrame = _settingsButton!.frame
         settingsFrame.origin.x = _settingsBarView!.frame.width - settingsFrame.width - 14
         settingsFrame.origin.y = 7
-        settingsButton.frame = settingsFrame
+        _settingsButton!.frame = settingsFrame
         
         _clearHistoryButton = UIButton(frame: CGRectZero)
         _clearHistoryButton!.setTitle("Clear History", forState: .Normal)
@@ -124,15 +126,15 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
         clearFrame.origin.y = 7
         _clearHistoryButton!.frame = clearFrame
 
-        settingsButton.addTarget(self, action: "presentSettingsView:", forControlEvents: .TouchUpInside)
+        _settingsButton!.addTarget(self, action: "presentSettingsView:", forControlEvents: .TouchUpInside)
         _clearHistoryButton!.addTarget(self, action: "didTapClearHistory:", forControlEvents: .TouchUpInside)
         
-        var topBorder = UIView()
-        topBorder.frame = CGRectMake(0, 0, _settingsBarView!.frame.width, 0.5)
-        topBorder.backgroundColor = LIGHT_GREY_BORDER
+        _topBorder = UIView()
+        _topBorder!.frame = CGRectMake(0, 0, _settingsBarView!.frame.width, 0.5)
+        _topBorder!.backgroundColor = LIGHT_GREY_BORDER
         
-        _settingsBarView?.addSubview(topBorder)
-        _settingsBarView?.addSubview(settingsButton)
+        _settingsBarView?.addSubview(_topBorder!)
+        _settingsBarView?.addSubview(_settingsButton!)
         _settingsBarView?.addSubview(_clearHistoryButton!)
         self.view.addSubview(_settingsBarView!)
 
@@ -562,6 +564,22 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
         coordinator.animateAlongsideTransition({ context in
             self._webView!.frame = CGRectMake(0, 0, size.width, size.height)
+            let availHeight = size.height - 88 - CGFloat(self._keyboardHeight)
+            if let suggestionsTableView = self._suggestionsTableView {
+                suggestionsTableView.frame = CGRectMake(0, 44, size.width, availHeight)
+            }
+            if let settingsBar = self._settingsBarView {
+                settingsBar.frame = CGRectMake(0, self.view.frame.height, self.view.frame.width, 44)
+            }
+            if let topBorder = self._topBorder {
+                topBorder.frame = CGRectMake(0, 0, self._settingsBarView!.frame.width, 0.5)
+            }
+            if let settingsButton = self._settingsButton {
+                var settingsFrame = settingsButton.frame
+                settingsFrame.origin.x = self._settingsBarView!.frame.width - settingsFrame.width - 14
+                settingsFrame.origin.y = 7
+                settingsButton.frame = settingsFrame
+            }
         }, completion: nil)
     }
     
