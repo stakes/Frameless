@@ -410,6 +410,9 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     func displayLoadingErrorMessage() {
         self.view.sendSubviewToBack(_loadingErrorView)
         _loadingErrorView.hidden = false
+        if let suggestions = _suggestionsTableView {
+            suggestions.hidden = true
+        }
     }
     
     func handleGoBackPan(sender: UIScreenEdgePanGestureRecognizer) {
@@ -551,6 +554,10 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
             _suggestionsTableView?.separatorColor = UIColorFromHex(0x000000, alpha: 0.1)
             self.view.insertSubview(_suggestionsTableView!, belowSubview: _settingsBarView!)
         }
+        if let errorView = _loadingErrorView {
+            errorView.hidden = true
+        }
+        _suggestionsTableView?.hidden = false
         populateSuggestionsTableView()
     }
     
@@ -607,7 +614,7 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
         if rows == 0 {
             return ""
         } else if section == 0 {
-            return "Framer Studio"
+            return "Last Connection to Framer Studio"
         } else if section == 1 {
             return "Top Matches"
         } else {
