@@ -84,7 +84,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         page01.iconWidth = 158
         page01.iconHeight = 258.5
         
-        let str02 = NSMutableAttributedString(string: "Swipe up, swipe down,\nor tap with three fingers to show\nthe browser bar and keyboard")
+        let str02 = NSMutableAttributedString(string: "Swipe up from the bottom or\ndown from the top to show\nthe browser bar and keyboard")
         str02.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyle, range: NSMakeRange(0, str02.length))
         let page02: OnboardingContentViewController = OnboardingContentViewController(title: nil, body: str02, image: UIImage(named: "introimage02"), buttonText: nil) {
         }
