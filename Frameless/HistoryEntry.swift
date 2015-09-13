@@ -12,7 +12,7 @@ class HistoryEntry: NSObject, NSCoding {
     var urlString: String
     var title: String?
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         url = aDecoder.decodeObjectForKey("url") as! NSURL
         urlString = aDecoder.decodeObjectForKey("urlString") as! String
         title = aDecoder.decodeObjectForKey("title") as? String

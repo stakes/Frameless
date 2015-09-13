@@ -35,7 +35,7 @@ class FramelessSearchBar: UISearchBar {
         
         let helvetica = UIFont(name: "HelveticaNeue", size: 16)
         if let font = helvetica {
-            var normalTextAttributes: Dictionary = [
+            let normalTextAttributes: Dictionary = [
                 NSFontAttributeName: font
             ]
             UIBarButtonItem.appearance().setTitleTextAttributes(normalTextAttributes, forState: .Normal)
@@ -43,14 +43,14 @@ class FramelessSearchBar: UISearchBar {
             // See: http://stackoverflow.com/a/26224862/534343
             AppearanceBridge.setSearchBarTextInputAppearance()
             
-            var closeImg = UIImage(named: "close")
+            let closeImg = UIImage(named: "close")
             self.setImage(closeImg, forSearchBarIcon: .Clear, state: .Normal)
-            var closeImgHighlight = UIImage(named: "close-highlight")
+            let closeImgHighlight = UIImage(named: "close-highlight")
             self.setImage(closeImgHighlight, forSearchBarIcon: .Clear, state: .Highlighted)
             
             // Swap search bar button out for refresh
             var searchField: UITextField?
-            var searchBarSubviews = self.subviews.first?.subviews
+            let searchBarSubviews = self.subviews.first?.subviews
             for subview in searchBarSubviews! {
                 if subview.isKindOfClass(UITextField) {
                     searchField = subview as? UITextField
@@ -60,8 +60,8 @@ class FramelessSearchBar: UISearchBar {
             }
             if let field = searchField {
                 _field = field
-                var iconImage = UIImage(named: "refresh")
-                var iconImageDisabled = UIImage(named: "refresh-disabled")
+                let iconImage = UIImage(named: "refresh")
+                let iconImageDisabled = UIImage(named: "refresh-disabled")
                 if _refreshButton == nil {
                     _refreshButton = UIButton(frame: CGRectMake(0, 0, 16, 14.5))
                 }

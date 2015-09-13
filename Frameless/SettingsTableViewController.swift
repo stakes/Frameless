@@ -79,42 +79,42 @@ class SettingsTableViewController: UITableViewController, UINavigationController
     }
     
     @IBAction func toggleShakeSwitch(sender: AnyObject) {
-        var value = (sender as! UISwitch).on
+        let value = (sender as! UISwitch).on
         NSUserDefaults.standardUserDefaults().setValue(value, forKey: AppDefaultKeys.ShakeGesture.rawValue)
         checkControlsSettings()
     }
 
     @IBAction func toggleSwipeUpSwitch(sender: AnyObject) {
-        var value = (sender as! UISwitch).on
+        let value = (sender as! UISwitch).on
         NSUserDefaults.standardUserDefaults().setValue(value, forKey: AppDefaultKeys.PanFromBottomGesture.rawValue)
         checkControlsSettings()
     }
     
     @IBAction func toggleSwipeDownSwitch(sender: AnyObject) {
-        var value = (sender as! UISwitch).on
+        let value = (sender as! UISwitch).on
         NSUserDefaults.standardUserDefaults().setValue(value, forKey: AppDefaultKeys.PanFromTopGesture.rawValue)
         checkControlsSettings()
     }
 
     
     @IBAction func toggleBrowserNavSwitch(sender: AnyObject) {
-        var value = (sender as! UISwitch).on
+        let value = (sender as! UISwitch).on
         NSUserDefaults.standardUserDefaults().setValue(value, forKey: AppDefaultKeys.ForwardBackGesture.rawValue)
     }
     
     @IBAction func toggleFramerSwitch(sender: AnyObject) {
-        var value = (sender as! UISwitch).on
+        let value = (sender as! UISwitch).on
         NSUserDefaults.standardUserDefaults().setValue(value, forKey: AppDefaultKeys.FramerBonjour.rawValue)
     }
     
     @IBAction func toggleSleepSwitch(sender: AnyObject) {
-        var value = (sender as! UISwitch).on
+        let value = (sender as! UISwitch).on
         UIApplication.sharedApplication().idleTimerDisabled = value
         NSUserDefaults.standardUserDefaults().setValue(value, forKey: AppDefaultKeys.KeepAwake.rawValue)
     }
     
     @IBAction func toggleHistorySwitch(sender: AnyObject) {
-        var value = (sender as! UISwitch).on
+        let value = (sender as! UISwitch).on
         if !value {
             HistoryManager.manager.clearHistory()
         }
@@ -122,7 +122,7 @@ class SettingsTableViewController: UITableViewController, UINavigationController
     }
     
     func checkControlsSettings() -> Bool {
-        var arr = [_swipeUpSwitch.on, _swipeDownSwitch.on]
+        let arr = [_swipeUpSwitch.on, _swipeDownSwitch.on]
         let filtered = arr.filter { $0 == true }
         if filtered.count == 0 {
             _closeButton.enabled = false

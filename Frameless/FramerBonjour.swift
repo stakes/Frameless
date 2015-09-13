@@ -44,8 +44,8 @@ class FramerBonjour:NSObject, NSNetServiceDelegate, NSNetServiceBrowserDelegate 
             for address in addresses {
                 let ptr = UnsafePointer<sockaddr_in>(address.bytes)
                 var addr = ptr.memory.sin_addr
-                var buf = UnsafeMutablePointer<Int8>.alloc(Int(INET6_ADDRSTRLEN))
-                var family = ptr.memory.sin_family
+                let buf = UnsafeMutablePointer<Int8>.alloc(Int(INET6_ADDRSTRLEN))
+                let family = ptr.memory.sin_family
                 var ipc = UnsafePointer<Int8>()
                 if family == __uint8_t(AF_INET) {
                     ipc = inet_ntop(Int32(family), &addr, buf, __uint32_t(INET6_ADDRSTRLEN))

@@ -30,7 +30,7 @@ class HistoryManager: NSObject {
     }
     
     func getHistoryDataFor(originalString: String) {
-        var stringToFind = originalString.lowercaseString
+        let stringToFind = originalString.lowercaseString
         studio = nil
         history.removeAll(keepCapacity: false)
         matches.removeAll(keepCapacity: false)
@@ -38,8 +38,8 @@ class HistoryManager: NSObject {
         var domainMatches = Array<HistoryEntry>()
         var titleMatches = Array<HistoryEntry>()
         for entry:HistoryEntry in _fullHistory! {
-            var entryUrl = entry.urlString.lowercaseString
-            var entryTitle = entry.title?.lowercaseString
+            let entryUrl = entry.urlString.lowercaseString
+            let entryTitle = entry.title?.lowercaseString
             if entryTitle?.rangeOfString("framer studio projects") != nil {
                 // Put Framer Studio home in the top matches
                 studio = entry
@@ -88,21 +88,21 @@ class HistoryManager: NSObject {
     func trimHistory() {
         if let arr = _fullHistory {
             if arr.count > _maxHistoryItems {
-                var count = arr.count as Int
-                var extraCount = count - _maxHistoryItems
-                var newarr = arr[extraCount...(arr.endIndex-1)]
+                let count = arr.count as Int
+                let extraCount = count - _maxHistoryItems
+                let newarr = arr[extraCount...(arr.endIndex-1)]
                 _fullHistory = Array<HistoryEntry>(newarr)
             }
         }
     }
     
     func createDisplayURLString(url: NSURL) -> String {
-        var str = url.resourceSpecifier!
+        var str = url.resourceSpecifier
         if str.hasPrefix("//") {
-            str = str.substringFromIndex(advance(str.startIndex, 2))
+            str = str.substringFromIndex(str.startIndex.advancedBy(2))
         }
         if str.hasPrefix("www.") {
-            str = str.substringFromIndex(advance(str.startIndex, 4))
+            str = str.substringFromIndex(str.startIndex.advancedBy(4))
         }
         if str.hasSuffix("/") {
             str = str.substringToIndex(str.endIndex.predecessor())
@@ -124,7 +124,7 @@ class HistoryManager: NSObject {
         // if this is a Framer Studio URL
         if webView.title?.lowercaseString.rangeOfString("framer studio projects") != nil {
             // remove old framer studios
-            var filteredHistory = _fullHistory!.filter({
+            let filteredHistory = _fullHistory!.filter({
                 return $0.title?.lowercaseString.rangeOfString("framer studio projects") == nil
             })
             _fullHistory = filteredHistory

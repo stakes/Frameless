@@ -55,9 +55,9 @@ extension UIImage {
 // http://codewithchris.com/common-mistakes-with-adding-custom-fonts-to-your-ios-app/
 func listAllAvailableFonts() {
     for family: AnyObject in UIFont.familyNames() {
-        println("\(family)")
+        print("\(family)")
         for font: AnyObject in UIFont.fontNamesForFamilyName(family as! String) {
-            println(" \(font)")
+            print(" \(font)")
         }
     }
 }
@@ -89,7 +89,7 @@ func urlifyUserInput(input: String) -> String {
     if (looksLikeUrl) {
         // This is a URL. Prefix it if needed, otherwise just pass through
         
-        var urlCandidate = input
+        let urlCandidate = input
         if normalizedInput.hasPrefix("http://") || normalizedInput.hasPrefix("https://") {
             return urlCandidate
         } else {
