@@ -19,6 +19,7 @@ class SettingsTableViewController: UITableViewController, UINavigationController
     @IBOutlet weak var _closeButton: UIBarButtonItem!
     @IBOutlet weak var _searchEngineLabel: UILabel!
     @IBOutlet weak var _historySwitch: UISwitch!
+    @IBOutlet weak var _dimensionsSwitch: UISwitch!
     
     var delegate:ViewController?
     
@@ -76,6 +77,11 @@ class SettingsTableViewController: UITableViewController, UINavigationController
                 _searchEngineLabel.text = "Search engine: \(searchEngine.displayName)"
             }
         }
+    }
+    
+    @IBAction func toggleDimensionsSwitch(sender: AnyObject) {
+        let value = (sender as! UISwitch).on
+        NSUserDefaults.standardUserDefaults().setValue(value, forKey: AppDefaultKeys.FixiOS9.rawValue)
     }
     
     @IBAction func toggleShakeSwitch(sender: AnyObject) {

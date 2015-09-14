@@ -18,6 +18,7 @@ enum AppDefaultKeys: String {
     case FramerBonjour = "framerConnect"
     case KeepAwake = "keepAwake"
     case SearchEngine = "searchEngine"
+    case FixiOS9 = "fixiOS9"
 }
 
 let BLUE = UIColorFromHex(0x28AFFA)

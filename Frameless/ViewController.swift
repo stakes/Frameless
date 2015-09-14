@@ -360,19 +360,24 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     }
     
     func webView(webView: WKWebView, decidePolicyForNavigationAction navigationAction: WKNavigationAction, decisionHandler: (WKNavigationActionPolicy) -> Void) {
-        if let absURL = navigationAction.request.URL {
-            if let _ = absURL.lastPathComponent!.rangeOfString(".framer") {
-                decisionHandler(.Cancel)
-                let screenWidth = UIScreen.mainScreen().bounds.width * UIScreen.mainScreen().scale
-                do {
-                    var html = try String(contentsOfURL: absURL, encoding: NSASCIIStringEncoding)
-                    html = html.stringByReplacingOccurrencesOfString("width=device-width", withString: "width=\(screenWidth)")
-                    // Hack to add 'rewritten' to the url so we dont get in an infinite loop here. There's no way to tell
-                    // whether the request was caused by loadRequest or the rewritten loadHTMLString.  This could also be
-                    // done with an instance variable saying "Don't rewrite the next request."
-                    _webView?.loadHTMLString(html, baseURL: absURL.URLByAppendingPathComponent("rewritten"))
-                } catch {
-                    
+        
+        
+        if NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.FixiOS9.rawValue) as! Bool == true {
+            // resize Framer prototypes to fix iOS9 "bug"
+            if let absURL = navigationAction.request.URL {
+                if let _ = absURL.lastPathComponent!.rangeOfString(".framer") {
+                    decisionHandler(.Cancel)
+                    let screenWidth = UIScreen.mainScreen().bounds.width * UIScreen.mainScreen().scale
+                    do {
+                        var html = try String(contentsOfURL: absURL, encoding: NSASCIIStringEncoding)
+                        html = html.stringByReplacingOccurrencesOfString("width=device-width", withString: "width=\(screenWidth)")
+                        // Hack to add 'rewritten' to the url so we dont get in an infinite loop here. There's no way to tell
+                        // whether the request was caused by loadRequest or the rewritten loadHTMLString.  This could also be
+                        // done with an instance variable saying "Don't rewrite the next request."
+                        _webView?.loadHTMLString(html, baseURL: absURL.URLByAppendingPathComponent("rewritten"))
+                    } catch {
+                        
+                    }
                 }
             }
         }
