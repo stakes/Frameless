@@ -107,7 +107,7 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
         _settingsButton!.setTitle("Settings", forState: .Normal)
         _settingsButton!.setTitleColor(BLUE, forState: .Normal)
         _settingsButton!.setTitleColor(HIGHLIGHT_BLUE, forState: .Highlighted)
-        _settingsButton!.titleLabel!.font = UIFont(name: "HelveticaNeue-Bold", size: 14)
+        _settingsButton!.titleLabel!.font = UIFont.systemFontOfSize(14)
         _settingsButton!.sizeToFit()
         var settingsFrame = _settingsButton!.frame
         settingsFrame.origin.x = _settingsBarView!.frame.width - settingsFrame.width - 14
@@ -119,7 +119,7 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
         _clearHistoryButton!.setTitleColor(BLUE, forState: .Normal)
         _clearHistoryButton!.setTitleColor(HIGHLIGHT_BLUE, forState: .Highlighted)
         _clearHistoryButton!.setTitleColor(LIGHT_TEXT, forState: .Disabled)
-        _clearHistoryButton!.titleLabel!.font = UIFont(name: "HelveticaNeue", size: 14)
+        _clearHistoryButton!.titleLabel!.font = UIFont.systemFontOfSize(14)
         _clearHistoryButton!.sizeToFit()
         var clearFrame = _clearHistoryButton!.frame
         clearFrame.origin.x = 14
@@ -509,18 +509,14 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
                 let windowCount = UIApplication.sharedApplication().windows.count
                 if let targetView = UIApplication.sharedApplication().windows[windowCount-1].rootViewController {
                     _framerAddress = address
-                    
-                    let paragraphStyle = NSMutableParagraphStyle()
-                    paragraphStyle.lineSpacing = 2
-                    paragraphStyle.alignment = .Center
-                    let alertStr = NSMutableAttributedString(string: "Framer Studio is running on your network. Connect now?")
-                    alertStr.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyle, range: NSMakeRange(0, alertStr.length))
-                    let alert = _alertBuilder.show(targetView as UIViewController!, title: "Framer Mirror", text: alertStr, cancelButtonText: "Cancel", buttonText: "Connect", color: BLUE)
+//                    let paragraphStyle = NSMutableParagraphStyle()
+//                    paragraphStyle.lineSpacing = 2
+//                    paragraphStyle.alignment = .Center
+//                    let alertStr = NSMutableAttributedString(string: "Framer Studio is running on your network. Connect now?")
+//                    alertStr.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyle, range: NSMakeRange(0, alertStr.length))
+                    let alert = _alertBuilder.show(targetView as UIViewController!, title: "Framer Mirror", text: "Framer Studio is running on your network. Connect now?", cancelButtonText: "Cancel", buttonText: "Connect", color: BLUE)
                     alert.addAction(handleAlertConfirmTap)
                     alert.setTextTheme(.Light)
-                    alert.setTitleFont("HelveticaNeue-Bold")
-                    alert.setTextFont("HelveticaNeue")
-                    alert.setButtonFont("HelveticaNeue")
                 }
             }
         } else {
@@ -713,7 +709,7 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let size = UIScreen.mainScreen().bounds.size
         let label = UILabel(frame: CGRectMake(14, 4, size.width - 28, 13))
-        label.font = UIFont(name: "HelveticaNeue", size: 13)
+        label.font = UIFont.systemFontOfSize(13)
         label.textColor = UIColorFromHex(0x000000, alpha: 0.5)
         label.text = self.tableView(tableView, titleForHeaderInSection: section)?.uppercaseString
 

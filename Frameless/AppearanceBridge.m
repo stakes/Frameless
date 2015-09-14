@@ -13,7 +13,7 @@
 @implementation AppearanceBridge
 
 + (void)setSearchBarTextInputAppearance {
-    [[UITextField appearanceWhenContainedIn:[UISearchBar class], nil] setFont:[UIFont fontWithName:@"HelveticaNeue" size:14]];
+    [[UITextField appearanceWhenContainedIn:[UISearchBar class], nil] setFont:[UIFont systemFontOfSize:14]];
 //    [[UILabel appearanceWhenContainedIn:[UISearchBar class], nil] setTextColor:[UIColor whiteColor]];
 }
 

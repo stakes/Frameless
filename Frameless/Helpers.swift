@@ -62,6 +62,7 @@ func listAllAvailableFonts() {
     }
 }
 
+
 /// Given input from user, turn it into a URL, which could be either a direct URL or a search query
 func urlifyUserInput(input: String) -> String {
     

@@ -20,9 +20,9 @@ class HistoryTableViewCell: UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.textLabel?.textColor = UIColorFromHex(0x1E1E25)
-        self.textLabel?.font = UIFont(name: "HelveticaNeue", size: 16)
+        self.textLabel?.font = UIFont.systemFontOfSize(16)
         self.detailTextLabel?.textColor = UIColorFromHex(0xA5A6A9)
-        self.detailTextLabel?.font = UIFont(name: "HelveticaNeue", size: 12)
+        self.detailTextLabel?.font = UIFont.systemFontOfSize(12)
     }
     
     required init?(coder aDecoder: NSCoder) {

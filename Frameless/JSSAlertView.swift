@@ -31,9 +31,9 @@ class JSSAlertView: UIViewController {
     enum FontType {
         case Title, Text, Button
     }
-    var titleFont = "HelveticaNeue-Light"
-    var textFont = "HelveticaNeue"
-    var buttonFont = "HelveticaNeue-Bold"
+    var titleFont:String?
+    var textFont:String?
+    var buttonFont:String?
     
     var defaultColor = UIColorFromHex(0xF2F4F4, alpha: 1)
     
@@ -88,7 +88,7 @@ class JSSAlertView: UIViewController {
         switch type {
         case .Title:
             self.titleFont = fontStr
-            if let font = UIFont(name: self.titleFont, size: 18) {
+            if let font = UIFont(name: self.titleFont!, size: 18) {
                 self.titleLabel.font = font
             } else {
                 self.titleLabel.font = UIFont.systemFontOfSize(18)
@@ -96,7 +96,7 @@ class JSSAlertView: UIViewController {
         case .Text:
             if self.textView != nil {
                 self.textFont = fontStr
-                if let font = UIFont(name: self.textFont, size: 14) {
+                if let font = UIFont(name: self.textFont!, size: 14) {
                     self.textView.font = font
                 } else {
                     self.textView.font = UIFont.systemFontOfSize(14)
@@ -104,7 +104,7 @@ class JSSAlertView: UIViewController {
             }
         case .Button:
             self.buttonFont = fontStr
-            if let font = UIFont(name: self.buttonFont, size: 18) {
+            if let font = UIFont(name: self.buttonFont!, size: 18) {
                 self.buttonLabel.font = font
             } else {
                 self.buttonLabel.font = UIFont.systemFontOfSize(18)
@@ -210,10 +210,18 @@ class JSSAlertView: UIViewController {
         
         // set button fonts
         if self.buttonLabel != nil {
-            buttonLabel.font = UIFont(name: self.buttonFont, size: 18)
+            if let font = self.buttonFont {
+                buttonLabel.font = UIFont(name: font, size: 18)
+            } else {
+                buttonLabel.font = UIFont.systemFontOfSize(18)
+            }
         }
         if self.cancelButtonLabel != nil {
-            cancelButtonLabel.font = UIFont(name: self.buttonFont, size: 18)
+            if let font = self.buttonFont {
+                cancelButtonLabel.font = UIFont(name: font, size: 18)
+            } else {
+                cancelButtonLabel.font = UIFont.systemFontOfSize(18)
+            }
         }
     
         yPos += self.buttonHeight
@@ -290,7 +298,11 @@ class JSSAlertView: UIViewController {
         titleLabel.textColor = textColor
         titleLabel.numberOfLines = 0
         titleLabel.textAlignment = .Center
-        titleLabel.font = UIFont(name: self.titleFont, size: 24)
+        if let font = self.titleFont {
+            titleLabel.font = UIFont(name: font, size: 24)
+        } else {
+            titleLabel.font = UIFont.systemFontOfSize(24)
+        }
         titleLabel.text = title
         self.containerView.addSubview(titleLabel)
         
@@ -301,7 +313,11 @@ class JSSAlertView: UIViewController {
             textView.editable = false
             textView.textColor = textColor
             textView.textAlignment = .Center
-            textView.font = UIFont(name: self.textFont, size: 16)
+            if let font = self.textFont {
+                textView.font = UIFont(name: font, size: 16)
+            } else {
+                textView.font = UIFont.systemFontOfSize(16)
+            }
             textView.backgroundColor = UIColor.clearColor()
             if let attStr = textObj as? NSAttributedString {
                 textView.attributedText = attStr
