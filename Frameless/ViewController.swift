@@ -56,7 +56,7 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        var webViewConfiguration: WKWebViewConfiguration = WKWebViewConfiguration()
+        let webViewConfiguration: WKWebViewConfiguration = WKWebViewConfiguration()
         webViewConfiguration.allowsInlineMediaPlayback = true
         webViewConfiguration.mediaPlaybackRequiresUserAction = false
         
@@ -107,7 +107,7 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
         _settingsButton!.setTitle("Settings", forState: .Normal)
         _settingsButton!.setTitleColor(BLUE, forState: .Normal)
         _settingsButton!.setTitleColor(HIGHLIGHT_BLUE, forState: .Highlighted)
-        _settingsButton!.titleLabel!.font = UIFont(name: "HelveticaNeue-Bold", size: 14)
+        _settingsButton!.titleLabel!.font = UIFont.systemFontOfSize(14)
         _settingsButton!.sizeToFit()
         var settingsFrame = _settingsButton!.frame
         settingsFrame.origin.x = _settingsBarView!.frame.width - settingsFrame.width - 14
@@ -119,7 +119,7 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
         _clearHistoryButton!.setTitleColor(BLUE, forState: .Normal)
         _clearHistoryButton!.setTitleColor(HIGHLIGHT_BLUE, forState: .Highlighted)
         _clearHistoryButton!.setTitleColor(LIGHT_TEXT, forState: .Disabled)
-        _clearHistoryButton!.titleLabel!.font = UIFont(name: "HelveticaNeue", size: 14)
+        _clearHistoryButton!.titleLabel!.font = UIFont.systemFontOfSize(14)
         _clearHistoryButton!.sizeToFit()
         var clearFrame = _clearHistoryButton!.frame
         clearFrame.origin.x = 14
@@ -172,7 +172,7 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     func keyboardShown(sender: NSNotification) {
         let info  = sender.userInfo!
         let value: AnyObject = info[UIKeyboardFrameEndUserInfoKey]!
-        let rawFrame = value.CGRectValue()
+        let rawFrame = value.CGRectValue
         let keyboardFrame = view.convertRect(rawFrame, fromView: nil)
         _keyboardHeight = keyboardFrame.height
     }
@@ -208,8 +208,8 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
         return true
     }
     
-    override func motionEnded(motion: UIEventSubtype, withEvent event: UIEvent) {
-        if let isShakeActive:Bool = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.ShakeGesture.rawValue) as? Bool {
+    override func motionEnded(motion: UIEventSubtype, withEvent event: UIEvent?) {
+        if let _:Bool = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.ShakeGesture.rawValue) as? Bool {
 //            if(event.subtype == UIEventSubtype.MotionShake && isShakeActive == true) {
 //                if (!_areControlsVisible) {
 //                    showSearch()
@@ -232,7 +232,7 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     func hideSearch() {
         removeSuggestionsTableView()
         _searchBar.resignFirstResponder()
-        UIView.animateWithDuration(0.5, delay: 0.05, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.5, options: nil, animations: {
+        UIView.animateWithDuration(0.5, delay: 0.05, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.5, options: [], animations: {
             self._searchBar.transform = CGAffineTransformMakeTranslation(0, -44)
         }, completion: nil)
         _areControlsVisible = false
@@ -244,7 +244,7 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
             if let urlString = _webView?.URL?.absoluteString {
                 _searchBar.text = urlString
             }
-            UIView.animateWithDuration(0.5, delay: 0.05, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.5, options: nil, animations: {
+            UIView.animateWithDuration(0.5, delay: 0.05, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.5, options: [], animations: {
                 self._searchBar.transform = CGAffineTransformMakeTranslation(0, 0)
             }, completion: nil)
             _areControlsVisible = true
@@ -259,9 +259,9 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     func blurBackground() {
         if !_isFirstRun {
             if _effectView == nil {
-                var blur:UIBlurEffect = UIBlurEffect(style: UIBlurEffectStyle.Light)
+                let blur:UIBlurEffect = UIBlurEffect(style: UIBlurEffectStyle.Light)
                 _effectView = UIVisualEffectView(effect: blur)
-                var size = _webView!.frame.size
+                let size = _webView!.frame.size
                 _effectView!.frame = CGRectMake(0,0,size.width,size.height)
                 _effectView!.alpha = 0
                 _effectView?.addGestureRecognizer(_tapRecognizer!)
@@ -293,7 +293,7 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     func fadeInSuggestionsTable() {
         if let tableView = _suggestionsTableView {
             tableView.alpha = 0
-            UIView.animateWithDuration(0.25, delay: 0.25, options: nil, animations: {
+            UIView.animateWithDuration(0.25, delay: 0.25, options: [], animations: {
                 self._suggestionsTableView!.alpha = 1
             }, completion: nil)
         }
@@ -344,7 +344,7 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     }
 
     func webView(webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: NSError) {
-        if let newFrameLoading = _isMainFrameNavigationAction {
+        if let _ = _isMainFrameNavigationAction {
             // do nothing, I'm pretty sure it's a new page load into target="_blank" before the old one's subframes are finished
         } else {
             handleWebViewError()
@@ -352,7 +352,7 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     }
     
     func webView(webView: WKWebView, didFailNavigation navigation: WKNavigation!, withError error: NSError) {
-        if let newFrameLoading = _isMainFrameNavigationAction {
+        if let _ = _isMainFrameNavigationAction {
             // do nothing, it's a new page load before the old one's subframes are finished
         } else {
             handleWebViewError()
@@ -360,6 +360,28 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     }
     
     func webView(webView: WKWebView, decidePolicyForNavigationAction navigationAction: WKNavigationAction, decisionHandler: (WKNavigationActionPolicy) -> Void) {
+        
+        
+        if NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.FixiOS9.rawValue) as! Bool == true {
+            // resize Framer prototypes to fix iOS9 "bug"
+            if let absURL = navigationAction.request.URL {
+                if let _ = absURL.lastPathComponent!.rangeOfString(".framer") {
+                    decisionHandler(.Cancel)
+                    let screenWidth = UIScreen.mainScreen().bounds.width * UIScreen.mainScreen().scale
+                    do {
+                        var html = try String(contentsOfURL: absURL, encoding: NSASCIIStringEncoding)
+                        html = html.stringByReplacingOccurrencesOfString("width=device-width", withString: "width=\(screenWidth)")
+                        // Hack to add 'rewritten' to the url so we dont get in an infinite loop here. There's no way to tell
+                        // whether the request was caused by loadRequest or the rewritten loadHTMLString.  This could also be
+                        // done with an instance variable saying "Don't rewrite the next request."
+                        _webView?.loadHTMLString(html, baseURL: absURL.URLByAppendingPathComponent("rewritten"))
+                    } catch {
+                        
+                    }
+                }
+            }
+        }
+
         if (navigationAction.targetFrame == nil && navigationAction.navigationType == .LinkActivated) {
             _webView!.loadRequest(navigationAction.request)
         }
@@ -367,9 +389,9 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
         decisionHandler(.Allow)
     }
     
-    func webView(webView: WKWebView, didReceiveAuthenticationChallenge challenge: NSURLAuthenticationChallenge, completionHandler: (NSURLSessionAuthChallengeDisposition, NSURLCredential!) -> Void) {
-        var hostname = webView.URL?.host
-        var authMethod = challenge.protectionSpace.authenticationMethod
+    func webView(webView: WKWebView, didReceiveAuthenticationChallenge challenge: NSURLAuthenticationChallenge, completionHandler: (NSURLSessionAuthChallengeDisposition, NSURLCredential?) -> Void) {
+        let hostname = webView.URL?.host
+        let authMethod = challenge.protectionSpace.authenticationMethod
         if authMethod == NSURLAuthenticationMethodDefault {
             if let loadTimer = _loadingTimer {
                 loadTimer.invalidate()
@@ -383,23 +405,23 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
             if let hostStr = hostname {
                 message = "The server at \(hostStr) requires a username and password."
             }
-            var alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
-            alert.addTextFieldWithConfigurationHandler( { (textField: UITextField!) in
+            let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+            alert.addTextFieldWithConfigurationHandler( { (textField: UITextField) in
                 textField.placeholder = "Username"
             })
-            alert.addTextFieldWithConfigurationHandler( { (textField: UITextField!) in
+            alert.addTextFieldWithConfigurationHandler( { (textField: UITextField) in
                 textField.placeholder = "Password"
                 textField.secureTextEntry = true
             })
-            var okAction = UIAlertAction(title: "OK", style: .Default, handler: { (UIAlertaction) in
-                var usernameTextfield = alert.textFields![0] as! UITextField
-                var pwTextfield = alert.textFields![1] as! UITextField
-                var username = usernameTextfield.text
-                var pw = pwTextfield.text
-                var credential = NSURLCredential(user: username, password: pw, persistence: .ForSession)
+            let okAction = UIAlertAction(title: "OK", style: .Default, handler: { (UIAlertaction) in
+                let usernameTextfield = alert.textFields![0]
+                let pwTextfield = alert.textFields![1]
+                let username = usernameTextfield.text
+                let pw = pwTextfield.text
+                let credential = NSURLCredential(user: username!, password: pw!, persistence: .ForSession)
                 completionHandler(NSURLSessionAuthChallengeDisposition.UseCredential, credential)
             })
-            var cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: { (UIAlertAction) in
+            let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: { (UIAlertAction) in
                 completionHandler(NSURLSessionAuthChallengeDisposition.CancelAuthenticationChallenge, nil)
             })
             alert.addAction(okAction)
@@ -484,21 +506,17 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     func didResolveAddress(address: String) {
         if _confirmFramerConnect {
             if !_alertBuilder.isAlertOpen {
-                var windowCount = UIApplication.sharedApplication().windows.count
-                if let targetView = UIApplication.sharedApplication().windows[windowCount-1].rootViewController! {
+                let windowCount = UIApplication.sharedApplication().windows.count
+                if let targetView = UIApplication.sharedApplication().windows[windowCount-1].rootViewController {
                     _framerAddress = address
-                    
-                    let paragraphStyle = NSMutableParagraphStyle()
-                    paragraphStyle.lineSpacing = 2
-                    paragraphStyle.alignment = .Center
-                    let alertStr = NSMutableAttributedString(string: "Framer Studio is running on your network. Connect now?")
-                    alertStr.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyle, range: NSMakeRange(0, alertStr.length))
-                    var alert = _alertBuilder.show(targetView as UIViewController!, title: "Framer Mirror", text: alertStr, cancelButtonText: "Cancel", buttonText: "Connect", color: BLUE)
+//                    let paragraphStyle = NSMutableParagraphStyle()
+//                    paragraphStyle.lineSpacing = 2
+//                    paragraphStyle.alignment = .Center
+//                    let alertStr = NSMutableAttributedString(string: "Framer Studio is running on your network. Connect now?")
+//                    alertStr.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyle, range: NSMakeRange(0, alertStr.length))
+                    let alert = _alertBuilder.show(targetView as UIViewController!, title: "Framer Mirror", text: "Framer Studio is running on your network. Connect now?", cancelButtonText: "Cancel", buttonText: "Connect", color: BLUE)
                     alert.addAction(handleAlertConfirmTap)
                     alert.setTextTheme(.Light)
-                    alert.setTitleFont("HelveticaNeue-Bold")
-                    alert.setTextFont("HelveticaNeue")
-                    alert.setButtonFont("HelveticaNeue")
                 }
             }
         } else {
@@ -529,7 +547,7 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
 
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         hideSearch()
-        loadURL(searchBar.text)
+        loadURL(searchBar.text!)
     }
     
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
@@ -538,8 +556,10 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     
     func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool {
         var enable = false
-        if (count(_searchBar.text as String) > 0) && _isCurrentPageLoaded {
-            enable = true
+        if let txt = _searchBar.text {
+            if ((txt as String).characters.count > 0) && _isCurrentPageLoaded {
+                enable = true
+            }
         }
         _searchBar.refreshButton().enabled = enable
         return true
@@ -557,7 +577,7 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
             if let urlString = _webView?.URL?.absoluteString {
                 _searchBar.text = urlString
             }
-            loadURL(_searchBar.text)
+            loadURL(_searchBar.text!)
         }
     }
     
@@ -626,7 +646,7 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     }
     
     func populateSuggestionsTableView() {
-        HistoryManager.manager.getHistoryDataFor(_searchBar.text)
+        HistoryManager.manager.getHistoryDataFor(_searchBar.text!)
     }
     
     func removeSuggestionsTableView() {
@@ -639,7 +659,7 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell:HistoryTableViewCell = HistoryTableViewCell(style: .Subtitle, reuseIdentifier: nil)
+        let cell:HistoryTableViewCell = HistoryTableViewCell(style: .Subtitle, reuseIdentifier: nil)
         var entry:HistoryEntry
         if indexPath.section == 0 {
             entry = HistoryManager.manager.studio!
@@ -655,13 +675,13 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if let cell = _suggestionsTableView?.cellForRowAtIndexPath(indexPath) as? HistoryTableViewCell {
-            loadURL(cell.entry!.url.absoluteString!, andCloseSearch: true)
+            loadURL(cell.entry!.url.absoluteString, andCloseSearch: true)
         }
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            if let studio = HistoryManager.manager.studio {
+            if let _ = HistoryManager.manager.studio {
                 return 1
             } else {
                 return 0
@@ -674,7 +694,7 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     }
     
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        var rows = self.tableView(tableView, numberOfRowsInSection: section)
+        let rows = self.tableView(tableView, numberOfRowsInSection: section)
         if rows == 0 {
             return ""
         } else if section == 0 {
@@ -688,12 +708,12 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let size = UIScreen.mainScreen().bounds.size
-        var label = UILabel(frame: CGRectMake(14, 4, size.width - 28, 13))
-        label.font = UIFont(name: "HelveticaNeue", size: 13)
+        let label = UILabel(frame: CGRectMake(14, 4, size.width - 28, 13))
+        label.font = UIFont.systemFontOfSize(13)
         label.textColor = UIColorFromHex(0x000000, alpha: 0.5)
         label.text = self.tableView(tableView, titleForHeaderInSection: section)?.uppercaseString
 
-        var headerView = UIView()
+        let headerView = UIView()
         headerView.backgroundColor = UIColorFromHex(0x000000, alpha: 0.05)
         headerView.addSubview(label)
         return headerView

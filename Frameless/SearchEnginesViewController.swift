@@ -25,7 +25,7 @@ class SearchEnginesViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("SearchEngineCell", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("SearchEngineCell", forIndexPath: indexPath) 
         
         let thisEngine = engines[indexPath.row]
         cell.textLabel?.text = thisEngine.displayName

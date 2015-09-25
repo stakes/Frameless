@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         setUserSettingsDefaults()
         
-        if let lastIntro: AnyObject = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.IntroVersionSeen.rawValue) {
+        if let _: AnyObject = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.IntroVersionSeen.rawValue) {
             setupAppViewController(false)
         } else {
             self.window!.rootViewController = createIntroViewController()
@@ -33,14 +33,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     // Open from custom URL scheme
-    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
+    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
         if let host = url.host {
             var urlstr = "http://" + host
             if let port = url.port {
-                var portstr = port.stringValue
+                let portstr = port.stringValue
                 urlstr += ":" + portstr
             }
-            if let path = url.path {
+            if let _ = url.path {
                 urlstr += url.path!
             }
             
@@ -64,7 +64,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             AppDefaultKeys.ForwardBackGesture.rawValue: true,
             AppDefaultKeys.FramerBonjour.rawValue: true,
             AppDefaultKeys.KeepAwake.rawValue: true,
-            AppDefaultKeys.SearchEngine.rawValue: SearchEngineType.Google.rawValue
+            AppDefaultKeys.SearchEngine.rawValue: SearchEngineType.Google.rawValue,
+            AppDefaultKeys.FixiOS9.rawValue: true
         ])
 //        let defaults = NSUserDefaults.standardUserDefaults()
 //        defaults.setObject(Array<HistoryEntry>(), forKey: AppDefaultKeys.History.rawValue)
@@ -140,7 +141,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func setupAppViewController(animated : Bool) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let appViewController = storyboard.instantiateViewControllerWithIdentifier("mainViewController") as! UIViewController
+        let appViewController = storyboard.instantiateViewControllerWithIdentifier("mainViewController") 
         if animated {
             UIView.transitionWithView(self.window!, duration: 0.5, options:UIViewAnimationOptions.TransitionFlipFromBottom, animations: { () -> Void in
                 self.window!.rootViewController = appViewController

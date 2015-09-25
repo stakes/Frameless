@@ -19,6 +19,7 @@ class SettingsTableViewController: UITableViewController, UINavigationController
     @IBOutlet weak var _closeButton: UIBarButtonItem!
     @IBOutlet weak var _searchEngineLabel: UILabel!
     @IBOutlet weak var _historySwitch: UISwitch!
+    @IBOutlet weak var _dimensionsSwitch: UISwitch!
     
     var delegate:ViewController?
     
@@ -36,6 +37,7 @@ class SettingsTableViewController: UITableViewController, UINavigationController
         _framerSwitch.on = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.FramerBonjour.rawValue) as! Bool
         _sleepSwitch.on = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.KeepAwake.rawValue) as! Bool
         _historySwitch.on = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.KeepHistory.rawValue) as! Bool
+        _dimensionsSwitch.on = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.FixiOS9.rawValue) as! Bool
 
     }
 
@@ -78,43 +80,48 @@ class SettingsTableViewController: UITableViewController, UINavigationController
         }
     }
     
+    @IBAction func toggleDimensionsSwitch(sender: AnyObject) {
+        let value = (sender as! UISwitch).on
+        NSUserDefaults.standardUserDefaults().setValue(value, forKey: AppDefaultKeys.FixiOS9.rawValue)
+    }
+    
     @IBAction func toggleShakeSwitch(sender: AnyObject) {
-        var value = (sender as! UISwitch).on
+        let value = (sender as! UISwitch).on
         NSUserDefaults.standardUserDefaults().setValue(value, forKey: AppDefaultKeys.ShakeGesture.rawValue)
         checkControlsSettings()
     }
 
     @IBAction func toggleSwipeUpSwitch(sender: AnyObject) {
-        var value = (sender as! UISwitch).on
+        let value = (sender as! UISwitch).on
         NSUserDefaults.standardUserDefaults().setValue(value, forKey: AppDefaultKeys.PanFromBottomGesture.rawValue)
         checkControlsSettings()
     }
     
     @IBAction func toggleSwipeDownSwitch(sender: AnyObject) {
-        var value = (sender as! UISwitch).on
+        let value = (sender as! UISwitch).on
         NSUserDefaults.standardUserDefaults().setValue(value, forKey: AppDefaultKeys.PanFromTopGesture.rawValue)
         checkControlsSettings()
     }
 
     
     @IBAction func toggleBrowserNavSwitch(sender: AnyObject) {
-        var value = (sender as! UISwitch).on
+        let value = (sender as! UISwitch).on
         NSUserDefaults.standardUserDefaults().setValue(value, forKey: AppDefaultKeys.ForwardBackGesture.rawValue)
     }
     
     @IBAction func toggleFramerSwitch(sender: AnyObject) {
-        var value = (sender as! UISwitch).on
+        let value = (sender as! UISwitch).on
         NSUserDefaults.standardUserDefaults().setValue(value, forKey: AppDefaultKeys.FramerBonjour.rawValue)
     }
     
     @IBAction func toggleSleepSwitch(sender: AnyObject) {
-        var value = (sender as! UISwitch).on
+        let value = (sender as! UISwitch).on
         UIApplication.sharedApplication().idleTimerDisabled = value
         NSUserDefaults.standardUserDefaults().setValue(value, forKey: AppDefaultKeys.KeepAwake.rawValue)
     }
     
     @IBAction func toggleHistorySwitch(sender: AnyObject) {
-        var value = (sender as! UISwitch).on
+        let value = (sender as! UISwitch).on
         if !value {
             HistoryManager.manager.clearHistory()
         }
@@ -122,7 +129,7 @@ class SettingsTableViewController: UITableViewController, UINavigationController
     }
     
     func checkControlsSettings() -> Bool {
-        var arr = [_swipeUpSwitch.on, _swipeDownSwitch.on]
+        let arr = [_swipeUpSwitch.on, _swipeDownSwitch.on]
         let filtered = arr.filter { $0 == true }
         if filtered.count == 0 {
             _closeButton.enabled = false
