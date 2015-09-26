@@ -10,8 +10,8 @@ import UIKit
 import WebKit
 
 class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarDelegate, UIGestureRecognizerDelegate, WKNavigationDelegate, FramerBonjourDelegate, UITableViewDataSource, UITableViewDelegate {
-
-
+    
+    
     
     @IBOutlet weak var _searchBar: FramelessSearchBar!
     @IBOutlet weak var _progressView: UIProgressView!
@@ -52,16 +52,19 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     var _progressTimer: NSTimer?
     var _isWebViewLoading = false
     
+    // did we just rewrite framer html?
+    var _isRewritten = false
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         let webViewConfiguration: WKWebViewConfiguration = WKWebViewConfiguration()
         webViewConfiguration.allowsInlineMediaPlayback = true
         webViewConfiguration.mediaPlaybackRequiresUserAction = false
         
         _webView = WKWebView(frame: self.view.frame, configuration: webViewConfiguration)
-
+        
         self.view.addSubview(_webView!)
         //        _webView!.scalesPageToFit = true
         _webView!.navigationDelegate = self
@@ -72,7 +75,7 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
         _loadingErrorView.hidden = true
         
         _tapRecognizer = UITapGestureRecognizer(target: self, action: Selector("hideSearch"))
-
+        
         _panFromBottomRecognizer = UIScreenEdgePanGestureRecognizer(target: self, action: Selector("handleBottomEdgePan:"))
         _panFromBottomRecognizer!.edges = UIRectEdge.Bottom
         _panFromBottomRecognizer!.delegate = self
@@ -92,13 +95,13 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
         _panFromRightRecognizer!.edges = UIRectEdge.Right
         _panFromRightRecognizer!.delegate = self
         self.view.addGestureRecognizer(_panFromRightRecognizer!)
-
+        
         _searchBar.delegate = self
         _searchBar.framelessSearchBarDelegate = self
         _searchBar.showsCancelButton = false
         _searchBar.autocapitalizationType = .None
         _searchBar.becomeFirstResponder()
-         AppearanceBridge.setSearchBarTextInputAppearance()
+        AppearanceBridge.setSearchBarTextInputAppearance()
         
         _settingsBarView = UIView(frame: CGRectMake(0, self.view.frame.height, self.view.frame.width, 44))
         _settingsBarView?.backgroundColor = LIGHT_GREY
@@ -125,7 +128,7 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
         clearFrame.origin.x = 14
         clearFrame.origin.y = 7
         _clearHistoryButton!.frame = clearFrame
-
+        
         _settingsButton!.addTarget(self, action: "presentSettingsView:", forControlEvents: .TouchUpInside)
         _clearHistoryButton!.addTarget(self, action: "didTapClearHistory:", forControlEvents: .TouchUpInside)
         
@@ -137,7 +140,7 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
         _settingsBarView?.addSubview(_settingsButton!)
         _settingsBarView?.addSubview(_clearHistoryButton!)
         self.view.addSubview(_settingsBarView!)
-
+        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name:UIKeyboardWillShowNotification, object: nil);
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name:UIKeyboardWillHideNotification, object: nil);
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardShown:"), name: UIKeyboardDidShowNotification, object: nil)
@@ -155,13 +158,13 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     deinit {
         NSNotificationCenter.defaultCenter().removeObserver(self);
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-
+    
+    
     func introCompletion() {
         _onboardingViewController?.dismissViewControllerAnimated(true, completion: nil)
     }
@@ -210,13 +213,13 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     
     override func motionEnded(motion: UIEventSubtype, withEvent event: UIEvent?) {
         if let _:Bool = NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.ShakeGesture.rawValue) as? Bool {
-//            if(event.subtype == UIEventSubtype.MotionShake && isShakeActive == true) {
-//                if (!_areControlsVisible) {
-//                    showSearch()
-//                } else {
-//                    hideSearch()
-//                }
-//            }
+            //            if(event.subtype == UIEventSubtype.MotionShake && isShakeActive == true) {
+            //                if (!_areControlsVisible) {
+            //                    showSearch()
+            //                } else {
+            //                    hideSearch()
+            //                }
+            //            }
             searchBarRefreshWasPressed()
         }
     }
@@ -234,7 +237,7 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
         _searchBar.resignFirstResponder()
         UIView.animateWithDuration(0.5, delay: 0.05, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.5, options: [], animations: {
             self._searchBar.transform = CGAffineTransformMakeTranslation(0, -44)
-        }, completion: nil)
+            }, completion: nil)
         _areControlsVisible = false
         removeBackgroundBlur()
     }
@@ -246,7 +249,7 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
             }
             UIView.animateWithDuration(0.5, delay: 0.05, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.5, options: [], animations: {
                 self._searchBar.transform = CGAffineTransformMakeTranslation(0, 0)
-            }, completion: nil)
+                }, completion: nil)
             _areControlsVisible = true
             _searchBar.selectAllText()
             _searchBar.becomeFirstResponder()
@@ -270,7 +273,7 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
                 _webView!.alpha = 0.25
                 UIView.animateWithDuration(0.25, animations: {
                     self._effectView!.alpha = 1
-                }, completion: nil)
+                    }, completion: nil)
             }
         }
     }
@@ -279,8 +282,8 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
         if _effectView != nil {
             UIView.animateWithDuration(0.25, animations: {
                 self._effectView!.alpha = 0
-            }, completion: { finished in
-                self._effectView = nil
+                }, completion: { finished in
+                    self._effectView = nil
             })
             _webView!.alpha = 1
         }
@@ -295,10 +298,10 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
             tableView.alpha = 0
             UIView.animateWithDuration(0.25, delay: 0.25, options: [], animations: {
                 self._suggestionsTableView!.alpha = 1
-            }, completion: nil)
+                }, completion: nil)
         }
     }
-
+    
     
     //MARK: -  Settings view
     
@@ -342,7 +345,7 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
         _loadingTimer!.invalidate()
         _isWebViewLoading = false
     }
-
+    
     func webView(webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: NSError) {
         if let _ = _isMainFrameNavigationAction {
             // do nothing, I'm pretty sure it's a new page load into target="_blank" before the old one's subframes are finished
@@ -360,29 +363,30 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     }
     
     func webView(webView: WKWebView, decidePolicyForNavigationAction navigationAction: WKNavigationAction, decisionHandler: (WKNavigationActionPolicy) -> Void) {
-        
-        
         if NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.FixiOS9.rawValue) as! Bool == true {
             // resize Framer prototypes to fix iOS9 "bug"
             if let absURL = navigationAction.request.URL {
                 if let _ = absURL.lastPathComponent!.rangeOfString(".framer") {
-                    decisionHandler(.Cancel)
-                    let screenWidth = UIScreen.mainScreen().bounds.width * UIScreen.mainScreen().scale
-                    do {
-                        var html = try String(contentsOfURL: absURL, encoding: NSASCIIStringEncoding)
-                        html = html.stringByReplacingOccurrencesOfString("width=device-width", withString: "width=\(screenWidth)")
-                        // Hack to add 'rewritten' to the url so we dont get in an infinite loop here. There's no way to tell
-                        // whether the request was caused by loadRequest or the rewritten loadHTMLString.  This could also be
-                        // done with an instance variable saying "Don't rewrite the next request."
-                        _webView?.loadHTMLString(html, baseURL: absURL.URLByAppendingPathComponent("rewritten"))
-                    } catch {
-                        
+                    if _isRewritten == false {
+                        decisionHandler(.Cancel)
+                        let screenWidth = UIScreen.mainScreen().bounds.width * UIScreen.mainScreen().scale
+                        do {
+                            var html = try String(contentsOfURL: absURL, encoding: NSASCIIStringEncoding)
+                            html = html.stringByReplacingOccurrencesOfString("width=device-width", withString: "width=\(screenWidth)")
+                            _webView?.loadHTMLString(html, baseURL: absURL)
+                            _isRewritten = true
+                        } catch {
+                            
+                        }
+                    } else {
+                        _isRewritten = false
                     }
                 }
             }
         }
-
+        
         if (navigationAction.targetFrame == nil && navigationAction.navigationType == .LinkActivated) {
+            _isRewritten == false
             _webView!.loadRequest(navigationAction.request)
         }
         _isMainFrameNavigationAction = navigationAction.targetFrame?.mainFrame
@@ -433,7 +437,7 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
             completionHandler(NSURLSessionAuthChallengeDisposition.CancelAuthenticationChallenge, nil)
         }
     }
-
+    
     func handleWebViewError() {
         _loadingTimer!.invalidate()
         _isCurrentPageLoaded = false
@@ -467,6 +471,7 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
             }
             _webView!.stopLoading()
             let req = NSURLRequest(URL: webAddr)
+            _isRewritten == false
             _webView!.loadRequest(req)
         } else {
             displayLoadingErrorMessage()
@@ -509,11 +514,11 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
                 let windowCount = UIApplication.sharedApplication().windows.count
                 if let targetView = UIApplication.sharedApplication().windows[windowCount-1].rootViewController {
                     _framerAddress = address
-//                    let paragraphStyle = NSMutableParagraphStyle()
-//                    paragraphStyle.lineSpacing = 2
-//                    paragraphStyle.alignment = .Center
-//                    let alertStr = NSMutableAttributedString(string: "Framer Studio is running on your network. Connect now?")
-//                    alertStr.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyle, range: NSMakeRange(0, alertStr.length))
+                    //                    let paragraphStyle = NSMutableParagraphStyle()
+                    //                    paragraphStyle.lineSpacing = 2
+                    //                    paragraphStyle.alignment = .Center
+                    //                    let alertStr = NSMutableAttributedString(string: "Framer Studio is running on your network. Connect now?")
+                    //                    alertStr.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyle, range: NSMakeRange(0, alertStr.length))
                     let alert = _alertBuilder.show(targetView as UIViewController!, title: "Framer Mirror", text: "Framer Studio is running on your network. Connect now?", cancelButtonText: "Cancel", buttonText: "Connect", color: BLUE)
                     alert.addAction(handleAlertConfirmTap)
                     alert.setTextTheme(.Light)
@@ -544,7 +549,7 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     
     
     //MARK: -  Search bar
-
+    
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         hideSearch()
         loadURL(searchBar.text!)
@@ -600,7 +605,7 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
                 settingsFrame.origin.y = 7
                 settingsButton.frame = settingsFrame
             }
-        }, completion: nil)
+            }, completion: nil)
     }
     
     //MARK: - History & favorites suggestions
@@ -627,7 +632,7 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
         showSuggestionsTableView()
     }
     
-    func showSuggestionsTableView() {   
+    func showSuggestionsTableView() {
         if _suggestionsTableView == nil {
             let size = UIScreen.mainScreen().bounds.size
             let availHeight = size.height - 88 - CGFloat(_keyboardHeight)
@@ -712,7 +717,7 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
         label.font = UIFont.systemFontOfSize(13)
         label.textColor = UIColorFromHex(0x000000, alpha: 0.5)
         label.text = self.tableView(tableView, titleForHeaderInSection: section)?.uppercaseString
-
+        
         let headerView = UIView()
         headerView.backgroundColor = UIColorFromHex(0x000000, alpha: 0.05)
         headerView.addSubview(label)
