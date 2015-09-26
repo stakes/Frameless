@@ -396,7 +396,11 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     func webView(webView: WKWebView, didReceiveAuthenticationChallenge challenge: NSURLAuthenticationChallenge, completionHandler: (NSURLSessionAuthChallengeDisposition, NSURLCredential?) -> Void) {
         let hostname = webView.URL?.host
         let authMethod = challenge.protectionSpace.authenticationMethod
-        if authMethod == NSURLAuthenticationMethodDefault {
+        // in ios9, https requests run through this method
+        // so just handle it otherwise they get canceled out
+        if authMethod == NSURLAuthenticationMethodServerTrust {
+            completionHandler(NSURLSessionAuthChallengeDisposition.PerformDefaultHandling, nil)
+        } else if authMethod == NSURLAuthenticationMethodHTTPBasic {
             if let loadTimer = _loadingTimer {
                 loadTimer.invalidate()
             }
