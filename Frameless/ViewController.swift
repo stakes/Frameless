@@ -366,7 +366,9 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
         if NSUserDefaults.standardUserDefaults().objectForKey(AppDefaultKeys.FixiOS9.rawValue) as! Bool == true {
             // resize Framer prototypes to fix iOS9 "bug"
             if let absURL = navigationAction.request.URL {
-                if let _ = absURL.lastPathComponent!.rangeOfString(".framer") {
+                let isFramerExt = absURL.lastPathComponent!.rangeOfString(".framer")
+                let isFramerShare = absURL.host?.rangeOfString("share.framerjs.com")
+                if (isFramerExt != nil) || (isFramerShare != nil) {
                     if _isRewritten == false {
                         decisionHandler(.Cancel)
                         let screenWidth = UIScreen.mainScreen().bounds.width * UIScreen.mainScreen().scale
