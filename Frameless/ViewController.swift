@@ -11,8 +11,6 @@ import WebKit
 
 class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarDelegate, UIGestureRecognizerDelegate, WKNavigationDelegate, FramerBonjourDelegate, UITableViewDataSource, UITableViewDelegate {
     
-    
-    
     @IBOutlet weak var _searchBar: FramelessSearchBar!
     @IBOutlet weak var _progressView: UIProgressView!
     @IBOutlet weak var _loadingErrorView: UIView!
@@ -54,6 +52,8 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     
     // did we just rewrite framer html?
     var _isRewritten = false
+    
+    var _channel: PTChannel?
     
     
     override func viewDidLoad() {
@@ -153,7 +153,13 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
         
         _progressView.hidden = true
         showSuggestionsTableView()
+        
+//        _channel = PTChannel(delegate: self)
     }
+    
+//    func ioFrameChannel(channel: PTChannel?, didReceiveFrameOfType type: UInt32, tag: UInt32, payload: PTData?) {
+//        print("BEEF NOODLY DOODLY")
+//    }
     
     deinit {
         NSNotificationCenter.defaultCenter().removeObserver(self);
@@ -388,7 +394,7 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
         }
         
         if (navigationAction.targetFrame == nil && navigationAction.navigationType == .LinkActivated) {
-            _isRewritten == false
+            _isRewritten = false
             _webView!.loadRequest(navigationAction.request)
         }
         _isMainFrameNavigationAction = navigationAction.targetFrame?.mainFrame
@@ -477,7 +483,7 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
             }
             _webView!.stopLoading()
             let req = NSURLRequest(URL: webAddr)
-            _isRewritten == false
+            _isRewritten = false
             _webView!.loadRequest(req)
         } else {
             displayLoadingErrorMessage()

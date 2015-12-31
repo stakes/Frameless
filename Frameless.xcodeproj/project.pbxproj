@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		0D0741CD1A366F0800A6D270 /* FramerBonjour.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D0741CC1A366F0800A6D270 /* FramerBonjour.swift */; };
 		0D18E4271A2D8B1200337D91 /* FramelessSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D18E4261A2D8B1200337D91 /* FramelessSearchBar.swift */; };
+		0D192C3A1C34FC1B0081419A /* PTChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D192C2E1C34F6FE0081419A /* PTChannel.m */; };
+		0D192C3B1C34FC390081419A /* PTProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D192C311C34F6FE0081419A /* PTProtocol.m */; };
+		0D192C3C1C34FC390081419A /* PTUSBHub.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D192C331C34F6FE0081419A /* PTUSBHub.m */; };
 		0D4915AD1A29031B0018BEC6 /* PortraitOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D4915AC1A29031B0018BEC6 /* PortraitOnboardingViewController.swift */; };
 		0D557D341B7402D3001117E7 /* HistoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D557D331B7402D3001117E7 /* HistoryManager.swift */; };
 		0D7AEC711B6C332400C7AFEB /* HistoryEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D7AEC701B6C332400C7AFEB /* HistoryEntry.swift */; };
@@ -46,6 +49,14 @@
 /* Begin PBXFileReference section */
 		0D0741CC1A366F0800A6D270 /* FramerBonjour.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FramerBonjour.swift; sourceTree = "<group>"; };
 		0D18E4261A2D8B1200337D91 /* FramelessSearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FramelessSearchBar.swift; sourceTree = "<group>"; };
+		0D192C2C1C34F6FE0081419A /* prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = prefix.pch; sourceTree = "<group>"; };
+		0D192C2D1C34F6FE0081419A /* PTChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTChannel.h; sourceTree = "<group>"; };
+		0D192C2E1C34F6FE0081419A /* PTChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTChannel.m; sourceTree = "<group>"; };
+		0D192C2F1C34F6FE0081419A /* PTPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTPrivate.h; sourceTree = "<group>"; };
+		0D192C301C34F6FE0081419A /* PTProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTProtocol.h; sourceTree = "<group>"; };
+		0D192C311C34F6FE0081419A /* PTProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTProtocol.m; sourceTree = "<group>"; };
+		0D192C321C34F6FE0081419A /* PTUSBHub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTUSBHub.h; sourceTree = "<group>"; };
+		0D192C331C34F6FE0081419A /* PTUSBHub.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTUSBHub.m; sourceTree = "<group>"; };
 		0D4915AC1A29031B0018BEC6 /* PortraitOnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PortraitOnboardingViewController.swift; sourceTree = "<group>"; };
 		0D557D331B7402D3001117E7 /* HistoryManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryManager.swift; sourceTree = "<group>"; };
 		0D7AEC701B6C332400C7AFEB /* HistoryEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryEntry.swift; sourceTree = "<group>"; };
@@ -97,6 +108,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0D192C2B1C34F6FE0081419A /* Peertalk */ = {
+			isa = PBXGroup;
+			children = (
+				0D192C2C1C34F6FE0081419A /* prefix.pch */,
+				0D192C2D1C34F6FE0081419A /* PTChannel.h */,
+				0D192C2E1C34F6FE0081419A /* PTChannel.m */,
+				0D192C2F1C34F6FE0081419A /* PTPrivate.h */,
+				0D192C301C34F6FE0081419A /* PTProtocol.h */,
+				0D192C311C34F6FE0081419A /* PTProtocol.m */,
+				0D192C321C34F6FE0081419A /* PTUSBHub.h */,
+				0D192C331C34F6FE0081419A /* PTUSBHub.m */,
+			);
+			path = Peertalk;
+			sourceTree = "<group>";
+		};
 		0D7AEC721B6C332800C7AFEB /* models */ = {
 			isa = PBXGroup;
 			children = (
@@ -171,6 +197,7 @@
 		0DA5BB4119FAD12800B2FDD1 /* Frameless */ = {
 			isa = PBXGroup;
 			children = (
+				0D192C2B1C34F6FE0081419A /* Peertalk */,
 				0DA5BB4219FAD12800B2FDD1 /* AppDelegate.swift */,
 				0D96CEF71AE1CB21002B16CA /* bridging */,
 				0D96CEF91AE1CB5B002B16CA /* external */,
@@ -385,6 +412,7 @@
 				0D4915AD1A29031B0018BEC6 /* PortraitOnboardingViewController.swift in Sources */,
 				0D0741CD1A366F0800A6D270 /* FramerBonjour.swift in Sources */,
 				0D7AEC761B6FFDC700C7AFEB /* HistoryTableViewCell.swift in Sources */,
+				0D192C3A1C34FC1B0081419A /* PTChannel.m in Sources */,
 				0DA5BBA019FDE2AC00B2FDD1 /* AppDefaults.swift in Sources */,
 				0D7AEC711B6C332400C7AFEB /* HistoryEntry.swift in Sources */,
 				0DA5BB5719FAD12800B2FDD1 /* ViewController.swift in Sources */,
@@ -393,9 +421,11 @@
 				0DD7EC1C1A72FC0F00BED2DC /* JSSAlertView.swift in Sources */,
 				0D557D341B7402D3001117E7 /* HistoryManager.swift in Sources */,
 				0DA5BB7919FC2EBF00B2FDD1 /* AppearanceBridge.m in Sources */,
+				0D192C3B1C34FC390081419A /* PTProtocol.m in Sources */,
 				0D80914F1B43402D009D5562 /* SearchEnginesViewController.swift in Sources */,
 				0D80914D1B434012009D5562 /* SearchEngine.swift in Sources */,
 				0D18E4271A2D8B1200337D91 /* FramelessSearchBar.swift in Sources */,
+				0D192C3C1C34FC390081419A /* PTUSBHub.m in Sources */,
 				0DAB64421A09FDD00046287E /* SettingsTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -519,6 +549,14 @@
 				INFOPLIST_FILE = Frameless/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-l\"Pods-Frameless-Onboard\"",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.stakelon.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -539,6 +577,14 @@
 				INFOPLIST_FILE = Frameless/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-l\"Pods-Frameless-Onboard\"",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.stakelon.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
