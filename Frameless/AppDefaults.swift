@@ -21,6 +21,13 @@ enum AppDefaultKeys: String {
     case FixiOS9 = "fixiOS9"
 }
 
+enum PTExampleFrameType: UInt32 {
+    case DeviceInfo = 100
+    case TextMessage = 101
+    case Ping = 102
+    case Pong = 103
+}
+
 let BLUE = UIColorFromHex(0x28AFFA)
 let HIGHLIGHT_BLUE = UIColorFromHex(0x28AFFA, alpha: 0.6)
 let GREEN = UIColorFromHex(0x7DDC16)

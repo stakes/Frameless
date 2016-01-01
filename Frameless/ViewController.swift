@@ -9,11 +9,13 @@
 import UIKit
 import WebKit
 
-class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarDelegate, UIGestureRecognizerDelegate, WKNavigationDelegate, FramerBonjourDelegate, UITableViewDataSource, UITableViewDelegate {
+class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarDelegate, UIGestureRecognizerDelegate, WKNavigationDelegate, FramerBonjourDelegate, UITableViewDataSource, UITableViewDelegate, PTChannelDelegate {
     
     @IBOutlet weak var _searchBar: FramelessSearchBar!
     @IBOutlet weak var _progressView: UIProgressView!
     @IBOutlet weak var _loadingErrorView: UIView!
+    
+    let INADDR_LOOPBACK = UInt32(0x7f000001)
     
     let _confirmFramerConnect = true
     
@@ -54,6 +56,13 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
     var _isRewritten = false
     
     var _channel: PTChannel?
+    var _serverchannel: PTChannel?
+    
+    struct PTExampleTextFrame {
+        let length: UInt32
+        let utf8text: UInt8
+    }
+
     
     
     override func viewDidLoad() {
@@ -154,12 +163,40 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
         _progressView.hidden = true
         showSuggestionsTableView()
         
-//        _channel = PTChannel(delegate: self)
+        _channel = PTChannel(delegate: self)
+        _channel!.listenOnPort(2345, IPv4Address: INADDR_LOOPBACK) { (error) -> Void in
+            if (error != nil) {
+                print("shit")
+            } else {
+                print("wait, what?")
+                self._serverchannel = self._channel
+            }
+        }
     }
     
-//    func ioFrameChannel(channel: PTChannel?, didReceiveFrameOfType type: UInt32, tag: UInt32, payload: PTData?) {
-//        print("BEEF NOODLY DOODLY")
+//    [channel listenOnPort:PTExampleProtocolIPv4PortNumber IPv4Address:INADDR_LOOPBACK callback:^(NSError *error) {
+//    if (error) {
+//    [self appendOutputMessage:[NSString stringWithFormat:@"Failed to listen on 127.0.0.1:%d: %@", PTExampleProtocolIPv4PortNumber, error]];
+//    } else {
+//    [self appendOutputMessage:[NSString stringWithFormat:@"Listening on 127.0.0.1:%d", PTExampleProtocolIPv4PortNumber]];
+//    serverChannel_ = channel;
 //    }
+//    }];
+    
+    func ioFrameChannel(channel: PTChannel?, didReceiveFrameOfType type: UInt32, tag: UInt32, payload: PTData?) {
+        if (type == PTExampleFrameType.TextMessage.rawValue) {
+            print("text")
+            let message = PeertalkFunctionsBridge.parseTextFrame(payload)
+            print(message)
+        } else if (type == PTExampleFrameType.Pong.rawValue) {
+            print("pong")
+        }
+        
+    }
+    
+    func ioFrameChannel(channel: PTChannel!, didAcceptConnection otherChannel: PTChannel!, fromAddress address: PTAddress!) {
+        print("heay")
+    }
     
     deinit {
         NSNotificationCenter.defaultCenter().removeObserver(self);

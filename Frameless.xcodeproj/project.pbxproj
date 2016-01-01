@@ -12,6 +12,7 @@
 		0D192C3A1C34FC1B0081419A /* PTChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D192C2E1C34F6FE0081419A /* PTChannel.m */; };
 		0D192C3B1C34FC390081419A /* PTProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D192C311C34F6FE0081419A /* PTProtocol.m */; };
 		0D192C3C1C34FC390081419A /* PTUSBHub.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D192C331C34F6FE0081419A /* PTUSBHub.m */; };
+		0D192C3E1C361D510081419A /* PeertalkFunctionsBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D192C3D1C361D510081419A /* PeertalkFunctionsBridge.m */; };
 		0D4915AD1A29031B0018BEC6 /* PortraitOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D4915AC1A29031B0018BEC6 /* PortraitOnboardingViewController.swift */; };
 		0D557D341B7402D3001117E7 /* HistoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D557D331B7402D3001117E7 /* HistoryManager.swift */; };
 		0D7AEC711B6C332400C7AFEB /* HistoryEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D7AEC701B6C332400C7AFEB /* HistoryEntry.swift */; };
@@ -57,6 +58,8 @@
 		0D192C311C34F6FE0081419A /* PTProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTProtocol.m; sourceTree = "<group>"; };
 		0D192C321C34F6FE0081419A /* PTUSBHub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTUSBHub.h; sourceTree = "<group>"; };
 		0D192C331C34F6FE0081419A /* PTUSBHub.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTUSBHub.m; sourceTree = "<group>"; };
+		0D192C3D1C361D510081419A /* PeertalkFunctionsBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PeertalkFunctionsBridge.m; sourceTree = "<group>"; };
+		0D192C3F1C361D640081419A /* PeertalkFunctionsBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PeertalkFunctionsBridge.h; sourceTree = "<group>"; };
 		0D4915AC1A29031B0018BEC6 /* PortraitOnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PortraitOnboardingViewController.swift; sourceTree = "<group>"; };
 		0D557D331B7402D3001117E7 /* HistoryManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryManager.swift; sourceTree = "<group>"; };
 		0D7AEC701B6C332400C7AFEB /* HistoryEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryEntry.swift; sourceTree = "<group>"; };
@@ -148,6 +151,8 @@
 				0DA5BB7319FC2E5400B2FDD1 /* Frameless-Bridging-Header.h */,
 				0DA5BB7719FC2EAE00B2FDD1 /* AppearanceBridge.h */,
 				0DA5BB7819FC2EBF00B2FDD1 /* AppearanceBridge.m */,
+				0D192C3F1C361D640081419A /* PeertalkFunctionsBridge.h */,
+				0D192C3D1C361D510081419A /* PeertalkFunctionsBridge.m */,
 			);
 			name = bridging;
 			sourceTree = "<group>";
@@ -421,6 +426,7 @@
 				0DD7EC1C1A72FC0F00BED2DC /* JSSAlertView.swift in Sources */,
 				0D557D341B7402D3001117E7 /* HistoryManager.swift in Sources */,
 				0DA5BB7919FC2EBF00B2FDD1 /* AppearanceBridge.m in Sources */,
+				0D192C3E1C361D510081419A /* PeertalkFunctionsBridge.m in Sources */,
 				0D192C3B1C34FC390081419A /* PTProtocol.m in Sources */,
 				0D80914F1B43402D009D5562 /* SearchEnginesViewController.swift in Sources */,
 				0D80914D1B434012009D5562 /* SearchEngine.swift in Sources */,
