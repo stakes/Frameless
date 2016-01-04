@@ -7,3 +7,5 @@
 #import "AppearanceBridge.h"
 #import <Onboard/OnboardingViewController.h>
 #import <arpa/inet.h>
+#import <sys/socket.h>
+#import <ifaddrs.h>

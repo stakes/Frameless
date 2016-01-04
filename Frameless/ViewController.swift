@@ -167,35 +167,28 @@ class ViewController: UIViewController, UISearchBarDelegate, FramelessSearchBarD
         _channel!.listenOnPort(2345, IPv4Address: INADDR_LOOPBACK) { (error) -> Void in
             if (error != nil) {
                 print("shit")
+                print(error)
             } else {
-                print("wait, what?")
+                print("listening")
                 self._serverchannel = self._channel
             }
         }
     }
     
-//    [channel listenOnPort:PTExampleProtocolIPv4PortNumber IPv4Address:INADDR_LOOPBACK callback:^(NSError *error) {
-//    if (error) {
-//    [self appendOutputMessage:[NSString stringWithFormat:@"Failed to listen on 127.0.0.1:%d: %@", PTExampleProtocolIPv4PortNumber, error]];
-//    } else {
-//    [self appendOutputMessage:[NSString stringWithFormat:@"Listening on 127.0.0.1:%d", PTExampleProtocolIPv4PortNumber]];
-//    serverChannel_ = channel;
-//    }
-//    }];
-    
     func ioFrameChannel(channel: PTChannel?, didReceiveFrameOfType type: UInt32, tag: UInt32, payload: PTData?) {
         if (type == PTExampleFrameType.TextMessage.rawValue) {
-            print("text")
             let message = PeertalkFunctionsBridge.parseTextFrame(payload)
             print(message)
+            loadURL(message, andCloseSearch: true)
         } else if (type == PTExampleFrameType.Pong.rawValue) {
-            print("pong")
+            
         }
         
     }
-    
+
     func ioFrameChannel(channel: PTChannel!, didAcceptConnection otherChannel: PTChannel!, fromAddress address: PTAddress!) {
-        print("heay")
+        print("CONNECTION!")
+        print(address)
     }
     
     deinit {
