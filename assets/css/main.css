@@ -187,7 +187,7 @@ td, th {
 html {
   background-color: #fff;
   color: #44444a;
-  font-family: 'Clear Sans', 'Helvetica Neue', Arial, sans-serif;
+  font-family: -apple-system, ".SFNSText-Regular", "San Francisco", "Roboto", "Segoe UI", "Helvetica Neue", "Lucida Grande", sans-serif;
   font-size: 18px;
   line-height: 1.56; }
 
@@ -195,19 +195,19 @@ body {
   background-color: inherit; }
 
 a {
-  border-bottom-color: rgba(143, 118, 224, 0.4);
-  color: #8F76E0;
+  border-bottom-color: #18C3FF;
+  color: #18C3FF;
   border-bottom-style: solid;
   border-bottom-width: 1px;
   text-decoration: none;
   transition: color 0.2s ease-in-out, border-bottom-color 0.2s ease-in-out; }
   a u {
-    border-bottom-color: rgba(143, 118, 224, 0.4); }
+    border-bottom-color: #18C3FF; }
   a.active, a:focus, a:hover {
-    border-bottom-color: rgba(109, 76, 215, 0.4);
-    color: #6d4cd7; }
+    border-bottom-color: #0B89CC;
+    color: #0B89CC; }
     a.active u, a:focus u, a:hover u {
-      border-bottom-color: rgba(109, 76, 215, 0.4); }
+      border-bottom-color: #0B89CC; }
   a:not(.button) u {
     border-bottom-style: solid;
     border-bottom-width: 1px;
@@ -310,7 +310,8 @@ h4:first-child, h5:first-child, h6:first-child {
   h6 {
     font-size: 18px; } }
 p {
-  margin: 20px 0; }
+  margin: 20px 0;
+  font-weight: 300; }
   p:first-child {
     margin-top: 0; }
   p:last-child {
@@ -351,7 +352,7 @@ blockquote {
 .button {
   background-color: white;
   border-color: white;
-  border: 1px solid rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.85);
   border-radius: 5px;
   color: #fff;
   cursor: pointer;
@@ -368,7 +369,7 @@ blockquote {
     background-color: white;
     border-color: white; }
   .button.hollow {
-    color: rgba(255, 255, 255, 0.7); }
+    color: rgba(255, 255, 255, 0.85); }
     .button.hollow:focus, .button.hollow:hover {
       border-color: white;
       color: white; }
@@ -389,7 +390,7 @@ blockquote {
     background-color: #52be35;
     border-color: #52be35; }
   .primary.button.hollow {
-    color: rgba(255, 255, 255, 0.7); }
+    color: rgba(255, 255, 255, 0.85); }
     .primary.button.hollow:focus, .primary.button.hollow:hover {
       border-color: #6fd055;
       color: #6fd055; }
@@ -397,7 +398,7 @@ blockquote {
 .hollow.button {
   background-color: transparent; }
   .hollow.button:focus, .hollow.button:hover {
-    background-color: transparent; }
+    background-color: rgba(255,255,255,.25); }
 
 @media (max-width: 480px) {
   .button-group .button, .button-group .button-image {
@@ -962,7 +963,7 @@ img.button-image {
   background-size: cover;
   position: relative; }
   .background-image:after {
-    background-color: #8f76e0;
+    background-color: #18C3FF;
     content: '';
     position: absolute;
     top: 0;
@@ -972,14 +973,14 @@ img.button-image {
     transition: background-color 0.2s ease-in-out;
     z-index: 0; }
   .background-image.loaded:after {
-    background: #8f76e0;
-    background: -moz-linear-gradient(top, #8f76e0 0%, #6b58a8 100%);
-    background: -webkit-gradient(left top, left bottom, color-stop(0%, #8f76e0), color-stop(100%, #6b58a8));
-    background: -webkit-linear-gradient(top, #8f76e0 0%, #6b58a8 100%);
-    background: -o-linear-gradient(top, #8f76e0 0%, #6b58a8 100%);
-    background: -ms-linear-gradient(top, #8f76e0 0%, #6b58a8 100%);
-    background: linear-gradient(to bottom, #8f76e0 0%, #6b58a8 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8f76e0', endColorstr='#6b58a8', GradientType=0 ); }
+    background: #18C3FF;
+    background: -moz-linear-gradient(top, #18C3FF 0%, #0E88CB 100%);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, #18C3FF), color-stop(100%, #0E88CB));
+    background: -webkit-linear-gradient(top, #18C3FF 0%, #0E88CB 100%);
+    background: -o-linear-gradient(top, #18C3FF 0%, #0E88CB 100%);
+    background: -ms-linear-gradient(top, #18C3FF 0%, #0E88CB 100%);
+    background: linear-gradient(to bottom, #18C3FF 0%, #0E88CB 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#18C3FF', endColorstr='#0E88CB', GradientType=0 ); }
   .background-image > * {
     position: relative;
     z-index: 2; }
@@ -987,6 +988,18 @@ img.button-image {
     color: #fff; }
     .background-image h1 small, .background-image h2 small, .background-image h3 small, .background-image h4 small, .background-image h5 small, .background-image h6 small {
       color: #fff; }
+  .background-image p {
+    color: rgba(255, 255, 255, .85);
+  }
+  .background-image a {
+    color: rgba(255, 255, 255, .85);
+    border-bottom-color: rgba(255, 255, 255, .85);
+  }
+  .background-image a:hover, .background-image a:active  {
+    color: rgba(255, 255, 255, 1);
+    border-bottom-color: rgba(255, 255, 255, 1);
+  }
+
 
 /*  ------------------------------------------------------------
     Testimonials
