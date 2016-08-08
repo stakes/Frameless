@@ -40,7 +40,8 @@ html {
   -webkit-text-size-adjust: 100%; }
 
 body {
-  margin: 0; }
+  margin: 0; 
+}
 
 article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, section, summary {
   display: block; }
@@ -192,7 +193,7 @@ html {
   line-height: 1.56; }
 
 body {
-  background-color: inherit; }
+  background-color: #f3f4f6; }
 
 a {
   border-bottom-color: #18C3FF;
@@ -290,7 +291,7 @@ h4:first-child, h5:first-child, h6:first-child {
 
 @media (min-width: 769px) {
   h1 {
-    font-size: 48px;
+    font-size: 36px;
     margin-bottom: 33px; }
     h1 small {
       margin-top: 26px; }
@@ -932,21 +933,20 @@ html, body {
   height: 100%; }
 
 #intro {
-  padding-top: 120px; }
-  @media (min-width: 481px) {
-    #intro {
-      padding-top: 160px; } }
+  padding-top: 48px; }
+
 
 .intro-copy {
-  padding-bottom: 80px; }
-  @media (min-width: 481px) {
+  padding-bottom: 24px; }
+  @media (max-width: 768px) {
     .intro-copy {
-      padding-bottom: 160px; } }
+      padding-bottom: 48px; } }
 
 .section {
   display: inline-block;
   position: relative;
-  width: 100%; }
+  width: 100%; 
+background-color: #fff;}
 
 @media (min-width: 481px) {
   .section-title {
